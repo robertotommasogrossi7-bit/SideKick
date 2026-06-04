@@ -1,0 +1,23 @@
+# Indice della libreria
+
+I **pacchetti di processo**, per tassonomia. Ogni pacchetto è una cartella con
+`PACCHETTO.md` (manifesto + metadati) + `spec.md` + `plan.md` (formato Spec Kit).
+Per aggiungerne uno → `../CONTRIBUIRE.md`. Per distillarne/usarne → `../GUIDA.md`.
+
+## 🧭 Progettazione — metodologie e architetture
+| Pacchetto | In una riga | non_ovvietà | Esito |
+|---|---|---|---|
+| [migrazione-a-componenti](migrazione-a-componenti/) | Migrare un'app vanilla a un framework a componenti, a fasi, senza rompere i dati | **alta** | reale, 48 test |
+| [architettura-multi-contenuto](architettura-multi-contenuto/) | Estendere un'app mono-scopo a multi-contenuto senza rompere il caso speciale | **alta** | reale, 57 test |
+
+## 🛠️ Pratiche — feature di dominio
+| Pacchetto | In una riga | non_ovvietà | Esito |
+|---|---|---|---|
+| [settlement-equo](settlement-equo/) | Chi paga chi tra N partecipanti, col minimo dei passaggi | bassa | in produzione |
+
+## 🤖 Pronte-per-l'AI — artefatti esecutivi
+_(ancora vuoto — prompt-template e task pronti da dare a un agente)_
+
+---
+> Forma **base, da ampliare**: in futuro questo indice diventa un **registry** con ricerca,
+> versioni e curation condivise (la "versione migliore sale"). Per ora vive nel repo.

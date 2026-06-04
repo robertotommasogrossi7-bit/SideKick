@@ -187,3 +187,26 @@
   METODO); rigenerare anche `migrazione-a-componenti` in formato Spec Kit; scrivere la
   **guida d'uso** (TODO); eventuale backend `claude-cli` full-auto; **F3** (estensione Spec
   Kit / condivisione).
+
+### 2026-06-04 — F2 mergiato + piano (crescere libreria, chiarito registry, #4 differito)
+- **Fatto:** `motore-f2` **mergiato in `main`** (override METODO, su richiesta utente).
+  Rigenerati settlement + migrazione in formato Spec Kit. Scritta `GUIDA.md` (TODO chiuso).
+- **Direzione scelta (#2):** crescere la libreria distillando più feature reali riutilizzabili
+  → serve a **validare F3** prima di proporla. Piano utente: *cresci → valida F3 → proponi*.
+- **Chiarito #3 (registry):** `libreria/` = catalogo **personale** nel repo (già mini-fonte
+  condivisa via GitHub). Il **registry/DB** vero = pool **multi-contributore** con
+  pubblicazione/ricerca/curation (npm-registro vs cartella). Serve **solo a scala** → futuro.
+  Il repo pubblico è già un registry minimale.
+- **#4 (polish portfolio: README+demo+writeup) DIFFERITO** a dopo libreria + F3.
+
+### 2026-06-04 — Multigioco distillato + catalogo base
+- **Pacchetto #3:** `architettura-multi-contenuto` (Progettazione, `non_ovvieta: alta`),
+  distillato da `MULTIGIOCO_SPEC`. Cuore non-ovvio: "default = istanza speciale del gruppo"
+  (zero codice doppio) · "tipo ricco speciale + N generici su schermata comune" · estensione
+  retrocompat idempotente · componenti condivisi · a fasi.
+- **Catalogo base ("terreno"):** `libreria/INDICE.md` (per tassonomia) + `CONTRIBUIRE.md`
+  (come aggiungere/migliorare un pacchetto). Forma base ma chiara da ampliare; il **registry
+  vero** (multi-contributore, ricerca, curation) resta futuro.
+- **GitHub (in corso):** ricerca app React complesse open-source → 1ª passata = repo
+  "didattici" generici (RealWorld, HospitalRun, Spectrum…). Serve **targettizzare** sulla
+  feature che l'utente vuole aggiungere alla SUA app prima di scegliere cosa scaricare.
