@@ -210,3 +210,15 @@
 - **GitHub (in corso):** ricerca app React complesse open-source → 1ª passata = repo
   "didattici" generici (RealWorld, HospitalRun, Spectrum…). Serve **targettizzare** sulla
   feature che l'utente vuole aggiungere alla SUA app prima di scegliere cosa scaricare.
+
+### 2026-06-04 — LOOP VALIDATO su feature altrui non-ovvia (scopa) ⭐
+- **Banco di prova:** `_test/poker-copia` (copia gitignorata di poker-react, deps installate).
+- **Test:** distillata la CONOSCENZA dello scoring scopa da **OMerkel/Scopa (GPLv3)** →
+  adattata su poker-copia (funzione pura TS + Vitest) → **4/4 verdi al primo colpo**.
+- **Conclusione:** il loop SideKick **funziona su una feature non-ovvia e di altri** (la
+  tabella primiera è sapere specifico). A differenza del settlement (textbook), qui il
+  pacchetto **trasferisce valore reale** → **la tesi regge.**
+- **Bonus licenza:** distillare la *conoscenza* (regole = fatti) e non il *codice* evita la
+  contaminazione GPL → vantaggio strutturale del "processo, non codice".
+- **Pacchetto:** `libreria/punteggio-scopa` (Pratiche, `non_ovvieta: alta`, esito=validato).
+  Libreria ora: **4 pacchetti**.

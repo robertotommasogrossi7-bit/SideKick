@@ -14,6 +14,7 @@ Per aggiungerne uno → `../CONTRIBUIRE.md`. Per distillarne/usarne → `../GUID
 | Pacchetto | In una riga | non_ovvietà | Esito |
 |---|---|---|---|
 | [settlement-equo](settlement-equo/) | Chi paga chi tra N partecipanti, col minimo dei passaggi | bassa | in produzione |
+| [punteggio-scopa](punteggio-scopa/) | Punteggio della Scopa (carte/denari/settebello/primiera/scope) | **alta** | validato con test |
 
 ## 🤖 Pronte-per-l'AI — artefatti esecutivi
 _(ancora vuoto — prompt-template e task pronti da dare a un agente)_
