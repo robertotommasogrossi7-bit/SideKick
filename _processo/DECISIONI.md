@@ -162,3 +162,15 @@
   (portano la loro AI; il pacchetto è solo testo). Punto di forza. API solo per eventuale
   servizio hosted futuro. Engine F2 free (Max) + pluggable.
 - **GTM/registry/monetizzazione/paura-furto:** in memoria (futuro, non ora).
+
+### 2026-06-04 — Repo pubblica + posizione motore + TODO guida
+- **Repo aperta e PUBBLICA:** github.com/robertotommasogrossi7-bit/SideKick. Processo
+  incluso (`_processo/` tracciato), README EN+IT, licenza MIT.
+- **Posizione del motore (valutato):** per **ora monorepo** (`motore/` dentro SideKick) —
+  semplice + dogfooding. **Split in futuro**: il **motore** (tool/CLI) e il **catalogo/
+  registry** (i pacchetti) hanno cicli e pubblici diversi, come **npm-comando vs registro**.
+  Engine → repo/tool suo; libreria → registry pubblico (repo o DB, il "piccolo DB di Roberto").
+- **TODO (utente "segnati"):** scrivere una **guida d'uso** chiara —
+  (a) prendere feature dai *propri* programmi (semplice/automatico),
+  (b) prendere feature da **progetti Spec Kit** e salvarle sul PC,
+  (c) usarle su un progetto reale. Da scrivere **quando esiste F2** (così "automatico" è reale).
