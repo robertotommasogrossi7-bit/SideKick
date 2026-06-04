@@ -16,3 +16,7 @@ dist/
 # OS
 .DS_Store
 Thumbs.db
+
+# Artefatti transitori del motore di distillazione
+_PROMPT_PRONTO.md
+motore/_out_*.txt
