@@ -1,36 +1,21 @@
-# Plan — il "come" che ha funzionato (+ esito)
+# Implementation Plan: Settlement equo
 
-> Spec Kit-shaped, ma di un build **completato**: l'approccio che ha funzionato, lo stack
-> *come un'istanza* (non un obbligo), e — la parte che un repo finito non ti dà — **cosa
-> si è rotto e come si è risolto**.
+## Technical Context (istanza originale, non vincolo)
+**Stack**: React + TypeScript. **Test**: Vitest sugli esempi-tabella. **Forma**: funzione
+**pura** `calcolaSettlement(partecipanti) -> Trasferimento[]`, separata dalla UI. In un
+altro stack: tieni la funzione pura + i test sugli stessi esempi.
 
-## Approccio (riusabile)
-1. **Design-first**: scrivi lo SPEC come **contratto** con esempi numerici PRIMA del
-   codice (logica di soldi → zero "aggiusto a caso").
-2. **Test-first su funzione pura**: gli esempi diventano test; la funzione di calcolo è
-   **pura e separata dalla UI**, testabile in isolamento. Verde prima di proseguire.
-3. **Separazione concettuale nell'UI**: due viste — "il fondo" (ridistribuzione passiva)
-   e "i trasferimenti" (contante reale). Nasce da un **fallimento del modello vecchio**
-   (debiti e vincite come liste separate → uno poteva apparire sia tra chi paga sia tra
-   chi riceve, e i soldi già nel fondo finivano tra i trasferimenti).
-4. **Override + check non bloccante**: l'algoritmo è un punto di partenza, non un dogma.
+## Approccio che ha funzionato
+1. **Design-first**: spec come contratto con esempi numerici, prima del codice (logica di soldi).
+2. **Test-first** su funzione pura (verde prima della UI).
+3. **Due viste** separate: fondo (passivo) vs trasferimenti (contante reale) — nato da un fallimento del modello a liste separate.
+4. **Override + check non bloccante.**
 
 ## Esito
-Mergiato in `main`. Coperto da test (tabella esempi + suite torneo). Il modello è stato
-poi esteso da "chiusura alla cieca" a "review live pre-compilata" **senza cambiare la
-math** (`saldo = valore − mancante` ne è una riformulazione): segno che l'astrazione era
-quella giusta.
+In produzione, mergiato; coperto da test. Esteso poi da "chiusura alla cieca" a "review live" **senza cambiare la math** (segno di buona astrazione).
 
-## 🐞 Il bug che insegna (auto-compensazione)
-In una variante (torneo), un vincitore che **non aveva versato** la sua quota risultava
-**insieme debitore e creditore** → l'abbinamento generava un trasferimento **verso sé
-stesso** (V→V) + un **debito fittizio** nello storico.
-**Fix**: prima dell'abbinamento greedy, elidi `min(quota_residua, valore_residuo)` dello
-*stesso* partecipante (è il §4.2 dello spec). Esempio: vince 100 senza aver versato 25 →
-quota_residua 0, valore_residuo 75 → riceve 75 dagli altri, nessun V→V.
-*Chi forka questo pacchetto si risparmia di scoprire il bug sul campo.*
+## 🐞 Il bug che insegna
+Variante torneo: un vincitore che non aveva versato risultava **insieme debitore e creditore** → trasferimento verso sé stesso (V→V) + debito fittizio. **Fix**: auto-compensazione (`min(quota_residua, valore_residuo)`) **prima** dell'abbinamento. *Nel modello a saldo-netto il bug non può nemmeno presentarsi — per questo conta la scelta di modellazione.*
 
-## Stack originale (UN'istanza, non un vincolo)
-React + TypeScript; funzioni pure `calcolaSettlement` / `calcolaSettlementTorneo`; test
-Vitest sugli esempi. In un altro stack: tieni **la funzione pura + i test sugli stessi
-esempi**; cambia solo linguaggio e UI.
+## Constitution Check (i cardini come principi)
+Saldo netto + auto-compensazione · Fondo ≠ contante reale · Check non bloccante + override.

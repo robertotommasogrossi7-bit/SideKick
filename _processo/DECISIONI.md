@@ -174,3 +174,16 @@
   (a) prendere feature dai *propri* programmi (semplice/automatico),
   (b) prendere feature da **progetti Spec Kit** e salvarle sul PC,
   (c) usarle su un progetto reale. Da scrivere **quando esiste F2** (così "automatico" è reale).
+
+### 2026-06-04 — F2 costruito e collaudato (branch motore-f2)
+- **Il motore funziona end-to-end.** `motore/distilla.py` = pipeline ELT
+  (extract → scrub → assemble → distill → load), backend pluggable (prompt-only gratis sul
+  Max / claude-cli). Branch `motore-f2`, 4 commit, pushati.
+- **Collaudo riuscito:** rigenerato `settlement-equo` dal materiale di poker → ora in
+  **formato Spec Kit** (User Scenarios/FR/SC + front-matter metadati), con il miglioramento
+  "centesimi interi" **assorbito** (la libreria si auto-migliora). Il `--load` parsa
+  correttamente i file delimitati.
+- **Da fare:** merge `motore-f2`→`main` (via review separata, **non** da questa chat —
+  METODO); rigenerare anche `migrazione-a-componenti` in formato Spec Kit; scrivere la
+  **guida d'uso** (TODO); eventuale backend `claude-cli` full-auto; **F3** (estensione Spec
+  Kit / condivisione).

@@ -1,73 +1,48 @@
-# Spec — Settlement equo tra partecipanti *(astratto, tech-agnostic)*
+# Feature Specification: Settlement equo tra partecipanti
 
-> Il **cosa** e il **perché**, indipendente da linguaggio/UI. Gli esempi del §6 sono il
-> **contratto**: vanno trasformati in test su una **funzione pura**, PRIMA del codice.
+**Status**: distillato (riusabile) · tech-agnostic
 
-## 1. Scopo & principi
-Dato un insieme di partecipanti che hanno versato denaro in un fondo comune e ne ritirano
-un valore (diverso per ciascuno), produrre la lista minima di **trasferimenti di contante
-reale** che salda tutti. Due principi guida:
-1. **Il debito di un partecipante si elide contro il SUO valore ritirato**
-   (auto-compensazione): chi deve ancora versare ma porta via valore compensa prima con
-   sé stesso.
-2. **Fondo comune ≠ contante che cambia mano**: i soldi già nel fondo si ridistribuiscono
-   passivamente; i "trasferimenti" sono **solo** il contante reale tra persone. Due viste
-   separate.
+## User Scenarios & Testing
 
-## 2. Grandezze (per partecipante)
-| Termine | Significato |
-|---|---|
-| `dovuto` | quanto avrebbe dovuto versare (la sua quota totale) |
-| `versato` | quanto ha realmente messo nel fondo (numero libero) |
-| `valore` | quanto porta via (vincita / quota di ritorno) |
-| `mancante` | `max(0, dovuto − versato)` — quota non versata (≥ 0) |
-| `eccedenza` | `max(0, versato − dovuto)` — versato in più, da restituire |
-| `netto` | `valore − dovuto` — il risultato vero del partecipante |
+### User Story 1 — Saldare col minimo dei passaggi (P1)
+Come organizzatore, voglio la lista minima di trasferimenti di contante per azzerare i conti.
+**Acceptance**
+1. **Given** N partecipanti con `dovuto`/`versato`/`valore`, **When** chiudo, **Then** ottengo trasferimenti `{from,to,importo}` la cui somma azzera tutti i saldi.
+2. **Given** debiti reciproci A↔B, **When** calcolo, **Then** compaiono compensati (solo la differenza).
 
-**Forma generale del saldo** (sempre valida): `saldo = valore − dovuto + versato`
-(= `netto + versato`); con `versato ≤ dovuto` si riduce a `valore − mancante`.
+### User Story 2 — Auto-compensazione (P1)
+Come partecipante con un debito ma con una vincita, non devo "pagare me stesso".
+**Acceptance**
+1. **Given** `mancante>0` e `valore>0` per la stessa persona, **When** calcolo, **Then** `min(mancante, valore)` si elide prima dell'abbinamento; quella persona non è insieme `from` e `to`.
 
-## 3. Requisiti
-- **R1**: servono `≥ 2` partecipanti.
-- **R2**: `somma(netti)` dovrebbe fare 0 (valore totale ritirato = stake totale). NON
-  darlo per scontato: i `valore` li inserisce un umano → potrebbero non quadrare.
-- **R3**: ogni partecipante con `eccedenza > 0` la riprende dal fondo automaticamente.
+### User Story 3 — Correzione manuale (P2)
+Come organizzatore, voglio modificare i trasferimenti e vedere se i conti tornano.
+**Acceptance**
+1. **Given** una lista calcolata, **When** modifico/aggiungo/elimino un trasferimento, **Then** la quadratura si ricalcola e mi avvisa se non torna — **senza bloccare**.
 
-## 4. Algoritmo (punto di partenza, poi override manuale)
-1. `mancante = max(0, dovuto − versato)`; `versato_legittimo = min(versato, dovuto)`.
-2. **Auto-compensazione**: `cancelled = min(mancante, valore)`;
-   `mancante' = mancante − cancelled`; `valore' = valore − cancelled`.
-3. `bisogno = max(0, valore' − versato_legittimo)`.
-4. **Abbinamento greedy**: debitori (`mancante' > 0`) e creditori (`bisogno > 0`) ordinati
-   decrescenti; per ogni debitore distribuisci `mancante'` ai creditori più grandi → ogni
-   passaggio è un trasferimento `{from, to, importo}` (2 decimali). I bisogni non coperti
-   si prendono dal fondo.
-- Totale trasferimenti = `somma(mancante')`. Se `mancante' = 0` per tutti → lista vuota.
+### Edge Cases
+- < 2 partecipanti → bloccato.
+- `somma(netti) ≠ 0` (conteggio umano errato) → segnala, non blocca.
+- Eccedenza (`versato > dovuto`) → restituita dal fondo.
+- Pareggio con debito (`mancante = valore`) → si annulla, esce dai trasferimenti.
 
-## 5. Casi limite
-- `< 2` partecipanti → blocca.
-- `somma(netti) ≠ 0` → segnala, **non** bloccare.
-- `eccedenza` → restituita dal fondo.
-- Pareggio con debito (`mancante = valore`) → si annulla in §4.2, esce dai trasferimenti.
-- Arrotondamenti: 2 decimali, tolleranza 0,01.
+## Requirements
+- **FR-001**: il sistema MUST richiedere ≥ 2 partecipanti.
+- **FR-002**: il sistema MUST distinguere il **fondo comune** (ridistribuzione passiva) dai **trasferimenti** di contante reale.
+- **FR-003**: il sistema MUST restituire l'eccedenza dal fondo.
+- **FR-004**: il sistema MUST permettere l'override manuale di ogni trasferimento.
+- **FR-005**: il check di quadratura MUST avvisare ma NON bloccare.
 
-## 6. Esempi lavorati = test obbligatori (su funzione pura)
-Unità monetarie generiche. Ogni riga = un test.
-| # | Scenario | netto | Trasferimenti attesi |
-|---|---|---|---|
-| 1 | A: dovuto 25, versato 25, valore 40 · B: 25/25/10 | A +15, B −15 | **nessuno** (dal fondo: A 40, B 10) |
-| 2 | A: 25/0/10 · B: 25/25/40 | A −15, B +15 | A→B 15 (auto-comp A: 10 di valore annullano 10 di mancante, resto 15) |
-| 3 | A: dovuto 35 (quota+ricarica), versato 25, valore 10 · B: 25/25/50 | A −25, B +25 | **nessuno** (A: mancante 10 elide contro valore 10) |
-| 4 | vincitore non versa → A: dovuto 25, versato 0, valore 0 · B: 25/25/25 · C: 25/25/50 | A −25, B 0, C +25 | **A→C 25** (A: mancante 25, valore 0 → mancante' 25; C: bisogno 25) |
-| 5 | overpay → A versa 30 (dovuto 25), valore 40 · B 25/25/10 | A +15, B −15 | nessuno; A riprende l'eccedenza 5 dal fondo |
-| 6 | quote miste → A dovuto 25 versato 25 valore 30 · B dovuto 10 versato 10 valore 5 | A +5, B −5 | nessuno (entrambi prendono dal fondo) |
+### Key Entities
+- **Partecipante**: `dovuto`, `versato`, `valore`; derivati `mancante = max(0, dovuto−versato)`, `eccedenza = max(0, versato−dovuto)`, `netto = valore − dovuto`.
+- **Trasferimento**: `from`, `to`, `importo`.
 
-*(Selezione dai 12 esempi reali del build originale: copre i casi chiave — nessun
-trasferimento, auto-compensazione, vincitore-non-versa, overpay, quote miste.)*
+## Success Criteria
+- **SC-001**: `somma(trasferimenti) = somma(mancante')` esattamente.
+- **SC-002**: nessun trasferimento "verso sé stessi".
+- **SC-003**: numero trasferimenti ≤ numero debitori (greedy).
+- **SC-004**: calcoli in **interi (centesimi)** con distribuzione del resto → zero errori di virgola. *(miglioramento assorbito, v0.2)*
 
-## 7. Success criteria
-- **SC1**: `somma(trasferimenti) = somma(mancante')` esattamente.
-- **SC2**: nessun trasferimento "verso sé stessi"; nessuno è insieme `from` e `to` per
-  importi che si annullerebbero.
-- **SC3**: numero di trasferimenti ≤ numero di debitori (greedy minimizza).
-- **SC4**: tutti gli esempi del §6 passano come test **prima** di scrivere la UI.
+## Assumptions
+- `valore` è inserito da un umano (può non quadrare: vedi FR-005).
+- Importi a 2 decimali.
