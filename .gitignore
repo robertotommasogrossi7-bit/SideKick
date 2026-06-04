@@ -1,0 +1,18 @@
+# SideKick — il PROCESSO è pubblico apposta (si condivide), quindi _processo/ NON è ignorato.
+
+# Config locale di Claude Code / agenti (può contenere credenziali/token)
+/.claude/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node
+node_modules/
+dist/
+
+# OS
+.DS_Store
+Thumbs.db

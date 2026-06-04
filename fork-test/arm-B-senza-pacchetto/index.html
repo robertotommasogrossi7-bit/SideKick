@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anticipi tra amici</title>
+<style>
+  :root { --bg:#0f1115; --card:#1a1d24; --ink:#e8eaed; --muted:#9aa0a6; --acc:#4c8bf5; --pos:#3fb950; --neg:#f85149; --line:#2a2e37; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:system-ui,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  header { padding:16px 20px; border-bottom:1px solid var(--line); }
+  header h1 { margin:0; font-size:18px; }
+  header p { margin:4px 0 0; color:var(--muted); font-size:13px; }
+  main { max-width:760px; margin:0 auto; padding:20px; display:grid; gap:16px; }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; }
+  h2 { margin:0 0 12px; font-size:15px; }
+  label { display:block; font-size:12px; color:var(--muted); margin:8px 0 4px; }
+  input, select { width:100%; padding:8px; background:#0f1115; border:1px solid var(--line); border-radius:6px; color:var(--ink); font-size:14px; }
+  button { padding:8px 12px; background:var(--acc); color:#fff; border:0; border-radius:6px; font-size:14px; cursor:pointer; }
+  button.ghost { background:transparent; border:1px solid var(--line); color:var(--muted); }
+  .row { display:flex; gap:8px; align-items:flex-end; flex-wrap:wrap; }
+  .row > div { flex:1; min-width:120px; }
+  ul { list-style:none; margin:0; padding:0; }
+  li { padding:8px 0; border-bottom:1px solid var(--line); font-size:14px; display:flex; justify-content:space-between; gap:8px; align-items:center; }
+  li:last-child { border-bottom:0; }
+  .chips { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
+  .chip { font-size:13px; padding:4px 8px; border:1px solid var(--line); border-radius:999px; display:flex; gap:6px; align-items:center; }
+  .benef { display:flex; gap:10px; flex-wrap:wrap; margin-top:4px; }
+  .benef label { display:flex; gap:4px; align-items:center; margin:0; color:var(--ink); font-size:13px; }
+  .benef input { width:auto; }
+  .pos { color:var(--pos); } .neg { color:var(--neg); } .muted { color:var(--muted); }
+  .todo { background:#2a1d1d; border:1px dashed var(--neg); color:#ffb4ae; padding:12px; border-radius:8px; font-size:14px; }
+  .small { font-size:12px; color:var(--muted); }
+  #listaTrasf li { gap:8px; flex-wrap:wrap; justify-content:flex-start; }
+  #listaTrasf select { width:auto; flex:1 1 90px; min-width:80px; }
+  #listaTrasf input { width:auto; flex:0 0 110px; }
+  #listaTrasf .arrow { flex:0 0 auto; color:var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Anticipi tra amici</h1>
+  <p>Chi ha pagato per chi. Tieni traccia di chi deve soldi a chi.</p>
+</header>
+<main>
+  <section>
+    <h2>Persone</h2>
+    <div class="row">
+      <div><input id="nome" placeholder="Nome amico" /></div>
+      <button onclick="addPersona()">Aggiungi</button>
+    </div>
+    <div class="chips" id="listaPersone"></div>
+  </section>
+
+  <section>
+    <h2>Registra un anticipo</h2>
+    <label>Chi ha pagato</label>
+    <select id="payer"></select>
+    <label>Per chi (uno o piu)</label>
+    <div class="benef" id="beneficiari"></div>
+    <div class="row" style="margin-top:10px">
+      <div><label>Importo (EUR)</label><input id="importo" type="number" min="0" step="0.01" /></div>
+      <div><label>Descrizione (opzionale)</label><input id="descr" placeholder="es. cena, benzina" /></div>
+      <button onclick="addAnticipo()">Aggiungi anticipo</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Movimenti</h2>
+    <ul id="listaMovimenti"></ul>
+  </section>
+
+  <section>
+    <h2>Debiti grezzi (chi deve a chi)</h2>
+    <p class="small">Somma diretta degli anticipi, <strong>senza compensazioni ne minimizzazione</strong>. Nota: possono comparire debiti reciproci (A&rarr;B e B&rarr;A) da scalare.</p>
+    <ul id="listaDebiti"></ul>
+  </section>
+
+  <section id="settle">
+    <h2>Salda i conti</h2>
+    <p class="small">Compensa i debiti reciproci e calcola <strong>chi deve dare contanti a chi</strong> con il <strong>minor numero di trasferimenti</strong>. Punto di partenza: importi e persone sono modificabili a mano.</p>
+    <button onclick="settleUp()">Salda i conti</button>
+    <div id="settleResult"></div>
+  </section>
+</main>
+
+<script>
+const KEY = 'anticipi-amici';
+let state = load();
+
+function load(){ try { return JSON.parse(localStorage.getItem(KEY)) || {persone:[], anticipi:[]}; } catch(e){ return {persone:[], anticipi:[]}; } }
+function save(){ localStorage.setItem(KEY, JSON.stringify(state)); render(); }
+
+function addPersona(){
+  const el = document.getElementById('nome');
+  const nome = el.value.trim();
+  if(!nome) return;
+  if(state.persone.includes(nome)){ alert('Persona gia presente'); return; }
+  state.persone.push(nome); el.value=''; save();
+}
+function removePersona(nome){
+  state.persone = state.persone.filter(p=>p!==nome);
+  state.anticipi = state.anticipi.filter(a=> a.payer!==nome && !a.beneficiari.includes(nome));
+  save();
+}
+function addAnticipo(){
+  const payer = document.getElementById('payer').value;
+  const importo = parseFloat(document.getElementById('importo').value);
+  const descr = document.getElementById('descr').value.trim();
+  const beneficiari = [...document.querySelectorAll('.benef input:checked')].map(c=>c.value);
+  if(!payer || !beneficiari.length || !(importo>0)){ alert('Servono pagante, almeno un beneficiario e un importo > 0'); return; }
+  state.anticipi.push({payer, beneficiari, importo, descr, ts: Date.now()});
+  document.getElementById('importo').value=''; document.getElementById('descr').value='';
+  save();
+}
+function removeAnticipo(ts){ state.anticipi = state.anticipi.filter(a=>a.ts!==ts); save(); }
+
+// Debiti grezzi: per ogni anticipo, ogni beneficiario (diverso dal pagante) deve la sua quota al pagante.
+// Aggregati per coppia ordinata, SENZA nettare il verso opposto (apposta: e il lavoro mancante).
+function debitiGrezzi(){
+  const map = {};
+  for(const a of state.anticipi){
+    const quota = a.importo / a.beneficiari.length;
+    for(const b of a.beneficiari){
+      if(b===a.payer) continue;
+      const k = b+' -> '+a.payer;
+      map[k] = (map[k]||0) + quota;
+    }
+  }
+  return map;
+}
+
+// ===================== Salda i conti =====================
+// Vista derivata ed editabile: i trasferimenti calcolati (in centesimi).
+// null = non ancora calcolato. Non persistita: si rigenera con "Ricalcola".
+let trasferimenti = null;
+
+// Netto per persona in centesimi interi (segno: + creditore, - debitore).
+// Qui avviene l'auto-compensazione: tutti i debiti/crediti di una persona
+// collassano in UN solo saldo, quindi A->B e B->A si elidono da soli e
+// nessuno puo restare insieme "da pagare" e "da incassare".
+function nettoCentesimi(){
+  const net = {};
+  for(const p of state.persone) net[p] = 0;
+  for(const a of state.anticipi){
+    const quota = a.importo / a.beneficiari.length;
+    for(const b of a.beneficiari){
+      if(b === a.payer) continue;          // la quota del pagante e consumo suo, non debito
+      if(!(a.payer in net)) net[a.payer] = 0;
+      if(!(b in net)) net[b] = 0;
+      net[a.payer] += quota;               // ha anticipato per altri -> creditore
+      net[b]       -= quota;               // ha ricevuto un anticipo -> debitore
+    }
+  }
+  // euro (float) -> centesimi interi, per evitare polvere in virgola mobile.
+  const cents = {}; let somma = 0;
+  for(const p in net){ cents[p] = Math.round(net[p]*100); somma += cents[p]; }
+  // I centesimi arrotondati possono non sommare a 0: scarico il residuo
+  // (1-2 cent) sul saldo piu grande, cosi il greedy chiude tutto a zero.
+  if(somma !== 0){
+    let big = null;
+    for(const p in cents){ if(big===null || Math.abs(cents[p])>Math.abs(cents[big])) big = p; }
+    if(big !== null) cents[big] -= somma;
+  }
+  return cents;
+}
+
+// Greedy "min cash flow": abbina il creditore piu grande col debitore piu
+// grande, salda il minimo dei due, avanza. Ogni passo azzera almeno una
+// persona -> tende al minor numero di trasferimenti reali.
+function calcolaTrasferimenti(){
+  const cents = nettoCentesimi();
+  const creditori = [], debitori = [];
+  for(const p in cents){
+    if(cents[p] > 0) creditori.push({nome:p, c:cents[p]});
+    else if(cents[p] < 0) debitori.push({nome:p, c:-cents[p]});
+  }
+  creditori.sort((x,y)=>y.c-x.c);
+  debitori.sort((x,y)=>y.c-x.c);
+  const out = [];
+  let i=0, j=0;
+  while(i<creditori.length && j<debitori.length){
+    const paga = Math.min(creditori[i].c, debitori[j].c);
+    out.push({from: debitori[j].nome, to: creditori[i].nome, cents: paga});
+    creditori[i].c -= paga;
+    debitori[j].c  -= paga;
+    if(creditori[i].c === 0) i++;
+    if(debitori[j].c === 0) j++;
+  }
+  return out;
+}
+
+function settleUp(){
+  trasferimenti = calcolaTrasferimenti();
+  renderSettle();
+  document.getElementById('settleResult').scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+// ---- modifica manuale dei trasferimenti ----
+function editTrasf(idx, campo, val){
+  if(!trasferimenti || !trasferimenti[idx]) return;
+  if(campo === 'cents'){
+    const n = parseFloat(val);
+    trasferimenti[idx].cents = isNaN(n) ? 0 : Math.round(n*100);
+    aggiornaQuadratura();              // aggiorna solo il check: non perde il focus
+  } else {
+    trasferimenti[idx][campo] = val;   // from / to
+    renderSettle();
+  }
+}
+function removeTrasf(idx){ if(trasferimenti){ trasferimenti.splice(idx,1); renderSettle(); } }
+function addTrasf(){
+  if(!trasferimenti) trasferimenti = [];
+  const p = state.persone;
+  trasferimenti.push({from: p[0]||'', to: p[1]||p[0]||'', cents:0});
+  renderSettle();
+}
+
+// Residuo per persona dopo i trasferimenti correnti (centesimi, con segno).
+// Tutto 0 = i conti quadrano. Base del check non bloccante.
+function residui(){
+  const r = nettoCentesimi();
+  for(const t of (trasferimenti||[])){
+    if(t.to   in r) r[t.to]   -= t.cents;   // chi incassa ha un credito in meno
+    if(t.from in r) r[t.from] += t.cents;   // chi paga ha un debito in meno
+  }
+  return r;
+}
+
+const eur = c => 'EUR ' + (c/100).toFixed(2);
+
+function optionsPersone(sel){
+  let nomi = state.persone.slice();
+  if(sel && !nomi.includes(sel)) nomi = nomi.concat(sel);   // non perdere un nome rimosso
+  return nomi.map(p=>`<option value="${p}"${p===sel?' selected':''}>${p}</option>`).join('');
+}
+
+function quadraturaHTML(){
+  const r = residui();
+  const aperti = Object.keys(r).filter(p=>r[p]!==0);
+  if(!aperti.length) return '<p class="pos small">&#10003; I conti quadrano: con questi trasferimenti tutti tornano a zero.</p>';
+  const dett = aperti.map(p=> r[p]>0
+    ? `${p} deve ancora ricevere ${eur(r[p])}`
+    : `${p} deve ancora dare ${eur(-r[p])}`).join(' &middot; ');
+  return `<p class="neg small">&#9888; Non quadra (puoi comunque lasciarlo cosi): ${dett}</p>`;
+}
+function aggiornaQuadratura(){
+  const el = document.getElementById('settleCheck');
+  if(el) el.innerHTML = quadraturaHTML();
+}
+
+function renderSettle(){
+  const box = document.getElementById('settleResult');
+  if(!box) return;
+  if(trasferimenti === null){ box.innerHTML=''; return; }
+  let html = '';
+  if(trasferimenti.length === 0){
+    html += '<p class="small">Nessun trasferimento necessario: i conti sono gia pari.</p>';
+  } else {
+    html += '<ul id="listaTrasf">' + trasferimenti.map((t,idx)=>`
+      <li>
+        <select onchange="editTrasf(${idx},'from',this.value)">${optionsPersone(t.from)}</select>
+        <span class="arrow">&rarr;</span>
+        <select onchange="editTrasf(${idx},'to',this.value)">${optionsPersone(t.to)}</select>
+        <input type="number" step="0.01" min="0" value="${(t.cents/100).toFixed(2)}" oninput="editTrasf(${idx},'cents',this.value)">
+        <button class="ghost" onclick="removeTrasf(${idx})" title="Rimuovi">x</button>
+      </li>`).join('') + '</ul>';
+  }
+  html += `<div id="settleCheck">${quadraturaHTML()}</div>`;
+  html += `<div class="row" style="margin-top:10px">
+      <button class="ghost" onclick="addTrasf()">+ Aggiungi trasferimento</button>
+      <button class="ghost" onclick="settleUp()">Ricalcola</button>
+    </div>`;
+  box.innerHTML = html;
+}
+
+function render(){
+  document.getElementById('listaPersone').innerHTML = state.persone.map(p=>
+    `<span class="chip">${p} <button class="ghost" style="padding:0 6px" onclick="removePersona('${p.replace(/'/g,"\\'")}')">x</button></span>`).join('') || '<span class="muted">Nessuna persona.</span>';
+  const payer = document.getElementById('payer');
+  payer.innerHTML = state.persone.map(p=>`<option value="${p}">${p}</option>`).join('');
+  document.getElementById('beneficiari').innerHTML = state.persone.map(p=>
+    `<label><input type="checkbox" value="${p}"> ${p}</label>`).join('') || '<span class="muted">Aggiungi prima delle persone.</span>';
+  document.getElementById('listaMovimenti').innerHTML = state.anticipi.slice().reverse().map(a=>
+    `<li><span>${a.payer} ha pagato <strong>EUR ${a.importo.toFixed(2)}</strong> per ${a.beneficiari.join(', ')}${a.descr?` <span class="muted">(${a.descr})</span>`:''}</span><button class="ghost" onclick="removeAnticipo(${a.ts})">elimina</button></li>`).join('') || '<li class="muted">Nessun anticipo.</li>';
+  const d = debitiGrezzi();
+  const keys = Object.keys(d);
+  document.getElementById('listaDebiti').innerHTML = keys.length ? keys.map(k=>
+    `<li><span>${k}</span><span class="neg">EUR ${d[k].toFixed(2)}</span></li>`).join('') : '<li class="muted">Nessun debito.</li>';
+}
+render();
+</script>
+</body>
+</html>
