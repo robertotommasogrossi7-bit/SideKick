@@ -5,7 +5,7 @@ tag: [migrazione, vanilla-to-framework, react, retrocompat, incrementale, metodo
 non_ovvieta: alta
 esito: migrazione reale completata (~3500 righe/16 moduli -> React+TS), 48 test verdi, dati intatti
 provenienza: poker/_processo/archivio/REACT_MIGRATION_PROMPT.md + DECISIONI.md (motore F2)
-versione: 0.2
+versione: 0.3
 speckit_compat: true
 ---
 
@@ -33,7 +33,11 @@ playbook a fasi (`plan.md`).
 
 ## I cardini
 1. **Comportamento identico, zero feature nuove** (rende possibile il diff, blocca lo scope-creep).
-2. **Retrocompat dati sacra**: stessa chiave/shape, migrazioni idempotenti all'avvio.
+2. **Retrocompat dati sacra**: stessa chiave/shape, migrazioni idempotenti all'avvio. ⚠️ Se
+   adotti uno store con `persist` (zustand/redux-persist/pinia), il middleware **avvolge** i dati
+   in `{state,version}`: non combacia con un valore grezzo già salvato (es. array nudo) → serve
+   un **adattatore storage custom** (legge il formato originale, riscrive nudo) o una migrazione
+   del legacy, altrimenti i dati vecchi **non si caricano**. Vedi `plan.md`.
 3. **A fasi**, una per sessione, ognuna testabile, branch da `main`.
 4. **Mappa del codice come bussola.**
 5. **Traduzione 1:1** (funzione→hook/componente, render-HTML→componente).

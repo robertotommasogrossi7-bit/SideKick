@@ -24,6 +24,9 @@ Come sviluppatore, voglio migrare a fasi indipendenti, non in un big-bang.
 - Lo store persiste troppo → persistere **solo i dati** (un `partialize`), non lo stato UI.
 - Stato derivato dal tempo (timer) → recovery dal **timestamp salvato** dopo un refresh.
 - Cambio shape storage → migrazione **idempotente** obbligatoria.
+- Adozione di un **persist-middleware** (zustand/redux-persist) → il wrapper `{state,version}` NON
+  combacia con lo storage grezzo esistente → **adattatore storage custom** (legge il formato
+  originale) o migrazione legacy, altrimenti i dati vecchi non si caricano.
 - Bug ai confini tra moduli → **grep dei call-site** prima di toccare una funzione.
 
 ## Requirements

@@ -272,3 +272,32 @@
 - **Kit:** `_processo/test-migrazione/` (COME-FARE + rubrica + seed dati + 4 PROMPT). **Da fare
   (utente):** aprire 4 chat pulite e lanciare (habit prima). **Poi:** ragionare su un *secondo*
   test finale con un **processo diverso** (anche inventato o preso da Spec Kit) prima di F3.
+
+### 2026-06-10 — ESITO test migrazione-grande (4 bracci) + pacchetto a v0.3
+- **Eseguito** il 2×2 (budget/habit × con/senza) dall'utente in chat pulite; review da questa chat
+  base con **prova retrocompat empirica nel browser** (seed dei dati ORIGINALI → reload → snapshot)
+  su tutti e 4.
+- **🔑 Retrocompat:** budget-A ✅, budget-B ✅, habit-B ✅, **habit-A ❌**. Il segnale-killer atteso
+  ("il cieco perde i dati") **non è scattato**: entrambi i ciechi hanno preservato chiave **e**
+  shape da soli. L'unico fallimento è il braccio **col pacchetto** (habit-armA): seguendo il
+  cardine "store con persist" ha usato zustand `persist` di default, il cui wrapper `{state,version}`
+  non combacia con l'array nudo originale → dati vecchi non caricati (verificato: dato intatto in
+  localStorage, UI "No habits"). budget-armA, stesso cardine, l'ha gestito con un `PersistStorage`
+  **custom** → retrocompat perfetta ($767.50, tema dark).
+- **Altri segnali:** comportamento identico ovunque (no scope-creep); **processo** più disciplinato
+  nei bracci-pacchetto (habit-A 5 commit fasati, traduzione 1:1, intento retrocompat dichiarato)
+  vs big-bang in budget-B; build verde / app gira su tutti e 4; streak time-derived corretta
+  (habit-B verificata live: "2 days, 13 hrs…").
+- **Verdetto:** come il settlement, questi probe erano ancora abbastanza **standard** che l'agente
+  cieco azzecca la retrocompat da solo → il pacchetto **non discrimina sull'esito** qui, e la sua
+  best-practice ha pure *introdotto* il bug se applicata senza adattatore. Valore osservato =
+  **disciplina di processo**, non retrocompat. **Ipotesi "valore ∝ dimensione" NON confermata** su
+  app multi-schermata ma standard.
+- **Auto-miglioramento (il regalo del test):** budget-armA ha prodotto il pattern corretto
+  (`PersistStorage` custom che legge l'array grezzo). **Assorbito** → `migrazione-a-componenti`
+  **v0.2 → v0.3**: aggiunto il gotcha "persist-middleware = wrapper di shape" + soluzione, in
+  PACCHETTO/spec/plan. Il loop fitness ha funzionato: un braccio ha migliorato il pacchetto.
+- **Implicazione per il 2° test (utente):** serve un processo **davvero tosto** — sapere non-ovvio
+  che *morde*, con **oracolo oggettivo** di correttezza, dove il cieco **fallisce**. Idea utente:
+  loop *discovery→redo* (fai la cosa difficile senza pista, vedi gli errori, rifalla da zero con
+  le soluzioni). Quadruplo (2 bersagli) per robustezza. Direzione in ragionamento.

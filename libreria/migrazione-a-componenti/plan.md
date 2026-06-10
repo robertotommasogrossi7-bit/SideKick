@@ -22,6 +22,12 @@ intatti e migrazioni idempotenti**. Ha poi abilitato nuove feature senza riscrit
 
 ## 🧰 I gotcha che insegnano
 - Store che persiste troppo → `partialize` (solo dati).
+- **persist-middleware = wrapper di shape.** zustand/redux-persist/pinia salvano
+  `{state:{…},version:N}` sotto la tua chiave. Se i dati vecchi sono un **valore grezzo** (es.
+  array nudo), la nuova app **non li carica** (cerca `.state`, trova un array, lo ignora).
+  Soluzione provata sul campo: un `PersistStorage` **custom** — in `getItem` riconosci il formato
+  legacy e lo avvolgi; in `setItem` riscrivi il formato grezzo originale (così i dati esistenti si
+  caricano *senza* migrazione). In alternativa, una migrazione del legacy al primo avvio.
 - Recovery dello stato-tempo dal timestamp salvato.
 - Stessa chiave di storage = salvezza (i dati si caricano) e trappola (cambio shape → migrazione idempotente).
 - Bug ai confini tra moduli → grep dei call-site prima.
