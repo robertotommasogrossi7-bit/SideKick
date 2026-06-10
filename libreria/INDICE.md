@@ -20,6 +20,8 @@ Per aggiungerne uno → `../CONTRIBUIRE.md`. Per distillarne/usarne → `../GUID
 
 | [bracket-eliminazione](bracket-eliminazione/) | Tabellone a eliminazione: seeding + bye | **alta** | validato con test |
 | [rating-elo](rating-elo/) | Aggiornamento rating Elo (forza, non vittorie assolute) | **alta** | validato con test |
+| [girone-italiana](girone-italiana/) | Calendario round-robin (metodo del cerchio + bye) | **alta** | validato con test |
+| [ricorrenze-date](ricorrenze-date/) | Ricorrenze tipo RRULE ("2° martedì del mese") | **alta** | validato con test |
 
 ## 🤖 Pronte-per-l'AI — artefatti esecutivi
 _(ancora vuoto — prompt-template e task pronti da dare a un agente)_
