@@ -236,3 +236,17 @@
 - **PROSSIMO: il "pezzo difficile" (gradino 2)** — test duro su un'app complessa **esterna**,
   end-to-end (feature piena, output reale *girato*), **con-vs-senza**, per chiudere il dubbio
   "nessun test sull'output reale". Poi F3.
+
+### 2026-06-10 — Gradino 2 (OUTPUT REALE) ✅ su app esterna complessa
+- **Bersaglio:** `szabolcsthedeveloper/React-Chess` (app scacchi React+TS reale, ~25 file,
+  regole complete, **nessun rating**). Clonata in `_test/_fonte-chess` (gitignorato).
+- **Integrato `rating-elo`** nel flusso REALE (`Referee.tsx`): stato 2 giocatori + rating,
+  aggiornamento Elo a fine partita (`useEffect` su `winningTeam`), display. Moduli
+  `giocatori.ts` + `elo.ts`.
+- **Prova output reale:** test sulla logica **integrata** 3/3 verdi (1500/1500 + vittoria
+  Bianco → 1516/1484) **+ build di produzione VERDE** → la feature è cablata nell'app vera e
+  compila/gira. **Chiude il dubbio "nessun test sull'output reale".**
+- **Onestà:** valida "il sapere si integra e funziona nell'app reale", NON "il pacchetto era
+  necessario" (Elo borderline-textbook → A/B debole qui). La necessità si vede su feature più
+  strane (terzi del tressette, primiera, snake seeding).
+- **PROSSIMO: F3** (preset/extension Spec Kit) → poi proporlo. Libreria provata + output reale = pronti.
