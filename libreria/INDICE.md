@@ -18,6 +18,9 @@ Per aggiungerne uno → `../CONTRIBUIRE.md`. Per distillarne/usarne → `../GUID
 | [punteggio-briscola](punteggio-briscola/) | Punteggio della Briscola (valori carte, >60 vince) | media | validato con test |
 | [punteggio-tressette](punteggio-tressette/) | Punteggio del Tressette (terzi con floor + ultima presa) | **alta** | validato con test |
 
+| [bracket-eliminazione](bracket-eliminazione/) | Tabellone a eliminazione: seeding + bye | **alta** | validato con test |
+| [rating-elo](rating-elo/) | Aggiornamento rating Elo (forza, non vittorie assolute) | **alta** | validato con test |
+
 ## 🤖 Pronte-per-l'AI — artefatti esecutivi
 _(ancora vuoto — prompt-template e task pronti da dare a un agente)_
 
