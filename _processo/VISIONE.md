@@ -26,6 +26,15 @@ feature-processi* — come npm/pip ma per **singole feature**, **non-tecnico** e
 meccanismo di **curation/versioning** che riassorbe i miglioramenti (legato alla fitness
 function: la versione migliore "sale").
 
+**Stato della validazione (2026-06-10).** Loop provato su **7+ feature non-ovvie** (165 test
+verdi sul banco) + **output reale** su un'app esterna vera (`rating-elo` integrato in un'app
+scacchi React, build verde). Libreria: **10 pacchetti validati**, pubblici. Resta da provare
+sui **processi grandi** (vedi `TEST_MIGRAZIONE_GRANDE.md`): ipotesi forte = **il valore del
+pacchetto CRESCE con la dimensione del processo** — su una migrazione lunga la disciplina
+non-ovvia (retrocompat dati, a fasi, comportamento identico) è proprio dove si fallisce,
+quindi il pacchetto discrimina molto più che su una feature piccola/textbook. Dopo: **F3**
+(preset/extension Spec Kit) → proporlo.
+
 ## 2. Il buco (vs GitHub e vs Spec Kit)
 - **GitHub** condivide l'*esito*: codice + storia dei commit (il *cosa*). Non il
   *perché*, non i prompt vincenti, non i loop di debug.
