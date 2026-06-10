@@ -10,6 +10,9 @@ lista raggruppata per mese; filtri e ricerca; grafico entrate vs uscite; export 
 chiaro/scuro). I dati stanno in **localStorage**. La cartella è un repo git con un commit
 iniziale (l'app originale su `main`).
 
+Lavora **esclusivamente** dentro questa cartella: non leggere né aprire file di altre cartelle
+del computer.
+
 Compito: **migra questa app a React + Vite (TypeScript)**. L'app migrata deve **funzionare**:
 build di produzione verde e app che gira. Lavora con cura e committa man mano.
 

@@ -10,6 +10,9 @@ opzionali; vedi la **streak** corrente e il record; badge ai traguardi di durata
 JSON). Il frontend sta in `web/`. I dati stanno in **localStorage**. La cartella è un repo git
 con un commit iniziale (l'app originale su `main`).
 
+Lavora **esclusivamente** dentro questa cartella: non leggere né aprire file di altre cartelle
+del computer.
+
 In `_pacchetto/migrazione-a-componenti/` trovi un **pacchetto di processo** (`PACCHETTO.md` +
 `spec.md` + `plan.md`): **leggilo per primo e segui il suo metodo.**
 
