@@ -23,10 +23,14 @@ originale: `../cattura-processo-ai-brief.md`.
   build verde).
 - **Banco di prova:** `_test/poker-copia` (copia di poker-react, gitignorata, deps
   installate) per adattare+testare feature via Vitest; `_test/_fonte-chess` = app scacchi del
-  gradino 2.
-- **Prossimi passi:** (1) **`TEST_MIGRAZIONE_GRANDE.md`** — provare un *processo grande*
-  (migrazione completa, con-vs-senza); (2) **F3** — preset/extension Spec Kit → proporlo;
-  (3) #4 polish portfolio (README con demo + writeup).
+  gradino 2; `_test/_fonte-budget` + `_test/_fonte-habit` = le due app vanilla (pristine) del
+  test migrazione-grande.
+- **Prossimi passi:** (1) **TEST MIGRAZIONE GRANDE — allestito, da *eseguire***: scaffold A/B
+  pieno 2×2 in `Programmi/_migr-test/` (budget/habit × armA/armB, fuori da SideKick per
+  isolamento); kit + rubrica + 4 prompt in `_processo/test-migrazione/` (vedi
+  `TEST_MIGRAZIONE_GRANDE.md`). Da lanciare in 4 chat pulite, habit prima. (2) **2° test finale**
+  su un *processo diverso* (anche inventato o da Spec Kit). (3) **F3** — preset/extension Spec
+  Kit → proporlo; (4) #4 polish portfolio (README con demo + writeup).
 - Spec Kit installato (`uv`+`specify`); sandbox in `Programmi/_spec-kit-sandbox`. GitHub Spec
   Kit = standard con cui restare compatibili (vedi `VISIONE.md` §4).
 

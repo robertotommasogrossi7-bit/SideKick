@@ -42,3 +42,27 @@ persi. **Se è così → il pacchetto vale tanto sui processi grandi = conferma 
 ## Note
 - È un test **lungo** (più fasi, forse più sessioni). Va bene consumare token: è serio.
 - A fine test, aggiornare `DECISIONI.md` con l'esito e, se il pacchetto è migliorato, alzarne la `versione`.
+
+## Stato — ALLESTITO (2026-06-10), da eseguire
+Scelte **due** app vanilla complementari (non poker → no circolarità), clonate e verificate sul
+codice vero:
+- **budget** = `AmirhosseinLN/advanced-finance-tracker` (~750 righe; chiavi `financeTrackerData`
+  + `financeTrackerTheme`; `amount` con segno). Sonda retrocompat **multi-chiave + shape flat**.
+- **habit** = `justind-dev/habit-tracker` (~1000 righe; chiave `habitTrackerHabits` **nidificata**;
+  **streak calcolate a render-time** + updater a intervallo). Sonda **shape nidificata + gotcha
+  del tempo** (il gotcha #2 del pacchetto in persona).
+
+Scaffold A/B **pieno (2×2)** costruito **fuori da SideKick** (isolamento): `Programmi/_migr-test/`
+→ `{budget,habit}-{armA,armB}`; gli arm-A contengono `_pacchetto/migrazione-a-componenti/`, gli
+arm-B no. Ogni root è un repo git con commit base. **Sorgenti pristine** (reference, gitignorate)
+in `_test/_fonte-budget` + `_test/_fonte-habit`.
+
+**Come eseguirlo + rubrica + seed dati + output riflessivo:** `test-migrazione/COME-FARE.md`;
+i 4 prompt da incollare nelle chat pulite: `test-migrazione/PROMPT-*.md`. **Ordine consigliato:
+habit prima** (probe più ricco); budget come conferma.
+
+**Dimensione aggiunta (input utente 2026-06-10):** il test non misura solo "A batte B" ma
+**quanto è buono il processo del pacchetto e come migliorarlo** (fitness function, `VISIONE.md`
+§9.1): a fine test, se emerge un miglioramento → riassorbirlo e **alzare la `versione`** del
+pacchetto. **Dopo questo test:** ragionare su un *secondo* test finale con un **processo diverso**
+(anche inventato o preso da Spec Kit), poi **F3**.

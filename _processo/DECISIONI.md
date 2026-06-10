@@ -250,3 +250,25 @@
   necessario" (Elo borderline-textbook → A/B debole qui). La necessità si vede su feature più
   strane (terzi del tressette, primiera, snake seeding).
 - **PROSSIMO: F3** (preset/extension Spec Kit) → poi proporlo. Libreria provata + output reale = pronti.
+
+### 2026-06-10 — Test migrazione-grande: ALLESTITO (2 app, 2×2 pieno)
+- **Decisione (utente "fai come pensi"):** test **con-vs-senza pieno 2×2** su **due** app vanilla
+  complementari, non una sola. Scelta dei bersagli delegata a Claude.
+- **Bersagli** (cercati + verificati su GitHub: vanilla puro, localStorage, taglia giusta):
+  - **budget** `AmirhosseinLN/advanced-finance-tracker` — 2 chiavi (`financeTrackerData`,
+    `financeTrackerTheme`) + `amount` con segno → probe retrocompat **multi-chiave/flat**.
+  - **habit** `justind-dev/habit-tracker` — chiave `habitTrackerHabits` **nidificata** + streak
+    **derivate dal tempo** (render-time + updater) → probe **shape nidificata + gotcha del tempo**.
+- **Isolamento:** root di lavoro **fuori da SideKick** (`Programmi/_migr-test/`), arm-B **senza**
+  pacchetto (applicata la lezione del fork-test v1 contaminato). Pristine in `_test/_fonte-*`.
+- **Chiarimento metodologico (richiesto dall'utente):** i test scacchi/feature erano **a un
+  braccio** ("il sapere si integra e gira?") → nessun gruppo di controllo da proteggere, quindi
+  la contaminazione era irrilevante e potevano vivere dentro SideKick. La migrazione è **A/B**:
+  arm-B è il **controllo** e deve restare **ignaro del pacchetto**, altrimenti il confronto è
+  nullo → da qui l'isolamento (e il motivo per cui *questa* chat base, che ha letto il pacchetto,
+  non può fare da arm-B).
+- **Dimensione fitness (input utente):** misurare anche **dove zoppica il mio processo** e se c'è
+  un modo migliore di progettarlo → se emerge, riassorbire e **alzare la `versione`** del pacchetto.
+- **Kit:** `_processo/test-migrazione/` (COME-FARE + rubrica + seed dati + 4 PROMPT). **Da fare
+  (utente):** aprire 4 chat pulite e lanciare (habit prima). **Poi:** ragionare su un *secondo*
+  test finale con un **processo diverso** (anche inventato o preso da Spec Kit) prima di F3.
