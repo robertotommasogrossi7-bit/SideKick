@@ -25,12 +25,14 @@ originale: `../cattura-processo-ai-brief.md`.
   installate) per adattare+testare feature via Vitest; `_test/_fonte-chess` = app scacchi del
   gradino 2; `_test/_fonte-budget` + `_test/_fonte-habit` = le due app vanilla (pristine) del
   test migrazione-grande.
-- **Prossimi passi:** (1) **TEST MIGRAZIONE GRANDE — allestito, da *eseguire***: scaffold A/B
-  pieno 2×2 in `Programmi/_migr-test/` (budget/habit × armA/armB, fuori da SideKick per
-  isolamento); kit + rubrica + 4 prompt in `_processo/test-migrazione/` (vedi
-  `TEST_MIGRAZIONE_GRANDE.md`). Da lanciare in 4 chat pulite, habit prima. (2) **2° test finale**
-  su un *processo diverso* (anche inventato o da Spec Kit). (3) **F3** — preset/extension Spec
-  Kit → proporlo; (4) #4 polish portfolio (README con demo + writeup).
+- **Prossimi passi:** (1) **TEST MIGRAZIONE GRANDE — ESEGUITO** (4 bracci, `_migr-test/`):
+  ipotesi *non* confermata su app standard — i ciechi tengono la retrocompat da soli; il
+  braccio-pacchetto habit l'ha pure **rotta** (wrapper zustand) e tutti i bracci-pacchetto sono
+  costati **~2x token**. Pacchetto salito a **v0.3** (gotcha persist-wrapper). Dettagli in
+  `DECISIONI.md` (2026-06-10/11). (2) **2° TEST TOSTO — IN CORSO**: sessionizzazione streaming
+  *ruthless* (`_processo/test-streaming/SPEC.md`), oracolo **validato** (`_test/streaming-oracle/`,
+  privato), nuova dimensione **costo** (`_test/misura-token.mjs`); mancano grader hashed + Fase 1
+  discovery + quadruplo. (3) **F3** — preset/extension Spec Kit → proporlo; (4) #4 polish portfolio.
 - Spec Kit installato (`uv`+`specify`); sandbox in `Programmi/_spec-kit-sandbox`. GitHub Spec
   Kit = standard con cui restare compatibili (vedi `VISIONE.md` §4).
 
