@@ -301,3 +301,28 @@
   che *morde*, con **oracolo oggettivo** di correttezza, dove il cieco **fallisce**. Idea utente:
   loop *discovery→redo* (fai la cosa difficile senza pista, vedi gli errori, rifalla da zero con
   le soluzioni). Quadruplo (2 bersagli) per robustezza. Direzione in ragionamento.
+
+### 2026-06-11 — Dimensione COSTO (token) + design test tosto (streaming, ruthless)
+- **Nuovo segnale: costo.** Misurati i token dei 4 bracci migrazione leggendo i loro transcript
+  (`~/.claude/projects/...`, dogfooding di SideKick) con `_test/misura-token.mjs` (riusabile):
+  - **budget** A(con) vs B(cieco): turns 72/50, tool 45/31, out 160k/70k, in 4.9M/2.2M →
+    **pacchetto ~2x più caro a parità di esito**.
+  - **habit** A(con) vs B(cieco): turns 132/62, tool 84/37, in **9.07M**/3.58M →
+    **~2.5x più caro E esito peggiore** (A ha rotto la retrocompat; 132 turni = thrashing).
+  - **Lettura:** la disciplina del pacchetto (leggere spec/plan, fasi, traduzione 1:1) ha un
+    **costo in token**; su problemi facili è **overhead puro**. Conferma: su task standard il
+    pacchetto non aiuta l'esito e fa lavorare di più. Paga solo se il problema è abbastanza duro.
+- **Rubrica permanente +1 riga: 💰 Costo** (turns, tool_calls, out_tok, in_tok; opz. debug-loop),
+  estratto dai transcript. Lega alla fitness function (VISIONE §9.1: "meno giri di debug? tempo?").
+- **Reframe success del test tosto:** il pacchetto **vince** sse è **corretto (passa l'oracolo)
+  E più economico** del cieco (che thrasha o fallisce caro). Discriminazione su 2 assi: correttezza + costo.
+- **Design test streaming = RUTHLESS (confermato dall'utente "il più spietato possibile"):**
+  - Problema: sessionizzazione per-chiave con **watermark GLOBALE** (tenuto: è la leva spietata,
+    accoppia le chiavi e fa cadere i naive), late-drop `t<W`, **merge retroattivo** dei tardivi
+    non-scartati, aggregati, exactly-once (idempotenza).
+  - Default `G=15 / L=60`, ma **hidden test con più (G,L)** (no tuning).
+  - Suite **avversaria**: minimal-failing per ogni trappola; stream random grandi vs reference;
+    **idempotenza** (doppia esecuzione identica); edge (vuoto / singolo / tutti-scartati /
+    t-uguali con tie-break su indice d'arrivo). Grading **binario** (qualunque mismatch = fail) +
+    quanto-lontano + costo. **Reference privata = oracolo** (in `_test/streaming-oracle/`, gitignored).
+  - Apparato pubblico (record): `_processo/test-streaming/SPEC.md`. Fasi: discovery→distilla→quadruplo.
