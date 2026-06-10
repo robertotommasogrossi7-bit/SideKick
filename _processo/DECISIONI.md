@@ -222,3 +222,17 @@
   contaminazione GPL → vantaggio strutturale del "processo, non codice".
 - **Pacchetto:** `libreria/punteggio-scopa` (Pratiche, `non_ovvieta: alta`, esito=validato).
   Libreria ora: **4 pacchetti**.
+
+### 2026-06-10 — Libreria a 10: 6 pacchetti nuovi validati
+- Aggiunti e validati (funzione pura + Vitest sul banco `_test/poker-copia`):
+  **punteggio-briscola, punteggio-tressette, bracket-eliminazione, rating-elo,
+  girone-italiana, ricorrenze-date**.
+- **Suite completa del banco: 19 file, 165 test verdi** (i 6 nuovi + scopa + i test poker
+  esistenti → niente rotto).
+- Tutti su sapere **non-ovvio** (terzi/floor del tressette, snake-seeding+bye, formula Elo,
+  metodo del cerchio, n-esimo giorno del mese). Confermano: il sapere distillato si
+  trasferisce **corretto**, ripetutamente.
+- Libreria: **10 pacchetti**, tutti su GitHub.
+- **PROSSIMO: il "pezzo difficile" (gradino 2)** — test duro su un'app complessa **esterna**,
+  end-to-end (feature piena, output reale *girato*), **con-vs-senza**, per chiudere il dubbio
+  "nessun test sull'output reale". Poi F3.
