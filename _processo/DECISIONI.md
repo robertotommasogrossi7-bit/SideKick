@@ -453,3 +453,21 @@
 - **Come si usa OGGI (chiarito):** è presto (1 disciplina). Installare il plugin **a livello utente**
   (ambiente in entrambi i progetti); usare `/metodo:idea` quando serve. Il *flusso* arriva con le
   prossime discipline + l'auto-riflessione. Validazione **dall'uso** (dogfooding su 2 progetti reali).
+
+### 2026-06-11 — Correzione utente: lo slash command è una MANUALIZZAZIONE (sbagliato)
+- **Critica (giusta):** uno slash command (`/metodo:idea`) **obbliga l'umano a premere un bottone** =
+  *più* attrito, non meno. "Sto manualizzando un processo automatico per renderlo più automatico."
+  L'utente **già** fa di meglio: dice alla chat di segnare le idee in ordine e **ripropormele da sola**.
+- **Modello giusto:** non "l'umano invoca un comando", ma **l'AI fa il metodo da sola** — ti **chiede
+  lei** se hai idee/da salvare, **tiene il passo** col metodo *senza forzare*, e **lo modifica da sola**
+  quando impara. Niente `/` da ricordare. "Non si usa con comandi: si installa una volta e l'AI *si
+  comporta* così, in ogni progetto."
+- **Forma corretta (Claude Code):** (1) **constitution = istruzioni permanenti** (`CLAUDE.md`/agent/
+  output-style caricato in automatico) → AI **proattiva** (chiede idee, tiene la lista, ripropone,
+  nudge design-first/micro-commit senza forzare); (2) **hook** (eseguiti dall'harness) per i momenti
+  davvero automatici (es. Stop: "idee da salvare?"); (3) **auto-modifica** della constitution quando il
+  metodo cambia (es. Max → niente multi-chat per feature). Lo **slash command scende a optional**.
+- **Onestà sul peso:** nel nocciolo = **una constitution ottima, auto-evolvente e condivisibile (+hook)**.
+  Modesto ma reale: rende il metodo già-funzionante dell'utente **portabile + proattivo + auto-migliorante**.
+- **Azione:** ripensare il plugin `metodo` attorno alla **constitution proattiva** (non ai comandi);
+  rivedere il README di conseguenza **dopo** conferma utente che è questa la cosa giusta.
