@@ -1,0 +1,6 @@
+﻿851425b feat(react): App.tsx wiring + CSS + build green, verified in preview
+5194fbe feat(react): components — HabitCard, modals, MotivationalMessage
+13446b8 feat(react): zustand store with persist on key 'habitTrackerHabits'
+74ad671 feat(react): port types and pure business logic 1:1 from app.js
+f068aaa feat(react): scaffold Vite+React+TS, copy assets from web/
+5440329 app vanilla originale (pre-migrazione)

@@ -1,0 +1,2 @@
+﻿1e5cd51 Migrate app to React + Vite (TypeScript)
+1ba0118 app vanilla originale (pre-migrazione)

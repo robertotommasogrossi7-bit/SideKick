@@ -39,6 +39,10 @@ We publish these results — positive and negative — on purpose. The rigor *is
 - `motore/` — the distillation engine that turns a real build's process into a package.
 - `_processo/` — the project's own working memory (vision, decisions, **the full experiment
   log**). **Public on purpose: we share our process too.**
+- `esperimenti/` — the **with/without experiments** that map where a process-package helps (and
+  where it doesn't). *They lived outside this repo during testing, on purpose:* the "blind" arm
+  must not be able to read the package, or the comparison is contaminated. Archived here for
+  transparency.
 
 ## Status
 Research in progress. 10 distilled packages; honest finding above; **validating the human-side
@@ -94,6 +98,9 @@ Pubblichiamo questi risultati — positivi e negativi — apposta. Il rigore *è
   pacchetto.
 - `_processo/` — la memoria di lavoro del progetto (visione, decisioni, **il log completo
   degli esperimenti**). **Pubblica apposta: condividiamo anche il nostro processo.**
+- `esperimenti/` — gli **esperimenti con/senza** che mappano dove un pacchetto-processo aiuta (e
+  dove no). *Durante i test vivevano fuori da questo repo, apposta:* il braccio "cieco" non deve
+  poter leggere il pacchetto, o il confronto è contaminato. Archiviati qui per trasparenza.
 
 ## Stato
 Ricerca in corso. 10 pacchetti distillati; il risultato onesto qui sopra; **prossimo: validare

@@ -1,0 +1,2 @@
+﻿0ae11de convenzioni progetto: adotta _pacchetto/migrazione-a-componenti
+9c392e8 app vanilla originale (pre-migrazione)

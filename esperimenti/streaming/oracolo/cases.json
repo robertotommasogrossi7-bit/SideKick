@@ -1,0 +1,394 @@
+[
+ {
+  "label": "esempio-spec",
+  "input": [
+   {
+    "key": "A",
+    "t": 10,
+    "v": 1
+   },
+   {
+    "key": "A",
+    "t": 20,
+    "v": 1
+   },
+   {
+    "key": "B",
+    "t": 100,
+    "v": 1
+   },
+   {
+    "key": "A",
+    "t": 40,
+    "v": 1
+   },
+   {
+    "key": "A",
+    "t": 30,
+    "v": 1
+   },
+   {
+    "key": "B",
+    "t": 110,
+    "v": 1
+   },
+   {
+    "key": "A",
+    "t": 5,
+    "v": 1
+   },
+   {
+    "key": "B",
+    "t": 130,
+    "v": 1
+   },
+   {
+    "key": "A",
+    "t": 200,
+    "v": 1
+   },
+   {
+    "key": "A",
+    "t": 38,
+    "v": 1
+   }
+  ],
+  "gap": 15,
+  "lateness": 60,
+  "expected_hash": "25ad0de774f58733758732cf9d5d4c2d56b15b0e864729fb17c9fefc31aa8b92"
+ },
+ {
+  "label": "merge-retroattivo-tenuto",
+  "input": [
+   {
+    "key": "A",
+    "t": 0,
+    "v": 1
+   },
+   {
+    "key": "A",
+    "t": 40,
+    "v": 1
+   },
+   {
+    "key": "A",
+    "t": 20,
+    "v": 1
+   }
+  ],
+  "gap": 25,
+  "lateness": 100,
+  "expected_hash": "dda816f6fd130f2047cd706f18f572ba30755c28d518ae60557de70a1468221a"
+ },
+ {
+  "label": "merge-ucciso-da-watermark-globale",
+  "input": [
+   {
+    "key": "A",
+    "t": 0,
+    "v": 1
+   },
+   {
+    "key": "A",
+    "t": 40,
+    "v": 1
+   },
+   {
+    "key": "B",
+    "t": 500,
+    "v": 1
+   },
+   {
+    "key": "A",
+    "t": 20,
+    "v": 1
+   }
+  ],
+  "gap": 25,
+  "lateness": 100,
+  "expected_hash": "202e5a744d401f7920155c91ed4fa06fb103bff92fce2e69c1f45cd203c3c2cf"
+ },
+ {
+  "label": "confine-stretto",
+  "input": [
+   {
+    "key": "A",
+    "t": 100,
+    "v": 1
+   },
+   {
+    "key": "A",
+    "t": 90,
+    "v": 1
+   }
+  ],
+  "gap": 1000,
+  "lateness": 10,
+  "expected_hash": "0ec671cb4d5ef8d5a31b8838a760f003fe6fc6c639fb2417f51bcc69f2394106"
+ },
+ {
+  "label": "ties-stesso-t",
+  "input": [
+   {
+    "key": "A",
+    "t": 10,
+    "v": 1
+   },
+   {
+    "key": "A",
+    "t": 10,
+    "v": 2
+   }
+  ],
+  "gap": 15,
+  "lateness": 60,
+  "expected_hash": "89ca84273a29b5eb51715ae5a9d2ec40a7dbc9965e96142e9720ad4b2ee0aca5"
+ },
+ {
+  "label": "v-negativi-zero",
+  "input": [
+   {
+    "key": "A",
+    "t": 10,
+    "v": -5
+   },
+   {
+    "key": "A",
+    "t": 20,
+    "v": 3
+   },
+   {
+    "key": "A",
+    "t": 60,
+    "v": 0
+   }
+  ],
+  "gap": 15,
+  "lateness": 60,
+  "expected_hash": "86e60f02242de86566f2c0b5acf029f76f7e2ea1534bd058c0571e2ecd5b27f8"
+ },
+ {
+  "label": "vuoto",
+  "input": [],
+  "gap": 15,
+  "lateness": 60,
+  "expected_hash": "48e211580c34b7375de986399c26c754b0f8217fa67946d1115f7215db47405d"
+ },
+ {
+  "label": "singolo",
+  "input": [
+   {
+    "key": "A",
+    "t": 42,
+    "v": 7
+   }
+  ],
+  "gap": 15,
+  "lateness": 60,
+  "expected_hash": "b07e58291296405aa8f3d2e1afc502385d1e35e266b4044d2070a941f3098765"
+ },
+ {
+  "label": "tutti-scartati-tranne-spike",
+  "input": [
+   {
+    "key": "A",
+    "t": 100,
+    "v": 1
+   },
+   {
+    "key": "A",
+    "t": 10,
+    "v": 1
+   },
+   {
+    "key": "A",
+    "t": 12,
+    "v": 1
+   },
+   {
+    "key": "A",
+    "t": 14,
+    "v": 1
+   }
+  ],
+  "gap": 10,
+  "lateness": 5,
+  "expected_hash": "24168b0f0e7467c43a7d5fe84e1c84d6a8b435374b585e1c1613cde0dfd38449"
+ },
+ {
+  "label": "misto-grande",
+  "input": [
+   {
+    "key": "X",
+    "t": 0,
+    "v": 1
+   },
+   {
+    "key": "X",
+    "t": 200,
+    "v": 1
+   },
+   {
+    "key": "Y",
+    "t": 5,
+    "v": 1
+   },
+   {
+    "key": "X",
+    "t": 50,
+    "v": 1
+   },
+   {
+    "key": "Y",
+    "t": 10,
+    "v": 1
+   },
+   {
+    "key": "X",
+    "t": 100,
+    "v": 1
+   },
+   {
+    "key": "X",
+    "t": 30,
+    "v": 1
+   },
+   {
+    "key": "Y",
+    "t": 210,
+    "v": 1
+   },
+   {
+    "key": "X",
+    "t": 205,
+    "v": 1
+   },
+   {
+    "key": "Y",
+    "t": 15,
+    "v": 1
+   },
+   {
+    "key": "X",
+    "t": 8,
+    "v": 1
+   },
+   {
+    "key": "Y",
+    "t": 400,
+    "v": 1
+   },
+   {
+    "key": "X",
+    "t": 250,
+    "v": 1
+   },
+   {
+    "key": "X",
+    "t": 246,
+    "v": 1
+   },
+   {
+    "key": "Y",
+    "t": 405,
+    "v": 1
+   },
+   {
+    "key": "X",
+    "t": 900,
+    "v": 1
+   }
+  ],
+  "gap": 20,
+  "lateness": 80,
+  "expected_hash": "8f41a3e490bfc023fa94a0dd90632f688ec0b9cfbd73a7b56d6379d766e0347c"
+ },
+ {
+  "label": "misto-grande-altri-parametri",
+  "input": [
+   {
+    "key": "X",
+    "t": 0,
+    "v": 1
+   },
+   {
+    "key": "X",
+    "t": 200,
+    "v": 1
+   },
+   {
+    "key": "Y",
+    "t": 5,
+    "v": 1
+   },
+   {
+    "key": "X",
+    "t": 50,
+    "v": 1
+   },
+   {
+    "key": "Y",
+    "t": 10,
+    "v": 1
+   },
+   {
+    "key": "X",
+    "t": 100,
+    "v": 1
+   },
+   {
+    "key": "X",
+    "t": 30,
+    "v": 1
+   },
+   {
+    "key": "Y",
+    "t": 210,
+    "v": 1
+   },
+   {
+    "key": "X",
+    "t": 205,
+    "v": 1
+   },
+   {
+    "key": "Y",
+    "t": 15,
+    "v": 1
+   },
+   {
+    "key": "X",
+    "t": 8,
+    "v": 1
+   },
+   {
+    "key": "Y",
+    "t": 400,
+    "v": 1
+   },
+   {
+    "key": "X",
+    "t": 250,
+    "v": 1
+   },
+   {
+    "key": "X",
+    "t": 246,
+    "v": 1
+   },
+   {
+    "key": "Y",
+    "t": 405,
+    "v": 1
+   },
+   {
+    "key": "X",
+    "t": 900,
+    "v": 1
+   }
+  ],
+  "gap": 60,
+  "lateness": 150,
+  "expected_hash": "133c95f71e73e09f6374262e2ae344925d647cfd611fb00e80253c9a13882d07"
+ }
+]

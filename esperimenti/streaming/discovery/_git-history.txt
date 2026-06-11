@@ -1,0 +1,1 @@
+﻿716d42b discovery: spec + grader + casi (hash) + stub

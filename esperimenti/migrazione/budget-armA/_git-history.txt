@@ -1,0 +1,3 @@
+﻿aef4952 rimuove file vanilla obsoleti (main.js, style.css)
+57b5d11 migra a React + Vite + TypeScript (build verde)
+98b2579 app vanilla originale (pre-migrazione)

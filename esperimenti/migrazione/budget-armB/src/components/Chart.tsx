@@ -1,0 +1,71 @@
+import { useEffect, useRef } from "react";
+import type { Transaction } from "../types";
+import { formatCurrency } from "../utils";
+
+interface Props {
+  transactions: Transaction[];
+}
+
+export default function Chart({ transactions }: Props) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const dpr = window.devicePixelRatio || 1;
+    const displayWidth = canvas.clientWidth;
+    const displayHeight = 260;
+
+    canvas.width = displayWidth * dpr;
+    canvas.height = displayHeight * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const width = displayWidth;
+    const height = displayHeight;
+    ctx.clearRect(0, 0, width, height);
+
+    const amounts = transactions.map((tx) => tx.amount);
+    const income = amounts.filter((a) => a > 0).reduce((s, a) => s + a, 0);
+    const expenses = Math.abs(amounts.filter((a) => a < 0).reduce((s, a) => s + a, 0));
+    const maxValue = Math.max(income, expenses, 1);
+
+    const barWidth = 120;
+    const gap = 80;
+    const baseY = height - 40;
+    const incomeHeight = (income / maxValue) * (height - 80);
+    const expenseHeight = (expenses / maxValue) * (height - 80);
+
+    ctx.strokeStyle = "rgba(255,255,255,0.08)";
+    ctx.beginPath();
+    ctx.moveTo(40, baseY);
+    ctx.lineTo(width - 40, baseY);
+    ctx.stroke();
+
+    ctx.fillStyle = "#22c55e";
+    ctx.fillRect(160, baseY - incomeHeight, barWidth, incomeHeight);
+
+    ctx.fillStyle = "#f97316";
+    ctx.fillRect(160 + barWidth + gap, baseY - expenseHeight, barWidth, expenseHeight);
+
+    ctx.fillStyle = "#f8f4e9";
+    ctx.font = "14px sans-serif";
+    ctx.fillText("Income", 170, baseY + 20);
+    ctx.fillText("Expense", 160 + barWidth + gap, baseY + 20);
+    ctx.fillText(formatCurrency(income), 150, baseY - incomeHeight - 10);
+    ctx.fillText(formatCurrency(expenses), 150 + barWidth + gap, baseY - expenseHeight - 10);
+  }, [transactions]);
+
+  return (
+    <section className="card chart">
+      <div className="transactions__header">
+        <h3 className="section-title">Cash Flow Overview</h3>
+        <p className="transactions__meta">Income vs Expense</p>
+      </div>
+      <canvas ref={canvasRef} id="financeChart" style={{ width: "100%", height: "260px" }} />
+    </section>
+  );
+}

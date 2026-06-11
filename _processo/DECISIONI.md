@@ -392,3 +392,24 @@
   (B) gold standard = **umano vero** (Roberto su dominio che non conosce) con/senza pacchetto, N=1.
 - **Impatto su F3 (scelta = C-F3):** F3 si progetta e si **valida lato-umano** (anello debole), non
   lato-oracolo. Il "modo per saperlo" diventa parte della validazione di F3.
+
+### 2026-06-11 — Test "richiesta vaga" (lato-umano): il pacchetto ha MISallineato
+- Setup: **stessa** richiesta vaga da non-esperto ("modernizza in React, falla più bella, fai tu")
+  ai due bracci budget; arm-A col pacchetto **ambientale** (CLAUDE.md → migrazione-a-componenti),
+  arm-B nudo. (`_vague-test/budget-arm{A,B}`.)
+- **Retrocompat:** ENTRAMBI hanno preservato `financeTrackerData`/`Theme` (array nudo) → i dati
+  vecchi si caricano in tutti e due, **anche se l'umano NON l'ha chiesto.** L'AI lo fa da sola.
+- **Costo:** arm-A **94 turni / 122k out / 7.1M in** vs arm-B **85 / 95k / 5.9M** → pacchetto di
+  nuovo **più caro**.
+- **Esito (giudizio utente): arm-B ha fatto MEGLIO.** Motivo strutturale: l'umano voleva un
+  **redesign** ("più bella e moderna"); il pacchetto impone "comportamento identico, niente
+  redesign/scope-creep" → arm-A ha **seguito il pacchetto e NON ha abbellito** (contro il volere
+  reale dell'umano), costando di più. arm-B, libero, ha fatto ciò che l'umano chiedeva.
+- **INSIGHT (inverte l'ipotesi del test lato-umano):** un pacchetto forkato porta i **vincoli/
+  assunzioni del contesto d'origine**. Se l'intento del nuovo umano differisce, il pacchetto **non
+  è neutro: steera ATTIVAMENTE lontano da ciò che l'umano vuole.** L'"allineamento" è verso
+  l'**autore** del pacchetto e può **confliggere** col nuovo utente → il forking-di-processo, nel
+  contesto sbagliato, **fa danno**. Conferma "il cieco ha fatto meglio" + "Sonnet troppo OP".
+- **Implicazione per F3/valore:** il valore NON è **imporre** un processo (misallinea); è semmai
+  **offrire** conoscenza *opzionale e pertinente* che l'umano sceglie. La **curation/pertinenza**
+  diventa centrale: applicare il pacchetto sbagliato nel contesto sbagliato è peggio che non averlo.

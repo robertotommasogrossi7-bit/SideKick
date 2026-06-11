@@ -1,0 +1,4 @@
+﻿562881a feat: add static assets to public/ (badge images, font, favicon)
+1bd353d feat: migrate app logic to React + TypeScript
+8579154 feat: add Vite + React + TypeScript project scaffold
+43def9a app vanilla originale (pre-migrazione)
