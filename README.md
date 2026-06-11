@@ -25,8 +25,10 @@ portable across stacks, usable by any human with any AI.
 
 ## What we've learned so far (honest status)
 We stress-tested our own thesis: does handing an AI a captured process-package actually help,
-versus not? Across several controlled **with/without** experiments (objective oracles + token-
-**cost** measurement + a reverse-engineering probe), the evidence is clear and nuanced:
+versus not? What we ran is a handful of **small, single-shot with/without probes** (objective
+oracles + token-**cost** measurement + a reverse-engineering probe) — **anecdotes with numbers,
+not proof**; N=1 per condition, full limitations in the writeup. Still, every probe pointed the
+same way:
 
 - **For problems a current model already knows — or can derive from the task itself — a package
   brings no net improvement, and can cost *more* tokens.** The AI is already the expert; it
@@ -40,7 +42,9 @@ versus not? Across several controlled **with/without** experiments (objective or
   near-**optimal specs that cut effort/cost significantly** — especially for non-experts or
   unfamiliar domains. That's exactly what we're validating next, **human-side**.
 
-We publish these results — positive and negative — on purpose. The rigor *is* the product.
+We publish these results — positive and negative — on purpose, and we had the writeup
+**adversarially reviewed by independent AI models** (verdict: the first version oversold its rigor
+— so we rewrote it). The honesty *is* the product.
 **→ Full writeup: [FINDINGS.md](FINDINGS.md).**
 
 ## Use it (standing behavior — no commands)
@@ -66,8 +70,10 @@ is the heart.)* Validated **by use** (does it remove friction?), starting with u
   transparency.
 
 ## Status
-Research in progress. 10 distilled packages; honest finding above; **validating the human-side
-value next** (does a package keep a vague, non-expert request on the rails?).
+Paused at an honest checkpoint. 10 distilled packages (legacy of the feature-package phase);
+single-shot probes showed **no value for a strong model** (sometimes harm, always more tokens);
+the real hypothesis — **scaffolding the human** — is *designed but not yet run* (we lack test
+subjects: open an issue if you'd like to participate in a small with/without study).
 
 ## License
 MIT.
@@ -101,9 +107,10 @@ giudizio*. GitHub condivide gli esiti (codice + commit). SideKick condivide il *
 
 ## Cosa abbiamo imparato finora (stato onesto)
 Abbiamo messo alla prova la nostra stessa tesi: dare a un'AI un pacchetto-processo aiuta
-davvero, oppure no? In diversi esperimenti controllati **con/senza** (oracoli oggettivi +
-misura del **costo** in token + una prova di reverse-engineering), l'evidenza è netta e
-sfumata:
+davvero, oppure no? Quello che abbiamo corso è una manciata di **probe piccole e single-shot
+con/senza** (oracoli oggettivi + misura del **costo** in token + una prova di
+reverse-engineering) — **aneddoti con numeri, non prove**; N=1 per condizione, limiti completi
+nel writeup. Detto questo, ogni probe ha puntato nella stessa direzione:
 
 - **Per problemi che un modello attuale già conosce — o sa derivare dal compito stesso — il
   pacchetto non dà miglioramento netto, e può costare *più* token.** L'AI è già l'esperto: non
@@ -118,7 +125,9 @@ sfumata:
   **spec quasi ottimali che riducano di molto sforzo/costo** — specie per non‑esperti o domini
   sconosciuti. È esattamente ciò che validiamo adesso, **lato‑umano**.
 
-Pubblichiamo questi risultati — positivi e negativi — apposta. Il rigore *è* il prodotto.
+Pubblichiamo questi risultati — positivi e negativi — apposta, e abbiamo fatto **recensire il
+writeup in modo avversario da modelli AI indipendenti** (verdetto: la prima versione vendeva un
+rigore che non aveva — l'abbiamo riscritta). L'onestà *è* il prodotto.
 **→ Writeup completo (EN): [FINDINGS.md](FINDINGS.md).**
 
 ## Usalo (condotta permanente — niente comandi)
@@ -144,8 +153,10 @@ mentre evolve. **Nessuno slash command da ricordare.**
   poter leggere il pacchetto, o il confronto è contaminato. Archiviati qui per trasparenza.
 
 ## Stato
-Ricerca in corso. 10 pacchetti distillati; il risultato onesto qui sopra; **prossimo: validare
-il valore lato‑umano** (un pacchetto tiene sulla rotta una richiesta vaga da non‑esperto?).
+In pausa a un checkpoint onesto. 10 pacchetti distillati (eredità della fase feature-package);
+le probe single-shot non hanno mostrato **alcun valore per un modello forte** (a volte danno,
+sempre più token); l'ipotesi vera — **lo scaffolding dell'umano** — è *progettata ma non ancora
+eseguita* (mancano soggetti: apri una issue se vuoi partecipare a un piccolo studio con/senza).
 
 ## Licenza
 MIT.

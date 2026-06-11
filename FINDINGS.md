@@ -1,106 +1,109 @@
-# Does giving an AI a captured "process" actually help? We measured it.
+# Can captured "processes" help AI-assisted development? I tried to measure it — and couldn't build a fair test (yet)
 
-The premise of a lot of AI-dev tooling — share specs, share processes, fork a "recipe" into a new
-project — rests on an untested assumption: that handing the AI a captured process **improves the
-outcome**. We tested that assumption on ourselves, with controlled experiments and real numbers.
+A lot of AI-dev tooling rests on an untested assumption: that handing the AI a captured process —
+a spec, a recipe, a "package" distilled from a previous build — **improves the outcome**. I set out
+to test that assumption on my own project. This is an honest account of what I ran, what it can and
+cannot support, and what a real test would take.
 
-The short version: **for problems a current model already knows or can derive, a captured process
-adds no net value — and usually costs more. The value, if any, is for the *human* (the weak link)
-and for *new* projects, not for a strong model on work it already understands.** In the wrong
-context a forked process can actively *hurt*.
+**The honest summary, up front:**
 
-This is an honest, negative-leaning result. We publish it because the rigor is the point.
+- What I ran is a handful of **small, single-shot probes** (N=1 per condition). They are
+  **anecdotes with numbers attached, not measurements.** LLMs are stochastic; without 20–30 runs
+  per arm and dispersion statistics, a "72 vs 50 turns" difference proves nothing by itself.
+- That said, every probe pointed the same way: **a strong model *without* the captured process
+  matched or beat the arm that had it**, and the with-process arm consistently consumed more
+  tokens. In one probe the process actively steered against what the user wanted.
+- These probes **cannot answer the question that matters**, because they test the wrong subject:
+  an *expert AI*, while the plausible beneficiary of process-scaffolding is the *human* who asks
+  the wrong things. That hypothesis — the real one — **remains untested.**
+- A first version of this writeup claimed "we measured it." I had it **adversarially reviewed by
+  independent AI models** prompted as skeptical senior engineers; their convergent verdict
+  (rigor ≈ 3/10, *"sells a level of rigor it doesn't have"*) led to this rewrite. The full
+  review log is public in this repo.
 
-## How we tested
+## What I ran (single-shot probes — read as anecdotes)
 
-- **With / without (A/B).** Same task, two isolated arms: one with the captured process package,
-  one blind. The blind arm lives in a separate repo so it can't even read the package (a first
-  attempt got contaminated; we fixed the isolation).
-- **Cost, not just correctness.** We measured each arm's effort from its Claude Code transcript:
-  assistant turns, tool calls, tokens. "Got it right but spent 2× the tokens" is a real outcome.
-- **Objective oracles.** Where possible, a deterministic checker (e.g. localStorage data must
-  reload; a hidden test suite verified by output hashes, leak-proof).
-- **A reverse-engineering probe.** We also gave an arm only input→output examples (no spec) to see
-  if a model can *re-derive* the hard knowledge by itself.
-- **A human-style prompt.** Finally, a vague, non-expert request ("modernize my app, make it
-  nicer") to test whether the package rescues a bad ask.
+Each row is **one run per arm**, same task, isolated arms (the "blind" arm could not read the
+package; an early contaminated attempt was redone). Cost measured from Claude Code transcripts.
 
-## What happened
-
-| Experiment | With package | Blind | Result |
+| Probe | With package | Blind | What happened |
 |---|---|---|---|
-| **Vanilla→React migration, budget app** | 72 turns, 4.9M in-tok, data ✅ | 50 turns, 2.2M, data ✅ | Blind kept the data unaided; package **~2× cost, no benefit** |
-| **Migration, habit app** | 132 turns, 9.1M, **data ❌** | 62 turns, 3.6M, data ✅ | Package arm followed "use a persist store" and **broke** old-data loading; blind got it right, cheaper |
-| **Bespoke streaming rule, full spec** | 13 turns → 11/11 + 5000/5000 random | — | A clear spec is enough; the model implements it correctly |
-| **Same rule, examples only (no spec)** | 17 turns → 11/11 + 5000/5000 | — | The model **re-derived** a non-obvious rule (global watermarks, retroactive merges) from 6 examples, +30% cost |
-| **Vague human request** | 94 turns, data ✅, judged **worse** | 85 turns, data ✅, judged **better** | Package imposed "no redesign" against what the human actually wanted; blind did the nicer job |
+| Vanilla→React migration, budget app | 72 turns, 4.9M in-tok, data ✅ | 50 turns, 2.2M, data ✅ | Blind preserved the stored data unaided; package cost ~2× in this run |
+| Migration, habit app | 132 turns, 9.1M, **data ❌** | 62 turns, 3.6M, data ✅ | Package arm followed "use a persist store" and broke old-data loading; blind got it right |
+| Bespoke streaming rule, full spec given | 13 turns → 11/11 hidden tests, 5000/5000 random | — | A clear spec was enough |
+| Same rule, 6 examples only (no spec) | 17 turns → 11/11, 5000/5000 | — | The model **re-derived** a non-obvious rule (global watermarks, retroactive merges) at +30% cost |
+| Vague human-style request ("modernize it, make it nicer") | 94 turns, data ✅, judged worse | 85 turns, data ✅, judged better | The package imposed "no redesign" against the request's intent. **Caveat: single, non-blind human judgment** |
 
-(An earlier textbook task — a debt-settlement algorithm — gave the same shape: the blind arm
-matched or beat the package.)
+(An earlier probe on a textbook settlement algorithm had the same shape: blind matched or beat the package.)
 
-## What it means
+## Why these probes can't answer the real question
 
-1. **Spec-able or model-known knowledge needs no package.** If the knowledge can be written in a
-   clear spec — or the model already has it from training, or can derive it from the task — a
-   captured package adds nothing and costs more.
-2. **Objective-oracle tests are structurally biased against showing value.** Anything with a clean
-   checker is, by construction, *derivable/verifiable* — exactly the regime where a strong model
-   doesn't need help. We spent five tests measuring the one regime where the package was bound to
-   lose.
-3. **We tested the wrong subject.** The "blind" arm was an expert AI — it asks itself the right
-   questions and recognizes a correct answer. The real user of these tools is a *human* who asks
-   the wrong things. These tools scaffold the **human (the weak link)**, not the model.
-4. **A forked process carries its origin's constraints.** It isn't neutral overhead: in a context
-   where the new person's intent differs, it can steer *away* from what they want (the vague-request
-   arm). "Alignment" is to the package's author, which can conflict with the new user.
-5. **So the durable, shareable asset is the *method*, not the feature.** The disciplines that keep a
-   human+AI collaboration organized — capture ideas without losing focus, design before code,
-   micro-commits, fresh handoffs — plus the judgment a model won't volunteer. And, crucially, that
-   value shows up for **non-experts and brand-new projects**, and as a **shared standard that
-   evolves**, not for an expert running a strong model on a trained project.
+1. **N=1 per cell.** Run-to-run variance alone could explain the cost gaps. Fatal for any general claim.
+2. **Wrong subject.** The "blind" arm is an expert AI that asks itself the right questions. The
+   tool's plausible user is a human who doesn't. I tested the strong link and concluded about the
+   weak one — that's a gap words can't close.
+3. **Single non-blind judge** on the only probe showing active harm (the vague request). No rubric,
+   no second rater.
+4. **Task selection is structurally biased.** Anything with a clean objective oracle is, by
+   construction, derivable/verifiable — exactly the regime where a strong model needs no help. My
+   probes were rigged to lose before they started; I understood this only afterwards.
+5. **Confound.** The habit-app failure shows *that package* carried *one bad instruction* for *that
+   context* — it doesn't separate "process-capture hurts" from "this package had a bug." A
+   corrected-package arm was never run.
 
-## So where's the value?
+## What I'd still defend (weakly, as informed hunches)
 
-Not in "the AI couldn't do it without us" (false). It's in:
+- For tasks a strong model already knows or can derive — most standard CRUD/migration/algorithm
+  work — packaged process knowledge is **overhead at best**. (Consistent across all probes; also
+  consistent with what experienced LLM users already report.)
+- A forked process **carries its origin's constraints** and can conflict with a new user's intent.
+  (One example, but mechanically obvious once seen.)
+- **Cost (tokens/turns) is a real outcome dimension** that almost nobody reports. "Got it right
+  but at 2× spend" should count.
 
-- **Onboarding a good method instantly** — for people who don't have one, and for new projects
-  before you've "trained" them.
-- **A shared, self-improving method** — a constitution others fork, improve, and re-share; the
-  better version rises.
-- **The finding itself** — a measured map of where AI-process-capture helps and where it doesn't.
-  Most projects assert; this one tested.
+## The hypothesis that remains untested
 
-That reframes the product from "a package manager of features" to **a shareable, self-evolving
-working method for building with AI** — delivered as standing AI behavior (a constitution the AI
-follows proactively and updates itself), not as commands you press.
+**Process-scaffolding helps the *human* — the one who asks wrong, in the wrong order, and can't
+always recognize a wrong answer — and helps most at entry level and on new projects.** Every probe
+I ran is silent on this. It is *not disproven*; it has simply never been tested here.
 
-## Honest limitations
+## What a fair test would take
 
-- Strong models (Opus/Sonnet) and small N. A weaker model, or a true beginner, might show more
-  package value — untested.
-- The apps were our own, mostly standard. The one regime we expect to matter — **whole projects
-  with delicate cross-cutting concerns (auth, accounts, money)** — is still untested, deferred to
-  when our test app is complete.
-- "Better job" on the vague request is a single human's judgment, not a metric.
+- **20–30+ runs per arm**, distributions, variance, effect sizes — not single runs.
+- **Human subjects** (entry-level), with/without the method, on tasks with delicate parts
+  (auth, accounts, money), outcomes scored by **blind judges with a rubric** (data loss, security
+  holes via checklist, time, cost) — not by the author.
+- **Non-derivable tasks**: proprietary domains or cross-cutting concerns, not textbook migrations.
+- **A corrected-package arm**, to separate process structure from package content.
+- **Longitudinal measures**: bugs, regressions, onboarding time after days/weeks, not just at delivery.
+
+**Status: designed, not run.** I currently lack test subjects. If you'd like to participate in a
+small with/without study, open an issue on this repo.
+
+## What survives this exercise
+
+- **Two reusable evaluation tools**: a transcript **cost-meter** (`esperimenti/misura-token.mjs`)
+  and a **leak-proof hidden-test grader** (`esperimenti/streaming/oracolo/`) for testing whether a
+  process artifact helps, without revealing answers.
+- **The full, public experiment log** — including the contaminated first attempt, the negative
+  results, and the adversarial external review (`_processo/`).
+- **A proposal, clearly labeled as untested:** a proactive, self-amending working-method
+  constitution (`plugins/metodo/`), also in Spec Kit drop-in format
+  (`plugins/metodo/spec-kit/constitution.md`, placed at `.specify/memory/constitution.md`). Spec
+  Kit's own constitution is read-once and passive; this one instructs the agent to evolve it. No
+  evidence yet that self-amendment improves anything — that's the human study above.
 
 ## Relation to Spec Kit
 
-[GitHub Spec Kit](https://github.com/github/spec-kit) makes the spec-first discipline a ritual —
-which is exactly why it's adopted: it scaffolds the *human's* process, not the model's capability.
-Our contribution sits next to it, and is now **Spec-Kit-native**:
-
-- A drop-in **`constitution.md`** in Spec Kit's format
-  ([`plugins/metodo/spec-kit/constitution.md`](plugins/metodo/spec-kit/constitution.md)) that you
-  place at `.specify/memory/constitution.md`. It adds the principle Spec Kit's constitution lacks —
-  **self-amendment** (the agent evolves the method instead of reading a passive doc once).
-- The empirical **finding** above (the honest map of where process-capture helps).
-- Two small reusable evaluation tools: a transcript **cost-meter** and a **leak-proof hidden-test
-  grader**.
-
-(In Spec Kit, *presets/extensions* override the `spec`/`plan`/`tasks` **templates**; a constitution
-is **memory**, not a template — so the method ships as a constitution drop-in, not a preset.)
+[GitHub Spec Kit](https://github.com/github/spec-kit) ritualizes spec-first development — which is
+plausibly why it's adopted: it scaffolds the *human's* process, not the model's capability. That
+reading is consistent with my probes, but on this evidence it's an interpretation, not a result.
+(Mechanical note for anyone shipping method-content to Spec Kit: presets/extensions override
+*templates* (`spec`/`plan`/`tasks`); a constitution is *memory* (`.specify/memory/`), so a method
+ships as a constitution drop-in, not a preset.)
 
 ---
 
-*Part of [SideKick](https://github.com/robertotommasogrossi7-bit/SideKick). The full experiment log
-lives in `_processo/DECISIONI.md`; the experiments themselves in `esperimenti/`.*
+*Part of [SideKick](https://github.com/robertotommasogrossi7-bit/SideKick). Experiment log:
+`_processo/DECISIONI.md` · external review verdicts: `_processo/VALUTAZIONE-ESTERNA.md` ·
+the probes themselves: `esperimenti/`.*
