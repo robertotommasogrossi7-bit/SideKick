@@ -413,3 +413,24 @@
 - **Implicazione per F3/valore:** il valore NON è **imporre** un processo (misallinea); è semmai
   **offrire** conoscenza *opzionale e pertinente* che l'umano sceglie. La **curation/pertinenza**
   diventa centrale: applicare il pacchetto sbagliato nel contesto sbagliato è peggio che non averlo.
+
+### 2026-06-11 — LA direzione che regge: il META-PROCESSO operazionalizzato (input utente)
+- **Osservazione utente:** usando Code vede sempre lo stesso *schema personale*: (1) **micro-commit**,
+  (2) **cattura ordinata delle idee in qualsiasi momento**, (3) **fasi di design/ragionamento prima
+  di scrivere**. "Vanno condivise, e va trovato il metodo migliore in assoluto per usarle."
+- **Chiude il cerchio:** non è feature-knowledge (l'AI ce l'ha → provato 6 volte), è **meta-processo /
+  metodo di lavoro** = il valore **non-derivabile + lato-umano + allineamento** a cui siamo arrivati.
+  L'AI *conosce* questi concetti ma **non li fa da sola** in sessione → vanno **operazionalizzati**
+  (automatici, senza attrito) o l'umano se li dimentica. Spec Kit è virale perché operazionalizza lo
+  "spec-first" (una disciplina resa rituale). Il valore non è *imporre* (fa danno, vedi richiesta-vaga)
+  ma **togliere l'attrito** alle discipline buone.
+- **Mappa abitudine → tooling:** micro-commit → hook/skill commit-per-step; cattura idee →
+  slash-command "salva in IDEE.md"; design-prima → gate di fase (plan-mode/design-doc); + cattura
+  esito/processo (la "traccia").
+- **FORMA VERA DI F3 (sharpening di C):** SideKick = **metodo di lavoro condivisibile e best-in-class
+  per dev human+AI** = una **constitution** (il `METODO.md`, già il seme, Spec-Kit-compatibile) +
+  **automazione** (hook/skill/settings di Claude Code) che rende le discipline automatiche. **Validato
+  dall'uso** (sessioni più ordinate/efficaci) = validazione lato-umano. **Dogfooding** su noi stessi
+  (VISIONE §10 "traccia fantasma").
+- **Sposta il baricentro:** dal "package manager di feature" (evidenza debole) al **metodo di lavoro
+  operazionalizzato e condiviso** (dove puntano TUTTI i risultati). È la forma che prende F3.
