@@ -41,6 +41,7 @@ versus not? Across several controlled **with/without** experiments (objective or
   unfamiliar domains. That's exactly what we're validating next, **human-side**.
 
 We publish these results — positive and negative — on purpose. The rigor *is* the product.
+**→ Full writeup: [FINDINGS.md](FINDINGS.md).**
 
 ## Use it (standing behavior — no commands)
 The method is a **constitution**: copy
@@ -118,6 +119,7 @@ sfumata:
   sconosciuti. È esattamente ciò che validiamo adesso, **lato‑umano**.
 
 Pubblichiamo questi risultati — positivi e negativi — apposta. Il rigore *è* il prodotto.
+**→ Writeup completo (EN): [FINDINGS.md](FINDINGS.md).**
 
 ## Usalo (condotta permanente — niente comandi)
 Il metodo è una **costituzione**: copia
