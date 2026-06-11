@@ -1,9 +1,17 @@
 # SideKick
 
-**A package manager for *feature-processes*.** Share the *process* of building software —
-decisions, reasoning, gotchas, outcomes — not just the code. Distill a feature from a real,
-finished build into a reusable, **AI-agnostic** package; then fork it to bootstrap the same
-feature in a *different* project, in *any* stack.
+**A shareable, self-improving *working method* for building software with AI.** The reusable
+asset of AI-assisted dev isn't the code (the AI regenerates it) — it's the **method**: the
+disciplines that keep a human+AI collaboration organized and aligned (capture ideas without
+losing focus, design before code, micro-commits). SideKick operationalizes that method as
+**Claude Code tooling you install, use, fork, and re-share**, and refines it from your own
+real sessions.
+
+> *We started as a "package manager for feature-processes" and tested it hard.* The honest result:
+> when the model already knows or can derive the work, a feature-package adds **no net value**
+> (see **What we've learned**). So the **live product is the method**; feature-packaging stays a
+> **secondary, explored** idea — with a possible future for **whole-project** specs, not single
+> functions.
 
 Built to be **compatible with [GitHub Spec Kit](https://github.com/github/spec-kit)**: every
 package ships Spec-Kit-shaped `spec.md` / `plan.md` (drop-in), plus a `PACCHETTO.md`
@@ -69,11 +77,18 @@ MIT.
 
 # SideKick (Italiano)
 
-**Un package manager di *feature-processi*.** Condividi il *processo* con cui si costruisce
-software — decisioni, ragionamenti, trappole, esiti — non solo il codice. Distilla una
-feature da un progetto reale e finito in un pacchetto riutilizzabile e **AI-agnostico**;
-poi lo forki per ripartire con quella stessa feature in un progetto *diverso*, in *qualsiasi*
-stack.
+**Un *metodo di lavoro* condivisibile e auto-migliorante per costruire software con l'AI.**
+L'asset riutilizzabile dello sviluppo con l'AI non è il codice (l'AI lo rigenera) — è il
+**metodo**: le discipline che tengono ordinata e allineata la collaborazione human+AI
+(catturare idee senza perdere il filo, design prima del codice, micro-commit). SideKick lo
+operazionalizza come **strumento di Claude Code da installare, usare, forkare e ri-condividere**,
+e lo affina dalle tue sessioni reali.
+
+> *Siamo partiti come "package manager di feature-processi" e l'abbiamo testato a fondo.* Esito
+> onesto: quando il modello già sa o sa derivare, un feature-package **non aggiunge valore netto**
+> (vedi **Cosa abbiamo imparato**). Quindi il **prodotto vivo è il metodo**; il feature-packaging
+> resta un'idea **secondaria** ed esplorata — con un possibile futuro per gli spec di **interi
+> progetti**, non singole funzioni.
 
 Costruito per essere **compatibile con [GitHub Spec Kit](https://github.com/github/spec-kit)**:
 ogni pacchetto produce `spec.md` / `plan.md` in formato Spec Kit (drop-in), più un manifesto

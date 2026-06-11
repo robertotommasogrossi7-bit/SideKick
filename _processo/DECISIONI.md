@@ -434,3 +434,22 @@
   (VISIONE §10 "traccia fantasma").
 - **Sposta il baricentro:** dal "package manager di feature" (evidenza debole) al **metodo di lavoro
   operazionalizzato e condiviso** (dove puntano TUTTI i risultati). È la forma che prende F3.
+
+### 2026-06-11 — Riposizionamento: il METODO è il prodotto; feature secondarie; auto-miglioramento
+- **Workflow reale (utente):** con **Max** non serve più cambiare chat per le feature (il costo non è
+  più il vincolo); cambiare **chat base** ogni tanto resta utile. → **Raffinamento METODO**: multi-chat
+  per-feature **obsoleto**, tenere la **rotazione chat base**. (Esempio perfetto di "miglioramento
+  automatico del metodo".)
+- **Feature, deciso:** i **single-feature package** sono controproducenti (evidenza) → **secondari/
+  storici**, non perseguiti ora. **README riposizionato** per guidare col **METODO**; feature in
+  secondo piano (tagline + nota "siamo partiti da lì, testato, il prodotto vivo è il metodo").
+- **Parcheggiato (futuro, NON ora):** "**intero progetto → spec** per riuso" (tutto poker incl. le
+  parti delicate **auth/account**). Diverso dalle single-feature (composizione + concern trasversali =
+  dove vivono bug/token) → potenziale ma **da testare quando poker è completo**. Scelta utente.
+- **Direzione viva = flusso continuo + auto-miglioramento:** l'engine F2 (mining transcript), inutile
+  sulle feature, è **prezioso sul META-PROCESSO**: legge le sessioni reali e propone raffinamenti al
+  metodo. È il "miglioramento automatico" richiesto. **Prossimo build candidato:** `/metodo:riflessione`
+  (o routine) che mina i transcript recenti e propone tweak a constitution/skill.
+- **Come si usa OGGI (chiarito):** è presto (1 disciplina). Installare il plugin **a livello utente**
+  (ambiente in entrambi i progetti); usare `/metodo:idea` quando serve. Il *flusso* arriva con le
+  prossime discipline + l'auto-riflessione. Validazione **dall'uso** (dogfooding su 2 progetti reali).

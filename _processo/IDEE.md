@@ -14,3 +14,11 @@ Ragionamenti aperti / feature future (METODO). Cattura al volo con **`/metodo:id
   **conoscenza esterna/nascosta** non derivabile dal problema (quirk non documentato di un sistema).
 - [2026-06-11] **Dogfooding / "traccia fantasma"** (VISIONE §10): strumentare lo sviluppo di
   SideKick con le proprie discipline → il progetto si auto-documenta.
+- [2026-06-11] **Auto-miglioramento del metodo** (il riscatto del motore F2): `/metodo:riflessione`
+  (o routine schedulata) che **mina i tuoi transcript recenti** e propone tweak a constitution/skill.
+  È il "flusso continuo + miglioramento automatico" richiesto dall'utente.
+- [2026-06-11] **Raffinamento METODO (da Max):** multi-chat **per-feature obsoleto** (il costo non è
+  più il vincolo); tenere solo la **rotazione della chat base**. Aggiornare `METODO.md`.
+- [2026-06-11] **FUTURO (non ora): "intero progetto → spec" per riuso** — tutto poker incl. le parti
+  delicate (**auth, account**). Diverso dalle single-feature (composizione + concern trasversali).
+  Testare **quando poker è completo**.
