@@ -326,3 +326,26 @@
     t-uguali con tie-break su indice d'arrivo). Grading **binario** (qualunque mismatch = fail) +
     quanto-lontano + costo. **Reference privata = oracolo** (in `_test/streaming-oracle/`, gitignored).
   - Apparato pubblico (record): `_processo/test-streaming/SPEC.md`. Fasi: discovery→distilla→quadruplo.
+
+### 2026-06-11 — Discovery streaming: risolto pulito → SPEC troppo completa (META-LEZIONE)
+- L'agente cieco ha risolto in **13 turni / 6 tool / 32k out / 371k in**: grader **11/11** +
+  **property-test 5000/5000** vs reference → soluzione *genuinamente* corretta. **Zero sofferenza**
+  (≈ one-shot). (Costo misurato dal transcript; conferma l'utilità della dimensione costo: 13
+  turni qui vs 132 del thrashing di habit-A.)
+- **Diagnosi:** lo SPEC specificava *tutta* la semantica (watermark globale, confine stretto,
+  merge via sessionizzazione dei sopravvissuti). Un agente che legge lo spec lo implementa giusto;
+  il naive falliva (6/11) solo perché *ignorava* lo spec. Non era "senza pista": la pista era nello spec.
+- **META-LEZIONE (3 su 3, ora netta):** settlement, migrazione, streaming — ogni volta che la
+  conoscenza è **scrivibile in uno spec (o è prassi standard)**, l'agente non ha bisogno del
+  pacchetto. Il pacchetto vale **solo** per conoscenza **non spec-abile**: hard-won, non-ovvia
+  anche conoscendo l'obiettivo, imparata *fallendo*. È la caratterizzazione più affilata e onesta
+  del valore di SideKick (= cattura ciò che NON metti in uno spec). Coerente col reframe utente del
+  2026-06-04: valore = accumulo + allineamento + auto-miglioramento, NON one-shot.
+- **Implicazione test (per la metà positiva):** serve un problema dato come **goal + oracolo, NON
+  come algoritmo**, dove l'agente fallisce *pur* conoscendo l'obiettivo. Strade: (A) ri-lanciare lo
+  *stesso* oracolo streaming con la **semantica NASCOSTA** (solo esempi I/O + grader →
+  reverse-engineering; riusa l'apparato); (B) correttezza non-enumerabile (scacchi perft);
+  (C) accettare la meta-lezione + il modello di valore del 4/6 e portare F3 su quella tesi onesta.
+- **Apparato riusabile:** grader hashed leak-proof, property-test, misura-token (in `_test/streaming-oracle/`).
+- **Archiviazione chat di test:** OK — il `.jsonl` **persiste** dopo l'archivio (verificato sul
+  discovery). Serve solo non **cancellarli** (F0 li copre).
