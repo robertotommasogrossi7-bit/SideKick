@@ -34,6 +34,20 @@ versus not? Across several controlled **with/without** experiments (objective or
 
 We publish these results — positive and negative — on purpose. The rigor *is* the product.
 
+## Use it (the method, operationalized)
+SideKick now ships as a **Claude Code plugin** — the working method turned into tooling you
+**install in one command, use, fork to improve, and re-share** (that's what makes a method real,
+not ethereal).
+
+```
+/plugin marketplace add robertotommasogrossi7-bit/SideKick
+/plugin install metodo@sidekick
+```
+
+First discipline shipped: **`/metodo:idea <text>`** — capture an idea into `_processo/IDEE.md`
+without losing your train of thought. Next: a design-first gate, a micro-commit nudge.
+*Validated by use* (does it remove friction?), starting with us dogfooding it.
+
 ## Structure
 - `libreria/` — the catalog of distilled feature-processes (10 packages so far).
 - `motore/` — the distillation engine that turns a real build's process into a package.
@@ -91,6 +105,20 @@ sfumata:
   sconosciuti. È esattamente ciò che validiamo adesso, **lato‑umano**.
 
 Pubblichiamo questi risultati — positivi e negativi — apposta. Il rigore *è* il prodotto.
+
+## Usalo (il metodo, operazionalizzato)
+SideKick ora è anche un **plugin di Claude Code** — il metodo di lavoro reso strumento che
+**installi in un comando, usi, forki per migliorarlo e ri-condividi** (è ciò che rende un metodo
+reale, non etereo).
+
+```
+/plugin marketplace add robertotommasogrossi7-bit/SideKick
+/plugin install metodo@sidekick
+```
+
+Prima disciplina spedita: **`/metodo:idea <testo>`** — cattura un'idea in `_processo/IDEE.md`
+senza perdere il filo. In arrivo: gate design-first, nudge micro-commit. *Validato dall'uso*
+(toglie attrito?), a partire da noi che lo dogfoodiamo.
 
 ## Struttura
 - `libreria/` — il catalogo dei feature-processi distillati (10 pacchetti finora).
