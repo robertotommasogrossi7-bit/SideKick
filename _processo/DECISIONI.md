@@ -349,3 +349,27 @@
 - **Apparato riusabile:** grader hashed leak-proof, property-test, misura-token (in `_test/streaming-oracle/`).
 - **Archiviazione chat di test:** OK — il `.jsonl` **persiste** dopo l'archivio (verificato sul
   discovery). Serve solo non **cancellarli** (F0 li copre).
+
+### 2026-06-11 — Reverse (SENZA spec): risolto a ~pari costo → LA VERITÀ sul valore
+- Dati **solo 6 esempi I/O + grader** (niente regole, label neutre `case_NN`), l'agente ha dedotto
+  la regola bespoke (watermark globale, confine, merge) e fatto **11/11**; **property-test 5000/5000**
+  vs reference, **zero hardcoding** → soluzione *genuinamente generale*. (Il "11" lo stampa il grader,
+  `PASSATI k/11`: di design, non un leak; gli attesi restano solo hash.)
+- **Costo:** reverse **17 turni / 9 tool / 43k out** vs discovery-con-spec **13 / 6 / 33k** → solo
+  **~30% in più SENZA la specifica**. Togliere l'informazione **non** ha dato valore al sapere
+  raccolto: il modello l'ha **ri-derivato da 6 esempi quasi gratis**.
+- **CONCLUSIONE (la più importante):** il valore di un pacchetto-processo richiede conoscenza **non
+  ri-derivabile** dal problema. "Difficile-ma-deducibile-da-esempi" NON basta. Punto metodologico:
+  **ogni test con oracolo oggettivo sonda solo conoscenza derivabile/verificabile = proprio dove un
+  modello forte non ha bisogno di noi.** I 5 test hanno misurato nell'unico regime sfavorevole.
+- **Dove vive il valore (NON oracolo-abile):** rationale/trade-off, **vicoli ciechi** (negativo,
+  invisibile nel codice finale), contesto esterno/proprietario, **allineamento** (il *tuo* modo),
+  **accumulo** (corpus che cresce). = reframe utente 4/6, NON "battere il modello".
+- **DECISIONE → C riformulata:** SideKick non è "far risolvere all'AI compiti duri" (l'AI è troppo
+  brava perché *quello* sia il valore); è **memoria condivisa, allineata e crescente delle parti NON
+  derivabili del costruire** (perché, dead-end, convenzioni, esiti), servita Spec-Kit-native,
+  giudicata **dall'uso** non da un oracolo. Spec Kit = tubatura; prodotto = distillazione-dalla-realtà
+  + registry + segnale d'esito sul non-derivabile. **Stop ai test con/senza su oracolo** (non
+  aggiungono informazione). Unica eccezione che *potrebbe* dare un positivo oracolo-abile: conoscenza
+  **esterna/nascosta** non derivabile dal problema (es. quirk non documentato di un sistema).
+- **Prossimo:** F3 inquadrata su C, oppure (se si vuole un ultimo positivo) un test su conoscenza esterna.
