@@ -15,6 +15,14 @@ originale: `../cattura-processo-ai-brief.md`.
 - Transcript di poker:
   `~/.claude/projects/C--Users-rober-Desktop-Programmi-poker[*-worktrees-*]/*.jsonl`.
 
+## ⚠️ STATO: CONGELATO (2026-06-11) — strada unica = POKER
+SideKick è **fermo a un checkpoint onesto** per decisione finale (vedi `DECISIONI.md`, ultima
+voce): i test non hanno mostrato valore del pacchetto per un modello forte; la tesi vera
+(scaffolding dell'umano) è progettata ma non eseguibile ora (mancano soggetti). Il lavoro
+continua su **`poker/`** (auth/account → testbed e portfolio AWS). Una chat nuova su SideKick
+serve solo per: pubblicare `FINDINGS.md` (già ricalibrato e presentabile) o un revival informato
+(idee pronte in `IDEE.md`: specchio di processo, studio umano, whole-project-spec).
+
 ## Stato attuale (2026-06-11)
 - **Repo PUBBLICA:** github.com/robertotommasogrossi7-bit/SideKick. Tutto committato/pushato.
 - **Fatto:** F2 (motore `motore/distilla.py`, pipeline ELT). **Libreria: 10 pacchetti

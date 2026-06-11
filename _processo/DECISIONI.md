@@ -490,3 +490,24 @@
      risponde davvero = **studio umano** (utenti veri non-esperti, con/senza, outcome misurati).
      Le reti amplificano un valore unitario: prima va dimostrato il valore unitario su UNA persona.
   4. Direzione (park / studio-umano / poker-first) = scelta utente, in corso.
+
+### 2026-06-11 — DECISIONE FINALE: una strada sola = POKER. SideKick congelato (bene)
+- **Contesto:** l'utente, dopo i verdetti esterni, chiede una strada unica e delega il consiglio
+  ("tu cosa consigli?"). Raccomandazione data e adottata: **poker**.
+- **Perché poker:** unico percorso a valore garantito — skill che compongono, portfolio, utenti
+  veri, e le parti delicate in arrivo (**auth/account**, idealmente su AWS → profilo Data Engineer).
+  Produce da solo ciò che a SideKick è sempre mancato: testbed delicato + transcript reali.
+- **I "30/40 test seri": rinviati con motivazione.** Anche vinti, risponderebbero alla domanda
+  sbagliata (ancora AI-come-soggetto); la tesi vera è lato-umano e richiede persone. Se mai, si
+  faranno sull'auth di poker, quasi gratis.
+- **SideKick: CONGELATO al checkpoint onesto, non scartato.** Il punto, in una riga: *l'idea
+  assumeva che all'AI mancasse la conoscenza di processo degli umani; i test mostrano che all'AI
+  di oggi quasi sempre non manca; il valore superstite (scaffolding umani, misura, feedback)
+  richiede persone o tempo che ora non ci sono.* Era un'idea "del 2023-24": i modelli le sono
+  cresciuti sotto. Dividendo già incassato: repo onesto presentabile, FINDINGS ricalibrato, 2 tool
+  riusabili, costituzione installata (`~/.claude/CLAUDE.md`), disciplina sperimentale.
+- **Riprendibile senza perdita:** transcript si accumulano da soli (F0); specchio + studio umano +
+  whole-project-spec restano in `IDEE.md`; il banco auth arriverà da poker.
+- **Operativo:** prossima sessione = chat base su `poker/`, si riparte dal suo `_processo/CONTESTO.md`.
+  Questo repo resta com'è; si riapre solo per pubblicare FINDINGS (quando/se l'utente vorrà) o per
+  un futuro revival informato.
