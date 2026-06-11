@@ -4,7 +4,8 @@ Rende il tuo **metodo di lavoro** la **condotta proattiva e auto-evolvente dell'
 progetto — senza comandi da ricordare, senza costrizioni.
 
 ## Il cuore: la costituzione (nessun comando)
-[`COSTITUZIONE.md`](COSTITUZIONE.md) è il metodo reso **istruzioni permanenti**. Copialo in
+[`COSTITUZIONE.md`](COSTITUZIONE.md) (IT) — English: [`CONSTITUTION.md`](CONSTITUTION.md) — è il
+metodo reso **istruzioni permanenti**. Copialo in
 `~/.claude/CLAUDE.md` (livello utente → vale per **tutti** i progetti) o nel `CLAUDE.md` di un
 progetto. Da quel momento l'AI, **da sola**:
 - cattura le idee in `_processo/IDEE.md` **senza farti perdere il filo**, e te le **ripropone**;
