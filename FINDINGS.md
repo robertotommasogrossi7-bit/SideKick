@@ -87,10 +87,18 @@ follows proactively and updates itself), not as commands you press.
 
 [GitHub Spec Kit](https://github.com/github/spec-kit) makes the spec-first discipline a ritual —
 which is exactly why it's adopted: it scaffolds the *human's* process, not the model's capability.
-Our contribution sits next to it: the empirical finding above, plus a **proactive, self-evolving
-constitution** (Spec Kit's `constitution.md` is read once and passive; ours drives behavior and
-rewrites itself), and two small reusable evaluation tools (a transcript cost-meter and a leak-proof
-hidden-test grader).
+Our contribution sits next to it, and is now **Spec-Kit-native**:
+
+- A drop-in **`constitution.md`** in Spec Kit's format
+  ([`plugins/metodo/spec-kit/constitution.md`](plugins/metodo/spec-kit/constitution.md)) that you
+  place at `.specify/memory/constitution.md`. It adds the principle Spec Kit's constitution lacks —
+  **self-amendment** (the agent evolves the method instead of reading a passive doc once).
+- The empirical **finding** above (the honest map of where process-capture helps).
+- Two small reusable evaluation tools: a transcript **cost-meter** and a **leak-proof hidden-test
+  grader**.
+
+(In Spec Kit, *presets/extensions* override the `spec`/`plan`/`tasks` **templates**; a constitution
+is **memory**, not a template — so the method ships as a constitution drop-in, not a preset.)
 
 ---
 
