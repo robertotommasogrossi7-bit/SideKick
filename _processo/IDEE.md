@@ -22,6 +22,13 @@ Ragionamenti aperti / feature future (METODO). Cattura al volo con **`/metodo:id
 - [2026-06-11] **FUTURO (non ora): "intero progetto → spec" per riuso** — tutto poker incl. le parti
   delicate (**auth, account**). Diverso dalle single-feature (composizione + concern trasversali).
   Testare **quando poker è completo**.
+- [2026-06-11] **"Specchio di processo"** — tool che mina i *propri* transcript e restituisce
+  metriche sul *come lavori*: richieste vaghe e quanto costano, loop di rework, disciplina
+  (commit/design-first), trend settimanali. Dashboard di **costo** esistono già (es. ccusage);
+  specchi di **qualità del processo** no. Diverso dai pivot precedenti perché: (a) si testa su
+  se stessi legittimamente (il prodotto È uno specchio personale, non un claim su altri);
+  (b) è **data engineering puro** (JSONL→metriche→dashboard = obiettivo AWS); (c) i dati si
+  accumulano da soli mentre si sviluppa poker → si può riprendere quando si vuole, senza perdere nulla.
 - [2026-06-11] **Contribuibile a Spec Kit / community** (in ordine di valore):
   (a) **il writeup del finding** — metodo con/senza + costo (da transcript) + reverse-engineering →
   "il processo aiuta l'**umano/anello debole**, non il modello esperto; ecco come si misura". Raro e
