@@ -15,7 +15,7 @@ originale: `../cattura-processo-ai-brief.md`.
 - Transcript di poker:
   `~/.claude/projects/C--Users-rober-Desktop-Programmi-poker[*-worktrees-*]/*.jsonl`.
 
-## Stato attuale (2026-06-10)
+## Stato attuale (2026-06-11)
 - **Repo PUBBLICA:** github.com/robertotommasogrossi7-bit/SideKick. Tutto committato/pushato.
 - **Fatto:** F2 (motore `motore/distilla.py`, pipeline ELT). **Libreria: 10 pacchetti
   validati** (vedi `libreria/INDICE.md`). **Loop validato** su 7+ feature non-ovvie (165 test
@@ -25,14 +25,21 @@ originale: `../cattura-processo-ai-brief.md`.
   installate) per adattare+testare feature via Vitest; `_test/_fonte-chess` = app scacchi del
   gradino 2; `_test/_fonte-budget` + `_test/_fonte-habit` = le due app vanilla (pristine) del
   test migrazione-grande.
-- **Prossimi passi:** (1) **TEST MIGRAZIONE GRANDE — ESEGUITO** (4 bracci, `_migr-test/`):
-  ipotesi *non* confermata su app standard — i ciechi tengono la retrocompat da soli; il
-  braccio-pacchetto habit l'ha pure **rotta** (wrapper zustand) e tutti i bracci-pacchetto sono
-  costati **~2x token**. Pacchetto salito a **v0.3** (gotcha persist-wrapper). Dettagli in
-  `DECISIONI.md` (2026-06-10/11). (2) **2° TEST TOSTO — IN CORSO**: sessionizzazione streaming
-  *ruthless* (`_processo/test-streaming/SPEC.md`), oracolo **validato** (`_test/streaming-oracle/`,
-  privato), nuova dimensione **costo** (`_test/misura-token.mjs`); mancano grader hashed + Fase 1
-  discovery + quadruplo. (3) **F3** — preset/extension Spec Kit → proporlo; (4) #4 polish portfolio.
+- **CONCLUSIONE TEST (vedi `DECISIONI.md`, 2026-06-11):** 5 test con/senza su oracolo →
+  **nessun valore netto del pacchetto** quando il modello già sa/deriva (anzi costa più token:
+  migrazione ~2x; streaming risolto pulito; reverse *senza* spec risolto a +30%). **Svolta
+  (intuizione utente):** il soggetto era un'**AI esperta** (anello *forte*); il valore vive
+  **lato-umano** (anello debole, che chiede male) + nel **non-derivabile** (perché, dead-end,
+  convenzioni, allineamento, accumulo). Spec Kit è virale perché scaffolda l'umano, non l'AI.
+- **DECISIONE = C-F3:** SideKick = memoria del **non-derivabile**, Spec-Kit-native, **validata
+  lato-umano** (non su oracolo). **README aggiornato** di conseguenza (onesto: nessun miglioramento
+  netto coi modelli che già sanno; non escluso che pacchetti migliori diano spec ottimali a costo
+  ridotto).
+- **IN CORSO: test "richiesta vaga"** (`_vague-test/budget-arm{A,B}`): prompt da **non-esperto**,
+  pacchetto come **rete** → primo test nel **regime giusto** (anello debole). Poi **F3**
+  (preset/extension Spec Kit); #4 polish portfolio.
+- **Apparato test riusabile:** `_test/streaming-oracle/` (grader hashed + property-test + reference
+  privata), `_test/misura-token.mjs` (costo dai transcript), `_migr-test/` + `_stream-test/` (bracci).
 - Spec Kit installato (`uv`+`specify`); sandbox in `Programmi/_spec-kit-sandbox`. GitHub Spec
   Kit = standard con cui restare compatibili (vedi `VISIONE.md` §4).
 
