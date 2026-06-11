@@ -373,3 +373,22 @@
   aggiungono informazione). Unica eccezione che *potrebbe* dare un positivo oracolo-abile: conoscenza
   **esterna/nascosta** non derivabile dal problema (es. quirk non documentato di un sistema).
 - **Prossimo:** F3 inquadrata su C, oppure (se si vuole un ultimo positivo) un test su conoscenza esterna.
+
+### 2026-06-11 — LA chiave (intuizione utente): il SOGGETTO era sbagliato
+- **Svolta:** tutti i 5 test usavano come "cieco" un'**AI esperta** — che si fa le domande giuste,
+  conosce i gotcha, riconosce la risposta corretta. Ma l'utente reale di Spec Kit/SideKick è un
+  **umano** che **chiede le cose sbagliate** e non sa cosa non sa. → Questi strumenti **scaffoldano
+  l'anello debole (l'umano), non l'anello forte (l'AI).**
+- **Spiega tutto:** (a) i 5 null result = abbiamo misurato l'anello forte (l'AI *è già* lo scaffold);
+  (b) la viralità di Spec Kit "pur cambiando poco" = cambia poco per un'AI esperta su task chiaro,
+  **molto per un umano** (disciplina spec-first, struttura condivisa, evita vago→output-plausibile-
+  ma-sbagliato-che-l'umano-non-vede). NB: viralità = anche brand/hype/senso-di-controllo, non solo
+  efficacia provata.
+- **Valore riformulato:** non "l'AI non ce la fa senza" (falso), ma "**l'umano non saprebbe cosa
+  chiedere / in che ordine / come riconoscere il giusto**, e il pacchetto/spec gliela fornisce".
+- **C'è un modo per saperlo? Sì, cambiando il SOGGETTO:** (A) proxy runnable = test a **"richiesta
+  vaga da umano"** (prompt da non-esperto: "rendi la mia app moderna con React", senza dire
+  dati/comportamento; pacchetto = rete che tiene la rotta vs cieco che va in scope-creep/dati persi);
+  (B) gold standard = **umano vero** (Roberto su dominio che non conosce) con/senza pacchetto, N=1.
+- **Impatto su F3 (scelta = C-F3):** F3 si progetta e si **valida lato-umano** (anello debole), non
+  lato-oracolo. Il "modo per saperlo" diventa parte della validazione di F3.
