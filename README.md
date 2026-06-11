@@ -42,19 +42,17 @@ versus not? Across several controlled **with/without** experiments (objective or
 
 We publish these results — positive and negative — on purpose. The rigor *is* the product.
 
-## Use it (the method, operationalized)
-SideKick now ships as a **Claude Code plugin** — the working method turned into tooling you
-**install in one command, use, fork to improve, and re-share** (that's what makes a method real,
-not ethereal).
+## Use it (standing behavior — no commands)
+The method is a **constitution**: copy
+[`plugins/metodo/COSTITUZIONE.md`](plugins/metodo/COSTITUZIONE.md) into your `~/.claude/CLAUDE.md`
+(user-level → every project) or a project's `CLAUDE.md`. From then on the AI **proactively** stewards
+your method — captures ideas without breaking your focus and re-proposes them, nudges design-first
+and micro-commits *when it matters*, **without forcing you** — and **updates the method itself** as
+it evolves. **No slash commands to remember.**
 
-```
-/plugin marketplace add robertotommasogrossi7-bit/SideKick
-/plugin install metodo@sidekick
-```
-
-First discipline shipped: **`/metodo:idea <text>`** — capture an idea into `_processo/IDEE.md`
-without losing your train of thought. Next: a design-first gate, a micro-commit nudge.
-*Validated by use* (does it remove friction?), starting with us dogfooding it.
+*(Optional plugin packaging — `/plugin marketplace add robertotommasogrossi7-bit/SideKick` →
+`/plugin install metodo@sidekick` — adds an explicit `/metodo:idea` capture, but the constitution
+is the heart.)* Validated **by use** (does it remove friction?), starting with us dogfooding it.
 
 ## Structure
 - `libreria/` — the catalog of distilled feature-processes (10 packages so far).
@@ -121,19 +119,17 @@ sfumata:
 
 Pubblichiamo questi risultati — positivi e negativi — apposta. Il rigore *è* il prodotto.
 
-## Usalo (il metodo, operazionalizzato)
-SideKick ora è anche un **plugin di Claude Code** — il metodo di lavoro reso strumento che
-**installi in un comando, usi, forki per migliorarlo e ri-condividi** (è ciò che rende un metodo
-reale, non etereo).
+## Usalo (condotta permanente — niente comandi)
+Il metodo è una **costituzione**: copia
+[`plugins/metodo/COSTITUZIONE.md`](plugins/metodo/COSTITUZIONE.md) nel tuo `~/.claude/CLAUDE.md`
+(livello utente → ogni progetto) o nel `CLAUDE.md` di un progetto. Da quel momento l'AI, **da sola**,
+gestisce il tuo metodo: cattura le idee senza farti perdere il filo e te le ripropone, ti tiene su
+design-first e micro-commit *quando serve*, **senza forzarti**, e **aggiorna il metodo stesso**
+mentre evolve. **Nessuno slash command da ricordare.**
 
-```
-/plugin marketplace add robertotommasogrossi7-bit/SideKick
-/plugin install metodo@sidekick
-```
-
-Prima disciplina spedita: **`/metodo:idea <testo>`** — cattura un'idea in `_processo/IDEE.md`
-senza perdere il filo. In arrivo: gate design-first, nudge micro-commit. *Validato dall'uso*
-(toglie attrito?), a partire da noi che lo dogfoodiamo.
+*(Packaging opzionale come plugin — `/plugin marketplace add robertotommasogrossi7-bit/SideKick` →
+`/plugin install metodo@sidekick` — aggiunge una cattura esplicita `/metodo:idea`, ma la costituzione
+è il cuore.)* Validato **dall'uso** (toglie attrito?), a partire da noi che lo dogfoodiamo.
 
 ## Struttura
 - `libreria/` — il catalogo dei feature-processi distillati (10 pacchetti finora).

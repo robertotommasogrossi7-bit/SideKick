@@ -1,27 +1,28 @@
-# metodo — il plugin di SideKick
+# metodo — il metodo di lavoro human+AI di SideKick
 
-Operazionalizza il **metodo di lavoro human+AI** di SideKick: rende le buone discipline
-**automatiche e senza attrito**, perché l'anello debole è l'umano che se le dimentica, non l'AI.
+Rende il tuo **metodo di lavoro** la **condotta proattiva e auto-evolvente dell'AI**, in ogni
+progetto — senza comandi da ricordare, senza costrizioni.
 
-> Perché un plugin? Perché è il modo **reale** di rendere condivisibile un metodo: lo **installi**
-> in un comando, lo **forki** per migliorarlo, fai **PR** per ri-condividerlo. Niente di etereo.
+## Il cuore: la costituzione (nessun comando)
+[`COSTITUZIONE.md`](COSTITUZIONE.md) è il metodo reso **istruzioni permanenti**. Copialo in
+`~/.claude/CLAUDE.md` (livello utente → vale per **tutti** i progetti) o nel `CLAUDE.md` di un
+progetto. Da quel momento l'AI, **da sola**:
+- cattura le idee in `_processo/IDEE.md` **senza farti perdere il filo**, e te le **ripropone**;
+- ti tiene su **design-first** e **micro-commit** *quando serve*, **senza forzarti**;
+- **aggiorna la costituzione stessa** quando il metodo cambia.
 
-## Installa
+→ **Si usa così:** incolli un file, e l'AI *si comporta* così. Niente `/comandi`.
+
+## Opzionale: cattura esplicita
+Per chi la vuole, il plugin offre anche `/metodo:idea <testo>` (salva un'idea al volo). Ma la
+costituzione lo fa già **proattivamente**, quindi è secondario.
+
+## Installa il plugin (opzionale)
 ```
 /plugin marketplace add robertotommasogrossi7-bit/SideKick
 /plugin install metodo@sidekick
 ```
-(In locale: `/plugin marketplace add <percorso-della-cartella-SideKick>`.)
 
-## Discipline
-- ✅ **`/metodo:idea <testo>`** — cattura un'idea in `_processo/IDEE.md` (o `IDEE.md`) **senza
-  perdere il filo** del lavoro corrente. Una riga datata, una riga di conferma, stop.
-- 🔜 **design-first** — un gate che invita a ragionare/spec prima di scrivere codice.
-- 🔜 **micro-commit** — un nudge a committare per step logico.
-
-## Validazione
-Non si valida con un oracolo (lo abbiamo imparato): si valida **dall'uso** — riduce l'attrito e
-rende le sessioni più ordinate? Lo proviamo prima **su noi stessi** (dogfooding), poi su chi lo adotta.
-
-## Migliora / contribuisci
-Forka il repo, modifica `plugins/metodo/skills/...`, apri una PR. Ogni miglioramento torna a tutti.
+## Migliora / condividi
+È pensato per una **community che condivide e fa evolvere il proprio metodo con l'AI**: forka,
+migliora la tua `COSTITUZIONE.md`, apri una PR. La versione migliore "sale".

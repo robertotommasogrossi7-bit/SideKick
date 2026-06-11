@@ -22,3 +22,13 @@ Ragionamenti aperti / feature future (METODO). Cattura al volo con **`/metodo:id
 - [2026-06-11] **FUTURO (non ora): "intero progetto → spec" per riuso** — tutto poker incl. le parti
   delicate (**auth, account**). Diverso dalle single-feature (composizione + concern trasversali).
   Testare **quando poker è completo**.
+- [2026-06-11] **Contribuibile a Spec Kit / community** (in ordine di valore):
+  (a) **il writeup del finding** — metodo con/senza + costo (da transcript) + reverse-engineering →
+  "il processo aiuta l'**umano/anello debole**, non il modello esperto; ecco come si misura". Raro e
+  forte; va come blog/discussion, non come grosso PR.
+  (b) **pattern "constitution proattiva e auto-evolvente"** — la `constitution.md` di Spec Kit è
+  *passiva* (principi letti una volta); la nostra **guida la condotta** e **si auto-modifica** →
+  proposta di estensione/preset.
+  (c) **due tool riusabili**: `misura-token` (costo di una sessione dai transcript) e il **grader
+  hashed leak-proof** (valutare se un processo aiuta senza rivelare le risposte). Utili a chiunque
+  voglia testare "il mio processo serve?".
