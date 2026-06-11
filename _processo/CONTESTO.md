@@ -35,9 +35,16 @@ originale: `../cattura-processo-ai-brief.md`.
   lato-umano** (non su oracolo). **README aggiornato** di conseguenza (onesto: nessun miglioramento
   netto coi modelli che già sanno; non escluso che pacchetti migliori diano spec ottimali a costo
   ridotto).
-- **IN CORSO: test "richiesta vaga"** (`_vague-test/budget-arm{A,B}`): prompt da **non-esperto**,
-  pacchetto come **rete** → primo test nel **regime giusto** (anello debole). Poi **F3**
-  (preset/extension Spec Kit); #4 polish portfolio.
+- **FATTO: test "richiesta vaga"** — il pacchetto ha **MISallineato** (imponeva "no redesign"
+  contro il volere umano "fallo bello") e il **cieco ha fatto meglio** (+ pacchetto più caro).
+  Lezione: forkare un processo nel contesto sbagliato **fa danno**. Tutti i test archiviati in
+  `esperimenti/` (erano fuori dal repo apposta, per isolamento del cieco).
+- **F3 IN CORSO (forma "metodo operazionalizzato"):** SideKick è ora un **marketplace**
+  (`.claude-plugin/marketplace.json`) + plugin **`metodo`** (`plugins/metodo/`); prima disciplina
+  spedita **`/metodo:idea`** (cattura idea in `_processo/IDEE.md`). Prossime: **design-first gate**,
+  **micro-commit nudge** (hook), **constitution da METODO**. Validazione **dall'uso** (dogfooding),
+  non da oracolo. Install: `/plugin marketplace add robertotommasogrossi7-bit/SideKick` →
+  `/plugin install metodo@sidekick`. Poi #4 polish portfolio.
 - **Apparato test riusabile:** `_test/streaming-oracle/` (grader hashed + property-test + reference
   privata), `_test/misura-token.mjs` (costo dai transcript), `_migr-test/` + `_stream-test/` (bracci).
 - Spec Kit installato (`uv`+`specify`); sandbox in `Programmi/_spec-kit-sandbox`. GitHub Spec
