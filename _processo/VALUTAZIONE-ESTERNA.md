@@ -43,5 +43,31 @@ esperimenti/ dimostrano davvero quello che FINDINGS afferma, o c'e' un salto?
 - Se emergono critiche **specifiche e correggibili** → le sistemiamo prima di pubblicare (#2).
 - Registra gli esiti qui sotto.
 
-## Esiti (da compilare)
-- _(incolla qui le risposte chiave delle chat esterne)_
+## Esiti (2026-06-11) — due valutazioni indipendenti, verdetto CONVERGENTE
+
+**ChatGPT (senior scettico):** interesse 7 · rigore 3.5 · utilità senior 4.
+**Claude fresco (senior scettico):** interesse 5 · rigore 3 · utilità senior 3.
+
+**Convergono su tutto ciò che conta:**
+- **N=1 per cella = difetto fatale.** Gli LLM hanno varianza; senza 20-30 run per braccio con
+  media/deviazione, "~2x cost" è un aneddoto con un numero accanto, non un dato.
+- **Soggetto sbagliato, auto-confessato:** abbiamo testato AI-esperta mentre la tesi riguarda
+  l'umano. "È come valutare un esoscheletro facendo gare con Usain Bolt." La tesi vera
+  (scaffolding dell'umano) **non è mai stata testata**.
+- **Giudice unico non cieco** sull'unico esperimento che mostra "danno" (richiesta vaga) →
+  quasi inutilizzabile.
+- **Conclusioni oltre i dati:** "the durable asset is the method" è una tesi, non un risultato.
+  Pivot motivato: i dati dicono negativo → la conclusione scivola su ciò che non è stato misurato.
+- **"We measured it" vende un rigore che non c'è.** La forma da paper è il difetto peggiore:
+  riscritto come "non sono ancora riuscito a costruire un test equo per la domanda che conta —
+  ecco perché e come lo farei" diventerebbe onesto.
+- **Niente di nuovo per un senior** (folk wisdom); valore plausibile per **entry-level**.
+- **Si salvano:** l'onestà del negativo (rara), la misura del costo, la probe reverse-engineering,
+  i 2 tool (cost-meter, grader leak-proof), l'istinto metodologico ("migliore del 90% dei post
+  sul tooling AI" — Claude).
+- **Cosa servirebbe:** 20-30+ run per braccio; **studio UMANO** (utenti veri, con/senza, outcome
+  misurati); giudici ciechi con rubrica; task non-derivabili (auth/soldi/proprietario); braccio
+  col pacchetto corretto (isolare struttura vs contenuto sbagliato); misure longitudinali.
+
+**Conseguenza:** non pubblicare FINDINGS così com'è (#2 sospesa). Ricalibrare il linguaggio è il
+minimo non-negoziabile; la direzione si decide a parte (vedi DECISIONI).

@@ -471,3 +471,22 @@
   Modesto ma reale: rende il metodo già-funzionante dell'utente **portabile + proattivo + auto-migliorante**.
 - **Azione:** ripensare il plugin `metodo` attorno alla **constitution proattiva** (non ai comandi);
   rivedere il README di conseguenza **dopo** conferma utente che è questa la cosa giusta.
+
+### 2026-06-11 — Valutazione esterna (2 modelli indipendenti): verdetto convergente, duro e utile
+- **Mossa dell'utente (giusta):** far giudicare FINDINGS a chat fresche di modelli diversi, da
+  "senior scettico", senza rivelarsi autore. Esiti completi in `VALUTAZIONE-ESTERNA.md`.
+- **Verdetto convergente:** interesse 5-7 · **rigore 3-3.5** · utilità senior 3-4. N=1 per cella =
+  difetto fatale; soggetto sbagliato (AI esperta, non l'umano); giudice unico non cieco; conclusioni
+  oltre i dati; "we measured" vende rigore inesistente; **la tesi vera (scaffolding dell'umano) non è
+  mai stata testata**; niente di nuovo per un senior; valore plausibile = **entry-level**. Si salvano:
+  onestà del negativo, misura del costo, probe reverse, i 2 tool, l'istinto metodologico.
+- **DECISIONI conseguenti:**
+  1. **#2 (pubblicazione) SOSPESA.** FINDINGS non si pubblica così.
+  2. **Ricalibrare FINDINGS** (non-negoziabile, indipendente dalla direzione): da "we measured it"
+     a "ho corso una manciata di probe single-shot; non sono ancora riuscito a costruire un test
+     equo per la domanda che conta — ecco perché e come lo farei". È la versione che entrambi i
+     reviewer definiscono onesta.
+  3. **La visione (rete di processi condivisi) = NON smentita ma NON provata.** L'unico test che
+     risponde davvero = **studio umano** (utenti veri non-esperti, con/senza, outcome misurati).
+     Le reti amplificano un valore unitario: prima va dimostrato il valore unitario su UNA persona.
+  4. Direzione (park / studio-umano / poker-first) = scelta utente, in corso.
