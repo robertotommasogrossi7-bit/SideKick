@@ -22,6 +22,20 @@ Ragionamenti aperti / feature future (METODO). Cattura al volo con **`/metodo:id
 - [2026-06-11] **FUTURO (non ora): "intero progetto → spec" per riuso** — tutto poker incl. le parti
   delicate (**auth, account**). Diverso dalle single-feature (composizione + concern trasversali).
   Testare **quando poker è completo**.
+- [2026-06-11] **TESI CHIARITA (il vero punto di SideKick, mai testato bene):** non "forka una
+  *feature*", ma **condividi l'intera traiettoria di build di un'APP** (prompt + decisioni + output
+  finito da *vedere prima di scegliere*) e **supervisiona l'AI mentre la ri-costruisce, adattandola**.
+  Buco reale: GitHub = solo codice; tutorial = processo non eseguibile/non forkabile; v0/bolt/Lovable
+  = build *nuovo dal tuo prompt*, NON *fork della traiettoria di un'app specifica*.
+  - **Due killer da ricordare:** (1) corri contro il modello (v0/bolt migliorano ogni mese a
+    "fammi l'app e adattala"); (2) ancora non provato.
+  - **IL TEST GIUSTO (finalmente a fuoco):** app **complessa vera** (auth/account/soldi) → catturane
+    la build-trace (il transcript `.jsonl` *è* già la traccia) → due costruttori, idealmente **umani**:
+    uno con la **traiettoria completa**, uno con **solo descrizione/codice finito** → misura esito +
+    costo + bug. Tesi forte = persone + N (i "30/40 run"). Substrato = **poker con auth** (lo si sta
+    già costruendo → poker-first NON abbandona l'idea, fabbrica il banco di prova).
+  - **Prodotto (se mai):** (a) cattura transcript→trace; (b) galleria di app finite da scegliere;
+    (c) replay adattabile con punti-di-fork. Pezzi duri: rendere la traccia *replayabile* + curation.
 - [2026-06-11] **"Specchio di processo"** — tool che mina i *propri* transcript e restituisce
   metriche sul *come lavori*: richieste vaghe e quanto costano, loop di rework, disciplina
   (commit/design-first), trend settimanali. Dashboard di **costo** esistono già (es. ccusage);
