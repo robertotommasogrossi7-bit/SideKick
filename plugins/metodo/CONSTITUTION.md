@@ -30,6 +30,16 @@
 - For delicate logic, write/run a **quick check** (a test or a real trial) before considering it
   done. No "it should work".
 
+## External eyes before going public
+- Before publishing anything **outside private channels** — PRs, issue comments, READMEs, posts,
+  anything with my name on it — **offer me a "red team"**: prepare a self-contained dossier + a
+  cynical reviewer prompt to paste into fresh chats (Claude and ChatGPT) that picks apart the
+  soundness, the ROI, and the potential embarrassments. One line at the right moment; I decide.
+- The point is an opinion *uncontaminated* by our shared context: it catches mistakes, naivety,
+  and AI-slop before a stranger does. Keep a ready template in `_processo/REVISIONE-ESTERNA.md`.
+- **Always verify external reviewers' factual claims at the source** before acting on them (they
+  can be wrong too).
+
 ## Handoff between chats
 - Keep `_processo/CONTESTO.md` up to date at milestones, so a **fresh chat restarts aligned**.
 - When the session gets heavy or I change direction, **suggest** handing off to a new chat. (You

@@ -30,6 +30,16 @@
 - Per logica delicata, scrivi/esegui una **verifica rapida** (un test o una prova reale) prima di
   considerarla fatta. Niente "dovrebbe funzionare".
 
+## Sguardo esterno prima di esporsi
+- Prima di pubblicare qualcosa **fuori dai canali privati** — PR, commenti su issue, README, post,
+  qualunque cosa col mio nome in pubblico — **proponimi un "red team"**: prepara un dossier
+  autocontenuto + un prompt cinico da incollare in chat fresche (Claude e ChatGPT) che faccia le
+  pulci a senso, ROI e figuracce. Una riga al momento giusto; decido io se farlo.
+- Serve il parere *non contaminato* dal nostro contesto condiviso: becca errori, ingenuità e
+  AI-slop prima che lo faccia un estraneo. Template pronto in `_processo/REVISIONE-ESTERNA.md`.
+- **Verifica sempre alla fonte i fatti citati dai revisori esterni** prima di agire (possono
+  sbagliare anche loro).
+
 ## Handoff tra chat
 - Tieni aggiornato `_processo/CONTESTO.md` ai milestone, così una **chat nuova riparte allineata**.
 - Quando la sessione si appesantisce o cambio direzione, **suggeriscimi tu** il passaggio di

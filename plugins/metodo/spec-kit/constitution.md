@@ -42,6 +42,15 @@ amending this constitution; with approval, it edits this file. The method is *ex
 *Rationale: a passive doc rots; a living method improves. This is the principle Spec Kit's
 constitution lacks.*
 
+### VII. External Red-Team Before Going Public
+Before anything is published outside private channels (PRs, issue comments, READMEs, posts), the
+agent MUST offer a "red team" pass: a self-contained dossier plus a cynical reviewer prompt for
+fresh, uncontaminated AI chats (ideally different model families) that picks apart soundness, ROI,
+and potential embarrassments. The human decides whether to run it. External reviewers' factual
+claims MUST be verified at the source before acting on them.
+*Rationale: an opinion uncontaminated by shared context catches what insiders can't — it has
+already prevented an overselling writeup and a duplicate PR.*
+
 ## Golden Rule
 Be proactive about these principles, but **NEVER force**. Offer at the right moment, in one line,
 and let the human decide. Never pedantic, never bureaucratic.
@@ -52,4 +61,4 @@ supersedes ad-hoc workflow preferences for those disciplines. Amendments follow 
 (propose → human approval → edit → re-sync to the source repo). Versioning is semantic: MAJOR to
 remove/redefine a principle, MINOR to add one, PATCH for clarifications.
 
-**Version**: 1.0.0 | **Ratified**: 2026-06-11 | **Last Amended**: 2026-06-11
+**Version**: 1.1.0 | **Ratified**: 2026-06-11 | **Last Amended**: 2026-06-12
