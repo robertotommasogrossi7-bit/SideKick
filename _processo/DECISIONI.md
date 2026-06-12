@@ -511,3 +511,29 @@
 - **Operativo:** prossima sessione = chat base su `poker/`, si riparte dal suo `_processo/CONTESTO.md`.
   Questo repo resta com'è; si riapre solo per pubblicare FINDINGS (quando/se l'utente vorrà) o per
   un futuro revival informato.
+
+### 2026-06-11 — Ricerca reale sullo spazio (richiesta utente: niente adulazione)
+- **Domanda utente:** "perché corro contro il modello? Forse non migliora i modelli ma velocizza
+  l'umano (controllo + raccolta info), ed essere i primi a renderla analizzabile/riusabile/comoda."
+- **Concetto: l'utente ha RAGIONE su un punto** — un tool che aiuta l'**umano** a catturare/
+  analizzare/riusare il processo NON corre contro la *capacità del modello* (è complementare, come
+  git col compilatore). "Corri contro il modello" era il frame sbagliato.
+- **Ma la ricerca è severa sul frame giusto ("corri contro piattaforme + incumbent finanziati"):**
+  - **Observability/replay/eval LLM** affollato e finanziato: **Arize $70M Series C 2025**; LangSmith,
+    Langfuse, Helicone, Braintrust, Maxim, Galileo, MLflow. "Cattura+replay+condivisione sessione/
+    workflow" **già esiste** (per debug agenti in produzione).
+  - **AI app builder** ipercrescita: **Lovable $20M ARR/2 mesi**, **bolt.new $40M/6 mesi**, v0,
+    Replit, **Google AI Studio** (App Gallery: *sfogli, preview, remix* → già il "vedi output finiti
+    e adatta").
+  - **"Condividi processo/prompt non solo codice"** già movimento (prompt-library, prompt in
+    source-control). Le piattaforme (Cursor/Claude Code/VS Code) assorbono nativamente (rules,
+    prompt-files, skills).
+- **"Essere i primi": NO.** Ogni pezzo è già costruito da player finanziati.
+- **Spiraglio onesto ma STRETTO:** trace di processo *ricca* (perché/decisioni/vicoli) di un'app
+  *intera* con assistente *generale*, forkabile da un altro UMANO per imparare/riusare. I builder
+  forkano il *risultato*, non il ragionamento; l'observability è per debug-infra. Gap reale ma
+  cade **esattamente sull'ipotesi che i test + il mercato mettono in dubbio** (processo vs risultato;
+  l'ARR di Lovable = la gente vuole l'app, non studiare come è fatta).
+- **Verdetto (non adulatorio):** non "l'AI lo fa, molla", ma "spazio affollato/finanziato/veloce,
+  edge sottile e non provato, mercato che compra l'opposto". Freeze confermato; poker = substrato +
+  unica prova lato-umano possibile più avanti.
