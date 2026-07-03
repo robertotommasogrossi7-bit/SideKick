@@ -74,6 +74,20 @@
   Nota YAML (imparata a spese nostre): **quota i `name:` degli step** se contengono `:`, em-dash o
   caratteri speciali, altrimenti il workflow non si parsa e il run fallisce con *0 job*.
 
+## Supabase (o backend simile): UN SOLO posto per l'SQL, stato esplicito
+- **Tutte** le migration SQL vivono in **una cartella sola versionata** (es. `supabase/migrations/`),
+  mai sparse in doc/chat/scratch. Prima di crearne una nuova, **cerca ovunque nel repo** (`**/*.sql` +
+  blocchi ```sql``` nei `.md`) per essere sicuro di non duplicare o perdere qualcosa.
+- **Un inventario NUMERATO** (tabella con colonna # e Stato) in un file di riferimento (es.
+  `supabase/README.md`), dichiarato **fonte di verità unica**: se la memoria/chat dice qualcosa di
+  diverso dall'inventario, vince l'inventario. Rinfrescalo a ogni migration nuova.
+- **"Applicato" si segna SOLO se lo confermi esplicitamente tu** (mai per supposizione, mai perché
+  "probabilmente l'ho detto prima"). Se hai un dubbio su cosa hai già fatto, chiedimelo — non
+  presumere. Nome-file `SQL 1`/`SQL 2` generico = segnale che serve un inventario, non un nome vero.
+- **Promemoria che sopravvive a un reset di contesto**: lo stato SQL pendente va anche in un
+  "Promemoria attivo" del file di contesto del progetto (es. `_processo/CONTESTO.md`), così una chat
+  nuova lo ricorda senza dover rileggere tutta la cronologia.
+
 ## Modello e effort giusti per OGNI passo (consigliameli TU, in automatico)
 - **Ogni volta che decidiamo il flusso di lavoro** — roadmap, kickoff di fase, inizio di un task —
   **proponi in automatico, in una riga, il modello + effort migliori per quel passo** (e per gli
