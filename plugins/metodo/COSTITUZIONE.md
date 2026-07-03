@@ -74,6 +74,27 @@
   Nota YAML (imparata a spese nostre): **quota i `name:` degli step** se contengono `:`, em-dash o
   caratteri speciali, altrimenti il workflow non si parsa e il run fallisce con *0 job*.
 
+## Modello e effort giusti per OGNI passo (consigliameli TU, in automatico)
+- **Ogni volta che decidiamo il flusso di lavoro** — roadmap, kickoff di fase, inizio di un task —
+  **proponi in automatico, in una riga, il modello + effort migliori per quel passo** (e per gli
+  agenti, se c'è un workflow). Io decido (regola d'oro). Vale in **tutte** le chat, sempre.
+- **Tabella di default** (dalla ricerca con fonti 2026-07 → dossier in SideKick
+  `esperimenti/ricerca-modelli-effort-2026-07.md`; la rivede l'osservatorio quando escono modelli nuovi):
+  - **Fix scoped e verificabili con test** (bug mirati, migration, unit test, UI semplice) →
+    **Sonnet, effort high** (il default). Sali a xhigh solo se un fix resiste.
+  - **Logica delicata** (soldi, auth, sync, migrazioni dati, refactor architetturale) →
+    **Opus, effort xhigh**. **Mai `max` su task lunghi**: misurato PEGGIO di high
+    (overthinking + compaction del contesto — studio Andon Labs su Opus 4.8).
+  - **Ragionamento architetturale, mini-spec, recap** → **Fable**, poco e bene (brucia la
+    finestra 5h del piano Max): riservalo alla decisione che conta di più.
+  - **Audit / sweep paralleli su tanti file** → multi-agente/ultracode (agenti Sonnet/Haiku,
+    sintesi Opus). **MAI multi-agente per coding lineare**: a parità di budget il singolo agente
+    forte pareggia o vince (paper 2026 + Anthropic stessa).
+- **Due trappole da ricordare**: (1) la leva **effort** conta più del cambio modello tra modelli
+  adiacenti (doc ufficiale Anthropic); il salto che rende è medium→high, poi rendimenti decrescenti.
+  (2) **Sonnet non si sceglie per risparmiare** (tokenizer più verboso → per-task può costare quanto
+  Opus): si sceglie dove la sua qualità basta.
+
 ## Audit multi-agente (verifica pesante — quando lo chiedo o lo consigli tu a fine fase grande)
 - Per un controllo profondo — **quando lo chiedo**, o **quando lo consigli tu al termine di una fase
   molto grande** — lancia un **audit multi-agente** (workflow): **revisori paralleli** sui sottosistemi
