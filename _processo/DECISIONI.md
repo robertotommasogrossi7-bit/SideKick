@@ -537,3 +537,53 @@
 - **Verdetto (non adulatorio):** non "l'AI lo fa, molla", ma "spazio affollato/finanziato/veloce,
   edge sottile e non provato, mercato che compra l'opposto". Freeze confermato; poker = substrato +
   unica prova lato-umano possibile più avanti.
+
+### 2026-06-12 — Extension "metodo" per Spec Kit: red-team confuta la tesi-bandiera
+- **Contesto:** track contribuzione Spec Kit (`Programmi/_speckit-contrib/`). Scritta bozza
+  dell'extension "metodo" (constitution proattiva + 5 comandi) in `Programmi/spec-kit-metodo/`,
+  **tenuta solo locale**. Roberto chiede red-team (Principio VII) prima di pubblicare.
+- **Red-team (2 chat fresche, non rivelandosi autore):** ChatGPT **6.5/10** ("non slop, non
+  innovativa"), Claude **3/10** (più dura). Verdetti pieni in `_speckit-contrib/RED-TEAM-EXTENSION.md`.
+- **🔑 Il claim-bandiera era FALSO** — "Spec Kit's constitution is read once and stays passive".
+  **Verificato alla fonte**: `spec-kit/templates/commands/constitution.md` fa già propose→edit con
+  **semver MAJOR/MINOR/PATCH**, **Sync Impact Report**, commit suggerito, + hook
+  `before/after_constitution`. Il nostro "self-amending" (Principio VI / comando `evolve`) è quindi
+  **già nel core**: l'unico delta è il *trigger proattivo*, una sfumatura.
+- **Convergenza dei giudici:** `redteam` è l'unica cosa davvero originale e di valore (model-
+  agnostica); `idea` è `echo >>` (buttata); `adopt/handoff/evolve` sottili; togliere tono
+  filosofico ("the human is the weak link") e grandiosità ("what Spec Kit lacks") = sa di AI-slop.
+  Distinzione autentica che regge = **"constitution del *processo* (collaborazione human+AI), non
+  del software"** — non l'auto-emendamento.
+- **Vittoria del metodo:** il Principio VII ha fatto *esattamente* il suo lavoro — beccata una
+  figuraccia (claim falso col nome di Roberto sopra) **prima** della pubblicazione. 2ª volta che
+  il red-team salva da una figuraccia (la 1ª: PR duplicata su bolt.diy).
+- **Correzioni applicate (solo locale):** rimosso `idea`; README riscritto onesto (riconosce il
+  core, valore guidato da redteam, niente grandiosità); idea `/review` captata in IDEE.
+- **APERTO → scelta di Roberto (venue):** (A) extension snella guidata da redteam; (B) **post**
+  su redteam usando questa review come caso reale (raccomandata dai giudici); (C) commento nelle
+  discussion aperte. Niente pubblicato finché non decide.
+
+### 2026-06-12 — ⭐ PIVOT: D ("constitution non solo del software") diventa il prodotto
+- **Svolta di Roberto:** il punto D — *la constitution di Spec Kit è concepita solo per il software;
+  dare rango costituzionale al **processo** human+AI può rivoluzionare qualcosa* — è "**il punto che
+  cercavo da tre chat di SideKick**". Diventa la **traccia primaria**. Design doc:
+  `_speckit-contrib/D-CONSTITUTION-PROCESS.md`.
+- **Perché è sostanza (verificato alla fonte):** il `Constitution Check` è un **GATE** nel
+  `plan-template.md` e si **auto-deriva dalla constitution** (agnostico al contenuto). Quindi
+  l'enforcement (gate + semver + sync) **esiste già**: l'unica cosa che tiene il processo fuori è
+  che template/esempi invitano solo principi software. → la "modifica giusta" è **cambiare
+  l'invito/i default**, e la disciplina di processo diventa gated *gratis*. Forma idiomatica =
+  **preset** (i preset fanno override dei template), non extension.
+- **Schiva il fallimento storico di SideKick:** D **non impone** un metodo (la constitution è
+  per-progetto, scritta dall'umano) → dà i denti del gate ai *tuoi* principi di processo. Evita la
+  misallineazione vista nel test "richiesta vaga". Punto di forza, non di debolezza.
+- **Pipeline scelta da Roberto:** (1) implementa D (preset funzionante) nel **suo repo GitHub** e lo
+  mostra → (2) **PR grande al core**, mettendo in conto il rifiuto (troppo grande) → (3) **commento
+  civile** linkando il repo, unendosi al dibattito (constitution vs AGENTS.md/CLAUDE.md).
+- **Tutto il resto → LEGACY (preservato, non in primo piano):** redteam ("scoperta interessante con
+  molti buchi"; secondaria se troviamo di meglio), extension `metodo`, storia+test SideKick. Roberto
+  vuole **ripulire il repo SideKick con una sezione legacy** che tiene i test e queste scoperte.
+- **Ordine operativo:** D-design (ora) → extension (chiusura, secondaria) → **post LinkedIn**
+  (`POST-LINKEDIN.md`, dopo l'extension; red-team del post prima) → **commento solo se roba OP**.
+- **Disciplina ferma:** niente di pubblico senza red-team (Principio VII) — vale doppio per D, che
+  Roberto stesso definisce "molto delicata". No overselling/"revolutionary".

@@ -53,3 +53,24 @@ Ragionamenti aperti / feature future (METODO). Cattura al volo con **`/metodo:id
   (c) **due tool riusabili**: `misura-token` (costo di una sessione dai transcript) e il **grader
   hashed leak-proof** (valutare se un processo aiuta senza rivelare le risposte). Utili a chiunque
   voglia testare "il mio processo serve?".
+- [2026-06-12] **⭐ PIVOT — D: "la constitution non è solo del software".** È il punto cercato da
+  tre chat. Design doc: `_speckit-contrib/D-CONSTITUTION-PROCESS.md`. D diventa primario; tutto il
+  resto (sotto) → **legacy/secondo piano**. Pipeline: repo GitHub di Roberto (preset funzionante) →
+  PR grande al core (probabile rifiuto) → commento civile linkando il repo.
+- [2026-06-12] **Post LinkedIn** — bozza in `_speckit-contrib/POST-LINKEDIN.md`. Roberto vuole
+  pubblicarlo a breve; ordine: **dopo** extension. **Ricordarglielo a ogni inizio sessione.**
+  Red-team del post prima di pubblicare.
+- [2026-06-12] **Commento nelle discussion Spec Kit** — Roberto VUOLE farlo, ma **solo se abbiamo
+  roba veramente OP** (linkando il repo D). Tenere in caldo, non forzare.
+- [2026-06-12] **Cleanup repo SideKick con un "legacy"** — spostare tutto il fatto finora (test,
+  package-manager, redteam, le scoperte "già presenti e forse peggiori") in una sezione legacy:
+  **preservare tutto**, ma in secondo piano; D in primo piano. Da fare dopo che D è chiaro.
+- [2026-06-12] **Extension metodo — comando `/review` "state of the project"** (suggerito dal
+  red-team ChatGPT): scansiona TODO/idee/contesto-stale/test-mancanti/diff-grosse/attrito → "stato
+  del progetto". L'unica aggiunta che darebbe una *capability*. Solo SE l'extension (ora legacy)
+  va avanti.
+- [2026-06-12] **bolt.diy — codice scritto da Roberto, da recuperare e organizzare.** Su disco non
+  c'è traccia: il clone `Programmi/bolt.diy` è pulito e allineato a upstream, niente zip in
+  Downloads. Se scritto *dentro* l'app bolt.diy, vive nello storage del browser → va **esportato**
+  prima di poterlo organizzare nelle cartelle. **Secondario per ora** (focus: spec-kit), ma da
+  riproporre ogni tanto finché non è messo al sicuro.
