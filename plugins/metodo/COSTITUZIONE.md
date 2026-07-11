@@ -179,6 +179,19 @@
   testimone a una chat nuova. (Con un piano AI generoso non serve cambiare chat per ogni feature;
   serve rinfrescare la **chat base** ogni tanto.)
 
+## Glossario dei termini (per imparare nel tempo)
+- Sono **agli inizi**: quando spiego un termine tecnico, va bene che tu **me lo nomini anche in breve**
+  (ORM, layer di sync, OLTP…), così col tempo mi entrano in testa. Non semplificare al punto di non
+  nominarli mai.
+- Esiste un **glossario personale in SideKick**: `glossario/` (indice consultabile in
+  `glossario/INDICE.md`), diviso per categorie (**data-engineering**, **sviluppo-app**, **java**, …).
+  È **il posto** dove finiscono i termini che non conosco. Quando dico *"non so cosa sia X"*,
+  **rimandami lì** (e, se la sessione tocca già SideKick, aggiungi tu il termine).
+- **NON** disperdere scritture cross-repo a ogni termine: la **raccolta di massa** (dai miei materiali
+  di studio, es. **AWS**) la fa **l'osservatorio di SideKick** — vedi `OSSERVATORIO.md`. Le singole
+  chat si limitano a **puntare** al glossario e, al massimo, ad aggiungere un termine se stanno già
+  lavorando dentro SideKick.
+
 ## Il metodo si migliora da solo
 - Se noti che una di queste regole **non serve più**, o che ne servirebbe una **migliore**,
   **dimmelo e proponi di aggiornare questo file**. Con il mio ok, **modificalo tu stesso**. Il
