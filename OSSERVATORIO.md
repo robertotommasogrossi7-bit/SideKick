@@ -24,6 +24,12 @@ aggiungerli al glossario, spiegati semplici, aggiornando `glossario/INDICE.md`.
   - Path materiali di studio AWS: _(da compilare)_
 - Categorie AWS attese dentro `data-engineering/`: ingestion, staging, database, servizi AWS.
 
-### 2. (spazio per altri compiti osservatorio)
+### 2. Osservatorio dati — consumo token + revisione del metodo
+La chat-osservatorio segue il **rituale in `osservatorio/DATI.md`**: rigenera il consumo token
+di TUTTE le chat (`node osservatorio/consumo.mjs` — nomi privati censurati, legenda solo locale),
+confronta la copia attiva del metodo col master del repo, rilegge ESPERIMENTI/METRICHE nuovi e
+aggiorna i verdetti. I passi già decisi con Roberto sono in `osservatorio/PIANO.md`.
+
+### 3. (spazio per altri compiti osservatorio)
 Es. rivedere il metodo quando escono modelli nuovi (già previsto nella COSTITUZIONE), consolidare gli
 esperimenti, ecc. Aggiungere qui man mano.

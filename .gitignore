@@ -23,3 +23,6 @@ motore/_out_*.txt
 
 # Banco di prova (copia di app per testare SideKick) - non versionato
 /_test/
+
+# Legenda della censura dei progetti privati (SOLO locale, mai su GitHub)
+osservatorio/censura.local.json

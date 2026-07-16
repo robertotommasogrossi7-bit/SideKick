@@ -8,6 +8,7 @@
 
 Punti d'ingresso:
 - `OSSERVATORIO.md` — compiti permanenti + ruolo di SideKick (ottimizzare/testare/analizzare Claude Code).
+- `osservatorio/` — dati e verdetti: consumo token di tutte le chat (`DATI.md`, `consumo/`) + piano (`PIANO.md`).
 - `glossario/INDICE.md` — i termini che Roberto sta imparando (dove finiscono i termini nuovi).
 - `GUIDA.md` — come distillare/usare le feature della `libreria/`.
 - `plugins/metodo/COSTITUZIONE.md` — il metodo di lavoro canonico.
