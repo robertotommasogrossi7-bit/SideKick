@@ -1,6 +1,6 @@
 # experiments (method tests) — token usage (generated)
 
-> Back to the dashboard: [`../CONSUMO.md`](../CONSUMO.md). Do not edit by hand.
+> Back to the dashboard: [`../DASHBOARD.md`](../DASHBOARD.md). Do not edit by hand.
 
 **9 sessions** from 2026-06-04 to 2026-06-11 · **375k output** ·
 5k input · 19.1M cache read · 299 messages

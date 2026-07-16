@@ -1,6 +1,6 @@
 # progetto-16 — token usage (generated)
 
-> Back to the dashboard: [`../CONSUMO.md`](../CONSUMO.md). Do not edit by hand.
+> Back to the dashboard: [`../DASHBOARD.md`](../DASHBOARD.md). Do not edit by hand.
 
 **1 sessions** from 2026-06-28 to 2026-06-30 · **308k output** ·
 17k input · 10.9M cache read · 55 messages

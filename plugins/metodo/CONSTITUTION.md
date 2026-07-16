@@ -102,7 +102,7 @@
   propose, in one line, the best model + effort for that step** (and for agents, if there's a
   workflow). I decide (golden rule). This applies in **all** chats, always.
 - **Default table** (from research with 2026-07 sources — **all source URLs are in the
-  dossier**, SideKick `esperimenti/ricerca-modelli-effort-2026-07.md`; reviewed by the
+  dossier**, SideKick `experiments/research-models-effort-2026-07.md`; reviewed by the
   observatory when new models come out):
   - **Scoped fixes verifiable with tests** (targeted bugs, migrations, unit tests, simple UI) →
     **Sonnet, effort high** (the default). Go up to xhigh only if a fix resists.
@@ -178,18 +178,18 @@
   byproduct (novelty per run, overlap, cost).
 
 ## Data contract — every chat leaves useful traces (~zero cost)
-> SideKick's observatory (`osservatorio/`) only learns from the numbers if chats leave these
+> SideKick's observatory (`observatory/`) only learns from the numbers if chats leave these
 > minimal traces. One line per event, never bureaucracy.
 - **Title the chat** as soon as the work takes shape: `Project/Phase_N` (e.g. `WTB/Base_5`,
   `Poker_App/Feature_6`). Titles end up in the transcripts and allow attributing tokens **to
-  every operation** (extracted automatically by `osservatorio/consumo.mjs` — no other manual
+  every operation** (extracted automatically by `observatory/usage.mjs` — no other manual
   consumption logging).
 - **Experiment run** → 1 line immediately in `~/.claude/ESPERIMENTI.md` (the file's fixed
   format).
 - **Important choice** → 1 line in the project's `DECISIONI.md` (options · choice · why) and,
   when the outcome becomes visible — even months later — fill in the **Observed outcome**
   column.
-- **Multi-agent workflow completed** → 1 line in SideKick's `osservatorio/consumo/workflow.csv`
+- **Multi-agent workflow completed** → 1 line in SideKick's `observatory/usage/workflow.csv`
   (cloud workflows don't leave a transcript on the PC: without that line their tokens are lost).
 
 ## External eyes before going public

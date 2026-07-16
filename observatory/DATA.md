@@ -10,12 +10,12 @@
 > **Last review: 2026-07-16.**
 
 ## The ritual (when the observatory chat opens)
-1. `node osservatorio/consumo.mjs` → updates the `consumo/CONSUMO.md` dashboard, a detail file
-   per project in `consumo/per-progetto/`, and the raw data `consumo.csv` +
-   `sessioni.csv` (one row per session with the **operation title**, searchable).
-   The lessons at the top of the dashboard are hand-curated in `consumo/LESSONS.md`.
+1. `node observatory/usage.mjs` → updates the `usage/DASHBOARD.md` dashboard, a detail file
+   per project in `usage/per-project/`, and the raw data `usage.csv` +
+   `sessions.csv` (one row per session with the **operation title**, searchable).
+   The lessons at the top of the dashboard are hand-curated in `usage/LESSONS.md`.
 1b. If a **multi-agent workflow** has run since last time (audit, research…), add
-   its row to `consumo/workflow.csv` (cloud workflows leave no transcript on the PC).
+   its row to `usage/workflow.csv` (cloud workflows leave no transcript on the PC).
 2. Compare the active copy of the method (`~/.claude/CLAUDE.md`) with the **master**
    (`plugins/metodo/COSTITUZIONE.md`): if they diverge, decide which one wins and re-sync.
 3. Read the new lines of `~/.claude/ESPERIMENTI.md` and of the active projects' METRICHE.md.
@@ -26,13 +26,13 @@
 ## The data sources (census 2026-07-16)
 | Source | What it contains | Status |
 |---|---|---|
-| `osservatorio/consumo/` | tokens per project × model × month **and per operation/session** (chat titles), from ALL local chats (23 chat folders → 11 grouped projects, 53 sessions since May 2026) + cloud workflow register | ✅ auto-generated (workflow.csv by hand) |
+| `observatory/usage/` | tokens per project × model × month **and per operation/session** (chat titles), from ALL local chats (23 chat folders → 11 grouped projects, 53 sessions since May 2026) + cloud workflow register | ✅ auto-generated (workflow.csv by hand) |
 | `~/.claude/ESPERIMENTI.md` | cross-model A/B and same-model repetitions | 2 A/B lines · 0 repetitions |
 | poker: `_processo/METRICHE.md` | per phase: model+effort, duration (git), volume, workflow tokens | ✅ the richest series |
 | progetto-15: process docs at root | DECISIONI + audits, but **no METRICHE.md** | ⚠️ uncovered arm |
 | Audits (poker `AUDIT_R6_R7.md`, progetto-15 `AUDIT_ALTO_2026-07-03.md`) | confirmed/refuted findings + cost | ✅ 2 data points |
-| `osservatorio/STRATEGIES.md` | cost/gain register of EVERY method strategy (audit, red team, research, shadow…) | ✅ created 2026-07-16 |
-| `FINDINGS.md` + `esperimenti/` | with/without process-package probes (N=1 per arm) | ✅ historical, already analyzed |
+| `observatory/STRATEGIES.md` | cost/gain register of EVERY method strategy (audit, red team, research, shadow…) | ✅ created 2026-07-16 |
+| `FINDINGS.md` + `experiments/` | with/without process-package probes (N=1 per arm) | ✅ historical, already analyzed |
 | DECISIONI.md (poker, progetto-15) | options, choice, why | ⚠️ missing the **outcome observed later** |
 
 **Known limitation of consumption data**: cloud workflows (multi-agent audits) leave no
@@ -65,5 +65,5 @@ money.
 2. **Important choices** → one line in the project's DECISIONI.md (options · choice · why)
    **+ "Observed outcome" column** to fill in when the outcome becomes visible (even months
    later).
-3. **Token consumption** → **nobody writes anything by hand**: `consumo.mjs` extracts it from
+3. **Token consumption** → **nobody writes anything by hand**: `usage.mjs` extracts it from
    the transcripts. The more Claude is used, the more data accumulates, for free.

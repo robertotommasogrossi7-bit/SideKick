@@ -1,6 +1,6 @@
 # weather-report — token usage (generated)
 
-> Back to the dashboard: [`../CONSUMO.md`](../CONSUMO.md). Do not edit by hand.
+> Back to the dashboard: [`../DASHBOARD.md`](../DASHBOARD.md). Do not edit by hand.
 
 **1 sessions** from 2026-05-07 to 2026-05-07 · **42k output** ·
 137 input · 6.8M cache read · 80 messages

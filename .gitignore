@@ -25,7 +25,7 @@ versione-italiano/motore/_out_*.txt
 /_test/
 
 # Legenda della censura dei progetti privati (SOLO locale, mai su GitHub)
-osservatorio/censura.local.json
+observatory/censura.local.json
 
 # Glossario personale (SOLO locale, mai su GitHub)
 versione-italiano/glossario/

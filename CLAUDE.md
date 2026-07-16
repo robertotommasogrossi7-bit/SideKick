@@ -8,7 +8,7 @@
 permanent tasks (Italian, operational).
 
 Entry points:
-- `osservatorio/` — the lab data (English): `DATA.md`, `PLAN.md`, `STRATEGIES.md`,
+- `observatory/` — the lab data (English): `DATA.md`, `PLAN.md`, `STRATEGIES.md`,
   token dashboard in `consumo/`, red-team verdicts in `redteam/`.
 - `versione-italiano/` — all Italian originals and working docs (`LEGGIMI.md` is the map).
 - `plugins/metodo/` — the working method (Italian master + English + Spec Kit drop-in).

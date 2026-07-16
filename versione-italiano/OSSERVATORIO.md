@@ -8,7 +8,7 @@ SideKick è il posto dove Roberto **ottimizza, controlla, testa e analizza Claud
 sessioni**, per renderle **più efficienti nel tempo**. Non è (solo) la libreria di feature distillate:
 è il **banco di lavoro sul metodo stesso**.
 - **Metodo canonico**: `../plugins/metodo/COSTITUZIONE.md` (master; lo specchio in sola lettura è `~/.claude/CLAUDE.md`).
-- **Esperimenti sui modelli / processo**: `../esperimenti/` + log globale `~/.claude/ESPERIMENTI.md`.
+- **Esperimenti sui modelli / processo**: `../experiments/` + log globale `~/.claude/ESPERIMENTI.md`.
 - **Libreria di feature distillate**: `libreria/` (vedi `GUIDA.md`).
 - **Glossario dei termini che Roberto impara**: `glossario/` (indice: `glossario/INDICE.md`).
 
@@ -26,11 +26,11 @@ spiegati semplici, aggiornando `glossario/INDICE.md`.
 - Categorie AWS attese dentro `data-engineering/`: ingestion, staging, database, servizi AWS.
 
 ### 2. Osservatorio dati — consumo token + revisione del metodo
-La chat-osservatorio segue il **rituale in `../osservatorio/DATA.md`** (in inglese; l'originale
+La chat-osservatorio segue il **rituale in `../observatory/DATA.md`** (in inglese; l'originale
 italiano congelato è in `osservatorio/DATI.md` qui accanto): rigenera il consumo token di TUTTE
-le chat (`node osservatorio/consumo.mjs` dalla root del repo — nomi privati censurati, legenda
+le chat (`node observatory/usage.mjs` dalla root del repo — nomi privati censurati, legenda
 solo locale), confronta lo specchio del metodo col master del repo, rilegge ESPERIMENTI/METRICHE
-nuovi e aggiorna i verdetti. I passi già decisi con Roberto sono in `../osservatorio/PLAN.md`.
+nuovi e aggiorna i verdetti. I passi già decisi con Roberto sono in `../observatory/PLAN.md`.
 
 ### 3. (spazio per altri compiti osservatorio)
 Es. rivedere il metodo quando escono modelli nuovi (già previsto nella COSTITUZIONE), consolidare gli

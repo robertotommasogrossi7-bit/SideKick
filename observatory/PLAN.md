@@ -22,7 +22,7 @@
 
 ## 3. GitHub repositioning — line UPDATED by the 2026-07-16 red team
 Double red team (Claude+ChatGPT) done: verdicts and verifications in
-`osservatorio/redteam/VERDICTS.md`. New line: **not "method laboratory"
+`observatory/redteam/VERDICTS.md`. New line: **not "method laboratory"
 but "case study with real data + reusable tools"** — the method is an appendix.
 - [x] External pre-publication red team (2026-07-16) + verifications at the source + fixes.
 - [x] Root README in ENGLISH (2026-07-16): (1) what you take away — tool + dataset + FINDINGS —
@@ -49,16 +49,19 @@ interesting for those who already use Spec Kit.
       verified at the source, never from memory).
 - [ ] Move from CSV to SQLite once rows are counted in the hundreds (trivial migration).
 
-## 6. Workshop block (from red team round 2 — dedicated Sonnet session, effort high)
-Ordered by ROI (reviewers' consensus):
-- [ ] Dashboard screenshot in the README (the most sellable artifact is invisible today).
-- [ ] CI (GitHub Actions) with badge: run script tests on push — the constitution preaches
-      "CI from day one" and this repo lacks it.
-- [ ] 2–3 tests for `consumo.mjs` / `misura-token.mjs` (JSONL parsing on a fixture).
-- [ ] English CONTRIBUTING.md (FINDINGS invites participation in English; the guide is Italian).
+## 6. Workshop block (from red team round 2) — largely DONE 2026-07-17
+- [x] Italian folder/file names renamed to English (`observatory/`, `experiments/`, `usage/`,
+      `per-project/`, `DASHBOARD.md`, `usage.csv`, `sessions.csv`, `cost-meter.mjs`, `oracle/`)
+      with a full reference sweep.
+- [x] CI (GitHub Actions) with badge in the README: 4 script tests run on every push.
+- [x] Tests for `usage.mjs` (JSONL fixture: dedup by message.id, redaction of unknown
+      projects, model totals, dashboard sums). `cost-meter.mjs` tests: still open.
+- [x] English CONTRIBUTING.md (study participation, attack-the-data, tool PRs).
+- [ ] Dashboard screenshot in the README — Roberto takes it from the GitHub-rendered
+      DASHBOARD.md (guide given), saves to `docs/img/`, then it gets wired in.
 - [ ] Full "operating hypotheses" tone pass on CONSTITUTION/COSTITUZIONE (soften NEVER/ALWAYS,
       N next to each claim).
-- [ ] De-Claude sweep: frame as AI-assisted software engineering throughout (Claude = current
-      instrument).
+- [ ] De-Claude sweep of remaining docs (framing done in README title/intro).
 - [ ] Dataset release/tag (v0.1) + documented CSV schema (columns, units).
-- [ ] MANUAL (Roberto): repo description + topics on GitHub; decide on username rename.
+- [ ] MANUAL (Roberto, decided: AFTER the Spec Kit study): repo description + topics;
+      decide on username rename.

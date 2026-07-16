@@ -1,0 +1,6 @@
+{"type":"custom-title","customTitle":"Demo/Fase_1","sessionId":"s1"}
+{"type":"user","isSidechain":false,"sessionId":"s1","timestamp":"2026-07-01T09:59:00.000Z","message":{"role":"user","content":"Costruisci la feature X"}}
+{"type":"assistant","isSidechain":false,"sessionId":"s1","timestamp":"2026-07-01T10:00:00.000Z","message":{"id":"msg_A","model":"claude-sonnet-5","usage":{"input_tokens":100,"output_tokens":200,"cache_read_input_tokens":1000,"cache_creation_input_tokens":50}}}
+{"type":"assistant","isSidechain":false,"sessionId":"s1","timestamp":"2026-07-01T10:00:00.000Z","message":{"id":"msg_A","model":"claude-sonnet-5","usage":{"input_tokens":100,"output_tokens":200,"cache_read_input_tokens":1000,"cache_creation_input_tokens":50}}}
+{"type":"assistant","isSidechain":false,"sessionId":"s1","timestamp":"2026-07-02T11:00:00.000Z","message":{"id":"msg_B","model":"claude-opus-4-8","usage":{"input_tokens":10,"output_tokens":20,"cache_read_input_tokens":0,"cache_creation_input_tokens":0}}}
+{"type":"assistant","isSidechain":false,"sessionId":"s1","timestamp":"2026-07-02T11:01:00.000Z","message":{"id":"msg_C","model":"<synthetic>","usage":{"input_tokens":999,"output_tokens":999}}}

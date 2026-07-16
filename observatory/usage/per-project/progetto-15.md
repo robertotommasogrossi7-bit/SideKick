@@ -1,6 +1,6 @@
 # progetto-15 — token usage (generated)
 
-> Back to the dashboard: [`../CONSUMO.md`](../CONSUMO.md). Do not edit by hand.
+> Back to the dashboard: [`../DASHBOARD.md`](../DASHBOARD.md). Do not edit by hand.
 
 **5 sessions** from 2026-05-29 to 2026-07-12 · **3.6M output** ·
 233k input · 914.4M cache read · 2k messages · **+1.1M cloud-agent tokens** (1 workflows)

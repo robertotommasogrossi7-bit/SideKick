@@ -1,4 +1,4 @@
 date,project,operation,agents,agent_tokens,source
 2026-07-03,poker (Who's the Boss),"Multi-agent HIGH audit on R6+R7.1 (45 findings confirmed, 11 refuted)",67,2638212,_processo/METRICHE.md
-2026-07-03,poker (Who's the Boss),"Model/effort research for the method (dossier in esperimenti/)",5,688672,_processo/METRICHE.md
+2026-07-03,poker (Who's the Boss),"Model/effort research for the method (dossier in experiments/)",5,688672,_processo/METRICHE.md
 2026-07-03,progetto-15,"Multi-agent HIGH audit (12 confirmed, 1 refuted + Sonnet-vs-Opus shadow check)",21,1070000,project audit report

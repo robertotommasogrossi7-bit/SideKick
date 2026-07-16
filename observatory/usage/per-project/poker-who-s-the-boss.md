@@ -1,6 +1,6 @@
 # poker (Who's the Boss) — token usage (generated)
 
-> Back to the dashboard: [`../CONSUMO.md`](../CONSUMO.md). Do not edit by hand.
+> Back to the dashboard: [`../DASHBOARD.md`](../DASHBOARD.md). Do not edit by hand.
 
 **20 sessions** from 2026-05-14 to 2026-07-14 · **6.7M output** ·
 324k input · 1416.6M cache read · 4k messages · **+3.3M cloud-agent tokens** (2 workflows)
@@ -33,4 +33,4 @@
 | Date | Operation | Agents | Agent tokens | Source |
 |---|---|---|---|---|
 | 2026-07-03 | Multi-agent HIGH audit on R6+R7.1 (45 findings confirmed, 11 refuted) | 67 | 2.6M | _processo/METRICHE.md |
-| 2026-07-03 | Model/effort research for the method (dossier in esperimenti/) | 5 | 689k | _processo/METRICHE.md |
+| 2026-07-03 | Model/effort research for the method (dossier in experiments/) | 5 | 689k | _processo/METRICHE.md |

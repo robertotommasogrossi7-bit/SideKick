@@ -1,9 +1,9 @@
 # SideKick — token usage (generated)
 
-> Back to the dashboard: [`../CONSUMO.md`](../CONSUMO.md). Do not edit by hand.
+> Back to the dashboard: [`../DASHBOARD.md`](../DASHBOARD.md). Do not edit by hand.
 
-**9 sessions** from 2026-06-03 to 2026-07-16 · **1.7M output** ·
-116k input · 161.7M cache read · 576 messages
+**9 sessions** from 2026-06-03 to 2026-07-16 · **1.8M output** ·
+116k input · 168.6M cache read · 593 messages
 
 ## Sessions (in time order — the title says what was done)
 | Period | Operation | Models | Msg | Input | Output | Cache read |
@@ -16,4 +16,4 @@
 | 2026-06-10→06-12 | SK/Base_2 | opus-4-8 + fable-5 | 216 | 22k | 557k | 67.8M |
 | 2026-06-12 | SK/Base_3 | opus-4-8 + fable-5 | 55 | 10k | 114k | 7.6M |
 | 2026-07-16 | Sidekick data observatory setup | fable-5 | 23 | 3k | 43k | 2.2M |
-| 2026-07-16 | Sidekick data observatory setup | fable-5 | 79 | 145 | 163k | 20.6M |
+| 2026-07-16 | Sidekick data observatory setup | fable-5 | 96 | 176 | 203k | 27.4M |

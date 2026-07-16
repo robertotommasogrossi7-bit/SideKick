@@ -7,7 +7,7 @@
 
 **Cos'è SideKick**: il laboratorio dove Roberto analizza esperimenti e progetti reali fatti
 con Claude Code, per capire quali scelte di metodo fanno risparmiare token e automatizzare i
-processi. I dati vivi sono in [`../osservatorio/`](../osservatorio/DATA.md) (inglese); il
+processi. I dati vivi sono in [`../observatory/`](../observatory/DATA.md) (inglese); il
 metodo canonico in [`../plugins/metodo/COSTITUZIONE.md`](../plugins/metodo/COSTITUZIONE.md)
 (il master resta in italiano, con la CONSTITUTION inglese accanto).
 
@@ -29,13 +29,13 @@ metodo canonico in [`../plugins/metodo/COSTITUZIONE.md`](../plugins/metodo/COSTI
 
 | Originale qui | Versione viva (inglese) |
 |---|---|
-| [`osservatorio/DATI.md`](osservatorio/DATI.md) | [`../osservatorio/DATA.md`](../osservatorio/DATA.md) |
-| [`osservatorio/PIANO.md`](osservatorio/PIANO.md) | [`../osservatorio/PLAN.md`](../osservatorio/PLAN.md) |
-| [`osservatorio/STRATEGIE.md`](osservatorio/STRATEGIE.md) | [`../osservatorio/STRATEGIES.md`](../osservatorio/STRATEGIES.md) |
-| [`osservatorio/redteam/VERDETTI-2026-07-16.md`](osservatorio/redteam/VERDETTI-2026-07-16.md) | [`../osservatorio/redteam/VERDICTS.md`](../osservatorio/redteam/VERDICTS.md) |
-| [`osservatorio/consumo/LEZIONI.md`](osservatorio/consumo/LEZIONI.md) | [`../osservatorio/consumo/LESSONS.md`](../osservatorio/consumo/LESSONS.md) |
-| [`osservatorio/consumo/`](osservatorio/consumo/) (cruscotto + per-progetto) | [`../osservatorio/consumo/`](../osservatorio/consumo/) (rigenerato in inglese) |
-| [`esperimenti/`](esperimenti/) (README + dossier ricerca) | [`../esperimenti/`](../esperimenti/) |
+| [`osservatorio/DATI.md`](osservatorio/DATI.md) | [`../observatory/DATA.md`](../observatory/DATA.md) |
+| [`osservatorio/PIANO.md`](osservatorio/PIANO.md) | [`../observatory/PLAN.md`](../observatory/PLAN.md) |
+| [`osservatorio/STRATEGIE.md`](osservatorio/STRATEGIE.md) | [`../observatory/STRATEGIES.md`](../observatory/STRATEGIES.md) |
+| [`osservatorio/redteam/VERDETTI-2026-07-16.md`](osservatorio/redteam/VERDETTI-2026-07-16.md) | [`../observatory/redteam/VERDICTS.md`](../observatory/redteam/VERDICTS.md) |
+| [`osservatorio/consumo/LEZIONI.md`](osservatorio/consumo/LEZIONI.md) | [`../observatory/usage/LESSONS.md`](../observatory/usage/LESSONS.md) |
+| [`osservatorio/consumo/`](osservatorio/consumo/) (cruscotto + per-progetto) | [`../observatory/usage/`](../observatory/usage/) (rigenerato in inglese) |
+| [`esperimenti/`](esperimenti/) (README + dossier ricerca) | [`../experiments/`](../experiments/) |
 | [`plugins-metodo/`](plugins-metodo/) (README del plugin) | [`../plugins/metodo/`](../plugins/metodo/) |
 
 *(Il glossario personale vive qui accanto ma è solo locale, mai su GitHub.)*

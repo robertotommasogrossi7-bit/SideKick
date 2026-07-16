@@ -1,6 +1,6 @@
 # Text-Adventure-Engine — token usage (generated)
 
-> Back to the dashboard: [`../CONSUMO.md`](../CONSUMO.md). Do not edit by hand.
+> Back to the dashboard: [`../DASHBOARD.md`](../DASHBOARD.md). Do not edit by hand.
 
 **1 sessions** from 2026-05-28 to 2026-05-29 · **466k output** ·
 370 input · 54.3M cache read · 174 messages

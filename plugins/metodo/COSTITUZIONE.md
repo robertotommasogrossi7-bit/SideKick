@@ -99,7 +99,7 @@
   **proponi in automatico, in una riga, il modello + effort migliori per quel passo** (e per gli
   agenti, se c'è un workflow). Io decido (regola d'oro). Vale in **tutte** le chat, sempre.
 - **Tabella di default** (dalla ricerca con fonti 2026-07 — le **fonti con URL** sono tutte nel
-  dossier, SideKick `esperimenti/ricerca-modelli-effort-2026-07.md`; la rivede l'osservatorio
+  dossier, SideKick `experiments/research-models-effort-2026-07.md`; la rivede l'osservatorio
   quando escono modelli nuovi):
   - **Fix scoped e verificabili con test** (bug mirati, migration, unit test, UI semplice) →
     **Sonnet, effort high** (il default). Sali a xhigh solo se un fix resiste.
@@ -168,16 +168,16 @@
   è l'**output migliore**; il dato ordinato nel log è il sottoprodotto (novità per run, overlap, costo).
 
 ## Contratto dati — ogni chat lascia tracce utili (costo ~zero)
-> L'osservatorio di SideKick (`osservatorio/`) impara dai numeri solo se le chat lasciano
+> L'osservatorio di SideKick (`observatory/`) impara dai numeri solo se le chat lasciano
 > queste tracce minime. Una riga per evento, mai burocrazia.
 - **Titola la chat** appena il lavoro prende forma: `Progetto/Fase_N` (es. `WTB/Base_5`,
   `Poker_App/Feature_6`). I titoli finiscono nei transcript e permettono di attribuire i
-  token **a ogni operazione** (li estrae da solo `osservatorio/consumo.mjs` — nessun'altra
+  token **a ogni operazione** (li estrae da solo `observatory/usage.mjs` — nessun'altra
   registrazione manuale del consumo).
 - **Esperimento eseguito** → 1 riga subito in `~/.claude/ESPERIMENTI.md` (formato fisso del file).
 - **Scelta importante** → 1 riga in `DECISIONI.md` del progetto (opzioni · scelta · perché) e,
   quando l'esito si vede — anche mesi dopo — riempi la colonna **Esito osservato**.
-- **Workflow multi-agente concluso** → 1 riga in SideKick `osservatorio/consumo/workflow.csv`
+- **Workflow multi-agente concluso** → 1 riga in SideKick `observatory/usage/workflow.csv`
   (i workflow cloud non lasciano transcript sul PC: senza quella riga i loro token si perdono).
 
 ## Sguardo esterno prima di esporsi

@@ -9,7 +9,7 @@
 
 ## Where the two verdicts CONVERGE (→ line for the README)
 1. **The value for a stranger is**: FINDINGS.md (honestly told failure) + the **reusable
-   tools** (consumo.mjs, cost-meter, hidden-test oracle) + the **real per-session consumption
+   tools** (usage.mjs, cost-meter, hidden-test oracle) + the **real per-session consumption
    dataset** (almost nobody publishes this). → They must OPEN the README.
 2. **The meta-structure (constitution, observatory, governance) dilutes the value** if
    presented as the repo's identity → in public it should be reduced/moved to an appendix;

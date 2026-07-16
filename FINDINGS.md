@@ -82,8 +82,8 @@ small with/without study, open an issue on this repo.
 
 ## What survives this exercise
 
-- **Two reusable evaluation tools**: a transcript **cost-meter** (`esperimenti/misura-token.mjs`)
-  and a **leak-proof hidden-test grader** (`esperimenti/streaming/oracolo/`) for testing whether a
+- **Two reusable evaluation tools**: a transcript **cost-meter** (`experiments/cost-meter.mjs`)
+  and a **leak-proof hidden-test grader** (`experiments/streaming/oracle/`) for testing whether a
   process artifact helps, without revealing answers.
 - **The full, public experiment log** — including the contaminated first attempt, the negative
   results, and the adversarial external review (`versione-italiano/_processo/`, raw logs in Italian).
@@ -107,4 +107,4 @@ ships as a constitution drop-in, not a preset.)
 *Part of [SideKick](https://github.com/robertotommasogrossi7-bit/SideKick). Experiment log:
 `versione-italiano/_processo/DECISIONI.md` · external review verdicts:
 `versione-italiano/_processo/VALUTAZIONE-ESTERNA.md` ·
-the probes themselves: `esperimenti/`.*
+the probes themselves: `experiments/`.*

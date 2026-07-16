@@ -1,30 +1,35 @@
-// osservatorio/consumo.mjs — counts the tokens of ALL local Claude Code chats.
+// observatory/usage.mjs — counts the tokens of ALL local Claude Code chats.
 //
-// Reads the transcripts in ~/.claude/projects/*/*.jsonl and generates in osservatorio/consumo/:
-//   CONSUMO.md          the DASHBOARD: recap, top costs, lessons, one link per project
-//   per-progetto/*.md   one file per project: all its sessions with titles
-//   consumo.csv         raw data: project × model × month
-//   sessioni.csv        raw data: ONE ROW PER SESSION, with the operation title (searchable)
+// Reads the transcripts in ~/.claude/projects/*/*.jsonl and generates in observatory/usage/:
+//   DASHBOARD.md        recap, top costs, lessons, one link per project
+//   per-project/*.md    one file per project: all its sessions with titles
+//   usage.csv           raw data: project × model × month
+//   sessions.csv        raw data: ONE ROW PER SESSION, with the operation title (searchable)
 //
 // LESSONS.md (same folder) is HAND-CURATED by the observatory: the dashboard embeds it.
 // The script never touches it. (Italian original: versione-italiano/osservatorio/consumo/LEZIONI.md)
 //
-// REDACTION: projects with "pubblico": false in osservatorio/censura.local.json appear
+// REDACTION: projects with "pubblico": false in observatory/censura.local.json appear
 // under an alias and without titles. That file is LOCAL ONLY (gitignored, never on GitHub).
 //
 // CLOUD AGENT WORKFLOWS: they leave no transcripts on the PC. Their numbers are kept by
-// hand in consumo/workflow.csv (one row per workflow); the script renders them.
+// hand in usage/workflow.csv (one row per workflow); the script renders them.
 //
-// Usage: node osservatorio/consumo.mjs
+// Usage: node observatory/usage.mjs [--base <transcripts dir>] [--out <output dir>]
+//   --base  where to read the *.jsonl transcripts (default: ~/.claude/projects) — used by tests
+//   --out   where to write censura.local.json + usage/ (default: this script's folder)
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const qui = path.dirname(fileURLToPath(import.meta.url));
-const base = path.join(process.env.USERPROFILE || process.env.HOME, '.claude', 'projects');
-const fileCensura = path.join(qui, 'censura.local.json');
-const dirOut = path.join(qui, 'consumo');
-const dirProg = path.join(dirOut, 'per-progetto');
+const argv = process.argv.slice(2);
+const opt = (name, def) => { const i = argv.indexOf('--' + name); return i >= 0 && argv[i + 1] ? argv[i + 1] : def; };
+const base = opt('base', path.join(process.env.USERPROFILE || process.env.HOME, '.claude', 'projects'));
+const outBase = opt('out', qui);
+const fileCensura = path.join(outBase, 'censura.local.json');
+const dirOut = path.join(outBase, 'usage');
+const dirProg = path.join(dirOut, 'per-project');
 const fileWorkflow = path.join(dirOut, 'workflow.csv');
 const fileLessons = path.join(dirOut, 'LESSONS.md');
 
@@ -131,14 +136,15 @@ const righe = [...agg.entries()].map(([k, r]) => {
   return { prog, mod, mese, ...r };
 }).sort((a, b) => a.prog.localeCompare(b.prog) || a.mese.localeCompare(b.mese) || a.mod.localeCompare(b.mod));
 
-fs.writeFileSync(path.join(dirOut, 'consumo.csv'),
+fs.mkdirSync(dirOut, { recursive: true });
+fs.writeFileSync(path.join(dirOut, 'usage.csv'),
   ['project,model,month,messages,input_tokens,output_tokens,cache_read,cache_written']
     .concat(righe.map(r => [r.prog, r.mod, r.mese, r.msg, r.input, r.output, r.cacheR, r.cacheW].join(',')))
     .join('\n') + '\n');
 
 const csvq = s => `"${String(s).replace(/"/g, '""')}"`;
 sessioni.sort((a, b) => a.gruppo.localeCompare(b.gruppo) || String(a.primo).localeCompare(String(b.primo)));
-fs.writeFileSync(path.join(dirOut, 'sessioni.csv'),
+fs.writeFileSync(path.join(dirOut, 'sessions.csv'),
   ['group,project,session,start,end,operation,models,messages,input_tokens,output_tokens,cache_read,cache_written']
     .concat(sessioni.map(s => [csvq(s.gruppo), csvq(s.alias), s.id, s.primo, s.ultimo, csvq(descrizione(s)), csvq(modelliDi(s)), s.msg, s.input, s.output, s.cacheR, s.cacheW].join(',')))
     .join('\n') + '\n');
@@ -174,7 +180,7 @@ for (const [nome, g] of ordGruppi) {
   const sess = [...g.sess].sort((a, b) => String(a.primo).localeCompare(String(b.primo)));
   const testo = `# ${nome} — token usage (generated)
 
-> Back to the dashboard: [\`../CONSUMO.md\`](../CONSUMO.md). Do not edit by hand.
+> Back to the dashboard: [\`../DASHBOARD.md\`](../DASHBOARD.md). Do not edit by hand.
 
 **${g.sess.length} sessions** from ${g.primo} to ${g.ultimo} · **${fmt(g.output)} output** ·
 ${fmt(g.input)} input · ${fmt(g.cacheR)} cache read · ${fmt(g.msg)} messages${wf.length ? ` · **+${fmt(wf.reduce((a, w) => a + w.token, 0))} cloud-agent tokens** (${wf.length} workflows)` : ''}
@@ -216,10 +222,10 @@ const lezioni = fs.existsSync(fileLessons)
 
 const md = `# TOKEN USAGE — dashboard (generated)
 
-> Generated by \`osservatorio/consumo.mjs\` on ${new Date().toISOString().slice(0, 10)}. **Do not edit by
+> Generated by \`observatory/usage.mjs\` on ${new Date().toISOString().slice(0, 10)}. **Do not edit by
 > hand** (except \`LESSONS.md\`, which is curated by the observatory and embedded below).
-> Each project's detail is in \`per-progetto/\` (one file per project, one table row per session).
-> Raw data: \`consumo.csv\` · \`sessioni.csv\` (searchable: grep "react", "audit", "Feature_6"…).
+> Each project's detail is in \`per-project/\` (one file per project, one table row per session).
+> Raw data: \`usage.csv\` · \`sessions.csv\` (searchable: grep "react", "audit", "Feature_6"…).
 > Reserved projects are redacted (legend kept local only). *Output* = generated tokens (the
 > heaviest); *input* = tokens read at full price; *cache read* = context re-read (~1/10 of input).
 
@@ -240,7 +246,7 @@ ${lezioni}
 ## By project (click for the per-session detail)
 | Project | Period | Sessions | Output | Input | Cache read |
 |---|---|---|---|---|---|
-${ordGruppi.map(([nome, g]) => `| [${mdEsc(nome)}](per-progetto/${slug(nome)}.md) | ${g.primo} → ${g.ultimo} | ${g.sess.length} | ${fmt(g.output)} | ${fmt(g.input)} | ${fmt(g.cacheR)} |`).join('\n')}
+${ordGruppi.map(([nome, g]) => `| [${mdEsc(nome)}](per-project/${slug(nome)}.md) | ${g.primo} → ${g.ultimo} | ${g.sess.length} | ${fmt(g.output)} | ${fmt(g.input)} | ${fmt(g.cacheR)} |`).join('\n')}
 
 ## Cloud agent work (workflows — hand-maintained register)
 Multi-agent workflows run in the cloud and **leave no transcripts on the PC**: these numbers
@@ -261,8 +267,8 @@ ${modelli.map(({ m, t }) => `| ${m} | ${fmt(t.msg)} | ${fmt(t.input)} | ${fmt(t.
 |---|---|---|---|---|
 ${mesi.map(({ m, t }) => `| ${m} | ${fmt(t.msg)} | ${fmt(t.input)} | ${fmt(t.output)} | ${fmt(t.cacheR)} |`).join('\n')}
 `;
-fs.writeFileSync(path.join(dirOut, 'CONSUMO.md'), md);
+fs.writeFileSync(path.join(dirOut, 'DASHBOARD.md'), md);
 
 console.log(`OK: ${dirs.length} folders, ${ordGruppi.length} projects, ${sessioni.length} sessions, ${vistiMsg.size} unique messages.`);
-console.log('Written: CONSUMO.md (dashboard), per-progetto/ (' + ordGruppi.length + ' files), consumo.csv, sessioni.csv');
+console.log('Written: DASHBOARD.md, per-project/ (' + ordGruppi.length + ' files), usage.csv, sessions.csv');
 console.log('Redaction legend (LOCAL, do not commit):', fileCensura);

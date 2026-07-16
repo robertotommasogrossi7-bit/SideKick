@@ -1,6 +1,6 @@
 # Programmi (root) — token usage (generated)
 
-> Back to the dashboard: [`../CONSUMO.md`](../CONSUMO.md). Do not edit by hand.
+> Back to the dashboard: [`../DASHBOARD.md`](../DASHBOARD.md). Do not edit by hand.
 
 **3 sessions** from 2026-05-31 to 2026-06-27 · **997k output** ·
 45k input · 96.4M cache read · 253 messages
