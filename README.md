@@ -70,8 +70,8 @@ drop-in.
 ## Italiano
 
 Tutta la documentazione di lavoro in italiano è in
-[`versione-italiano/`](versione-italiano/LEGGIMI.md) (guida, glossario, libreria dei
-pacchetti, motore di distillazione, compiti dell'osservatorio).
+[`versione-italiano/`](versione-italiano/LEGGIMI.md) (guida, libreria dei pacchetti,
+motore di distillazione, compiti dell'osservatorio).
 
 ## License
 

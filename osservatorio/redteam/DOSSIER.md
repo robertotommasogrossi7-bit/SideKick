@@ -1,43 +1,174 @@
-# RED TEAM — riposizionamento pubblico di SideKick (2026-07-16)
+# RED TEAM round 2 — il repo riposizionato (2026-07-16)
 
 > **Come si usa**: incolla TUTTO il contenuto di `DOSSIER.md` (che inizia con questo stesso
-> prompt) in UNA chat nuova di Claude E in UNA di ChatGPT — **con la memoria/personalizzazione
-> DISATTIVATA** (lezione del run 2026-07-16: Claude con memoria si è auto-dichiarato
-> "contaminato" — il parere non era più esterno). Poi confrontiamo i due verdetti e — regola
-> del metodo — **verifichiamo alla fonte i fatti citati dai revisori** prima di agire: nel run
-> 2026-07-16 una "correzione" del revisore (tokenizer di Sonnet 5) era **sbagliata** — il
-> nostro claim reggeva sulla fonte ufficiale.
+> prompt) in UNA chat nuova di Claude E in UNA di ChatGPT — **con memoria/personalizzazione
+> DISATTIVATA** (lezione del round 1: Claude con memoria si è auto-dichiarato "contaminato").
+> Poi — regola del metodo — **verifica alla fonte i fatti citati dai revisori**: nel round 1
+> una loro "correzione" (tokenizer di Sonnet 5) era sbagliata.
 
 ---
 
 Sei un revisore esterno cinico: metà senior engineer che ha visto troppi progetti
-"AI-powered", metà recruiter tecnico che scrolla GitHub in 30 secondi. Non conosci nulla di
-questo progetto e non devi essere gentile.
+"AI-powered", metà recruiter tecnico che scrolla GitHub in 30-60 secondi. Non conosci nulla
+di questo progetto e non devi essere gentile.
 
-L'autore è un principiante che studia da data engineer e sta per RIPOSIZIONARE pubblicamente
-il suo repo GitHub "SideKick" così: «laboratorio dove si analizzano esperimenti e progetti
-reali fatti con Claude Code, per capire quali scelte di metodo fanno risparmiare token e
-automatizzare i processi — collegabile a GitHub Spec Kit».
+CONTESTO: l'autore è un principiante che studia da data engineer. Il suo repo pubblico
+"SideKick" ha già passato un primo red team (verdetti inclusi nel dossier, con le azioni
+prese). Dopo quel giro il repo è stato **riposizionato**: README inglese nuovo in root
+(linea: "case study con dati reali + strumenti riusabili", metodo in appendice), materiale
+di lavoro italiano spostato in `versione-italiano/`, correzioni fattuali applicate (finestra
+di utilizzo vs contesto, confronto tra audit riformulato, incoerenze numeriche), regola
+"Spotify" generalizzata in "leader di settore", glossario personale tolto dal pubblico.
 
-Sotto trovi il dossier completo: il metodo (costituzione v1.5), il cruscotto dei consumi
-reali di token, il registro strategie con costi/benefici, i verdetti dell'osservatorio, il
-piano, e il resoconto storico degli esperimenti. Fai le pulci SENZA pietà su:
+Il dossier contiene: il nuovo README (la facciata), il LEGGIMI italiano, la costituzione del
+metodo v1.5, il cruscotto consumi, il registro strategie costi/benefici, i verdetti del
+round 1 con le azioni, il piano, e il writeup storico FINDINGS. Fai le pulci SENZA pietà su:
 
-1. **SENSO** — Il riposizionamento regge? C'è qualcosa che un estraneo troverebbe utile o è
-   un diario personale travestito da ricerca?
-2. **CREDIBILITÀ** — Dove i numeri NON supportano le conclusioni? Dove N=1/N=2 viene venduto
-   come prova? Overselling, AI-slop, gergo vuoto, percentuali costruite su confronti impari?
-3. **FIGURACCE** — Cosa farebbe storcere il naso a un senior (o a un recruiter) se diventasse
-   pubblico domani? Dati privati che trapelano nonostante la censura? Errori concettuali su
-   token/cache/modelli?
-4. **ROI** — L'autore paga un piano Claude e ci mette tempo: questo lavoro sul metodo vale i
-   token che consuma, o è procrastinazione strutturata? Sii diretto.
-5. **CONFRONTO** — Rispetto a GitHub Spec Kit e a ciò che esiste già (awesome-list, blog,
-   benchmark di harness), cosa aggiunge davvero? Cosa hanno già fatto meglio altri?
+1. **LA FACCIATA IN 40 SECONDI** — Apri il README da recruiter: cosa capisci? cosa ti fa
+   chiudere la pagina? Da senior: le promesse dell'apertura ("what you can take away") sono
+   mantenute dai contenuti reali del dossier?
+2. **LE CORREZIONI DEL ROUND 1** — Confronta i verdetti round 1 (inclusi) con lo stato
+   attuale: le azioni dichiarate sono state fatte DAVVERO o sono cosmetiche? Cosa del round 1
+   è rimasto irrisolto?
+3. **STRUTTURA** — Root inglese + `versione-italiano/` per i doc di lavoro: regge? Ci sono
+   residui di confusione, incoerenze tra file, percorsi che non tornano, doppioni?
+4. **CREDIBILITÀ RESIDUA** — Dove ancora i numeri non supportano le parole? N piccoli venduti
+   come trend? Claim da ri-verificare? Il linguaggio "ipotesi operative" è applicato dappertutto
+   o solo dove faceva comodo?
+5. **COSA MANCA PER SEMBRARE PROFESSIONALE** — Con gli occhi di chi valuta un candidato:
+   release/tag? badge CI? test degli script? esempi d'uso dei tool? screenshot? Cosa aggiungeresti
+   PRIMA di linkare questo repo in un CV o in un post?
 
-Concludi con: (a) verdetto in UNA riga · (b) le 3 cose da TAGLIARE o correggere prima di
-pubblicare · (c) le 2 cose che valgono davvero e su cui puntare · (d) voto di rigore 1-10
-come per un abstract scientifico. Se non sei sicuro di un fatto, dillo invece di inventare.
+Concludi con: (a) verdetto in UNA riga — *pubblicizzabile così o no?* · (b) le 3 cose da
+correggere/tagliare ancora · (c) le 2 cose più forti da mettere ancora più in evidenza ·
+(d) voto di rigore 1-10 e voto "prima impressione recruiter" 1-10. Se non sei sicuro di un
+fatto, dillo invece di inventare.
+
+
+=====================================================
+== FILE DEL DOSSIER: README.md
+=====================================================
+
+# SideKick — a real-world lab on building software with Claude Code
+
+One beginner developer, several real apps, **every transcript measured**. This repo collects
+real experiments, real token data, and honest negative results about *how* to work with an AI
+coding agent — plus the small tools used to measure it all.
+
+> **What this is:** exploratory case studies with the sample sizes always stated (usually
+> N=1–2). **What this is not:** benchmarks or proven best practices. Negative results are
+> published on purpose.
+
+## What you can take away
+
+| Thing | Where | Why it's rare |
+|---|---|---|
+| **Per-session token telemetry for Claude Code** | [`osservatorio/consumo.mjs`](osservatorio/consumo.mjs) → dataset in [`osservatorio/consumo/`](osservatorio/consumo/) (CSV + dashboard) | Scans every local transcript and attributes tokens to each project, model, month **and named operation** (session titles). Private projects redacted. Very little real Claude Code consumption data is public — this grows automatically with use. |
+| **Cost meter for A/B experiment arms** | [`esperimenti/misura-token.mjs`](esperimenti/misura-token.mjs) | Measures turns/tokens of a with/without experiment from its transcripts. |
+| **Leak-proof hidden-test grader** | [`esperimenti/streaming/oracolo/`](esperimenti/streaming/oracolo/) | Tests whether a process artifact helps, without revealing the answers to the model. |
+| **The writeup** | [`FINDINGS.md`](FINDINGS.md) | *"I tried to measure whether captured process helps AI-assisted dev — and couldn't build a fair test (yet)."* Includes the contaminated first attempt and the external adversarial review that tore up v1. |
+| **A Spec Kit constitution drop-in** | [`plugins/metodo/spec-kit/constitution.md`](plugins/metodo/spec-kit/constitution.md) | A self-amending working-method constitution in Spec Kit format (v1.5.0). |
+
+## The lab (live data)
+
+[`osservatorio/`](osservatorio/) is the observatory — working language Italian, but the tables
+read fine in any language:
+
+- [`consumo/CONSUMO.md`](osservatorio/consumo/CONSUMO.md) — the cost dashboard: totals, the
+  most expensive operations, per-project drilldowns (one file per project).
+- [`STRATEGIE.md`](osservatorio/STRATEGIE.md) — cost/benefit register of every working-method
+  strategy under test: multi-agent audits, cross-model shadow checks, red teams, **including
+  the strategies that failed and were dropped**.
+- [`redteam/`](osservatorio/redteam/) — before this repo went public in its current form, two
+  independent AI reviewers tore the dossier apart; the verdicts, the claim-by-claim
+  verification (one reviewer "correction" turned out to be wrong), and the fixes are all in
+  the open.
+- [`DATI.md`](osservatorio/DATI.md) / [`PIANO.md`](osservatorio/PIANO.md) — what the data can
+  and cannot say yet, and what's next.
+
+A few sampled findings (details and caveats inside): a heavy multi-agent audit found real
+critical bugs on both projects it ran on, at a known cost; on code-verification tasks small
+and large models tied (process design paid, not model size); cache reads were ~170× the live
+tokens across all chats, so resuming beats restarting.
+
+## The method (appendix — operating hypotheses, not proven rules)
+
+We also maintain a **working-method constitution** for human+AI collaboration: idea capture,
+design-before-code, research-before-choosing, model+effort per step, a "data contract" so
+every chat leaves measurable traces. It lives in [`plugins/metodo/`](plugins/metodo/)
+(Italian master · English version · Spec Kit drop-in) and is **self-amending**: the method is
+expected to change as the data comes in. Every rule in it is an operating hypothesis backed
+by small N.
+
+To use it: copy [`plugins/metodo/COSTITUZIONE.md`](plugins/metodo/COSTITUZIONE.md) (or the
+[English version](plugins/metodo/CONSTITUTION.md)) into your `~/.claude/CLAUDE.md`, or drop
+the [Spec Kit constitution](plugins/metodo/spec-kit/constitution.md) into
+`.specify/memory/constitution.md`.
+
+Relation to [GitHub Spec Kit](https://github.com/github/spec-kit): Spec Kit organizes the
+*work* (constitution → spec → plan → tasks); SideKick measures the *collaboration* — what
+each method choice costs and returns — and ships its method as a Spec Kit constitution
+drop-in.
+
+## Honesty rules of this repo
+
+1. Sample sizes stated next to every claim; small N is called an *indication*, never proof.
+2. Negative results and dropped strategies stay published (`FINDINGS.md`, `_processo/`,
+   the "scartate" section of `STRATEGIE.md`).
+3. Anything public goes through an external AI red team first — and the reviewers' claims get
+   verified at the source too (they're sometimes wrong).
+
+## Italiano
+
+Tutta la documentazione di lavoro in italiano è in
+[`versione-italiano/`](versione-italiano/LEGGIMI.md) (guida, libreria dei pacchetti,
+motore di distillazione, compiti dell'osservatorio).
+
+## License
+
+[MIT](LICENSE)
+
+
+=====================================================
+== FILE DEL DOSSIER: versione-italiano/LEGGIMI.md
+=====================================================
+
+# SideKick — versione italiana (documentazione di lavoro)
+
+> La **facciata pubblica** del repo è in inglese: [`../README.md`](../README.md). Questa
+> cartella raccoglie tutto il materiale di lavoro in italiano.
+
+**Cos'è SideKick**: il laboratorio dove Roberto analizza esperimenti e progetti reali fatti
+con Claude Code, per capire quali scelte di metodo fanno risparmiare token e automatizzare i
+processi. I dati veri (consumo token, strategie, verdetti) vivono in
+[`../osservatorio/`](../osservatorio/DATI.md); il metodo canonico in
+[`../plugins/metodo/COSTITUZIONE.md`](../plugins/metodo/COSTITUZIONE.md).
+
+## Cosa c'è in questa cartella
+
+| File/cartella | Cosa contiene |
+|---|---|
+| [`OSSERVATORIO.md`](OSSERVATORIO.md) | I compiti permanenti di SideKick (li legge ogni sessione all'avvio) e il rituale dell'osservatorio dati. |
+| [`GUIDA.md`](GUIDA.md) | Come distillare/usare le feature della libreria. |
+| [`libreria/`](libreria/) | Il catalogo dei pacchetti-processo distillati (l'idea originale di SideKick, oggi secondaria — vedi FINDINGS). |
+| [`motore/`](motore/) | Il motore di distillazione che trasforma il processo di una build reale in un pacchetto. |
+| [`CONTRIBUIRE.md`](CONTRIBUIRE.md) | Come contribuire un pacchetto. |
+| [`cattura-processo-ai-brief.md`](cattura-processo-ai-brief.md) | Il brief storico dell'idea iniziale (archivio). |
+
+## Mappa del resto del repo (in inglese o neutro)
+
+- [`../osservatorio/`](../osservatorio/DATI.md) — **il laboratorio**: cruscotto consumi
+  ([CONSUMO](../osservatorio/consumo/CONSUMO.md)), registro strategie costi/guadagni
+  ([STRATEGIE](../osservatorio/STRATEGIE.md)), verdetti red team
+  ([redteam/](../osservatorio/redteam/VERDETTI-2026-07-16.md)), piano
+  ([PIANO](../osservatorio/PIANO.md)).
+- [`../esperimenti/`](../esperimenti/README.md) — gli esperimenti con/senza + i tool
+  (misura-token, oracolo a test nascosti).
+- [`../plugins/metodo/`](../plugins/metodo/) — il metodo: COSTITUZIONE (master italiano),
+  CONSTITUTION (inglese), drop-in Spec Kit.
+- [`../FINDINGS.md`](../FINDINGS.md) — il resoconto onesto degli esperimenti (inglese).
+- [`../_processo/`](../_processo/) — la memoria di processo del progetto SideKick stesso
+  (decisioni, log esperimenti — pubblico apposta).
 
 
 =====================================================
@@ -257,9 +388,9 @@ come per un abstract scientifico. Se non sei sicuro di un fatto, dillo invece di
 - Sono **agli inizi**: quando spiego un termine tecnico, va bene che tu **me lo nomini anche in breve**
   (ORM, layer di sync, OLTP…), così col tempo mi entrano in testa. Non semplificare al punto di non
   nominarli mai.
-- Esiste un **glossario personale in SideKick**: `versione-italiano/glossario/` (indice in
-  `versione-italiano/glossario/INDICE.md`), diviso per categorie (**data-engineering**,
-  **sviluppo-app**, **java**, …).
+- Esiste un **glossario personale** (cartella **solo locale** dentro SideKick,
+  `versione-italiano/glossario/` — gitignorata, mai su GitHub), diviso per categorie
+  (**data-engineering**, **sviluppo-app**, **java**, …).
   È **il posto** dove finiscono i termini che non conosco. Quando dico *"non so cosa sia X"*,
   **rimandami lì** (e, se la sessione tocca già SideKick, aggiungi tu il termine).
 - **NON** disperdere scritture cross-repo a ogni termine: la **raccolta di massa** (dai miei materiali
@@ -486,73 +617,48 @@ colonna "Esito osservato" nei DECISIONI · 1 riga in ESPERIMENTI.md per ogni esp
 
 
 =====================================================
-== FILE DEL DOSSIER: osservatorio/DATI.md
+== FILE DEL DOSSIER: osservatorio/redteam/VERDETTI-2026-07-16.md
 =====================================================
 
-# OSSERVATORIO DATI — cosa dicono i numeri (pagina di lettura)
+# Red team 2026-07-16 — verdetti, verifiche, azioni
 
-> **Cos'è**: la pagina che la chat-osservatorio aggiorna a ogni revisione. In una pagina:
-> quali dati abbiamo, cosa dicono, e quali modifiche al metodo suggeriscono. Onestà alla
-> FINDINGS.md: **N piccoli = indizi, non prove.**
-> Censura (scelta di Roberto 2026-07-16): **solo 3 progetti riservati** compaiono con alias
-> (`progetto-15`, `progetto-16`, `progetto-22` — legenda in `censura.local.json`, solo locale);
-> tutti gli altri col nome vero. I progetti nuovi nascono censurati finché non si decide.
-> **Ultima revisione: 2026-07-16.**
+> Doppio run sullo stesso dossier: **Claude** (⚠️ auto-dichiarato contaminato: aveva memoria
+> dei progetti — voto rigore 4/10) e **ChatGPT** (pulito — voti per aspetto, es. originalità
+> 9/10, comunicazione 5,5/10). Regola applicata: **ogni affermazione dei revisori è stata
+> verificata prima di agire**. I testi integrali sono nella chat-osservatorio del 2026-07-16.
 
-## Il rituale (quando si apre la chat-osservatorio)
-1. `node osservatorio/consumo.mjs` → aggiorna il cruscotto `consumo/CONSUMO.md`, un file di
-   dettaglio per progetto in `consumo/per-progetto/`, e i dati grezzi `consumo.csv` +
-   `sessioni.csv` (una riga per sessione col **titolo dell'operazione**, cercabile).
-   Le lezioni in testa al cruscotto si curano a mano in `consumo/LEZIONI.md`.
-1b. Se dall'ultima volta è girato un **workflow multi-agente** (audit, ricerca…), aggiungere
-   la sua riga a `consumo/workflow.csv` (i workflow cloud non lasciano transcript sul PC).
-2. Confronta la copia attiva del metodo (`~/.claude/CLAUDE.md`) con il **master**
-   (`plugins/metodo/COSTITUZIONE.md`): se divergono, decidere quale vince e risincronizzare.
-3. Leggi le righe nuove di `~/.claude/ESPERIMENTI.md` e dei METRICHE.md dei progetti attivi.
-4. Aggiorna i **verdetti** qui sotto e il registro **`STRATEGIE.md`** (costi/guadagni di ogni
-   scelta di metodo — red team, ricerca, audit…), e proponi (non imporre) le modifiche al metodo.
+## Dove i due verdetti CONVERGONO (→ linea per il README)
+1. **Il valore per un estraneo è**: FINDINGS.md (fallimento raccontato onesto) + i **tool
+   riusabili** (consumo.mjs, cost-meter, oracolo a test nascosti) + il **dataset reale di
+   consumi per-sessione** (quasi nessuno lo pubblica). → Devono APRIRE il README.
+2. **La metastruttura (costituzione, osservatorio, governance) diluisce il valore** se
+   presentata come identità del repo → nel pubblico va ridotta/spostata in appendice;
+   l'auto-emendamento presentato come ipotesi, non come identità.
+3. **N piccoli formulati come regole** → riformulare come "ipotesi operative (N=…)".
+4. Rapporto meta-lavoro/prodotto = rischio reputazionale: servono più cose *shipped*.
 
-## Le fonti dei dati (censimento 2026-07-16)
-| Fonte | Cosa contiene | Stato |
+## Verifica delle affermazioni dei revisori (fatta alla fonte)
+| Affermazione del revisore | Esito verifica | Azione |
 |---|---|---|
-| `osservatorio/consumo/` | token per progetto × modello × mese **e per operazione/sessione** (titoli delle chat), da TUTTE le chat locali (23 cartelle di chat → 11 progetti raggruppati, 53 sessioni da maggio 2026) + registro workflow cloud | ✅ generato automaticamente (workflow.csv a mano) |
-| `~/.claude/ESPERIMENTI.md` | A/B cross-modello e ripetizioni stesso-modello | 2 righe A/B · 0 ripetizioni |
-| poker: `_processo/METRICHE.md` | per ogni fase: modello+effort, durata (git), volume, token dei workflow | ✅ la serie più ricca |
-| progetto-15: doc di processo in root | DECISIONI + audit, ma **niente METRICHE.md** | ⚠️ braccio scoperto |
-| Audit (poker `AUDIT_R6_R7.md`, progetto-15 `AUDIT_ALTO_2026-07-03.md`) | finding confermati/confutati + costo | ✅ 2 punti dati |
-| `osservatorio/STRATEGIE.md` | registro costi/guadagni di OGNI strategia del metodo (audit, red team, ricerca, ombra…) | ✅ creato 2026-07-16 |
-| `FINDINGS.md` + `esperimenti/` | probe con/senza pacchetto-processo (N=1 per braccio) | ✅ storico, già analizzato |
-| DECISIONI.md (poker, progetto-15) | opzioni, scelta, perché | ⚠️ manca l'**esito poi osservato** |
+| "Tokenizer di Sonnet: quasi certamente errore, verificare" (Claude) | **Revisore SMENTITO**: la pagina ufficiale Sonnet 5 conferma "updated tokenizer… roughly 1.0–1.35× more tokens" | Claim mantenuto, con fonte e data di ri-verifica ✅ |
+| "5h di contesto" confonde finestra di utilizzo e finestra di contesto (Claude) | **Vero**: era la finestra di UTILIZZO (limite d'uso 5h del piano Max) | Corretto in COSTITUZIONE (2 punti) + LEZIONI ✅ |
+| "−60% tra audit: progetti diversi, non è un confronto" (Claude) | **Vero** | Riformulato con l'avvertenza in LEZIONI + STRATEGIE ✅ |
+| "170× cache venduta come scoperta: è la normale meccanica del caching" (Claude) | **Vero a metà**: la meccanica è nota, il dato misurato sui NOSTRI transcript e la regola di handoff sono il contributo | Riformulato in LEZIONI ✅ |
+| "45 confermati = agenti che verificano agenti, circolare" (Claude) | **Risposta esistente ma non scritta**: oltre 30 finding poi fixati e validati da test/typecheck verdi | Aggiunto "anti-circolarità" in STRATEGIE ✅ |
+| Incoerenze 23 vs 11 progetti · 6,1M vs 6,7M (Claude) | **Vere** (cartelle vs gruppi; senza/con worktree) | Precisati entrambi in DATI ✅ |
+| "Censura progetto-15 cosmetica, racconti i bug di terzi" (Claude) | **Parzialmente**: è un progetto DI Roberto (non di terzi), non ancora pubblico | ✅ Deciso 2026-07-16: si tiene la formulazione generica ("trovati e corretti prima del lancio" è una buona storia); si rivaluta al lancio dell'app |
+| "Regola Spotify = cargo-cult da principiante in pubblico" (entrambi, toni diversi) | Opinione, non fatto | ✅ Deciso 2026-07-16: regola riformulata in "leader di settore" (aziende/app/software professionali, funzionanti e a capo del rispettivo settore; Spotify solo come esempio) — e fuori dalla vetrina pubblica |
+| "Servono benchmark, non case study" (ChatGPT) | Vero come inquadramento | Il repo si presenta come **case study/ricerca esplorativa**, mai come benchmark |
 
-**Limite noto dei dati di consumo**: i workflow cloud (audit multi-agente) non lasciano
-transcript sul PC → i loro token (2,6M + 1,1M nei due audit + 0,7M di ricerca) vanno sommati
-a mano dai METRICHE. La dashboard Anthropic resta l'unica fonte del costo in denaro.
-
-## Verdetti (aggiornati 2026-07-16)
-- **Il processo pesante (audit) paga?** Indizio forte **sì**: 2 audit su 2 hanno trovato
-  bug critici veri (3 ALTA su poker; sul progetto-15 la causa radice di un bug bloccante
-  + 3 falle critiche) a un costo noto e sostenibile. N=2 → indizio.
-- **Verifica-ombra cross-modello**: 2 punti. Sui finding di **codice** i modelli si
-  equivalgono; sui finding di **processo/config** il modello alto falsifica meglio.
-  Ipotesi da confermare: ombra mirata solo sui finding di processo/config.
-- **Ripetizioni stesso-modello**: **zero dati** — la regola in costituzione è ancora fede.
-- **Quali modelli per quali agenti**: la tabella del metodo viene dalla ricerca esterna
-  (dossier 2026-07); i nostri dati coprono per ora solo la funzione "verifica".
-- **Dove vanno i token** (prima lettura di CONSUMO): i 2 progetti-app grossi dominano
-  (poker ~6,7M output incl. worktree, progetto-15 ~3,6M); la cache letta (~2,8 miliardi) è ~170× i token vivi
-  (~16,5M input+output) → la cache calda è ciò che rende sostenibile il piano. Opus ha generato ~83%
-  dell'output storico; Sonnet/Fable sono entrati da luglio con la regola modello-per-passo.
-- **A/B di processo poker (costruzione completa) vs progetto-15 (incrementale)**:
-  oggi **non misurabile** perché il secondo non logga le fasi. O si aggiunge un METRICHE.md
-  leggero, o si dichiara chiuso. (La nuova tabella per-sessione aiuta: le fasi di poker
-  hanno già i titoli `WTB/Base_4`, `Poker_App/Feature_6`, ecc.)
-
-## Contratto dati minimo (per tutte le chat — costo ~zero)
-1. **Esperimenti** → una riga in `~/.claude/ESPERIMENTI.md`, formato già fissato lì. Regge.
-2. **Scelte importanti** → una riga in DECISIONI.md del progetto (opzioni · scelta · perché)
-   **+ colonna "Esito osservato"** da riempire quando l'esito si vede (anche mesi dopo).
-3. **Consumo token** → **nessuno scrive nulla a mano**: lo estrae `consumo.mjs` dai
-   transcript. Più si usa Claude, più dati si accumulano, gratis.
+## Azioni per il riposizionamento (aggiornano PIANO §3)
+1. README nuovo ordine: **(1) cosa ti porti via** (tool + dataset CSV + writeup FINDINGS) →
+   (2) gli esperimenti e i dati → (3) il metodo come appendice con link (versione pubblica
+   corta; la costituzione completa resta nel repo per chi vuole).
+2. Linguaggio: "ipotesi operative (N=…)" al posto di "regole/lezioni" nel materiale pubblico.
+3. Sezione esplicita "cosa NON ha funzionato" (già in FINDINGS/STRATEGIE: metterla in evidenza).
+4. Strumenti separati dal metodo (cartella/sezione `tools` chiara, README dedicato per tool).
+5. Budget: ~80% esperimenti / 20% manutenzione del metodo da qui in poi (verdetto ROI di
+   entrambi i revisori — coerente col nostro stesso registro STRATEGIE).
 
 
 =====================================================

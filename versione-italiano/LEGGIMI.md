@@ -13,9 +13,8 @@ processi. I dati veri (consumo token, strategie, verdetti) vivono in
 
 | File/cartella | Cosa contiene |
 |---|---|
-| [`OSSERVATORIO.md`](OSSERVATORIO.md) | I compiti permanenti di SideKick (li legge ogni sessione all'avvio): glossario dai materiali AWS, rituale dell'osservatorio dati. |
+| [`OSSERVATORIO.md`](OSSERVATORIO.md) | I compiti permanenti di SideKick (li legge ogni sessione all'avvio) e il rituale dell'osservatorio dati. |
 | [`GUIDA.md`](GUIDA.md) | Come distillare/usare le feature della libreria. |
-| [`glossario/`](glossario/INDICE.md) | I termini tecnici che Roberto sta imparando, per categorie (data-engineering, sviluppo-app, java…). |
 | [`libreria/`](libreria/) | Il catalogo dei pacchetti-processo distillati (l'idea originale di SideKick, oggi secondaria — vedi FINDINGS). |
 | [`motore/`](motore/) | Il motore di distillazione che trasforma il processo di una build reale in un pacchetto. |
 | [`CONTRIBUIRE.md`](CONTRIBUIRE.md) | Come contribuire un pacchetto. |

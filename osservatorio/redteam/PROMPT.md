@@ -1,40 +1,45 @@
-# RED TEAM — riposizionamento pubblico di SideKick (2026-07-16)
+# RED TEAM round 2 — il repo riposizionato (2026-07-16)
 
 > **Come si usa**: incolla TUTTO il contenuto di `DOSSIER.md` (che inizia con questo stesso
-> prompt) in UNA chat nuova di Claude E in UNA di ChatGPT — **con la memoria/personalizzazione
-> DISATTIVATA** (lezione del run 2026-07-16: Claude con memoria si è auto-dichiarato
-> "contaminato" — il parere non era più esterno). Poi confrontiamo i due verdetti e — regola
-> del metodo — **verifichiamo alla fonte i fatti citati dai revisori** prima di agire: nel run
-> 2026-07-16 una "correzione" del revisore (tokenizer di Sonnet 5) era **sbagliata** — il
-> nostro claim reggeva sulla fonte ufficiale.
+> prompt) in UNA chat nuova di Claude E in UNA di ChatGPT — **con memoria/personalizzazione
+> DISATTIVATA** (lezione del round 1: Claude con memoria si è auto-dichiarato "contaminato").
+> Poi — regola del metodo — **verifica alla fonte i fatti citati dai revisori**: nel round 1
+> una loro "correzione" (tokenizer di Sonnet 5) era sbagliata.
 
 ---
 
 Sei un revisore esterno cinico: metà senior engineer che ha visto troppi progetti
-"AI-powered", metà recruiter tecnico che scrolla GitHub in 30 secondi. Non conosci nulla di
-questo progetto e non devi essere gentile.
+"AI-powered", metà recruiter tecnico che scrolla GitHub in 30-60 secondi. Non conosci nulla
+di questo progetto e non devi essere gentile.
 
-L'autore è un principiante che studia da data engineer e sta per RIPOSIZIONARE pubblicamente
-il suo repo GitHub "SideKick" così: «laboratorio dove si analizzano esperimenti e progetti
-reali fatti con Claude Code, per capire quali scelte di metodo fanno risparmiare token e
-automatizzare i processi — collegabile a GitHub Spec Kit».
+CONTESTO: l'autore è un principiante che studia da data engineer. Il suo repo pubblico
+"SideKick" ha già passato un primo red team (verdetti inclusi nel dossier, con le azioni
+prese). Dopo quel giro il repo è stato **riposizionato**: README inglese nuovo in root
+(linea: "case study con dati reali + strumenti riusabili", metodo in appendice), materiale
+di lavoro italiano spostato in `versione-italiano/`, correzioni fattuali applicate (finestra
+di utilizzo vs contesto, confronto tra audit riformulato, incoerenze numeriche), regola
+"Spotify" generalizzata in "leader di settore", glossario personale tolto dal pubblico.
 
-Sotto trovi il dossier completo: il metodo (costituzione v1.5), il cruscotto dei consumi
-reali di token, il registro strategie con costi/benefici, i verdetti dell'osservatorio, il
-piano, e il resoconto storico degli esperimenti. Fai le pulci SENZA pietà su:
+Il dossier contiene: il nuovo README (la facciata), il LEGGIMI italiano, la costituzione del
+metodo v1.5, il cruscotto consumi, il registro strategie costi/benefici, i verdetti del
+round 1 con le azioni, il piano, e il writeup storico FINDINGS. Fai le pulci SENZA pietà su:
 
-1. **SENSO** — Il riposizionamento regge? C'è qualcosa che un estraneo troverebbe utile o è
-   un diario personale travestito da ricerca?
-2. **CREDIBILITÀ** — Dove i numeri NON supportano le conclusioni? Dove N=1/N=2 viene venduto
-   come prova? Overselling, AI-slop, gergo vuoto, percentuali costruite su confronti impari?
-3. **FIGURACCE** — Cosa farebbe storcere il naso a un senior (o a un recruiter) se diventasse
-   pubblico domani? Dati privati che trapelano nonostante la censura? Errori concettuali su
-   token/cache/modelli?
-4. **ROI** — L'autore paga un piano Claude e ci mette tempo: questo lavoro sul metodo vale i
-   token che consuma, o è procrastinazione strutturata? Sii diretto.
-5. **CONFRONTO** — Rispetto a GitHub Spec Kit e a ciò che esiste già (awesome-list, blog,
-   benchmark di harness), cosa aggiunge davvero? Cosa hanno già fatto meglio altri?
+1. **LA FACCIATA IN 40 SECONDI** — Apri il README da recruiter: cosa capisci? cosa ti fa
+   chiudere la pagina? Da senior: le promesse dell'apertura ("what you can take away") sono
+   mantenute dai contenuti reali del dossier?
+2. **LE CORREZIONI DEL ROUND 1** — Confronta i verdetti round 1 (inclusi) con lo stato
+   attuale: le azioni dichiarate sono state fatte DAVVERO o sono cosmetiche? Cosa del round 1
+   è rimasto irrisolto?
+3. **STRUTTURA** — Root inglese + `versione-italiano/` per i doc di lavoro: regge? Ci sono
+   residui di confusione, incoerenze tra file, percorsi che non tornano, doppioni?
+4. **CREDIBILITÀ RESIDUA** — Dove ancora i numeri non supportano le parole? N piccoli venduti
+   come trend? Claim da ri-verificare? Il linguaggio "ipotesi operative" è applicato dappertutto
+   o solo dove faceva comodo?
+5. **COSA MANCA PER SEMBRARE PROFESSIONALE** — Con gli occhi di chi valuta un candidato:
+   release/tag? badge CI? test degli script? esempi d'uso dei tool? screenshot? Cosa aggiungeresti
+   PRIMA di linkare questo repo in un CV o in un post?
 
-Concludi con: (a) verdetto in UNA riga · (b) le 3 cose da TAGLIARE o correggere prima di
-pubblicare · (c) le 2 cose che valgono davvero e su cui puntare · (d) voto di rigore 1-10
-come per un abstract scientifico. Se non sei sicuro di un fatto, dillo invece di inventare.
+Concludi con: (a) verdetto in UNA riga — *pubblicizzabile così o no?* · (b) le 3 cose da
+correggere/tagliare ancora · (c) le 2 cose più forti da mettere ancora più in evidenza ·
+(d) voto di rigore 1-10 e voto "prima impressione recruiter" 1-10. Se non sei sicuro di un
+fatto, dillo invece di inventare.

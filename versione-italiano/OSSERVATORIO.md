@@ -15,10 +15,11 @@ sessioni**, per renderle **più efficienti nel tempo**. Non è (solo) la libreri
 ## Compiti permanenti (controllali ad ogni avvio)
 
 ### 1. Glossario — aggiornalo dai materiali di studio
-Roberto è agli inizi e accumula i termini che non conosce in `glossario/` (categorie:
-data-engineering, sviluppo-app, java…). **Compito di SideKick**: prendere periodicamente i **termini
-nuovi dai materiali di studio di Roberto** — in particolare la sua **app/note di studio AWS** — e
-aggiungerli al glossario, spiegati semplici, aggiornando `glossario/INDICE.md`.
+Roberto è agli inizi e accumula i termini che non conosce in `glossario/` (cartella **solo
+locale, gitignorata — mai su GitHub**; categorie: data-engineering, sviluppo-app, java…).
+**Compito di SideKick**: prendere periodicamente i **termini nuovi dai materiali di studio di
+Roberto** — in particolare la sua **app/note di studio AWS** — e aggiungerli al glossario,
+spiegati semplici, aggiornando `glossario/INDICE.md`.
 - ⚠️ **Path dei materiali AWS: NON ancora noto.** La prima volta **chiedilo a Roberto** e **annotalo
   qui sotto**, così le volte dopo lo trovi da solo.
   - Path materiali di studio AWS: _(da compilare)_

@@ -211,9 +211,9 @@
 - Sono **agli inizi**: quando spiego un termine tecnico, va bene che tu **me lo nomini anche in breve**
   (ORM, layer di sync, OLTP…), così col tempo mi entrano in testa. Non semplificare al punto di non
   nominarli mai.
-- Esiste un **glossario personale in SideKick**: `versione-italiano/glossario/` (indice in
-  `versione-italiano/glossario/INDICE.md`), diviso per categorie (**data-engineering**,
-  **sviluppo-app**, **java**, …).
+- Esiste un **glossario personale** (cartella **solo locale** dentro SideKick,
+  `versione-italiano/glossario/` — gitignorata, mai su GitHub), diviso per categorie
+  (**data-engineering**, **sviluppo-app**, **java**, …).
   È **il posto** dove finiscono i termini che non conosco. Quando dico *"non so cosa sia X"*,
   **rimandami lì** (e, se la sessione tocca già SideKick, aggiungi tu il termine).
 - **NON** disperdere scritture cross-repo a ogni termine: la **raccolta di massa** (dai miei materiali
