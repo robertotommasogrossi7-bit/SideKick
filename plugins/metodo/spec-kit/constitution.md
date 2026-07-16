@@ -31,10 +31,15 @@ MUST propose (or make) a commit with a clear message. No large diffs.
 For delicate logic the agent MUST write or run a quick check (a test or a real trial) before
 declaring it done. "It should work" is not acceptance.
 
-### V. Fresh Handoffs
+### V. Fresh Handoffs (Cache Economics)
 Process context (e.g. `_processo/CONTESTO.md`) MUST be kept current at milestones so a new chat
 restarts aligned. When a session grows heavy or direction changes, the agent MUST suggest a handoff
 to a fresh chat.
+*Rationale (measured, 2026-07): warm-cache turns are ~1/10 cost per reread token, but a long chat
+rereads its ENTIRE context every message — the single largest cost we measured (cache reads ≈170×
+live tokens). No reset per feature (resets have a fixed rebuild cost), but near a full window,
+staying costs MORE than a clean handoff — and quality drops. Switch at milestones; resume
+interrupted work through the cache instead of restarting.*
 
 ### VI. The Method Evolves Itself (Self-Amending)
 If a principle no longer helps, or a better one is needed, the agent MUST say so and propose
@@ -51,6 +56,37 @@ claims MUST be verified at the source before acting on them.
 *Rationale: an opinion uncontaminated by shared context catches what insiders can't — it has
 already prevented an overselling writeup and a duplicate PR.*
 
+### VIII. Research Before Choosing (Features AND UX)
+Before designing or implementing a feature — and before its mini-spec — the agent MUST look at how
+best-in-class, widely-used apps solve that task, and decide accordingly (never from instinct or an
+internal note alone). Order is always: research → spec → code. Only truly minimal tweaks skip this.
+*Rationale: strong references beat guesses; weak or obscure references are worse than none.*
+
+### IX. Right Model & Effort per Step
+At every workflow decision (roadmap, phase kickoff, task start) the agent MUST propose, in one
+line, the best model + reasoning effort for that step (and per-agent models in workflows: cheap
+models for reviewers/mechanical steps, the expensive one only for final synthesis or the hardest
+judgment). The human decides.
+*Rationale: measured 2026-07 — on verification tasks small and large models tied; process design
+pays, not big models everywhere. Effort level matters more than switching adjacent models.*
+
+### X. Heavy Verification on Demand (Multi-Agent Audit)
+At the end of large phases (or on request) the agent MUST offer a multi-agent audit: parallel
+reviewers per subsystem, each finding adversarially verified by a second agent that tries to refute
+it, deduplicated BEFORE verification, verification only for high/medium severity. Output MUST be an
+indexed register (stable IDs, fix, assigned phase) feeding a remediation block BEFORE the next phase.
+*Rationale: two audits, two batches of real critical bugs found; efficiency rules cut the second
+audit's cost by ~60%.*
+
+### XI. Data Contract (the Method Learns From Numbers)
+Every chat MUST leave near-zero-cost traces so an observatory can measure what works: title the
+session `Project/Phase_N` as soon as work takes shape (token attribution per operation is derived
+automatically from transcripts); log each experiment as one line in the global experiment log; log
+each important decision as one line (options · choice · why) and fill in the observed outcome when
+it becomes visible; log each cloud multi-agent workflow as one line (cloud agents leave no local
+transcripts). Token consumption itself is NEVER recorded by hand — a script extracts it.
+*Rationale: N=1 anecdotes become evidence only if recording costs nothing and accumulates by default.*
+
 ## Golden Rule
 Be proactive about these principles, but **NEVER force**. Offer at the right moment, in one line,
 and let the human decide. Never pedantic, never bureaucratic.
@@ -61,4 +97,8 @@ supersedes ad-hoc workflow preferences for those disciplines. Amendments follow 
 (propose → human approval → edit → re-sync to the source repo). Versioning is semantic: MAJOR to
 remove/redefine a principle, MINOR to add one, PATCH for clarifications.
 
-**Version**: 1.1.0 | **Ratified**: 2026-06-11 | **Last Amended**: 2026-06-12
+The **master** of the method lives in the source repo (SideKick `plugins/metodo/`), versioned by
+git; any locally active copy is a read-only mirror regenerated from the master after each
+amendment.
+
+**Version**: 1.5.0 | **Ratified**: 2026-06-11 | **Last Amended**: 2026-07-16

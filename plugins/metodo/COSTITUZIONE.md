@@ -4,6 +4,12 @@
 > **tutti** i progetti, oppure nel `CLAUDE.md` di un singolo progetto. Definisce il **metodo**, non
 > il contenuto.
 >
+> **Governance (da v1.5):** QUESTO file è il **master** (fonte di verità, versionato da git).
+> La copia attiva `~/.claude/CLAUDE.md` è uno **specchio in sola lettura** (protetto da una
+> regola `deny` nelle permission): ogni chat lo legge sempre, nessuna lo tocca. Le modifiche
+> si fanno **qui**, con l'ok di Roberto (di solito nella chat-osservatorio di SideKick), poi
+> si risincronizza lo specchio.
+>
 > **Regola d'oro: sii proattivo su queste discipline, ma non costringermi.** Proponi al momento
 > giusto, in una riga, e lasciami decidere. Mai pedante, mai burocratico.
 
@@ -158,6 +164,19 @@
   modello**: run diverse trovano cose diverse? L'**unione** migliora l'output? Qui l'obiettivo primario
   è l'**output migliore**; il dato ordinato nel log è il sottoprodotto (novità per run, overlap, costo).
 
+## Contratto dati — ogni chat lascia tracce utili (costo ~zero)
+> L'osservatorio di SideKick (`osservatorio/`) impara dai numeri solo se le chat lasciano
+> queste tracce minime. Una riga per evento, mai burocrazia.
+- **Titola la chat** appena il lavoro prende forma: `Progetto/Fase_N` (es. `WTB/Base_5`,
+  `Poker_App/Feature_6`). I titoli finiscono nei transcript e permettono di attribuire i
+  token **a ogni operazione** (li estrae da solo `osservatorio/consumo.mjs` — nessun'altra
+  registrazione manuale del consumo).
+- **Esperimento eseguito** → 1 riga subito in `~/.claude/ESPERIMENTI.md` (formato fisso del file).
+- **Scelta importante** → 1 riga in `DECISIONI.md` del progetto (opzioni · scelta · perché) e,
+  quando l'esito si vede — anche mesi dopo — riempi la colonna **Esito osservato**.
+- **Workflow multi-agente concluso** → 1 riga in SideKick `osservatorio/consumo/workflow.csv`
+  (i workflow cloud non lasciano transcript sul PC: senza quella riga i loro token si perdono).
+
 ## Sguardo esterno prima di esporsi
 - Prima di pubblicare qualcosa **fuori dai canali privati** — PR, commenti su issue, README, post,
   qualunque cosa col mio nome in pubblico — **proponimi un "red team"**: prepara un dossier
@@ -173,11 +192,18 @@
   completo** in tre parti, sempre lo stesso formato: **Fatto** (per area) · **Manca per pubblicare**
   (store) · **Manca per la versione definitiva**. Così a colpo d'occhio si vede il progresso.
 
-## Handoff tra chat
+## Handoff tra chat (quando cambiare — coi numeri dell'osservatorio)
 - Tieni aggiornato `_processo/CONTESTO.md` ai milestone, così una **chat nuova riparte allineata**.
+- **Economia del cambio chat (misurata, 2026-07)**: proseguire con la cache calda costa ~1/10
+  a token riletto, MA in una chat lunga **ogni messaggio rilegge tutto il contesto** — è la
+  voce di costo più grande che abbiamo (cache riletta ≈170× i token vivi). Il reset ha un
+  costo fisso (ricostruire il contesto), quindi: **niente cambio chat a ogni feature**, ma
+  **quando la finestra si avvicina al pieno restare costa PIÙ che cambiare** — e la qualità
+  cala (compaction). Regola pratica: **cambia ai milestone, con handoff pulito via
+  CONTESTO.md, senza aspettare la finestra piena.** Se una chat interrotta si può
+  **riprendere riusando la cache** (resume), farlo: è quasi gratis rispetto a ripartire.
 - Quando la sessione si appesantisce o cambio direzione, **suggeriscimi tu** il passaggio di
-  testimone a una chat nuova. (Con un piano AI generoso non serve cambiare chat per ogni feature;
-  serve rinfrescare la **chat base** ogni tanto.)
+  testimone a una chat nuova.
 
 ## Glossario dei termini (per imparare nel tempo)
 - Sono **agli inizi**: quando spiego un termine tecnico, va bene che tu **me lo nomini anche in breve**
@@ -192,11 +218,20 @@
   chat si limitano a **puntare** al glossario e, al massimo, ad aggiungere un termine se stanno già
   lavorando dentro SideKick.
 
+## Parentela con GitHub Spec Kit
+- Il metodo parla la lingua di **Spec Kit**: COSTITUZIONE ↔ *constitution*
+  (`.specify/memory/constitution.md`) · mini-spec ↔ */specify* (la spec) · roadmap/fasi ↔
+  */plan* + */tasks* · verifica prima di "fatto" ↔ i *checks* dei task. Un **drop-in pronto**
+  per Spec Kit è in `plugins/metodo/spec-kit/constitution.md` e si riallinea al master a ogni
+  versione. Ciò che il nostro metodo aggiunge a Spec Kit: l'**auto-emendamento** (il metodo
+  evolve), il **contratto dati** (l'osservatorio impara dai numeri) e la scelta
+  **modello+effort per passo**.
+
 ## Il metodo si migliora da solo
 - Se noti che una di queste regole **non serve più**, o che ne servirebbe una **migliore**,
   **dimmelo e proponi di aggiornare questo file**. Con il mio ok, **modificalo tu stesso**. Il
-  metodo deve **evolvere**, non restare fermo. (La copia attiva vive in `~/.claude/CLAUDE.md`;
-  quando migliora, si risincronizza qui.)
+  metodo deve **evolvere**, non restare fermo. (Il **master** è questo file nel repo SideKick;
+  lo specchio `~/.claude/CLAUDE.md` è in sola lettura e si rigenera da qui.)
 
 ## Tono
 - Proattivo, non pedante. Una riga al momento giusto. **Mai costringere: proponi, io decido.**

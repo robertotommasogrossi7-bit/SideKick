@@ -3,23 +3,21 @@
 > Deciso con Roberto nella chat-osservatorio. Ordine consigliato dall'alto in basso.
 > Spuntare quando fatto.
 
-## 1. Master del metodo nel repo (APPROVATO — da attuare con la riscrittura)
-- [ ] La fonte di verità del metodo diventa `plugins/metodo/COSTITUZIONE.md` (versionata da
-      git: storia, diff, rollback). `~/.claude/CLAUDE.md` diventa lo **specchio** che si
-      aggiorna copiando dal repo, mai il contrario.
-- [ ] Proteggere lo specchio: regola `deny` su Edit/Write di `~/.claude/CLAUDE.md` in
-      `~/.claude/settings.json` (ogni chat lo LEGGE sempre — è caricato in automatico — ma
-      nessuna lo tocca; le modifiche passano dal repo, in questa chat).
-- [ ] La chat-osservatorio, al rituale, confronta specchio ↔ master e segnala derive.
+## 1. Master del metodo nel repo — ✅ FATTO 2026-07-16
+- [x] La fonte di verità è `plugins/metodo/COSTITUZIONE.md` (v1.5); `~/.claude/CLAUDE.md` è
+      lo **specchio** rigenerato dal master.
+- [x] Specchio protetto: regola `deny` su Edit/Write di `~/.claude/CLAUDE.md` in
+      `~/.claude/settings.json` (ogni chat lo legge, nessuna lo tocca).
+- [x] Il rituale dell'osservatorio confronta specchio ↔ master e segnala derive.
 
-## 2. Riscrittura della COSTITUZIONE (qui, con Roberto, sezione per sezione)
-- [ ] Integrare il **contratto dati** (vedi `DATI.md`): esperimenti = 1 riga in
-      ESPERIMENTI.md · scelte = 1 riga in DECISIONI.md + colonna "Esito osservato" ·
-      consumo = automatico, mai a mano.
-- [ ] Integrare la regola master-nel-repo (punto 1).
-- [ ] **Dopo** la riscrittura, riallineare le copie arretrate in un colpo solo:
-      `CONSTITUTION.md` (inglese, ferma a ~v1.0) · `plugins/metodo/spec-kit/constitution.md`
-      · il repo `spec-kit-metodo` (diverge pure da quella).
+## 2. Aggiornamento COSTITUZIONE — v1.5 FATTA 2026-07-16, restano le copie estere
+- [x] Contratto dati integrato (titoli chat · ESPERIMENTI · Esito osservato · workflow.csv ·
+      consumo automatico) + regola handoff coi numeri (cache/finestra) + sezione Spec Kit.
+- [x] Drop-in Spec Kit `plugins/metodo/spec-kit/constitution.md` riallineato (v1.5.0,
+      principi VIII-XI nuovi).
+- [ ] `CONSTITUTION.md` (inglese, ferma a ~v1.0): tradurre la v1.5 completa —
+      **task per una chat Sonnet, effort high** (traduzione scoped).
+- [ ] Repo `spec-kit-metodo`: copiare la constitution v1.5.0 appena tradotta/verificata.
 
 ## 3. Riposizionamento GitHub (RIMANDATO da Roberto — farlo dopo il punto 2)
 Nuova identità del repo: **laboratorio dove si analizzano esperimenti e progetti reali
