@@ -41,10 +41,10 @@
   **default: nel dubbio, cerca.** Cita in una riga cosa hai trovato e **su quali app**.
 - Salta la ricerca **solo** per i ritocchi davvero minimi (spostare di qualche px, cambiare un
   colore già deciso). Per tutto il resto: ricerca. Meglio spendere un po' di più e farlo bello.
-- **Riferimento Spotify (e i migliori) — A OGNI PASSO.** Per ogni feature o rifinitura, prima
-  guarda **come la fa Spotify** (o l'app best-in-class per quel compito) e prendine spunto per
-  **arricchire** ciò che stiamo facendo, invece di fare il minimo. Cita in una riga cosa fa Spotify
-  e cosa adottiamo.
+- **Riferimento ai leader di settore — A OGNI PASSO.** Per ogni feature o rifinitura, prima
+  guarda **come la fanno aziende/app/software professionali, funzionanti e a capo del rispettivo
+  settore** (es. Spotify per la musica) e prendine spunto per **arricchire** ciò che stiamo
+  facendo, invece di fare il minimo. Cita in una riga cosa fa il riferimento e cosa adottiamo.
 - **Ri-orchestra sugli ostacoli grossi.** Se durante un passo emerge un ostacolo serio (tecnico, di
   policy, di prodotto), fermati, ripensa ordine/piano e **proponi la nuova rotta** — non tirare
   dritto a testa bassa.
@@ -211,8 +211,9 @@
 - Sono **agli inizi**: quando spiego un termine tecnico, va bene che tu **me lo nomini anche in breve**
   (ORM, layer di sync, OLTP…), così col tempo mi entrano in testa. Non semplificare al punto di non
   nominarli mai.
-- Esiste un **glossario personale in SideKick**: `glossario/` (indice consultabile in
-  `glossario/INDICE.md`), diviso per categorie (**data-engineering**, **sviluppo-app**, **java**, …).
+- Esiste un **glossario personale in SideKick**: `versione-italiano/glossario/` (indice in
+  `versione-italiano/glossario/INDICE.md`), diviso per categorie (**data-engineering**,
+  **sviluppo-app**, **java**, …).
   È **il posto** dove finiscono i termini che non conosco. Quando dico *"non so cosa sia X"*,
   **rimandami lì** (e, se la sessione tocca già SideKick, aggiungi tu il termine).
 - **NON** disperdere scritture cross-repo a ogni termine: la **raccolta di massa** (dai miei materiali

@@ -7,8 +7,8 @@
 SideKick è il posto dove Roberto **ottimizza, controlla, testa e analizza Claude Code e le sue
 sessioni**, per renderle **più efficienti nel tempo**. Non è (solo) la libreria di feature distillate:
 è il **banco di lavoro sul metodo stesso**.
-- **Metodo canonico**: `plugins/metodo/COSTITUZIONE.md` (la copia attiva è `~/.claude/CLAUDE.md`).
-- **Esperimenti sui modelli / processo**: `esperimenti/` + log globale `~/.claude/ESPERIMENTI.md`.
+- **Metodo canonico**: `../plugins/metodo/COSTITUZIONE.md` (master; lo specchio in sola lettura è `~/.claude/CLAUDE.md`).
+- **Esperimenti sui modelli / processo**: `../esperimenti/` + log globale `~/.claude/ESPERIMENTI.md`.
 - **Libreria di feature distillate**: `libreria/` (vedi `GUIDA.md`).
 - **Glossario dei termini che Roberto impara**: `glossario/` (indice: `glossario/INDICE.md`).
 
@@ -25,10 +25,11 @@ aggiungerli al glossario, spiegati semplici, aggiornando `glossario/INDICE.md`.
 - Categorie AWS attese dentro `data-engineering/`: ingestion, staging, database, servizi AWS.
 
 ### 2. Osservatorio dati — consumo token + revisione del metodo
-La chat-osservatorio segue il **rituale in `osservatorio/DATI.md`**: rigenera il consumo token
-di TUTTE le chat (`node osservatorio/consumo.mjs` — nomi privati censurati, legenda solo locale),
-confronta la copia attiva del metodo col master del repo, rilegge ESPERIMENTI/METRICHE nuovi e
-aggiorna i verdetti. I passi già decisi con Roberto sono in `osservatorio/PIANO.md`.
+La chat-osservatorio segue il **rituale in `../osservatorio/DATI.md`**: rigenera il consumo token
+di TUTTE le chat (`node osservatorio/consumo.mjs` dalla root del repo — nomi privati censurati,
+legenda solo locale), confronta lo specchio del metodo col master del repo, rilegge
+ESPERIMENTI/METRICHE nuovi e aggiorna i verdetti. I passi già decisi con Roberto sono in
+`../osservatorio/PIANO.md`.
 
 ### 3. (spazio per altri compiti osservatorio)
 Es. rivedere il metodo quando escono modelli nuovi (già previsto nella COSTITUZIONE), consolidare gli

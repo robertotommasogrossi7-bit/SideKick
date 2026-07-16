@@ -1,162 +1,78 @@
-# SideKick
+# SideKick — a real-world lab on building software with Claude Code
 
-**A shareable, self-improving *working method* for building software with AI.** The reusable
-asset of AI-assisted dev isn't the code (the AI regenerates it) — it's the **method**: the
-disciplines that keep a human+AI collaboration organized and aligned (capture ideas without
-losing focus, design before code, micro-commits). SideKick operationalizes that method as
-**Claude Code tooling you install, use, fork, and re-share**, and refines it from your own
-real sessions.
+One beginner developer, several real apps, **every transcript measured**. This repo collects
+real experiments, real token data, and honest negative results about *how* to work with an AI
+coding agent — plus the small tools used to measure it all.
 
-> *We started as a "package manager for feature-processes" and tested it hard.* The honest result:
-> when the model already knows or can derive the work, a feature-package adds **no net value**
-> (see **What we've learned**). So the **live product is the method**; feature-packaging stays a
-> **secondary, explored** idea — with a possible future for **whole-project** specs, not single
-> functions.
+> **What this is:** exploratory case studies with the sample sizes always stated (usually
+> N=1–2). **What this is not:** benchmarks or proven best practices. Negative results are
+> published on purpose.
 
-Built to be **compatible with [GitHub Spec Kit](https://github.com/github/spec-kit)**: every
-package ships Spec-Kit-shaped `spec.md` / `plan.md` (drop-in), plus a `PACCHETTO.md`
-manifest carrying what Spec Kit doesn't — the **outcome**, the **hard-won decisions**, and
-the **bug that teaches**.
+## What you can take away
 
-## Why
-As AI writes more of the code, the durable human asset shifts from *code* to *process and
-judgment*. GitHub shares outcomes (code + commits). SideKick shares the **reasoning** —
-portable across stacks, usable by any human with any AI.
+| Thing | Where | Why it's rare |
+|---|---|---|
+| **Per-session token telemetry for Claude Code** | [`osservatorio/consumo.mjs`](osservatorio/consumo.mjs) → dataset in [`osservatorio/consumo/`](osservatorio/consumo/) (CSV + dashboard) | Scans every local transcript and attributes tokens to each project, model, month **and named operation** (session titles). Private projects redacted. Very little real Claude Code consumption data is public — this grows automatically with use. |
+| **Cost meter for A/B experiment arms** | [`esperimenti/misura-token.mjs`](esperimenti/misura-token.mjs) | Measures turns/tokens of a with/without experiment from its transcripts. |
+| **Leak-proof hidden-test grader** | [`esperimenti/streaming/oracolo/`](esperimenti/streaming/oracolo/) | Tests whether a process artifact helps, without revealing the answers to the model. |
+| **The writeup** | [`FINDINGS.md`](FINDINGS.md) | *"I tried to measure whether captured process helps AI-assisted dev — and couldn't build a fair test (yet)."* Includes the contaminated first attempt and the external adversarial review that tore up v1. |
+| **A Spec Kit constitution drop-in** | [`plugins/metodo/spec-kit/constitution.md`](plugins/metodo/spec-kit/constitution.md) | A self-amending working-method constitution in Spec Kit format (v1.5.0). |
 
-## What we've learned so far (honest status)
-We stress-tested our own thesis: does handing an AI a captured process-package actually help,
-versus not? What we ran is a handful of **small, single-shot with/without probes** (objective
-oracles + token-**cost** measurement + a reverse-engineering probe) — **anecdotes with numbers,
-not proof**; N=1 per condition, full limitations in the writeup. Still, every probe pointed the
-same way:
+## The lab (live data)
 
-- **For problems a current model already knows — or can derive from the task itself — a package
-  brings no net improvement, and can cost *more* tokens.** The AI is already the expert; it
-  doesn't need the scaffold. (Our tests used an expert AI as the subject — the *strong* link.)
-- **The value lives where AI-vs-AI tests can't look:** the **human** (the weak link, who asks
-  the wrong things, in the wrong order, and can't always tell a wrong answer), and **non-
-  derivable** knowledge — rationale, dead-ends, conventions, alignment, and the compounding
-  value of a growing library. This is also *why* Spec Kit gets adopted: it scaffolds the
-  human's process, not the model's raw capability.
-- **Open and promising:** we **do not exclude** that *better* packages/features can produce
-  near-**optimal specs that cut effort/cost significantly** — especially for non-experts or
-  unfamiliar domains. That's exactly what we're validating next, **human-side**.
+[`osservatorio/`](osservatorio/) is the observatory — working language Italian, but the tables
+read fine in any language:
 
-We publish these results — positive and negative — on purpose, and we had the writeup
-**adversarially reviewed by independent AI models** (verdict: the first version oversold its rigor
-— so we rewrote it). The honesty *is* the product.
-**→ Full writeup: [FINDINGS.md](FINDINGS.md).**
+- [`consumo/CONSUMO.md`](osservatorio/consumo/CONSUMO.md) — the cost dashboard: totals, the
+  most expensive operations, per-project drilldowns (one file per project).
+- [`STRATEGIE.md`](osservatorio/STRATEGIE.md) — cost/benefit register of every working-method
+  strategy under test: multi-agent audits, cross-model shadow checks, red teams, **including
+  the strategies that failed and were dropped**.
+- [`redteam/`](osservatorio/redteam/) — before this repo went public in its current form, two
+  independent AI reviewers tore the dossier apart; the verdicts, the claim-by-claim
+  verification (one reviewer "correction" turned out to be wrong), and the fixes are all in
+  the open.
+- [`DATI.md`](osservatorio/DATI.md) / [`PIANO.md`](osservatorio/PIANO.md) — what the data can
+  and cannot say yet, and what's next.
 
-## Use it (standing behavior — no commands)
-The method is a **constitution**: copy
-[`plugins/metodo/COSTITUZIONE.md`](plugins/metodo/COSTITUZIONE.md) into your `~/.claude/CLAUDE.md`
-(user-level → every project) or a project's `CLAUDE.md`. From then on the AI **proactively** stewards
-your method — captures ideas without breaking your focus and re-proposes them, nudges design-first
-and micro-commits *when it matters*, **without forcing you** — and **updates the method itself** as
-it evolves. **No slash commands to remember.**
+A few sampled findings (details and caveats inside): a heavy multi-agent audit found real
+critical bugs on both projects it ran on, at a known cost; on code-verification tasks small
+and large models tied (process design paid, not model size); cache reads were ~170× the live
+tokens across all chats, so resuming beats restarting.
 
-*(Optional plugin packaging — `/plugin marketplace add robertotommasogrossi7-bit/SideKick` →
-`/plugin install metodo@sidekick` — adds an explicit `/metodo:idea` capture, but the constitution
-is the heart.)* Validated **by use** (does it remove friction?), starting with us dogfooding it.
+## The method (appendix — operating hypotheses, not proven rules)
 
-## Structure
-- `libreria/` — the catalog of distilled feature-processes (10 packages so far).
-- `motore/` — the distillation engine that turns a real build's process into a package.
-- `_processo/` — the project's own working memory (vision, decisions, **the full experiment
-  log**). **Public on purpose: we share our process too.**
-- `esperimenti/` — the **with/without experiments** that map where a process-package helps (and
-  where it doesn't). *They lived outside this repo during testing, on purpose:* the "blind" arm
-  must not be able to read the package, or the comparison is contaminated. Archived here for
-  transparency.
+We also maintain a **working-method constitution** for human+AI collaboration: idea capture,
+design-before-code, research-before-choosing, model+effort per step, a "data contract" so
+every chat leaves measurable traces. It lives in [`plugins/metodo/`](plugins/metodo/)
+(Italian master · English version · Spec Kit drop-in) and is **self-amending**: the method is
+expected to change as the data comes in. Every rule in it is an operating hypothesis backed
+by small N.
 
-## Status
-Paused at an honest checkpoint. 10 distilled packages (legacy of the feature-package phase);
-single-shot probes showed **no value for a strong model** (sometimes harm, always more tokens);
-the real hypothesis — **scaffolding the human** — is *designed but not yet run* (we lack test
-subjects: open an issue if you'd like to participate in a small with/without study).
+To use it: copy [`plugins/metodo/COSTITUZIONE.md`](plugins/metodo/COSTITUZIONE.md) (or the
+[English version](plugins/metodo/CONSTITUTION.md)) into your `~/.claude/CLAUDE.md`, or drop
+the [Spec Kit constitution](plugins/metodo/spec-kit/constitution.md) into
+`.specify/memory/constitution.md`.
+
+Relation to [GitHub Spec Kit](https://github.com/github/spec-kit): Spec Kit organizes the
+*work* (constitution → spec → plan → tasks); SideKick measures the *collaboration* — what
+each method choice costs and returns — and ships its method as a Spec Kit constitution
+drop-in.
+
+## Honesty rules of this repo
+
+1. Sample sizes stated next to every claim; small N is called an *indication*, never proof.
+2. Negative results and dropped strategies stay published (`FINDINGS.md`, `_processo/`,
+   the "scartate" section of `STRATEGIE.md`).
+3. Anything public goes through an external AI red team first — and the reviewers' claims get
+   verified at the source too (they're sometimes wrong).
+
+## Italiano
+
+Tutta la documentazione di lavoro in italiano è in
+[`versione-italiano/`](versione-italiano/LEGGIMI.md) (guida, glossario, libreria dei
+pacchetti, motore di distillazione, compiti dell'osservatorio).
 
 ## License
-MIT.
 
----
-
-# SideKick (Italiano)
-
-**Un *metodo di lavoro* condivisibile e auto-migliorante per costruire software con l'AI.**
-L'asset riutilizzabile dello sviluppo con l'AI non è il codice (l'AI lo rigenera) — è il
-**metodo**: le discipline che tengono ordinata e allineata la collaborazione human+AI
-(catturare idee senza perdere il filo, design prima del codice, micro-commit). SideKick lo
-operazionalizza come **strumento di Claude Code da installare, usare, forkare e ri-condividere**,
-e lo affina dalle tue sessioni reali.
-
-> *Siamo partiti come "package manager di feature-processi" e l'abbiamo testato a fondo.* Esito
-> onesto: quando il modello già sa o sa derivare, un feature-package **non aggiunge valore netto**
-> (vedi **Cosa abbiamo imparato**). Quindi il **prodotto vivo è il metodo**; il feature-packaging
-> resta un'idea **secondaria** ed esplorata — con un possibile futuro per gli spec di **interi
-> progetti**, non singole funzioni.
-
-Costruito per essere **compatibile con [GitHub Spec Kit](https://github.com/github/spec-kit)**:
-ogni pacchetto produce `spec.md` / `plan.md` in formato Spec Kit (drop-in), più un manifesto
-`PACCHETTO.md` con ciò che Spec Kit non ha — l'**esito**, le **decisioni sudate** e il **bug
-che insegna**.
-
-## Perché
-Più l'AI scrive il codice, più l'asset umano che dura si sposta dal *codice* al *processo e
-giudizio*. GitHub condivide gli esiti (codice + commit). SideKick condivide il **ragionamento**
-— portabile tra stack, usabile da qualunque umano con qualunque AI.
-
-## Cosa abbiamo imparato finora (stato onesto)
-Abbiamo messo alla prova la nostra stessa tesi: dare a un'AI un pacchetto-processo aiuta
-davvero, oppure no? Quello che abbiamo corso è una manciata di **probe piccole e single-shot
-con/senza** (oracoli oggettivi + misura del **costo** in token + una prova di
-reverse-engineering) — **aneddoti con numeri, non prove**; N=1 per condizione, limiti completi
-nel writeup. Detto questo, ogni probe ha puntato nella stessa direzione:
-
-- **Per problemi che un modello attuale già conosce — o sa derivare dal compito stesso — il
-  pacchetto non dà miglioramento netto, e può costare *più* token.** L'AI è già l'esperto: non
-  ha bisogno dello scaffold. (I nostri test usavano come soggetto un'AI esperta — l'anello
-  *forte*.)
-- **Il valore vive dove i test AI‑vs‑AI non possono guardare:** l'**umano** (l'anello debole,
-  che chiede le cose sbagliate, nell'ordine sbagliato, e non sempre riconosce una risposta
-  errata), e la conoscenza **non derivabile** — il perché, i vicoli ciechi, le convenzioni,
-  l'allineamento, e il valore che si accumula in una libreria che cresce. È anche il *motivo*
-  per cui Spec Kit viene adottato: scaffolda il processo dell'umano, non la capacità del modello.
-- **Aperto e promettente:** **non escludiamo** che pacchetti/feature *migliori* possano produrre
-  **spec quasi ottimali che riducano di molto sforzo/costo** — specie per non‑esperti o domini
-  sconosciuti. È esattamente ciò che validiamo adesso, **lato‑umano**.
-
-Pubblichiamo questi risultati — positivi e negativi — apposta, e abbiamo fatto **recensire il
-writeup in modo avversario da modelli AI indipendenti** (verdetto: la prima versione vendeva un
-rigore che non aveva — l'abbiamo riscritta). L'onestà *è* il prodotto.
-**→ Writeup completo (EN): [FINDINGS.md](FINDINGS.md).**
-
-## Usalo (condotta permanente — niente comandi)
-Il metodo è una **costituzione**: copia
-[`plugins/metodo/COSTITUZIONE.md`](plugins/metodo/COSTITUZIONE.md) nel tuo `~/.claude/CLAUDE.md`
-(livello utente → ogni progetto) o nel `CLAUDE.md` di un progetto. Da quel momento l'AI, **da sola**,
-gestisce il tuo metodo: cattura le idee senza farti perdere il filo e te le ripropone, ti tiene su
-design-first e micro-commit *quando serve*, **senza forzarti**, e **aggiorna il metodo stesso**
-mentre evolve. **Nessuno slash command da ricordare.**
-
-*(Packaging opzionale come plugin — `/plugin marketplace add robertotommasogrossi7-bit/SideKick` →
-`/plugin install metodo@sidekick` — aggiunge una cattura esplicita `/metodo:idea`, ma la costituzione
-è il cuore.)* Validato **dall'uso** (toglie attrito?), a partire da noi che lo dogfoodiamo.
-
-## Struttura
-- `libreria/` — il catalogo dei feature-processi distillati (10 pacchetti finora).
-- `motore/` — il motore di distillazione che trasforma il processo di un build reale in un
-  pacchetto.
-- `_processo/` — la memoria di lavoro del progetto (visione, decisioni, **il log completo
-  degli esperimenti**). **Pubblica apposta: condividiamo anche il nostro processo.**
-- `esperimenti/` — gli **esperimenti con/senza** che mappano dove un pacchetto-processo aiuta (e
-  dove no). *Durante i test vivevano fuori da questo repo, apposta:* il braccio "cieco" non deve
-  poter leggere il pacchetto, o il confronto è contaminato. Archiviati qui per trasparenza.
-
-## Stato
-In pausa a un checkpoint onesto. 10 pacchetti distillati (eredità della fase feature-package);
-le probe single-shot non hanno mostrato **alcun valore per un modello forte** (a volte danno,
-sempre più token); l'ipotesi vera — **lo scaffolding dell'umano** — è *progettata ma non ancora
-eseguita* (mancano soggetti: apri una issue se vuoi partecipare a un piccolo studio con/senza).
-
-## Licenza
-MIT.
+[MIT](LICENSE)

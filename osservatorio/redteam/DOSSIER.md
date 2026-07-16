@@ -87,10 +87,10 @@ come per un abstract scientifico. Se non sei sicuro di un fatto, dillo invece di
   **default: nel dubbio, cerca.** Cita in una riga cosa hai trovato e **su quali app**.
 - Salta la ricerca **solo** per i ritocchi davvero minimi (spostare di qualche px, cambiare un
   colore già deciso). Per tutto il resto: ricerca. Meglio spendere un po' di più e farlo bello.
-- **Riferimento Spotify (e i migliori) — A OGNI PASSO.** Per ogni feature o rifinitura, prima
-  guarda **come la fa Spotify** (o l'app best-in-class per quel compito) e prendine spunto per
-  **arricchire** ciò che stiamo facendo, invece di fare il minimo. Cita in una riga cosa fa Spotify
-  e cosa adottiamo.
+- **Riferimento ai leader di settore — A OGNI PASSO.** Per ogni feature o rifinitura, prima
+  guarda **come la fanno aziende/app/software professionali, funzionanti e a capo del rispettivo
+  settore** (es. Spotify per la musica) e prendine spunto per **arricchire** ciò che stiamo
+  facendo, invece di fare il minimo. Cita in una riga cosa fa il riferimento e cosa adottiamo.
 - **Ri-orchestra sugli ostacoli grossi.** Se durante un passo emerge un ostacolo serio (tecnico, di
   policy, di prodotto), fermati, ripensa ordine/piano e **proponi la nuova rotta** — non tirare
   dritto a testa bassa.
@@ -257,8 +257,9 @@ come per un abstract scientifico. Se non sei sicuro di un fatto, dillo invece di
 - Sono **agli inizi**: quando spiego un termine tecnico, va bene che tu **me lo nomini anche in breve**
   (ORM, layer di sync, OLTP…), così col tempo mi entrano in testa. Non semplificare al punto di non
   nominarli mai.
-- Esiste un **glossario personale in SideKick**: `glossario/` (indice consultabile in
-  `glossario/INDICE.md`), diviso per categorie (**data-engineering**, **sviluppo-app**, **java**, …).
+- Esiste un **glossario personale in SideKick**: `versione-italiano/glossario/` (indice in
+  `versione-italiano/glossario/INDICE.md`), diviso per categorie (**data-engineering**,
+  **sviluppo-app**, **java**, …).
   È **il posto** dove finiscono i termini che non conosco. Quando dico *"non so cosa sia X"*,
   **rimandami lì** (e, se la sessione tocca già SideKick, aggiungi tu il termine).
 - **NON** disperdere scritture cross-repo a ogni termine: la **raccolta di massa** (dai miei materiali
@@ -584,12 +585,12 @@ Red team doppio (Claude+ChatGPT) fatto: verdetti e verifiche in
 `osservatorio/redteam/VERDETTI-2026-07-16.md`. Linea nuova: **non "laboratorio del metodo"
 ma "case study con dati reali + strumenti riusabili"** — il metodo è appendice.
 - [x] Red team esterno pre-pubblicazione (2026-07-16) + verifiche alla fonte + correzioni.
-- [ ] README (IT+EN) nell'ordine: (1) cosa ti porti via — tool (`consumo.mjs`, cost-meter,
-      oracolo) + dataset CSV dei consumi per-sessione + writeup FINDINGS — (2) esperimenti e
-      dati (incl. "cosa NON ha funzionato") — (3) metodo in appendice, versione corta, con
-      linguaggio "ipotesi operative (N=…)".
-- [ ] Decisioni di Roberto prima di scrivere: (a) dettagli dei finding di progetto-15 fuori
-      dal pubblico? (b) regola Spotify resta nel metodo ma fuori vetrina?
+- [x] README root in INGLESE (2026-07-16): (1) cosa ti porti via — tool + dataset + FINDINGS —
+      (2) il laboratorio — (3) metodo in appendice come "ipotesi operative". Facciata italiana
+      in `versione-italiano/LEGGIMI.md`; docs italiani (GUIDA, glossario, libreria, motore,
+      OSSERVATORIO, CONTRIBUIRE) spostati in `versione-italiano/`.
+- [x] Decisioni di Roberto (2026-07-16): (a) progetto-15 resta com'è, si rivaluta al lancio;
+      (b) regola Spotify → riformulata in "leader di settore" nella COSTITUZIONE.
 - [ ] Descrizione + topics del repo GitHub (claude-code, spec-kit, token-usage, case-study…).
 - [ ] Budget da qui in poi: ~80% esperimenti / 20% manutenzione metodo (verdetto ROI).
 

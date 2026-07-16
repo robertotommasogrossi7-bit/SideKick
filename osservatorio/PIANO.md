@@ -24,12 +24,12 @@ Red team doppio (Claude+ChatGPT) fatto: verdetti e verifiche in
 `osservatorio/redteam/VERDETTI-2026-07-16.md`. Linea nuova: **non "laboratorio del metodo"
 ma "case study con dati reali + strumenti riusabili"** — il metodo è appendice.
 - [x] Red team esterno pre-pubblicazione (2026-07-16) + verifiche alla fonte + correzioni.
-- [ ] README (IT+EN) nell'ordine: (1) cosa ti porti via — tool (`consumo.mjs`, cost-meter,
-      oracolo) + dataset CSV dei consumi per-sessione + writeup FINDINGS — (2) esperimenti e
-      dati (incl. "cosa NON ha funzionato") — (3) metodo in appendice, versione corta, con
-      linguaggio "ipotesi operative (N=…)".
-- [ ] Decisioni di Roberto prima di scrivere: (a) dettagli dei finding di progetto-15 fuori
-      dal pubblico? (b) regola Spotify resta nel metodo ma fuori vetrina?
+- [x] README root in INGLESE (2026-07-16): (1) cosa ti porti via — tool + dataset + FINDINGS —
+      (2) il laboratorio — (3) metodo in appendice come "ipotesi operative". Facciata italiana
+      in `versione-italiano/LEGGIMI.md`; docs italiani (GUIDA, glossario, libreria, motore,
+      OSSERVATORIO, CONTRIBUIRE) spostati in `versione-italiano/`.
+- [x] Decisioni di Roberto (2026-07-16): (a) progetto-15 resta com'è, si rivaluta al lancio;
+      (b) regola Spotify → riformulata in "leader di settore" nella COSTITUZIONE.
 - [ ] Descrizione + topics del repo GitHub (claude-code, spec-kit, token-usage, case-study…).
 - [ ] Budget da qui in poi: ~80% esperimenti / 20% manutenzione metodo (verdetto ROI).
 
