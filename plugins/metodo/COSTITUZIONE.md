@@ -98,8 +98,9 @@
 - **Ogni volta che decidiamo il flusso di lavoro** — roadmap, kickoff di fase, inizio di un task —
   **proponi in automatico, in una riga, il modello + effort migliori per quel passo** (e per gli
   agenti, se c'è un workflow). Io decido (regola d'oro). Vale in **tutte** le chat, sempre.
-- **Tabella di default** (dalla ricerca con fonti 2026-07 → dossier in SideKick
-  `esperimenti/ricerca-modelli-effort-2026-07.md`; la rivede l'osservatorio quando escono modelli nuovi):
+- **Tabella di default** (dalla ricerca con fonti 2026-07 — le **fonti con URL** sono tutte nel
+  dossier, SideKick `esperimenti/ricerca-modelli-effort-2026-07.md`; la rivede l'osservatorio
+  quando escono modelli nuovi):
   - **Fix scoped e verificabili con test** (bug mirati, migration, unit test, UI semplice) →
     **Sonnet, effort high** (il default). Sali a xhigh solo se un fix resiste.
   - **Logica delicata** (soldi, auth, sync, migrazioni dati, refactor architetturale) →
@@ -113,8 +114,8 @@
 - **Due trappole da ricordare**: (1) la leva **effort** conta più del cambio modello tra modelli
   adiacenti (doc ufficiale Anthropic); il salto che rende è medium→high, poi rendimenti decrescenti.
   (2) **Sonnet non si sceglie per risparmiare** (tokenizer aggiornato di Sonnet 5: 1,0–1,35× token
-  a parità di testo — fonte ufficiale, ri-verificata 2026-07-16 → per-task può costare quanto
-  Opus): si sceglie dove la sua qualità basta.
+  a parità di testo — fonte: anthropic.com/news/claude-sonnet-5, ri-verificata 2026-07-16 →
+  per-task può costare quanto Opus): si sceglie dove la sua qualità basta.
 
 ## Audit multi-agente (verifica pesante — quando lo chiedo o lo consigli tu a fine fase grande)
 - Per un controllo profondo — **quando lo chiedo**, o **quando lo consigli tu al termine di una fase
@@ -226,7 +227,8 @@
   (`.specify/memory/constitution.md`) · mini-spec ↔ */specify* (la spec) · roadmap/fasi ↔
   */plan* + */tasks* · verifica prima di "fatto" ↔ i *checks* dei task. Un **drop-in pronto**
   per Spec Kit è in `plugins/metodo/spec-kit/constitution.md` e si riallinea al master a ogni
-  versione. Ciò che il nostro metodo aggiunge a Spec Kit: l'**auto-emendamento** (il metodo
+  versione — ed è anche la **variante spersonalizzata e riusabile** del metodo (questo file è la
+  copia vissuta: nomina Roberto e i nostri file). Ciò che il nostro metodo aggiunge a Spec Kit: l'**auto-emendamento** (il metodo
   evolve), il **contratto dati** (l'osservatorio impara dai numeri) e la scelta
   **modello+effort per passo**.
 

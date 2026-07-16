@@ -1,5 +1,8 @@
 # metodo — il metodo di lavoro human+AI di SideKick
 
+> ⚠️ **COPIA CONGELATA (2026-07-17)** — originale italiano storico, non più aggiornato.
+> La versione viva è in inglese: [../../plugins/metodo/README.md](../../plugins/metodo/README.md)
+
 Rende il tuo **metodo di lavoro** la **condotta proattiva e auto-evolvente dell'AI**, in ogni
 progetto — senza comandi da ricordare, senza costrizioni.
 

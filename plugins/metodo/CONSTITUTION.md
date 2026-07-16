@@ -101,9 +101,9 @@
 - **Every time we decide the workflow** — roadmap, phase kickoff, task start — **automatically
   propose, in one line, the best model + effort for that step** (and for agents, if there's a
   workflow). I decide (golden rule). This applies in **all** chats, always.
-- **Default table** (from research with 2026-07 sources → dossier in SideKick
-  `esperimenti/ricerca-modelli-effort-2026-07.md`; reviewed by the observatory when new models
-  come out):
+- **Default table** (from research with 2026-07 sources — **all source URLs are in the
+  dossier**, SideKick `esperimenti/ricerca-modelli-effort-2026-07.md`; reviewed by the
+  observatory when new models come out):
   - **Scoped fixes verifiable with tests** (targeted bugs, migrations, unit tests, simple UI) →
     **Sonnet, effort high** (the default). Go up to xhigh only if a fix resists.
   - **Delicate logic** (money, auth, sync, data migrations, architectural refactor) →
@@ -117,8 +117,8 @@
 - **Two traps to remember**: (1) the **effort** lever matters more than switching models between
   adjacent models (official Anthropic doc); the jump that pays off is medium→high, then
   diminishing returns. (2) **Sonnet isn't chosen to save money** (Sonnet 5's updated tokenizer:
-  1.0–1.35× tokens for the same text — official source, re-verified 2026-07-16 → per-task it can
-  cost as much as Opus): it's chosen where its quality is enough.
+  1.0–1.35× tokens for the same text — source: anthropic.com/news/claude-sonnet-5, re-verified
+  2026-07-16 → per-task it can cost as much as Opus): it's chosen where its quality is enough.
 
 ## Multi-agent audit (heavy verification — when I ask for it or you recommend it at the end of a big phase)
 - For a deep check — **when I ask for it**, or **when you recommend it at the end of a very big
@@ -241,7 +241,8 @@
   (`.specify/memory/constitution.md`) · mini-spec ↔ */specify* (the spec) · roadmap/phases ↔
   */plan* + */tasks* · verify before "done" ↔ tasks' *checks*. A **ready-made drop-in** for Spec
   Kit is in `plugins/metodo/spec-kit/constitution.md` and realigns with the master at every
-  version. What our method adds to Spec Kit: **self-amendment** (the method evolves), the
+  version — it is also the **depersonalized, reusable variant** of the method (this file is the
+  lived-in copy: it names Roberto and our own files). What our method adds to Spec Kit: **self-amendment** (the method evolves), the
   **data contract** (the observatory learns from the numbers), and the choice of
   **model+effort per step**.
 

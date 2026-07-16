@@ -1,5 +1,8 @@
 # CONSUMO — cruscotto token (generato)
 
+> ⚠️ **COPIA CONGELATA (2026-07-17)** — originale italiano storico, non più aggiornato.
+> La versione viva è in inglese: [../../../osservatorio/consumo/CONSUMO.md](../../../osservatorio/consumo/CONSUMO.md)
+
 > Generato da `osservatorio/consumo.mjs` il 2026-07-16. **Non modificare a
 > mano** (tranne `LEZIONI.md`, che è curato dall'osservatorio e viene incorporato qui sotto).
 > Il dettaglio di ogni progetto è in `per-progetto/` (un file a progetto, tabella per sessione).

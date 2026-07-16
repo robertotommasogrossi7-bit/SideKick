@@ -1,5 +1,7 @@
 # weather-report — consumo token (generato)
 
+> ⚠️ **COPIA CONGELATA (2026-07-17)** — la versione viva (inglese) è in `../../../../osservatorio/consumo/per-progetto/`.
+
 > Torna al cruscotto: [`../CONSUMO.md`](../CONSUMO.md). Non modificare a mano.
 
 **1 sessioni** dal 2026-05-07 al 2026-05-07 · **42k output** ·

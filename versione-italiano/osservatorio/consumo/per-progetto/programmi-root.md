@@ -1,5 +1,7 @@
 # Programmi (root) — consumo token (generato)
 
+> ⚠️ **COPIA CONGELATA (2026-07-17)** — la versione viva (inglese) è in `../../../../osservatorio/consumo/per-progetto/`.
+
 > Torna al cruscotto: [`../CONSUMO.md`](../CONSUMO.md). Non modificare a mano.
 
 **3 sessioni** dal 2026-05-31 al 2026-06-27 · **997k output** ·

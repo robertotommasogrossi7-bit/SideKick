@@ -1,5 +1,8 @@
 # Ricerca - modelli, effort, ultracode (2026-07-03)
 
+> ⚠️ **COPIA CONGELATA (2026-07-17)** — originale italiano storico, non più aggiornato.
+> La versione viva è in inglese: [../../esperimenti/ricerca-modelli-effort-2026-07.md](../../esperimenti/ricerca-modelli-effort-2026-07.md)
+
 > **Provenienza**: ricerca multi-agente (4 ricercatori Sonnet su angoli diversi + sintesi Opus,
 > ~689k token, fonti citate inline con qualita del dato dichiarata). Commissionata dal progetto
 > poker/who's-the-boss per scegliere modello+effort per fase; le REGOLE derivate sono nel metodo

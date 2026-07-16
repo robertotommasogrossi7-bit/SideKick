@@ -48,3 +48,17 @@ interesting for those who already use Spec Kit.
 - [ ] Add the estimated API cost-equivalent per model to the report (with prices
       verified at the source, never from memory).
 - [ ] Move from CSV to SQLite once rows are counted in the hundreds (trivial migration).
+
+## 6. Workshop block (from red team round 2 — dedicated Sonnet session, effort high)
+Ordered by ROI (reviewers' consensus):
+- [ ] Dashboard screenshot in the README (the most sellable artifact is invisible today).
+- [ ] CI (GitHub Actions) with badge: run script tests on push — the constitution preaches
+      "CI from day one" and this repo lacks it.
+- [ ] 2–3 tests for `consumo.mjs` / `misura-token.mjs` (JSONL parsing on a fixture).
+- [ ] English CONTRIBUTING.md (FINDINGS invites participation in English; the guide is Italian).
+- [ ] Full "operating hypotheses" tone pass on CONSTITUTION/COSTITUZIONE (soften NEVER/ALWAYS,
+      N next to each claim).
+- [ ] De-Claude sweep: frame as AI-assisted software engineering throughout (Claude = current
+      instrument).
+- [ ] Dataset release/tag (v0.1) + documented CSV schema (columns, units).
+- [ ] MANUAL (Roberto): repo description + topics on GitHub; decide on username rename.

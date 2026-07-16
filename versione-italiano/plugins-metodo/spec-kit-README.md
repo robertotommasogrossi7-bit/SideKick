@@ -1,5 +1,8 @@
 # Usare il metodo con GitHub Spec Kit
 
+> ⚠️ **COPIA CONGELATA (2026-07-17)** — originale italiano storico, non più aggiornato.
+> La versione viva è in inglese: [../../plugins/metodo/spec-kit/README.md](../../plugins/metodo/spec-kit/README.md)
+
 Il nostro metodo **è una constitution** → la forma Spec-Kit-nativa corretta è il file
 [`constitution.md`](constitution.md) messo dove Spec Kit tiene la sua: **`.specify/memory/constitution.md`**.
 

@@ -1,5 +1,8 @@
 # OSSERVATORIO DATI — cosa dicono i numeri (pagina di lettura)
 
+> ⚠️ **COPIA CONGELATA (2026-07-17)** — originale italiano storico, non più aggiornato.
+> La versione viva è in inglese: [../../osservatorio/DATA.md](../../osservatorio/DATA.md)
+
 > **Cos'è**: la pagina che la chat-osservatorio aggiorna a ogni revisione. In una pagina:
 > quali dati abbiamo, cosa dicono, e quali modifiche al metodo suggeriscono. Onestà alla
 > FINDINGS.md: **N piccoli = indizi, non prove.**

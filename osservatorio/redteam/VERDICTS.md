@@ -39,3 +39,30 @@
 4. Tools separated from the method (clear `tools` folder/section, dedicated README for tools).
 5. Budget: ~80% experiments / 20% method maintenance from here on (ROI verdict from both
    reviewers — consistent with our own STRATEGIES register).
+
+---
+
+## Round 2 — 2026-07-17 (the repositioned repo)
+
+> Double run again: **Claude** (memory OFF this time — rigor 6.5/10, recruiter first
+> impression 4/10) and **ChatGPT** (rigor 8.8/10, recruiter 8.2/10). Both agree on the two
+> real assets: **FINDINGS.md and the dataset**. Full texts in the observatory chat of
+> 2026-07-17. Every claim verified before acting, as per method.
+
+| Reviewer claim | Verification | Action |
+|---|---|---|
+| "ccusage and a whole ecosystem already parse the same local JSONL transcripts; *'very little consumption data is public'* is an unverified claim and the tool isn't rare" (Claude) | **CONFIRMED at the source**: [ccusage](https://github.com/ryoppippi/ccusage) (daily/monthly/session reports, 5-hour blocks, per-model breakdown) + tokscale and others | README rewritten the same day: take-away repositioned onto the **published dataset with named operations** ("to our knowledge"), ccusage cited, quickstart added ✅ |
+| "A shadow check at N=2 sold as a 'pattern'" (Claude) | True | Degraded to "a single cross-model shadow check (N=2) — an indication" in the README ✅ |
+| "cache ~170× *'so resuming beats restarting'* — the 'so' is unearned" (Claude) | True | Reworded: operating rule derived from the caching mechanic + one measured resume, explicitly *not* an A/B ✅ |
+| "Constitution full of NEVER/ALWAYS with unlinked sources" (Claude) | True | Tokenizer claim now cites anthropic.com/news/claude-sonnet-5 inline; both constitutions state that all source URLs live in the research dossier. Full hypothesis-tone pass: pending (PLAN) |
+| "The 'drop-in' constitution is a personal document" (Claude) | Partly true | The Spec Kit constitution **is** the depersonalized variant — now stated explicitly in both constitutions ✅ |
+| "Frozen Italian copies will be mistaken for live docs" (Claude) | True | FROZEN banner added to all 21 frozen files ✅ |
+| "Spotify still inside the constitution" (Claude) | Fact, but an owner decision | Roberto explicitly chose the generalized wording *with* the example "(e.g. Spotify for music)". Kept, recorded. |
+| "CI, tests, screenshots, quickstart missing — round-1 action 4 was skipped" (both) | True | Quickstart added today; CI + tests + dashboard screenshot + English CONTRIBUTING = next work block (see PLAN) |
+| "Repo too Claude-centric; frame it as AI-assisted software engineering" (ChatGPT) | Opinion with merit | Title and intro reframed ("AI coding agent — Claude Code is the current instrument"); deeper sweep later |
+| "Username looks auto-generated" (Claude) | Fact | Roberto's call — noted, not acted on |
+
+**Trajectory**: rigor 3/10 (round 1, Claude) → 6.5/10 (round 2, Claude) / 8.8 (ChatGPT).
+**Meta-lesson on the method**: round 1 a reviewer "correction" was WRONG (tokenizer);
+round 2 the headline reviewer claim was RIGHT (ccusage). Verifying at the source cuts
+both ways — that is exactly why the rule exists.

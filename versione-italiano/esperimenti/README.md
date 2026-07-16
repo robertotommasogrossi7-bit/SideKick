@@ -1,5 +1,8 @@
 # esperimenti/ — i test con/senza (dove un pacchetto-processo aiuta, e dove no)
 
+> ⚠️ **COPIA CONGELATA (2026-07-17)** — originale italiano storico, non più aggiornato.
+> La versione viva è in inglese: [../../esperimenti/README.md](../../esperimenti/README.md)
+
 Questa cartella raccoglie gli esperimenti **con/senza** con cui abbiamo messo alla prova la tesi
 di SideKick: *dare a un'AI un pacchetto-processo migliora il risultato, rispetto a non darglielo?*
 

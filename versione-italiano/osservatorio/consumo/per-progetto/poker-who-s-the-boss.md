@@ -1,5 +1,7 @@
 # poker (Who's the Boss) — consumo token (generato)
 
+> ⚠️ **COPIA CONGELATA (2026-07-17)** — la versione viva (inglese) è in `../../../../osservatorio/consumo/per-progetto/`.
+
 > Torna al cruscotto: [`../CONSUMO.md`](../CONSUMO.md). Non modificare a mano.
 
 **20 sessioni** dal 2026-05-14 al 2026-07-14 · **6.7M output** ·
