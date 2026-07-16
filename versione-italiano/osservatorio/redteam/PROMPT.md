@@ -19,6 +19,8 @@ prese). Dopo quel giro il repo è stato **riposizionato**: README inglese nuovo 
 di lavoro italiano spostato in `versione-italiano/`, correzioni fattuali applicate (finestra
 di utilizzo vs contesto, confronto tra audit riformulato, incoerenze numeriche), regola
 "Spotify" generalizzata in "leader di settore", glossario personale tolto dal pubblico.
+Dopo un'ulteriore passata, TUTTA la facciata (osservatorio, metodo, esperimenti, cruscotto) è
+stata tradotta in inglese; gli originali italiani sono copie congelate in versione-italiano/.
 
 Il dossier contiene: il nuovo README (la facciata), il LEGGIMI italiano, la costituzione del
 metodo v1.5, il cruscotto consumi, il registro strategie costi/benefici, i verdetti del
