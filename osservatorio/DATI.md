@@ -18,7 +18,8 @@
 2. Confronta la copia attiva del metodo (`~/.claude/CLAUDE.md`) con il **master**
    (`plugins/metodo/COSTITUZIONE.md`): se divergono, decidere quale vince e risincronizzare.
 3. Leggi le righe nuove di `~/.claude/ESPERIMENTI.md` e dei METRICHE.md dei progetti attivi.
-4. Aggiorna i **verdetti** qui sotto e proponi (non imporre) le modifiche al metodo.
+4. Aggiorna i **verdetti** qui sotto e il registro **`STRATEGIE.md`** (costi/guadagni di ogni
+   scelta di metodo — red team, ricerca, audit…), e proponi (non imporre) le modifiche al metodo.
 
 ## Le fonti dei dati (censimento 2026-07-16)
 | Fonte | Cosa contiene | Stato |
@@ -28,6 +29,7 @@
 | poker: `_processo/METRICHE.md` | per ogni fase: modello+effort, durata (git), volume, token dei workflow | ✅ la serie più ricca |
 | progetto-15: doc di processo in root | DECISIONI + audit, ma **niente METRICHE.md** | ⚠️ braccio scoperto |
 | Audit (poker `AUDIT_R6_R7.md`, progetto-15 `AUDIT_ALTO_2026-07-03.md`) | finding confermati/confutati + costo | ✅ 2 punti dati |
+| `osservatorio/STRATEGIE.md` | registro costi/guadagni di OGNI strategia del metodo (audit, red team, ricerca, ombra…) | ✅ creato 2026-07-16 |
 | `FINDINGS.md` + `esperimenti/` | probe con/senza pacchetto-processo (N=1 per braccio) | ✅ storico, già analizzato |
 | DECISIONI.md (poker, progetto-15) | opzioni, scelta, perché | ⚠️ manca l'**esito poi osservato** |
 
