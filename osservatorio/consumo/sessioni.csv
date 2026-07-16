@@ -1,54 +1,54 @@
-progetto,sessione,inizio,fine,operazione,modelli,messaggi,token_input,token_output,cache_letta,cache_scritta
-"esperimento migr-test budget-armA",a0c4ff32,2026-06-10,2026-06-10,"Migrate expense tracker app to React plus Vite","sonnet-4-6",27,31,44674,1821694,72489
-"esperimento migr-test budget-armB",4b830b7f,2026-06-10,2026-06-10,"Migrate expense app to React and Vite","sonnet-4-6",27,33,48224,1194679,40398
-"esperimento migr-test habit-armA",3e52ba28,2026-06-10,2026-06-10,"Migrate habit tracker to React and Vite","sonnet-4-6",81,93,30224,5617900,77614
-"esperimento migr-test habit-armB",ff934bc3,2026-06-10,2026-06-10,"Migrate habit tracker to React with Vite","sonnet-4-6",38,46,56856,2205281,59283
-"esperimento stream-test discovery",2babfeab,2026-06-10,2026-06-11,"Implement solution to pass all grader tests","sonnet-4-6",5,7,11116,137954,23423
-"esperimento stream-test reverse",3e1abbb8,2026-06-11,2026-06-11,"Deduce and implement solve function from examples","sonnet-4-6",8,10,21213,249189,34027
-"esperimento test2-anticipi",1d9935f7,2026-06-04,2026-06-04,"SK/Test_2","opus-4-8",19,4197,42401,963265,104484
-"esperimento vague-test armA",0b018f95,2026-06-11,2026-06-11,"Modernize expense app to React","sonnet-4-6",47,65,48065,3717519,82877
-"esperimento vague-test armB",11cf592f,2026-06-11,2026-06-11,"Modernize expense app with React","sonnet-4-6",47,65,72012,3222465,139429
-"Idee",4c051993,2026-06-11,2026-06-12,"GitHub/Base_1","opus-4-8 + fable-5",90,6399,270150,12769394,629681
-"Libri-Organizzazione",e1fb86f0,2026-05-07,2026-05-31,"Organizzazione","sonnet-4-6 + opus-4-8",397,475,268013,38239180,1204511
-"Libri-Organizzazione",77b678d6,2026-05-09,2026-05-20,"Poker_app/BASE","opus-4-7 + sonnet-4-6",440,10373,1024262,83205224,9345956
-"poker (Who's the Boss)",813529ea,2026-05-14,2026-05-14,"Poker_app/HTML_Split","opus-4-7",146,572,208714,33034798,905175
-"poker (Who's the Boss)",5c3deb0e,2026-05-20,2026-05-20,"Poker_app/Feature_2","sonnet-4-6",89,5543,53341,9795609,129672
-"poker (Who's the Boss)",ca83f1d7,2026-05-20,2026-05-20,"Poker_App/Feature_3","sonnet-4-6",40,1687,14057,2116272,50945
-"poker (Who's the Boss)",ea350d4c,2026-05-20,2026-05-31,"Poker_App/Base_2","opus-4-7 + opus-4-8",344,24235,676613,75653882,4142228
-"poker (Who's the Boss)",d0c3493f,2026-05-22,2026-05-24,"Poker_App/Feature_4","sonnet-4-6",77,11618,156887,6987937,384038
-"poker (Who's the Boss)",f4cb4c92,2026-05-22,2026-05-22,"Unify duplicate tournament cleanup functions","sonnet-4-6",31,2185,11562,1874264,55173
-"poker (Who's the Boss)",136b761a,2026-05-31,2026-06-01,"Poker_App/Feature_5","opus-4-8",19,4584,155359,1287509,332028
-"poker (Who's the Boss)",154828d8,2026-05-31,2026-06-04,"Poker_app/Base_3","opus-4-8",184,16234,629562,77764271,4278206
-"poker (Who's the Boss)",08ade9de,2026-06-01,2026-06-02,"Poker_App/Feature_6","opus-4-8",150,25575,252575,45577765,2708097
-"poker (Who's the Boss)",ebc0948f,2026-06-03,2026-06-03,"Poker_App/Feature_7","opus-4-8",140,21750,128551,30572964,761448
-"poker (Who's the Boss)",ec04ec2b,2026-06-03,2026-06-03,"Poker_app/Feature_8","sonnet-4-6",61,11322,44620,7236504,144056
-"poker (Who's the Boss)",0c898cc4,2026-06-04,2026-07-01,"WTB/Base_4","opus-4-8",675,71997,1641842,290854258,24107777
-"poker (Who's the Boss)",4f79442f,2026-06-04,2026-06-10,"WTB/Feature_9","opus-4-8",379,38336,334007,126174454,2253734
-"poker (Who's the Boss)",a9f60a98,2026-06-30,2026-07-01,"WTB/Base_4","opus-4-8",177,8073,248740,76666296,5024825
-"poker (Who's the Boss)",c221dbec,2026-07-01,2026-07-10,"WTB/Base_5","opus-4-8 +2",586,35365,794627,313786709,8419285
-"poker (Who's the Boss)",1613de1d,2026-07-03,2026-07-11,"WTB/Base_5","sonnet-5 + opus-4-8",512,33333,519305,207130043,7654933
-"poker (Who's the Boss)",953124bd,2026-07-11,2026-07-14,"WTB/Base_6","opus-4-8 +2",190,9701,266666,39638599,2321784
-"poker (worktree)",d0217971,2026-05-15,2026-05-16,"Poker_app/HTML->React","sonnet-4-6",280,1300,259493,25055662,932276
-"poker (worktree)",4fe68e57,2026-05-19,2026-05-19,"Poker_app/Feature_1","sonnet-4-6",130,134,67633,15274081,166913
-"poker (worktree)",8a0c4c82,2026-05-19,2026-05-19,"Poker_app/Feature","opus-4-7",102,204,276793,30123186,678840
-"progetto-15",37d34b53,2026-05-29,2026-06-17,"(censurato)","opus-4-8 + fable-5",331,35326,878409,110013029,4138322
-"progetto-15",b57d481e,2026-05-29,2026-07-01,"(censurato)","opus-4-8",1046,111623,1505108,523738795,28741210
-"progetto-15",12b36797,2026-06-29,2026-07-01,"(censurato)","opus-4-8",488,59902,749767,239766985,15613155
-"progetto-15",3460f0f6,2026-07-01,2026-07-12,"(censurato)","opus-4-8 + fable-5",145,26331,414737,40048052,4297809
-"progetto-15",a99c054a,2026-07-01,2026-07-01,"(censurato)","opus-4-8",3,6,13990,879522,26563
-"progetto-16",be99f72b,2026-06-28,2026-06-30,"(censurato)","opus-4-8",55,16806,308457,10939254,1698442
-"progetto-22",72101ad7,2026-06-17,2026-06-17,"(censurato)","opus-4-8",34,7525,51596,2162679,73633
-"Programmi (root)",77d468fd,2026-05-31,2026-06-19,"Set up personalized data engineering learning program","opus-4-8",124,22925,590144,35667816,6090238
-"Programmi (root)",ad9f1413,2026-05-31,2026-06-27,"AWS/Base_1","opus-4-8",79,14003,280830,55537925,9682177
-"Programmi (root)",ba28d02b,2026-06-15,2026-06-16,"Colloquio/Base_1","opus-4-8",50,7859,126083,5178540,579273
-"SideKick",4129f40f,2026-06-03,2026-06-03,"Set up poker app project using desktop method","opus-4-8",5,3911,2976,121600,23161
-"SideKick",6043194e,2026-06-03,2026-06-10,"SK/Base_1","opus-4-8",128,62198,676648,58399798,2704176
-"SideKick",1a5cc5ca,2026-06-04,2026-06-04,"SK/Test_2","opus-4-8",20,4566,39074,961224,101872
-"SideKick",b2355e6d,2026-06-04,2026-06-04,"SK/Test_1","opus-4-8",23,4334,53167,1466993,148914
-"SideKick",d02881d8,2026-06-10,2026-06-10,"BassPedal/Base","opus-4-8",27,5635,101364,2637361,197270
-"SideKick",ef473904,2026-06-10,2026-06-12,"SK/Base_2","opus-4-8 + fable-5",216,22035,556502,67782086,2985318
-"SideKick",ff1fffd4,2026-06-12,2026-06-12,"SK/Base_3","opus-4-8 + fable-5",55,10039,113670,7553388,517505
-"SideKick",137df591,2026-07-16,2026-07-16,"Sidekick data observatory setup","fable-5",23,3149,43275,2219001,109268
-"SideKick",5f351a58,2026-07-16,2026-07-16,"Sidekick data observatory setup","fable-5",13,24,23838,1829657,145142
-"Text-Adventure-Engine",7654955c,2026-05-28,2026-05-29,"Text_game/Base_1","opus-4-7",174,370,466353,54311569,1235975
-"weather-report (worktree)",f24c43ea,2026-05-07,2026-05-07,"Weather_report/Prova","opus-4-7 + sonnet-4-6",80,137,42170,6811669,151725
+gruppo,progetto,sessione,inizio,fine,operazione,modelli,messaggi,token_input,token_output,cache_letta,cache_scritta
+"esperimenti (test del metodo)","esperimento test2-anticipi",1d9935f7,2026-06-04,2026-06-04,"SK/Test_2","opus-4-8",19,4197,42401,963265,104484
+"esperimenti (test del metodo)","esperimento migr-test budget-armA",a0c4ff32,2026-06-10,2026-06-10,"Migrate expense tracker app to React plus Vite","sonnet-4-6",27,31,44674,1821694,72489
+"esperimenti (test del metodo)","esperimento migr-test budget-armB",4b830b7f,2026-06-10,2026-06-10,"Migrate expense app to React and Vite","sonnet-4-6",27,33,48224,1194679,40398
+"esperimenti (test del metodo)","esperimento migr-test habit-armA",3e52ba28,2026-06-10,2026-06-10,"Migrate habit tracker to React and Vite","sonnet-4-6",81,93,30224,5617900,77614
+"esperimenti (test del metodo)","esperimento migr-test habit-armB",ff934bc3,2026-06-10,2026-06-10,"Migrate habit tracker to React with Vite","sonnet-4-6",38,46,56856,2205281,59283
+"esperimenti (test del metodo)","esperimento stream-test discovery",2babfeab,2026-06-10,2026-06-11,"Implement solution to pass all grader tests","sonnet-4-6",5,7,11116,137954,23423
+"esperimenti (test del metodo)","esperimento stream-test reverse",3e1abbb8,2026-06-11,2026-06-11,"Deduce and implement solve function from examples","sonnet-4-6",8,10,21213,249189,34027
+"esperimenti (test del metodo)","esperimento vague-test armA",0b018f95,2026-06-11,2026-06-11,"Modernize expense app to React","sonnet-4-6",47,65,48065,3717519,82877
+"esperimenti (test del metodo)","esperimento vague-test armB",11cf592f,2026-06-11,2026-06-11,"Modernize expense app with React","sonnet-4-6",47,65,72012,3222465,139429
+"Idee","Idee",4c051993,2026-06-11,2026-06-12,"GitHub/Base_1","opus-4-8 + fable-5",90,6399,270150,12769394,629681
+"Libri-Organizzazione","Libri-Organizzazione",e1fb86f0,2026-05-07,2026-05-31,"Organizzazione","sonnet-4-6 + opus-4-8",397,475,268013,38239180,1204511
+"Libri-Organizzazione","Libri-Organizzazione",77b678d6,2026-05-09,2026-05-20,"Poker_app/BASE","opus-4-7 + sonnet-4-6",440,10373,1024262,83205224,9345956
+"poker (Who's the Boss)","poker (Who's the Boss)",813529ea,2026-05-14,2026-05-14,"Poker_app/HTML_Split","opus-4-7",146,572,208714,33034798,905175
+"poker (Who's the Boss)","poker (worktree)",d0217971,2026-05-15,2026-05-16,"Poker_app/HTML->React","sonnet-4-6",280,1300,259493,25055662,932276
+"poker (Who's the Boss)","poker (worktree)",4fe68e57,2026-05-19,2026-05-19,"Poker_app/Feature_1","sonnet-4-6",130,134,67633,15274081,166913
+"poker (Who's the Boss)","poker (worktree)",8a0c4c82,2026-05-19,2026-05-19,"Poker_app/Feature","opus-4-7",102,204,276793,30123186,678840
+"poker (Who's the Boss)","poker (Who's the Boss)",5c3deb0e,2026-05-20,2026-05-20,"Poker_app/Feature_2","sonnet-4-6",89,5543,53341,9795609,129672
+"poker (Who's the Boss)","poker (Who's the Boss)",ca83f1d7,2026-05-20,2026-05-20,"Poker_App/Feature_3","sonnet-4-6",40,1687,14057,2116272,50945
+"poker (Who's the Boss)","poker (Who's the Boss)",ea350d4c,2026-05-20,2026-05-31,"Poker_App/Base_2","opus-4-7 + opus-4-8",344,24235,676613,75653882,4142228
+"poker (Who's the Boss)","poker (Who's the Boss)",d0c3493f,2026-05-22,2026-05-24,"Poker_App/Feature_4","sonnet-4-6",77,11618,156887,6987937,384038
+"poker (Who's the Boss)","poker (Who's the Boss)",f4cb4c92,2026-05-22,2026-05-22,"Unify duplicate tournament cleanup functions","sonnet-4-6",31,2185,11562,1874264,55173
+"poker (Who's the Boss)","poker (Who's the Boss)",136b761a,2026-05-31,2026-06-01,"Poker_App/Feature_5","opus-4-8",19,4584,155359,1287509,332028
+"poker (Who's the Boss)","poker (Who's the Boss)",154828d8,2026-05-31,2026-06-04,"Poker_app/Base_3","opus-4-8",184,16234,629562,77764271,4278206
+"poker (Who's the Boss)","poker (Who's the Boss)",08ade9de,2026-06-01,2026-06-02,"Poker_App/Feature_6","opus-4-8",150,25575,252575,45577765,2708097
+"poker (Who's the Boss)","poker (Who's the Boss)",ebc0948f,2026-06-03,2026-06-03,"Poker_App/Feature_7","opus-4-8",140,21750,128551,30572964,761448
+"poker (Who's the Boss)","poker (Who's the Boss)",ec04ec2b,2026-06-03,2026-06-03,"Poker_app/Feature_8","sonnet-4-6",61,11322,44620,7236504,144056
+"poker (Who's the Boss)","poker (Who's the Boss)",0c898cc4,2026-06-04,2026-07-01,"WTB/Base_4","opus-4-8",675,71997,1641842,290854258,24107777
+"poker (Who's the Boss)","poker (Who's the Boss)",4f79442f,2026-06-04,2026-06-10,"WTB/Feature_9","opus-4-8",379,38336,334007,126174454,2253734
+"poker (Who's the Boss)","poker (Who's the Boss)",a9f60a98,2026-06-30,2026-07-01,"WTB/Base_4","opus-4-8",177,8073,248740,76666296,5024825
+"poker (Who's the Boss)","poker (Who's the Boss)",c221dbec,2026-07-01,2026-07-10,"WTB/Base_5","opus-4-8 +2",586,35365,794627,313786709,8419285
+"poker (Who's the Boss)","poker (Who's the Boss)",1613de1d,2026-07-03,2026-07-11,"WTB/Base_5","sonnet-5 + opus-4-8",512,33333,519305,207130043,7654933
+"poker (Who's the Boss)","poker (Who's the Boss)",953124bd,2026-07-11,2026-07-14,"WTB/Base_6","opus-4-8 +2",190,9701,266666,39638599,2321784
+"progetto-15","progetto-15",37d34b53,2026-05-29,2026-06-17,"(censurato)","opus-4-8 + fable-5",331,35326,878409,110013029,4138322
+"progetto-15","progetto-15",b57d481e,2026-05-29,2026-07-01,"(censurato)","opus-4-8",1046,111623,1505108,523738795,28741210
+"progetto-15","progetto-15",12b36797,2026-06-29,2026-07-01,"(censurato)","opus-4-8",488,59902,749767,239766985,15613155
+"progetto-15","progetto-15",3460f0f6,2026-07-01,2026-07-12,"(censurato)","opus-4-8 + fable-5",145,26331,414737,40048052,4297809
+"progetto-15","progetto-15",a99c054a,2026-07-01,2026-07-01,"(censurato)","opus-4-8",3,6,13990,879522,26563
+"progetto-16","progetto-16",be99f72b,2026-06-28,2026-06-30,"(censurato)","opus-4-8",55,16806,308457,10939254,1698442
+"progetto-22","progetto-22",72101ad7,2026-06-17,2026-06-17,"(censurato)","opus-4-8",34,7525,51596,2162679,73633
+"Programmi (root)","Programmi (root)",77d468fd,2026-05-31,2026-06-19,"Set up personalized data engineering learning program","opus-4-8",124,22925,590144,35667816,6090238
+"Programmi (root)","Programmi (root)",ad9f1413,2026-05-31,2026-06-27,"AWS/Base_1","opus-4-8",79,14003,280830,55537925,9682177
+"Programmi (root)","Programmi (root)",ba28d02b,2026-06-15,2026-06-16,"Colloquio/Base_1","opus-4-8",50,7859,126083,5178540,579273
+"SideKick","SideKick",4129f40f,2026-06-03,2026-06-03,"Set up poker app project using desktop method","opus-4-8",5,3911,2976,121600,23161
+"SideKick","SideKick",6043194e,2026-06-03,2026-06-10,"SK/Base_1","opus-4-8",128,62198,676648,58399798,2704176
+"SideKick","SideKick",1a5cc5ca,2026-06-04,2026-06-04,"SK/Test_2","opus-4-8",20,4566,39074,961224,101872
+"SideKick","SideKick",b2355e6d,2026-06-04,2026-06-04,"SK/Test_1","opus-4-8",23,4334,53167,1466993,148914
+"SideKick","SideKick",d02881d8,2026-06-10,2026-06-10,"BassPedal/Base","opus-4-8",27,5635,101364,2637361,197270
+"SideKick","SideKick",ef473904,2026-06-10,2026-06-12,"SK/Base_2","opus-4-8 + fable-5",216,22035,556502,67782086,2985318
+"SideKick","SideKick",ff1fffd4,2026-06-12,2026-06-12,"SK/Base_3","opus-4-8 + fable-5",55,10039,113670,7553388,517505
+"SideKick","SideKick",137df591,2026-07-16,2026-07-16,"Sidekick data observatory setup","fable-5",23,3149,43275,2219001,109268
+"SideKick","SideKick",5f351a58,2026-07-16,2026-07-16,"Sidekick data observatory setup","fable-5",19,36,39758,2883253,161581
+"Text-Adventure-Engine","Text-Adventure-Engine",7654955c,2026-05-28,2026-05-29,"Text_game/Base_1","opus-4-7",174,370,466353,54311569,1235975
+"weather-report","weather-report (worktree)",f24c43ea,2026-05-07,2026-05-07,"Weather_report/Prova","opus-4-7 + sonnet-4-6",80,137,42170,6811669,151725

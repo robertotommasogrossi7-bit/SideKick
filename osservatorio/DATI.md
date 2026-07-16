@@ -9,9 +9,10 @@
 > **Ultima revisione: 2026-07-16.**
 
 ## Il rituale (quando si apre la chat-osservatorio)
-1. `node osservatorio/consumo.mjs` → aggiorna `consumo/CONSUMO.md` + `consumo.csv` +
-   `sessioni.csv` (una riga per sessione col **titolo dell'operazione**, cercabile) con
-   **tutte** le chat Claude Code del PC.
+1. `node osservatorio/consumo.mjs` → aggiorna il cruscotto `consumo/CONSUMO.md`, un file di
+   dettaglio per progetto in `consumo/per-progetto/`, e i dati grezzi `consumo.csv` +
+   `sessioni.csv` (una riga per sessione col **titolo dell'operazione**, cercabile).
+   Le lezioni in testa al cruscotto si curano a mano in `consumo/LEZIONI.md`.
 1b. Se dall'ultima volta è girato un **workflow multi-agente** (audit, ricerca…), aggiungere
    la sua riga a `consumo/workflow.csv` (i workflow cloud non lasciano transcript sul PC).
 2. Confronta la copia attiva del metodo (`~/.claude/CLAUDE.md`) con il **master**
