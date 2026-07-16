@@ -1,9 +1,12 @@
 # RED TEAM — riposizionamento pubblico di SideKick (2026-07-16)
 
 > **Come si usa**: incolla TUTTO il contenuto di `DOSSIER.md` (che inizia con questo stesso
-> prompt) in UNA chat nuova di Claude E in UNA di ChatGPT (modelli base, nessun contesto
-> condiviso, niente memoria). Poi confrontiamo i due verdetti e — regola del metodo —
-> **verifichiamo alla fonte i fatti citati dai revisori** prima di agire.
+> prompt) in UNA chat nuova di Claude E in UNA di ChatGPT — **con la memoria/personalizzazione
+> DISATTIVATA** (lezione del run 2026-07-16: Claude con memoria si è auto-dichiarato
+> "contaminato" — il parere non era più esterno). Poi confrontiamo i due verdetti e — regola
+> del metodo — **verifichiamo alla fonte i fatti citati dai revisori** prima di agire: nel run
+> 2026-07-16 una "correzione" del revisore (tokenizer di Sonnet 5) era **sbagliata** — il
+> nostro claim reggeva sulla fonte ufficiale.
 
 ---
 
@@ -155,7 +158,8 @@ come per un abstract scientifico. Se non sei sicuro di un fatto, dillo invece di
     forte pareggia o vince (paper 2026 + Anthropic stessa).
 - **Due trappole da ricordare**: (1) la leva **effort** conta più del cambio modello tra modelli
   adiacenti (doc ufficiale Anthropic); il salto che rende è medium→high, poi rendimenti decrescenti.
-  (2) **Sonnet non si sceglie per risparmiare** (tokenizer più verboso → per-task può costare quanto
+  (2) **Sonnet non si sceglie per risparmiare** (tokenizer aggiornato di Sonnet 5: 1,0–1,35× token
+  a parità di testo — fonte ufficiale, ri-verificata 2026-07-16 → per-task può costare quanto
   Opus): si sceglie dove la sua qualità basta.
 
 ## Audit multi-agente (verifica pesante — quando lo chiedo o lo consigli tu a fine fase grande)
@@ -168,7 +172,8 @@ come per un abstract scientifico. Se non sei sicuro di un fatto, dillo invece di
 - **La grandezza del test e il numero di agenti li decido in base ai token che voglio spendere**
   (proponimi il livello):
   - **ALTO** = controllo totale (molti revisori + verifica per-finding + ricerca online). Richiede
-    **Opus** come chat: con **Fable non si può** — un audit alto **esaurisce le 5h di contesto** del piano Max.
+    **Opus** come chat: con **Fable non si può** — un audit alto **brucia la finestra di utilizzo
+    di 5 ore** del piano Max (il limite d'uso del piano, da non confondere con la finestra di contesto).
   - **MEDIO** = routine (pochi revisori + verifica leggera, poca/niente ricerca).
   - **BASSO** = controllo facile (1-2 agenti, niente verifica adversariale né ricerca).
 - **Modelli degli AGENTI (risparmio massimo)**: la chat orchestratrice va su **Opus**, ma gli agenti
@@ -196,7 +201,7 @@ come per un abstract scientifico. Se non sei sicuro di un fatto, dillo invece di
   SideKick**, che propone le modifiche al metodo).
 - **Verifica-ombra randomica (negli audit multi-agente)**: duplica a caso **~8% delle verifiche**
   (sotto il 10%: su 60 → 5-6) con **un agente in più sullo stesso identico compito ma con un modello
-  PIÙ ALTO** — in particolare **Haiku vs Opus** — **mai Fable** (esaurisce il contesto). A fine audit
+  PIÙ ALTO** — in particolare **Haiku vs Opus** — **mai Fable** (brucia la finestra di utilizzo). A fine audit
   confronta le coppie (verdetto, severità, qualità delle prove) e **annota l'esito nel log**.
   Poca spesa, dati veri.
 - **Estensione candidata (promemoria)**: valutare i duplicati cross-modello anche in **altre funzioni
@@ -298,9 +303,9 @@ human+AI condivisibile, forkabile e auto-evolvente. Migliora la tua copia e ri-c
 > *input* = token letti pieni; *cache letta* = contesto riletto (~1/10 dell'input).
 
 ## In breve
-- **15.7M token di output** (+ **4.4M** di agenti cloud) in **53 sessioni**
+- **15.8M token di output** (+ **4.4M** di agenti cloud) in **53 sessioni**
   su **11 progetti**, da 2026-05 a oggi. 9k messaggi totali.
-- La **cache** ha riletto 2799.0M token (≈170× i token vivi): riprendere una
+- La **cache** ha riletto 2805.9M token (≈170× i token vivi): riprendere una
   chat con la cache calda è ciò che rende sostenibile il piano — ricominciare da zero la butta.
 
 ## Le cose che sono costate di più
@@ -316,16 +321,19 @@ human+AI condivisibile, forkabile e auto-evolvente. Migliora la tua copia e ri-c
 | 8 | (censurato) — progetto-15 | chat | 2026-06-29 | 750k |
 
 ## Cosa abbiamo imparato sul costo (e ridotto davvero)
-- **Audit multi-agente: −60% dal primo al secondo.** Il primo audit ALTO (poker) è costato
-  **67 agenti / 2,6M token**; applicando le lezioni di efficienza (dedup dei finding PRIMA
-  delle verifiche, verifica adversariale solo su ALTA/MEDIA, cacce mirate) il secondo audit
-  ALTO è sceso a **21 agenti / 1,1M** trovando comunque i bug critici veri.
-- **Ripartire da zero è lo spreco più grosso.** La cache ha riletto ~170× i token vivi:
-  riprendere una chat/audit interrotto **riusando la cache** (il resume dell'audit poker ha
-  riusato il 100% dei passi completati) costa ~1/10; ricominciare butta tutto.
-- **Fable sui lavori lunghi non conviene**: l'audit poker su Fable si è interrotto per il
-  limite delle 5h → regola: lavori pesanti su Opus, **Fable solo per le decisioni che
-  contano e i recap** (poco e bene).
+- **Audit multi-agente: il secondo è costato meno della metà.** Primo audit ALTO (poker):
+  **67 agenti / 2,6M token**; secondo (progetto-15, con le regole di efficienza: dedup dei
+  finding PRIMA delle verifiche, verifica adversariale solo su ALTA/MEDIA, cacce mirate):
+  **21 agenti / 1,1M**, trovando comunque i bug critici veri. ⚠️ Onestà: progetti e scope
+  **diversi** — è un'indicazione (N=1+1), non un confronto pulito dello stesso audit.
+- **Ripartire da zero è lo spreco più grosso.** Sui nostri dati la cache ha riletto ~170× i
+  token vivi (è la normale meccanica del prompt caching nelle chat lunghe — il punto
+  azionabile è nostro): riprendere una chat/audit interrotto **riusando la cache** (il resume
+  dell'audit poker ha riusato il 100% dei passi completati) costa ~1/10; ricominciare butta tutto.
+- **Fable sui lavori lunghi non conviene**: l'audit poker su Fable si è fermato per la
+  **finestra di utilizzo di 5 ore** del piano Max (il limite d'uso, non la finestra di
+  contesto) → regola: lavori pesanti su Opus, **Fable solo per le decisioni che contano e i
+  recap** (poco e bene).
 - **Il modello grosso non serve ovunque.** Dai dati A/B: sulla verifica di codice la qualità
   Haiku/Sonnet/Opus era pari — paga il disegno del processo, non il modello caro ovunque.
   Da luglio i fix scoped girano su **Sonnet high** invece che Opus (blocco R6-B: 6 fasi,
@@ -339,7 +347,7 @@ human+AI condivisibile, forkabile e auto-evolvente. Migliora la tua copia e ri-c
 |---|---|---|---|---|---|
 | [poker (Who's the Boss)](per-progetto/poker-who-s-the-boss.md) | 2026-05-14 → 2026-07-14 | 20 | 6.7M | 324k | 1416.6M |
 | [progetto-15](per-progetto/progetto-15.md) | 2026-05-29 → 2026-07-12 | 5 | 3.6M | 233k | 914.4M |
-| [SideKick](per-progetto/sidekick.md) | 2026-06-03 → 2026-07-16 | 9 | 1.6M | 116k | 144.0M |
+| [SideKick](per-progetto/sidekick.md) | 2026-06-03 → 2026-07-16 | 9 | 1.7M | 116k | 150.8M |
 | [Libri-Organizzazione](per-progetto/libri-organizzazione.md) | 2026-05-07 → 2026-05-31 | 2 | 1.3M | 11k | 121.4M |
 | [Programmi (root)](per-progetto/programmi-root.md) | 2026-05-31 → 2026-06-27 | 3 | 997k | 45k | 96.4M |
 | [Text-Adventure-Engine](per-progetto/text-adventure-engine.md) | 2026-05-28 → 2026-05-29 | 1 | 466k | 370 | 54.3M |
@@ -366,7 +374,7 @@ vengono dai METRICHE/report dei progetti. **Dopo ogni nuovo workflow, aggiungere
 | opus-4-8 | 5k | 626k | 10.8M | 1921.5M |
 | opus-4-7 | 1k | 15k | 2.2M | 259.4M |
 | sonnet-4-6 | 2k | 38k | 1.5M | 137.6M |
-| fable-5 | 326 | 42k | 674k | 83.7M |
+| fable-5 | 354 | 42k | 725k | 90.5M |
 | sonnet-5 | 798 | 43k | 600k | 396.9M |
 
 ## Per mese
@@ -374,7 +382,7 @@ vengono dai METRICHE/report dei progetti. **Dopo ogni nuovo workflow, aggiungere
 |---|---|---|---|---|
 | 2026-05 | 2k | 82k | 4.0M | 396.6M |
 | 2026-06 | 4k | 536k | 9.0M | 1557.8M |
-| 2026-07 | 2k | 146k | 2.7M | 844.5M |
+| 2026-07 | 2k | 146k | 2.8M | 851.4M |
 
 
 =====================================================
@@ -396,8 +404,13 @@ vengono dai METRICHE/report dei progetti. **Dopo ogni nuovo workflow, aggiungere
   (crash su azioni store, montepremi sbagliato, funzione inclusione rotta); progetto-15 →
   causa radice di un **bug bloccante** + **3 falle critiche** sulla promessa centrale del
   prodotto, trovate **prima degli utenti**.
-- **Efficienza appresa**: le regole (dedup prima, verifica solo ALTA/MEDIA, cacce mirate)
-  hanno tagliato il **−60%** dal primo al secondo audit.
+- **Efficienza appresa**: col secondo audit (regole: dedup prima, verifica solo ALTA/MEDIA,
+  cacce mirate) il costo è sceso da 2,6M a 1,1M — ⚠️ su un progetto più piccolo: indicazione,
+  non confronto pulito.
+- **Anti-circolarità** (la conferma non è solo "agenti che verificano agenti"): dei 45
+  finding confermati su poker, **oltre 30 sono stati poi fixati e validati da test e
+  typecheck verdi** (blocchi R6-B1→B6, +46 test nuovi); i restanti sono assegnati a fasi
+  future nel registro.
 - **Verdetto**: indizio forte che paga a fine fase grande. N=2.
 
 ### 2. Verifica-ombra cross-modello (dentro gli audit)
@@ -452,7 +465,8 @@ vengono dai METRICHE/report dei progetti. **Dopo ogni nuovo workflow, aggiungere
 - **Guadagno osservato**: blocco R6-B (6 fasi di fix su **Sonnet high** invece di Opus):
   tutte verdi al primo colpo, zero regressioni sui 9 scenari soldi.
 - **Costo**: zero (è una scelta, non un'attività). Il risparmio esatto Sonnet-vs-Opus non è
-  quantificabile senza il controfattuale; il tokenizer di Sonnet è più verboso (trappola nota).
+  quantificabile senza il controfattuale; trappola nota: il tokenizer aggiornato di Sonnet 5
+  produce 1,0–1,35× token a parità di testo (fonte ufficiale, ri-verificata 2026-07-16).
 - **Verdetto**: indizio buono; la tabella resta basata sulla ricerca esterna finché i nostri
   numeri non bastano.
 
@@ -500,7 +514,7 @@ colonna "Esito osservato" nei DECISIONI · 1 riga in ESPERIMENTI.md per ogni esp
 ## Le fonti dei dati (censimento 2026-07-16)
 | Fonte | Cosa contiene | Stato |
 |---|---|---|
-| `osservatorio/consumo/` | token per progetto × modello × mese **e per operazione/sessione** (titoli delle chat), da TUTTE le chat locali (23 progetti, 53 sessioni da maggio 2026) + registro workflow cloud | ✅ generato automaticamente (workflow.csv a mano) |
+| `osservatorio/consumo/` | token per progetto × modello × mese **e per operazione/sessione** (titoli delle chat), da TUTTE le chat locali (23 cartelle di chat → 11 progetti raggruppati, 53 sessioni da maggio 2026) + registro workflow cloud | ✅ generato automaticamente (workflow.csv a mano) |
 | `~/.claude/ESPERIMENTI.md` | A/B cross-modello e ripetizioni stesso-modello | 2 righe A/B · 0 ripetizioni |
 | poker: `_processo/METRICHE.md` | per ogni fase: modello+effort, durata (git), volume, token dei workflow | ✅ la serie più ricca |
 | progetto-15: doc di processo in root | DECISIONI + audit, ma **niente METRICHE.md** | ⚠️ braccio scoperto |
@@ -524,7 +538,7 @@ a mano dai METRICHE. La dashboard Anthropic resta l'unica fonte del costo in den
 - **Quali modelli per quali agenti**: la tabella del metodo viene dalla ricerca esterna
   (dossier 2026-07); i nostri dati coprono per ora solo la funzione "verifica".
 - **Dove vanno i token** (prima lettura di CONSUMO): i 2 progetti-app grossi dominano
-  (poker ~6,1M output, progetto-15 ~3,6M); la cache letta (~2,8 miliardi) è ~170× i token vivi
+  (poker ~6,7M output incl. worktree, progetto-15 ~3,6M); la cache letta (~2,8 miliardi) è ~170× i token vivi
   (~16,5M input+output) → la cache calda è ciò che rende sostenibile il piano. Opus ha generato ~83%
   dell'output storico; Sonnet/Fable sono entrati da luglio con la regola modello-per-passo.
 - **A/B di processo poker (costruzione completa) vs progetto-15 (incrementale)**:
@@ -565,14 +579,19 @@ a mano dai METRICHE. La dashboard Anthropic resta l'unica fonte del costo in den
       **task per una chat Sonnet, effort high** (traduzione scoped).
 - [ ] Repo `spec-kit-metodo`: copiare la constitution v1.5.0 appena tradotta/verificata.
 
-## 3. Riposizionamento GitHub (RIMANDATO da Roberto — farlo dopo il punto 2)
-Nuova identità del repo: **laboratorio dove si analizzano esperimenti e progetti reali
-fatti con Claude, per capire quali scelte fanno risparmiare token e automatizzare i
-processi** — collegabile a GitHub Spec Kit.
-- [ ] README (IT+EN): riscrivere l'apertura attorno a laboratorio + osservatorio + metodo;
-      la libreria di feature diventa una sezione, non l'identità.
-- [ ] Descrizione + topics del repo GitHub (spec-kit, claude, token-efficiency, ...).
-- [ ] Red team esterno prima di pubblicare (regola del metodo: sguardo esterno).
+## 3. Riposizionamento GitHub — linea AGGIORNATA dal red team 2026-07-16
+Red team doppio (Claude+ChatGPT) fatto: verdetti e verifiche in
+`osservatorio/redteam/VERDETTI-2026-07-16.md`. Linea nuova: **non "laboratorio del metodo"
+ma "case study con dati reali + strumenti riusabili"** — il metodo è appendice.
+- [x] Red team esterno pre-pubblicazione (2026-07-16) + verifiche alla fonte + correzioni.
+- [ ] README (IT+EN) nell'ordine: (1) cosa ti porti via — tool (`consumo.mjs`, cost-meter,
+      oracolo) + dataset CSV dei consumi per-sessione + writeup FINDINGS — (2) esperimenti e
+      dati (incl. "cosa NON ha funzionato") — (3) metodo in appendice, versione corta, con
+      linguaggio "ipotesi operative (N=…)".
+- [ ] Decisioni di Roberto prima di scrivere: (a) dettagli dei finding di progetto-15 fuori
+      dal pubblico? (b) regola Spotify resta nel metodo ma fuori vetrina?
+- [ ] Descrizione + topics del repo GitHub (claude-code, spec-kit, token-usage, case-study…).
+- [ ] Budget da qui in poi: ~80% esperimenti / 20% manutenzione metodo (verdetto ROI).
 
 ## 4. Allineamento a GitHub Spec Kit (studio, poi decisioni)
 Perché: sono più avanti sull'organizzazione, e parlare la loro lingua rende SideKick

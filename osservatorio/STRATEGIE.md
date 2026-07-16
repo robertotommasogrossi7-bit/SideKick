@@ -13,8 +13,13 @@
   (crash su azioni store, montepremi sbagliato, funzione inclusione rotta); progetto-15 →
   causa radice di un **bug bloccante** + **3 falle critiche** sulla promessa centrale del
   prodotto, trovate **prima degli utenti**.
-- **Efficienza appresa**: le regole (dedup prima, verifica solo ALTA/MEDIA, cacce mirate)
-  hanno tagliato il **−60%** dal primo al secondo audit.
+- **Efficienza appresa**: col secondo audit (regole: dedup prima, verifica solo ALTA/MEDIA,
+  cacce mirate) il costo è sceso da 2,6M a 1,1M — ⚠️ su un progetto più piccolo: indicazione,
+  non confronto pulito.
+- **Anti-circolarità** (la conferma non è solo "agenti che verificano agenti"): dei 45
+  finding confermati su poker, **oltre 30 sono stati poi fixati e validati da test e
+  typecheck verdi** (blocchi R6-B1→B6, +46 test nuovi); i restanti sono assegnati a fasi
+  future nel registro.
 - **Verdetto**: indizio forte che paga a fine fase grande. N=2.
 
 ### 2. Verifica-ombra cross-modello (dentro gli audit)
@@ -69,7 +74,8 @@
 - **Guadagno osservato**: blocco R6-B (6 fasi di fix su **Sonnet high** invece di Opus):
   tutte verdi al primo colpo, zero regressioni sui 9 scenari soldi.
 - **Costo**: zero (è una scelta, non un'attività). Il risparmio esatto Sonnet-vs-Opus non è
-  quantificabile senza il controfattuale; il tokenizer di Sonnet è più verboso (trappola nota).
+  quantificabile senza il controfattuale; trappola nota: il tokenizer aggiornato di Sonnet 5
+  produce 1,0–1,35× token a parità di testo (fonte ufficiale, ri-verificata 2026-07-16).
 - **Verdetto**: indizio buono; la tabella resta basata sulla ricerca esterna finché i nostri
   numeri non bastano.
 

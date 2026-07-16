@@ -8,9 +8,9 @@
 > *input* = token letti pieni; *cache letta* = contesto riletto (~1/10 dell'input).
 
 ## In breve
-- **15.7M token di output** (+ **4.4M** di agenti cloud) in **53 sessioni**
+- **15.8M token di output** (+ **4.4M** di agenti cloud) in **53 sessioni**
   su **11 progetti**, da 2026-05 a oggi. 9k messaggi totali.
-- La **cache** ha riletto 2799.0M token (≈170× i token vivi): riprendere una
+- La **cache** ha riletto 2805.9M token (≈170× i token vivi): riprendere una
   chat con la cache calda è ciò che rende sostenibile il piano — ricominciare da zero la butta.
 
 ## Le cose che sono costate di più
@@ -26,16 +26,19 @@
 | 8 | (censurato) — progetto-15 | chat | 2026-06-29 | 750k |
 
 ## Cosa abbiamo imparato sul costo (e ridotto davvero)
-- **Audit multi-agente: −60% dal primo al secondo.** Il primo audit ALTO (poker) è costato
-  **67 agenti / 2,6M token**; applicando le lezioni di efficienza (dedup dei finding PRIMA
-  delle verifiche, verifica adversariale solo su ALTA/MEDIA, cacce mirate) il secondo audit
-  ALTO è sceso a **21 agenti / 1,1M** trovando comunque i bug critici veri.
-- **Ripartire da zero è lo spreco più grosso.** La cache ha riletto ~170× i token vivi:
-  riprendere una chat/audit interrotto **riusando la cache** (il resume dell'audit poker ha
-  riusato il 100% dei passi completati) costa ~1/10; ricominciare butta tutto.
-- **Fable sui lavori lunghi non conviene**: l'audit poker su Fable si è interrotto per il
-  limite delle 5h → regola: lavori pesanti su Opus, **Fable solo per le decisioni che
-  contano e i recap** (poco e bene).
+- **Audit multi-agente: il secondo è costato meno della metà.** Primo audit ALTO (poker):
+  **67 agenti / 2,6M token**; secondo (progetto-15, con le regole di efficienza: dedup dei
+  finding PRIMA delle verifiche, verifica adversariale solo su ALTA/MEDIA, cacce mirate):
+  **21 agenti / 1,1M**, trovando comunque i bug critici veri. ⚠️ Onestà: progetti e scope
+  **diversi** — è un'indicazione (N=1+1), non un confronto pulito dello stesso audit.
+- **Ripartire da zero è lo spreco più grosso.** Sui nostri dati la cache ha riletto ~170× i
+  token vivi (è la normale meccanica del prompt caching nelle chat lunghe — il punto
+  azionabile è nostro): riprendere una chat/audit interrotto **riusando la cache** (il resume
+  dell'audit poker ha riusato il 100% dei passi completati) costa ~1/10; ricominciare butta tutto.
+- **Fable sui lavori lunghi non conviene**: l'audit poker su Fable si è fermato per la
+  **finestra di utilizzo di 5 ore** del piano Max (il limite d'uso, non la finestra di
+  contesto) → regola: lavori pesanti su Opus, **Fable solo per le decisioni che contano e i
+  recap** (poco e bene).
 - **Il modello grosso non serve ovunque.** Dai dati A/B: sulla verifica di codice la qualità
   Haiku/Sonnet/Opus era pari — paga il disegno del processo, non il modello caro ovunque.
   Da luglio i fix scoped girano su **Sonnet high** invece che Opus (blocco R6-B: 6 fasi,
@@ -49,7 +52,7 @@
 |---|---|---|---|---|---|
 | [poker (Who's the Boss)](per-progetto/poker-who-s-the-boss.md) | 2026-05-14 → 2026-07-14 | 20 | 6.7M | 324k | 1416.6M |
 | [progetto-15](per-progetto/progetto-15.md) | 2026-05-29 → 2026-07-12 | 5 | 3.6M | 233k | 914.4M |
-| [SideKick](per-progetto/sidekick.md) | 2026-06-03 → 2026-07-16 | 9 | 1.6M | 116k | 144.0M |
+| [SideKick](per-progetto/sidekick.md) | 2026-06-03 → 2026-07-16 | 9 | 1.7M | 116k | 150.8M |
 | [Libri-Organizzazione](per-progetto/libri-organizzazione.md) | 2026-05-07 → 2026-05-31 | 2 | 1.3M | 11k | 121.4M |
 | [Programmi (root)](per-progetto/programmi-root.md) | 2026-05-31 → 2026-06-27 | 3 | 997k | 45k | 96.4M |
 | [Text-Adventure-Engine](per-progetto/text-adventure-engine.md) | 2026-05-28 → 2026-05-29 | 1 | 466k | 370 | 54.3M |
@@ -76,7 +79,7 @@ vengono dai METRICHE/report dei progetti. **Dopo ogni nuovo workflow, aggiungere
 | opus-4-8 | 5k | 626k | 10.8M | 1921.5M |
 | opus-4-7 | 1k | 15k | 2.2M | 259.4M |
 | sonnet-4-6 | 2k | 38k | 1.5M | 137.6M |
-| fable-5 | 326 | 42k | 674k | 83.7M |
+| fable-5 | 354 | 42k | 725k | 90.5M |
 | sonnet-5 | 798 | 43k | 600k | 396.9M |
 
 ## Per mese
@@ -84,4 +87,4 @@ vengono dai METRICHE/report dei progetti. **Dopo ogni nuovo workflow, aggiungere
 |---|---|---|---|---|
 | 2026-05 | 2k | 82k | 4.0M | 396.6M |
 | 2026-06 | 4k | 536k | 9.0M | 1557.8M |
-| 2026-07 | 2k | 146k | 2.7M | 844.5M |
+| 2026-07 | 2k | 146k | 2.8M | 851.4M |

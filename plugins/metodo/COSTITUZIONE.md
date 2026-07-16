@@ -112,7 +112,8 @@
     forte pareggia o vince (paper 2026 + Anthropic stessa).
 - **Due trappole da ricordare**: (1) la leva **effort** conta più del cambio modello tra modelli
   adiacenti (doc ufficiale Anthropic); il salto che rende è medium→high, poi rendimenti decrescenti.
-  (2) **Sonnet non si sceglie per risparmiare** (tokenizer più verboso → per-task può costare quanto
+  (2) **Sonnet non si sceglie per risparmiare** (tokenizer aggiornato di Sonnet 5: 1,0–1,35× token
+  a parità di testo — fonte ufficiale, ri-verificata 2026-07-16 → per-task può costare quanto
   Opus): si sceglie dove la sua qualità basta.
 
 ## Audit multi-agente (verifica pesante — quando lo chiedo o lo consigli tu a fine fase grande)
@@ -125,7 +126,8 @@
 - **La grandezza del test e il numero di agenti li decido in base ai token che voglio spendere**
   (proponimi il livello):
   - **ALTO** = controllo totale (molti revisori + verifica per-finding + ricerca online). Richiede
-    **Opus** come chat: con **Fable non si può** — un audit alto **esaurisce le 5h di contesto** del piano Max.
+    **Opus** come chat: con **Fable non si può** — un audit alto **brucia la finestra di utilizzo
+    di 5 ore** del piano Max (il limite d'uso del piano, da non confondere con la finestra di contesto).
   - **MEDIO** = routine (pochi revisori + verifica leggera, poca/niente ricerca).
   - **BASSO** = controllo facile (1-2 agenti, niente verifica adversariale né ricerca).
 - **Modelli degli AGENTI (risparmio massimo)**: la chat orchestratrice va su **Opus**, ma gli agenti
@@ -153,7 +155,7 @@
   SideKick**, che propone le modifiche al metodo).
 - **Verifica-ombra randomica (negli audit multi-agente)**: duplica a caso **~8% delle verifiche**
   (sotto il 10%: su 60 → 5-6) con **un agente in più sullo stesso identico compito ma con un modello
-  PIÙ ALTO** — in particolare **Haiku vs Opus** — **mai Fable** (esaurisce il contesto). A fine audit
+  PIÙ ALTO** — in particolare **Haiku vs Opus** — **mai Fable** (brucia la finestra di utilizzo). A fine audit
   confronta le coppie (verdetto, severità, qualità delle prove) e **annota l'esito nel log**.
   Poca spesa, dati veri.
 - **Estensione candidata (promemoria)**: valutare i duplicati cross-modello anche in **altre funzioni

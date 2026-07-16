@@ -19,14 +19,19 @@
       **task per una chat Sonnet, effort high** (traduzione scoped).
 - [ ] Repo `spec-kit-metodo`: copiare la constitution v1.5.0 appena tradotta/verificata.
 
-## 3. Riposizionamento GitHub (RIMANDATO da Roberto — farlo dopo il punto 2)
-Nuova identità del repo: **laboratorio dove si analizzano esperimenti e progetti reali
-fatti con Claude, per capire quali scelte fanno risparmiare token e automatizzare i
-processi** — collegabile a GitHub Spec Kit.
-- [ ] README (IT+EN): riscrivere l'apertura attorno a laboratorio + osservatorio + metodo;
-      la libreria di feature diventa una sezione, non l'identità.
-- [ ] Descrizione + topics del repo GitHub (spec-kit, claude, token-efficiency, ...).
-- [ ] Red team esterno prima di pubblicare (regola del metodo: sguardo esterno).
+## 3. Riposizionamento GitHub — linea AGGIORNATA dal red team 2026-07-16
+Red team doppio (Claude+ChatGPT) fatto: verdetti e verifiche in
+`osservatorio/redteam/VERDETTI-2026-07-16.md`. Linea nuova: **non "laboratorio del metodo"
+ma "case study con dati reali + strumenti riusabili"** — il metodo è appendice.
+- [x] Red team esterno pre-pubblicazione (2026-07-16) + verifiche alla fonte + correzioni.
+- [ ] README (IT+EN) nell'ordine: (1) cosa ti porti via — tool (`consumo.mjs`, cost-meter,
+      oracolo) + dataset CSV dei consumi per-sessione + writeup FINDINGS — (2) esperimenti e
+      dati (incl. "cosa NON ha funzionato") — (3) metodo in appendice, versione corta, con
+      linguaggio "ipotesi operative (N=…)".
+- [ ] Decisioni di Roberto prima di scrivere: (a) dettagli dei finding di progetto-15 fuori
+      dal pubblico? (b) regola Spotify resta nel metodo ma fuori vetrina?
+- [ ] Descrizione + topics del repo GitHub (claude-code, spec-kit, token-usage, case-study…).
+- [ ] Budget da qui in poi: ~80% esperimenti / 20% manutenzione metodo (verdetto ROI).
 
 ## 4. Allineamento a GitHub Spec Kit (studio, poi decisioni)
 Perché: sono più avanti sull'organizzazione, e parlare la loro lingua rende SideKick

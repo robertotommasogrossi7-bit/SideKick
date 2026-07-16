@@ -1,9 +1,12 @@
 # RED TEAM — riposizionamento pubblico di SideKick (2026-07-16)
 
 > **Come si usa**: incolla TUTTO il contenuto di `DOSSIER.md` (che inizia con questo stesso
-> prompt) in UNA chat nuova di Claude E in UNA di ChatGPT (modelli base, nessun contesto
-> condiviso, niente memoria). Poi confrontiamo i due verdetti e — regola del metodo —
-> **verifichiamo alla fonte i fatti citati dai revisori** prima di agire.
+> prompt) in UNA chat nuova di Claude E in UNA di ChatGPT — **con la memoria/personalizzazione
+> DISATTIVATA** (lezione del run 2026-07-16: Claude con memoria si è auto-dichiarato
+> "contaminato" — il parere non era più esterno). Poi confrontiamo i due verdetti e — regola
+> del metodo — **verifichiamo alla fonte i fatti citati dai revisori** prima di agire: nel run
+> 2026-07-16 una "correzione" del revisore (tokenizer di Sonnet 5) era **sbagliata** — il
+> nostro claim reggeva sulla fonte ufficiale.
 
 ---
 

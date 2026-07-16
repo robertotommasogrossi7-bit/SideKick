@@ -24,7 +24,7 @@
 ## Le fonti dei dati (censimento 2026-07-16)
 | Fonte | Cosa contiene | Stato |
 |---|---|---|
-| `osservatorio/consumo/` | token per progetto × modello × mese **e per operazione/sessione** (titoli delle chat), da TUTTE le chat locali (23 progetti, 53 sessioni da maggio 2026) + registro workflow cloud | ✅ generato automaticamente (workflow.csv a mano) |
+| `osservatorio/consumo/` | token per progetto × modello × mese **e per operazione/sessione** (titoli delle chat), da TUTTE le chat locali (23 cartelle di chat → 11 progetti raggruppati, 53 sessioni da maggio 2026) + registro workflow cloud | ✅ generato automaticamente (workflow.csv a mano) |
 | `~/.claude/ESPERIMENTI.md` | A/B cross-modello e ripetizioni stesso-modello | 2 righe A/B · 0 ripetizioni |
 | poker: `_processo/METRICHE.md` | per ogni fase: modello+effort, durata (git), volume, token dei workflow | ✅ la serie più ricca |
 | progetto-15: doc di processo in root | DECISIONI + audit, ma **niente METRICHE.md** | ⚠️ braccio scoperto |
@@ -48,7 +48,7 @@ a mano dai METRICHE. La dashboard Anthropic resta l'unica fonte del costo in den
 - **Quali modelli per quali agenti**: la tabella del metodo viene dalla ricerca esterna
   (dossier 2026-07); i nostri dati coprono per ora solo la funzione "verifica".
 - **Dove vanno i token** (prima lettura di CONSUMO): i 2 progetti-app grossi dominano
-  (poker ~6,1M output, progetto-15 ~3,6M); la cache letta (~2,8 miliardi) è ~170× i token vivi
+  (poker ~6,7M output incl. worktree, progetto-15 ~3,6M); la cache letta (~2,8 miliardi) è ~170× i token vivi
   (~16,5M input+output) → la cache calda è ciò che rende sostenibile il piano. Opus ha generato ~83%
   dell'output storico; Sonnet/Fable sono entrati da luglio con la regola modello-per-passo.
 - **A/B di processo poker (costruzione completa) vs progetto-15 (incrementale)**:
