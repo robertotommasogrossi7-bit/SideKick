@@ -4,15 +4,17 @@
     "name": "Roberto Tommaso Grossi"
   },
   "metadata": {
-    "description": "Il metodo di lavoro human+AI di SideKick, operazionalizzato come plugin: discipline rese automatiche e senza attrito, da installare, forkare e ri-condividere."
+    "description": "SideKick's human+AI working method, operationalized as a plugin: frictionless, automatic disciplines you install, fork, and re-share."
   },
   "plugins": [
     {
       "name": "metodo",
       "source": "./plugins/metodo",
-      "description": "Operazionalizza il metodo di lavoro: cattura-idee (/metodo:idea), e in arrivo design-first e micro-commit.",
+      "description": "Operationalizes the working method: idea capture (/metodo:idea); design-first and micro-commit coming next.",
       "version": "0.1.0",
-      "author": { "name": "Roberto Tommaso Grossi" }
+      "author": {
+        "name": "Roberto Tommaso Grossi"
+      }
     }
   ]
 }

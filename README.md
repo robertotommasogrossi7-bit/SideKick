@@ -20,19 +20,19 @@ coding agent — plus the small tools used to measure it all.
 
 ## The lab (live data)
 
-[`osservatorio/`](osservatorio/) is the observatory — working language Italian, but the tables
-read fine in any language:
+[`osservatorio/`](osservatorio/) is the observatory (English; Italian originals in
+[`versione-italiano/`](versione-italiano/LEGGIMI.md)):
 
 - [`consumo/CONSUMO.md`](osservatorio/consumo/CONSUMO.md) — the cost dashboard: totals, the
   most expensive operations, per-project drilldowns (one file per project).
-- [`STRATEGIE.md`](osservatorio/STRATEGIE.md) — cost/benefit register of every working-method
+- [`STRATEGIES.md`](osservatorio/STRATEGIES.md) — cost/benefit register of every working-method
   strategy under test: multi-agent audits, cross-model shadow checks, red teams, **including
   the strategies that failed and were dropped**.
-- [`redteam/`](osservatorio/redteam/) — before this repo went public in its current form, two
-  independent AI reviewers tore the dossier apart; the verdicts, the claim-by-claim
-  verification (one reviewer "correction" turned out to be wrong), and the fixes are all in
-  the open.
-- [`DATI.md`](osservatorio/DATI.md) / [`PIANO.md`](osservatorio/PIANO.md) — what the data can
+- [`redteam/VERDICTS.md`](osservatorio/redteam/VERDICTS.md) — before this repo went public in
+  its current form, two independent AI reviewers tore the dossier apart; the verdicts, the
+  claim-by-claim verification (one reviewer "correction" turned out to be wrong), and the
+  fixes are all in the open.
+- [`DATA.md`](osservatorio/DATA.md) / [`PLAN.md`](osservatorio/PLAN.md) — what the data can
   and cannot say yet, and what's next.
 
 A few sampled findings (details and caveats inside): a heavy multi-agent audit found real
@@ -62,8 +62,8 @@ drop-in.
 ## Honesty rules of this repo
 
 1. Sample sizes stated next to every claim; small N is called an *indication*, never proof.
-2. Negative results and dropped strategies stay published (`FINDINGS.md`, `_processo/`,
-   the "scartate" section of `STRATEGIE.md`).
+2. Negative results and dropped strategies stay published (`FINDINGS.md`, the raw Italian
+   logs in `versione-italiano/_processo/`, the "dropped" section of `STRATEGIES.md`).
 3. Anything public goes through an external AI red team first — and the reviewers' claims get
    verified at the source too (they're sometimes wrong).
 

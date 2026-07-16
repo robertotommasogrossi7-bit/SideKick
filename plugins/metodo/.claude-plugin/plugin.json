@@ -1,7 +1,9 @@
 {
   "name": "metodo",
-  "description": "Il metodo di lavoro di SideKick, operazionalizzato: discipline human+AI rese automatiche e senza attrito (cattura-idee; in arrivo design-first e micro-commit).",
+  "description": "SideKick's working method, operationalized: frictionless human+AI disciplines (idea capture; design-first and micro-commit coming next).",
   "version": "0.1.0",
-  "author": { "name": "Roberto Tommaso Grossi" },
+  "author": {
+    "name": "Roberto Tommaso Grossi"
+  },
   "homepage": "https://github.com/robertotommasogrossi7-bit/SideKick"
 }

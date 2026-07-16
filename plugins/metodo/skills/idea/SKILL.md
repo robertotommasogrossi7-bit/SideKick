@@ -1,22 +1,24 @@
 ---
-description: Salva al volo un'idea in _processo/IDEE.md senza interrompere il lavoro corrente. Invocala con /metodo:idea <testo dell'idea>.
+description: Instantly saves an idea to _processo/IDEE.md without interrupting the current work. Invoke it with /metodo:idea <idea text>.
 disable-model-invocation: true
 ---
 
-# Cattura idea (frictionless)
+# Idea capture (frictionless)
 
-L'utente vuole **salvare un'idea senza perdere il filo** di ciò che sta facendo. L'idea è:
+The user wants to **save an idea without losing the thread** of what they're doing. The idea is:
 
 "$ARGUMENTS"
 
-Fai **solo** questo, in modo non invasivo e veloce:
+Do **only** this, in a non-invasive and fast way:
 
-1. Determina il file idee del progetto: `_processo/IDEE.md` se nella root esiste la cartella
-   `_processo/`, altrimenti `IDEE.md` nella root del progetto.
-2. Se il file non esiste, crealo con l'intestazione `# IDEE` su una riga, seguita da una riga vuota.
-3. **Appendi** in fondo una riga sola: `- [AAAA-MM-GG] $ARGUMENTS` usando la data di oggi.
-   Non riordinare né riscrivere il resto del file.
-4. Rispondi con **una sola riga** di conferma (es. `💡 salvata in _processo/IDEE.md`).
+1. Determine the project's ideas file: `_processo/IDEE.md` if the `_processo/` folder exists at
+   the root, otherwise `IDEE.md` at the project root.
+2. If the file doesn't exist, create it with the `# IDEE` heading on one line, followed by a
+   blank line.
+3. **Append** a single line at the end: `- [YYYY-MM-DD] $ARGUMENTS` using today's date.
+   Don't reorder or rewrite the rest of the file.
+4. Reply with **a single line** of confirmation (e.g. `💡 saved to _processo/IDEE.md`).
 
-Non modificare codice, non aprire discussioni, non proporre azioni: l'utente sta lavorando ad
-altro e questa è solo una cattura al volo. Se `$ARGUMENTS` è vuoto, chiedi in una riga qual è l'idea.
+Don't modify code, don't open discussions, don't propose actions: the user is working on
+something else and this is just a quick capture. If `$ARGUMENTS` is empty, ask in one line what
+the idea is.

@@ -26,11 +26,11 @@ spiegati semplici, aggiornando `glossario/INDICE.md`.
 - Categorie AWS attese dentro `data-engineering/`: ingestion, staging, database, servizi AWS.
 
 ### 2. Osservatorio dati — consumo token + revisione del metodo
-La chat-osservatorio segue il **rituale in `../osservatorio/DATI.md`**: rigenera il consumo token
-di TUTTE le chat (`node osservatorio/consumo.mjs` dalla root del repo — nomi privati censurati,
-legenda solo locale), confronta lo specchio del metodo col master del repo, rilegge
-ESPERIMENTI/METRICHE nuovi e aggiorna i verdetti. I passi già decisi con Roberto sono in
-`../osservatorio/PIANO.md`.
+La chat-osservatorio segue il **rituale in `../osservatorio/DATA.md`** (in inglese; l'originale
+italiano congelato è in `osservatorio/DATI.md` qui accanto): rigenera il consumo token di TUTTE
+le chat (`node osservatorio/consumo.mjs` dalla root del repo — nomi privati censurati, legenda
+solo locale), confronta lo specchio del metodo col master del repo, rilegge ESPERIMENTI/METRICHE
+nuovi e aggiorna i verdetti. I passi già decisi con Roberto sono in `../osservatorio/PLAN.md`.
 
 ### 3. (spazio per altri compiti osservatorio)
 Es. rivedere il metodo quando escono modelli nuovi (già previsto nella COSTITUZIONE), consolidare gli

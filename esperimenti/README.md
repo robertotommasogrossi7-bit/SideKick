@@ -1,31 +1,33 @@
-# esperimenti/ — i test con/senza (dove un pacchetto-processo aiuta, e dove no)
+# esperimenti/ — the with/without tests (where a process package helps, and where it doesn't)
 
-Questa cartella raccoglie gli esperimenti **con/senza** con cui abbiamo messo alla prova la tesi
-di SideKick: *dare a un'AI un pacchetto-processo migliora il risultato, rispetto a non darglielo?*
+This folder collects the **with/without** experiments used to put SideKick's thesis to the
+test: *does giving an AI a process package improve the result, compared to not giving it one?*
 
-## Perché prima NON erano qui (importante)
-Durante i test queste cartelle vivevano **fuori dal repo** (in `Programmi/_migr-test`,
-`_stream-test`, `_vague-test`), come progetti git separati. **Apposta, per affidabilità:** il
-braccio **"cieco"** (senza pacchetto) non deve poter leggere né il pacchetto né la libreria di
-SideKick, altrimenti il confronto è **contaminato** (è successo davvero, vedi `DECISIONI.md`
-2026-06-04, fork-test v1). Ogni braccio era quindi un root isolato. A test conclusi li
-**archiviamo qui** per trasparenza (sorgente, senza `node_modules`/`dist`; lo storico dei commit
-di ogni braccio è in `_git-history.txt`).
+## Why they weren't here before (important)
+During testing these folders lived **outside the repo** (in `Programmi/_migr-test`,
+`_stream-test`, `_vague-test`), as separate git projects. **On purpose, for reliability:** the
+**"blind"** arm (without the package) must not be able to read either the package or
+SideKick's library, otherwise the comparison is **contaminated** (this actually happened, see
+`DECISIONI.md` 2026-06-04, fork-test v1). Each arm was therefore an isolated root. Once tests
+concluded, we **archived them here** for transparency (source, without `node_modules`/`dist`;
+each arm's commit history is in `_git-history.txt`).
 
-## Cosa c'è
-- `migrazione/` — `{budget,habit}-{armA,armB}`: migrazione vanilla→React, con/senza il pacchetto
-  `migrazione-a-componenti`.
-- `streaming/` — `discovery/` (con spec completa) e `reverse/` (solo esempi, regola da dedurre) di
-  un problema bespoke di sessionizzazione; `oracolo/` = reference + grader **leak-proof** (hash) +
-  generatori + property-test.
-- `richiesta-vaga/` — `budget-arm{A,B}`: **stessa richiesta vaga da non-esperto**, arm-A col
-  pacchetto ambientale (CLAUDE.md), arm-B nudo. Il test "lato-umano".
-- `misura-token.mjs` — misura il **costo** (turni/token) di un braccio dai suoi transcript.
+## What's here
+- `migrazione/` — `{budget,habit}-{armA,armB}`: vanilla→React migration, with/without the
+  `migrazione-a-componenti` package.
+- `streaming/` — `discovery/` (with a full spec) and `reverse/` (examples only, rule to be
+  inferred) of a bespoke sessionization problem; `oracolo/` = reference + **leak-proof** grader
+  (hash) + generators + property-tests.
+- `richiesta-vaga/` — `budget-arm{A,B}`: **same vague request from a non-expert**, arm-A with
+  the environmental package (CLAUDE.md), arm-B bare. The "human-side" test.
+- `misura-token.mjs` — measures the **cost** (turns/tokens) of an arm from its transcripts.
 
-## Cosa abbiamo trovato (sintesi; dettaglio in `../_processo/DECISIONI.md`)
-- Quando il modello **già sa o sa derivare**, il pacchetto **non migliora** l'esito e **costa di
-  più** (migrazione ~2x; streaming risolto pulito; reverse, *senza* spec, +30%).
-- Nel test **lato-umano** il pacchetto ha pure **misallineato**: l'umano voleva un redesign, il
-  pacchetto imponeva "comportamento identico" → il braccio cieco ha fatto **meglio**.
-- Lezione: il valore non è imporre un processo (può fare danno nel contesto sbagliato), ma offrire
-  conoscenza **non-derivabile**, **pertinente**, scelta dall'umano. È ciò su cui punta F3.
+## What we found (summary; detail in `../_processo/DECISIONI.md`)
+- When the model **already knows or can derive it**, the package **doesn't improve** the
+  outcome and **costs more** (migration ~2x; streaming solved cleanly; reverse, *without* a
+  spec, +30%).
+- In the **human-side** test the package even **misaligned**: the human wanted a redesign, the
+  package imposed "identical behavior" → the blind arm did **better**.
+- Lesson: the value isn't imposing a process (it can do harm in the wrong context), but
+  offering **non-derivable**, **relevant** knowledge, chosen by the human. That's what F3
+  aims at.

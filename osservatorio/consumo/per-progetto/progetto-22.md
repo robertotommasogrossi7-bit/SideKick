@@ -1,11 +1,11 @@
-# progetto-22 — consumo token (generato)
+# progetto-22 — token usage (generated)
 
-> Torna al cruscotto: [`../CONSUMO.md`](../CONSUMO.md). Non modificare a mano.
+> Back to the dashboard: [`../CONSUMO.md`](../CONSUMO.md). Do not edit by hand.
 
-**1 sessioni** dal 2026-06-17 al 2026-06-17 · **52k output** ·
-8k input · 2.2M cache letta · 34 messaggi
+**1 sessions** from 2026-06-17 to 2026-06-17 · **52k output** ·
+8k input · 2.2M cache read · 34 messages
 
-## Le sessioni (in ordine di tempo — il titolo dice cosa si è fatto)
-| Periodo | Operazione | Modelli | Msg | Input | Output | Cache letta |
+## Sessions (in time order — the title says what was done)
+| Period | Operation | Models | Msg | Input | Output | Cache read |
 |---|---|---|---|---|---|---|
-| 2026-06-17 | (censurato) | opus-4-8 | 34 | 8k | 52k | 2.2M |
+| 2026-06-17 | (redacted) | opus-4-8 | 34 | 8k | 52k | 2.2M |

@@ -1,12 +1,12 @@
-# poker (Who's the Boss) — token usage (generated)
+# poker (Who's the Boss) — consumo token (generato)
 
-> Back to the dashboard: [`../CONSUMO.md`](../CONSUMO.md). Do not edit by hand.
+> Torna al cruscotto: [`../CONSUMO.md`](../CONSUMO.md). Non modificare a mano.
 
-**20 sessions** from 2026-05-14 to 2026-07-14 · **6.7M output** ·
-324k input · 1416.6M cache read · 4k messages · **+3.3M cloud-agent tokens** (2 workflows)
+**20 sessioni** dal 2026-05-14 al 2026-07-14 · **6.7M output** ·
+324k input · 1416.6M cache letta · 4k messaggi · **+3.3M di agenti cloud** (2 workflow)
 
-## Sessions (in time order — the title says what was done)
-| Period | Operation | Models | Msg | Input | Output | Cache read |
+## Le sessioni (in ordine di tempo — il titolo dice cosa si è fatto)
+| Periodo | Operazione | Modelli | Msg | Input | Output | Cache letta |
 |---|---|---|---|---|---|---|
 | 2026-05-14 | Poker_app/HTML_Split | opus-4-7 | 146 | 572 | 209k | 33.0M |
 | 2026-05-15→05-16 | Poker_app/HTML->React *(poker (worktree))* | sonnet-4-6 | 280 | 1k | 259k | 25.1M |
@@ -29,8 +29,8 @@
 | 2026-07-03→07-11 | WTB/Base_5 | sonnet-5 + opus-4-8 | 512 | 33k | 519k | 207.1M |
 | 2026-07-11→07-14 | WTB/Base_6 | opus-4-8 +2 | 190 | 10k | 267k | 39.6M |
 
-## Cloud agent workflows on this project
-| Date | Operation | Agents | Agent tokens | Source |
+## Workflow di agenti cloud su questo progetto
+| Data | Operazione | Agenti | Token agenti | Fonte |
 |---|---|---|---|---|
-| 2026-07-03 | Multi-agent HIGH audit on R6+R7.1 (45 findings confirmed, 11 refuted) | 67 | 2.6M | _processo/METRICHE.md |
-| 2026-07-03 | Model/effort research for the method (dossier in esperimenti/) | 5 | 689k | _processo/METRICHE.md |
+| 2026-07-03 | Audit multi-agente ALTO su R6+R7.1 (45 finding confermati, 11 confutati) | 67 | 2.6M | _processo/METRICHE.md |
+| 2026-07-03 | Ricerca modelli/effort per il metodo (dossier in SideKick esperimenti/) | 5 | 689k | _processo/METRICHE.md |

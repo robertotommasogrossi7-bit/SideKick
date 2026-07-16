@@ -1,27 +1,29 @@
-# Usare il metodo con GitHub Spec Kit
+# Using the method with GitHub Spec Kit
 
-Il nostro metodo **è una constitution** → la forma Spec-Kit-nativa corretta è il file
-[`constitution.md`](constitution.md) messo dove Spec Kit tiene la sua: **`.specify/memory/constitution.md`**.
+Our method **is a constitution** → the correct Spec-Kit-native form is the
+[`constitution.md`](constitution.md) file placed where Spec Kit keeps its own:
+**`.specify/memory/constitution.md`**.
 
-## Come si installa in un progetto Spec Kit
-In un progetto già inizializzato con Spec Kit (`specify init …`):
+## How to install it in a Spec Kit project
+In a project already initialized with Spec Kit (`specify init …`):
 
 ```bash
-cp plugins/metodo/spec-kit/constitution.md  <progetto>/.specify/memory/constitution.md
+cp plugins/metodo/spec-kit/constitution.md  <project>/.specify/memory/constitution.md
 ```
-oppure incolla il contenuto rispondendo al comando **`/constitution`** del tuo agente.
+or paste the content in response to your agent's **`/constitution`** command.
 
-Da lì l'agente (che legge `.specify/memory/constitution.md` come contesto) segue il metodo
-**proattivamente**, e — grazie al **Principio VI (Self-Amending)** — può **aggiornarlo da solo**.
+From there the agent (which reads `.specify/memory/constitution.md` as context) follows the
+method **proactively**, and — thanks to **Principle VI (Self-Amending)** — can **update it on
+its own**.
 
-## Perché una *constitution* e non un preset/extension
-In Spec Kit **preset ed extension fanno override dei *template*** (`spec`/`plan`/`tasks`), risolti
-per priorità (`.specify/templates/overrides/` > `presets/` > `extensions/` > core). La constitution
-**non** è un template: è memoria (`.specify/memory/`). Quindi il metodo va consegnato come
-**constitution drop-in**, non come preset. *(Un preset avrebbe senso solo per riflettere il metodo
-anche nei template — es. un gate "design-first" nel `plan-template.md`: è un'estensione futura,
-non il cuore.)*
+## Why a *constitution* and not a preset/extension
+In Spec Kit **presets and extensions override the *templates*** (`spec`/`plan`/`tasks`),
+resolved by priority (`.specify/templates/overrides/` > `presets/` > `extensions/` > core). The
+constitution **is not** a template: it's memory (`.specify/memory/`). So the method must be
+delivered as a **constitution drop-in**, not as a preset. *(A preset would only make sense to
+also reflect the method in the templates — e.g. a "design-first" gate in `plan-template.md`: a
+future extension, not the core.)*
 
-## Differenza dalla constitution di Spec Kit
-La loro è **letta una volta e passiva**. La nostra aggiunge il **Principio VI**: l'agente la
-**fa evolvere**. È il contributo concreto che proponiamo al loro concetto di constitution.
+## Difference from Spec Kit's constitution
+Theirs is **read once and passive**. Ours adds **Principle VI**: the agent **makes it evolve**.
+It's the concrete contribution we propose to their concept of constitution.

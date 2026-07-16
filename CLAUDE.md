@@ -1,12 +1,15 @@
-# SideKick — istruzioni per Claude Code
+# SideKick — instructions for Claude Code
 
-> Caricato in automatico quando lavori in questa cartella. Il **metodo** completo è in
-> `plugins/metodo/COSTITUZIONE.md` (identico alla copia attiva `~/.claude/CLAUDE.md`).
+> Loaded automatically when working in this folder. The full working **method** is in
+> `plugins/metodo/COSTITUZIONE.md` (Italian master; English version: `CONSTITUTION.md`),
+> mirrored read-only to `~/.claude/CLAUDE.md`.
 
-**All'avvio, leggi `versione-italiano/OSSERVATORIO.md`**: elenca i compiti permanenti di SideKick.
+**On session start, read `versione-italiano/OSSERVATORIO.md`**: it lists SideKick's
+permanent tasks (Italian, operational).
 
-Punti d'ingresso:
-- `versione-italiano/OSSERVATORIO.md` — compiti permanenti + ruolo di SideKick (ottimizzare/testare/analizzare Claude Code).
-- `osservatorio/` — dati e verdetti: consumo token di tutte le chat (`DATI.md`, `consumo/`) + piano (`PIANO.md`).
-- `versione-italiano/` — tutta la documentazione italiana (LEGGIMI, GUIDA, libreria, motore).
-- `plugins/metodo/COSTITUZIONE.md` — il metodo di lavoro canonico (master). README root = facciata inglese.
+Entry points:
+- `osservatorio/` — the lab data (English): `DATA.md`, `PLAN.md`, `STRATEGIES.md`,
+  token dashboard in `consumo/`, red-team verdicts in `redteam/`.
+- `versione-italiano/` — all Italian originals and working docs (`LEGGIMI.md` is the map).
+- `plugins/metodo/` — the working method (Italian master + English + Spec Kit drop-in).
+- Root `README.md` — the public English facade (case study: tools, dataset, findings).

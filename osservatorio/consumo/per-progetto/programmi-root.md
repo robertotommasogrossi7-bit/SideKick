@@ -1,12 +1,12 @@
-# Programmi (root) — consumo token (generato)
+# Programmi (root) — token usage (generated)
 
-> Torna al cruscotto: [`../CONSUMO.md`](../CONSUMO.md). Non modificare a mano.
+> Back to the dashboard: [`../CONSUMO.md`](../CONSUMO.md). Do not edit by hand.
 
-**3 sessioni** dal 2026-05-31 al 2026-06-27 · **997k output** ·
-45k input · 96.4M cache letta · 253 messaggi
+**3 sessions** from 2026-05-31 to 2026-06-27 · **997k output** ·
+45k input · 96.4M cache read · 253 messages
 
-## Le sessioni (in ordine di tempo — il titolo dice cosa si è fatto)
-| Periodo | Operazione | Modelli | Msg | Input | Output | Cache letta |
+## Sessions (in time order — the title says what was done)
+| Period | Operation | Models | Msg | Input | Output | Cache read |
 |---|---|---|---|---|---|---|
 | 2026-05-31→06-19 | Set up personalized data engineering learning program | opus-4-8 | 124 | 23k | 590k | 35.7M |
 | 2026-05-31→06-27 | AWS/Base_1 | opus-4-8 | 79 | 14k | 281k | 55.5M |

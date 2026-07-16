@@ -1,13 +1,13 @@
-gruppo,progetto,sessione,inizio,fine,operazione,modelli,messaggi,token_input,token_output,cache_letta,cache_scritta
-"esperimenti (test del metodo)","esperimento test2-anticipi",1d9935f7,2026-06-04,2026-06-04,"SK/Test_2","opus-4-8",19,4197,42401,963265,104484
-"esperimenti (test del metodo)","esperimento migr-test budget-armA",a0c4ff32,2026-06-10,2026-06-10,"Migrate expense tracker app to React plus Vite","sonnet-4-6",27,31,44674,1821694,72489
-"esperimenti (test del metodo)","esperimento migr-test budget-armB",4b830b7f,2026-06-10,2026-06-10,"Migrate expense app to React and Vite","sonnet-4-6",27,33,48224,1194679,40398
-"esperimenti (test del metodo)","esperimento migr-test habit-armA",3e52ba28,2026-06-10,2026-06-10,"Migrate habit tracker to React and Vite","sonnet-4-6",81,93,30224,5617900,77614
-"esperimenti (test del metodo)","esperimento migr-test habit-armB",ff934bc3,2026-06-10,2026-06-10,"Migrate habit tracker to React with Vite","sonnet-4-6",38,46,56856,2205281,59283
-"esperimenti (test del metodo)","esperimento stream-test discovery",2babfeab,2026-06-10,2026-06-11,"Implement solution to pass all grader tests","sonnet-4-6",5,7,11116,137954,23423
-"esperimenti (test del metodo)","esperimento stream-test reverse",3e1abbb8,2026-06-11,2026-06-11,"Deduce and implement solve function from examples","sonnet-4-6",8,10,21213,249189,34027
-"esperimenti (test del metodo)","esperimento vague-test armA",0b018f95,2026-06-11,2026-06-11,"Modernize expense app to React","sonnet-4-6",47,65,48065,3717519,82877
-"esperimenti (test del metodo)","esperimento vague-test armB",11cf592f,2026-06-11,2026-06-11,"Modernize expense app with React","sonnet-4-6",47,65,72012,3222465,139429
+group,project,session,start,end,operation,models,messages,input_tokens,output_tokens,cache_read,cache_written
+"experiments (method tests)","experiment test2-anticipi",1d9935f7,2026-06-04,2026-06-04,"SK/Test_2","opus-4-8",19,4197,42401,963265,104484
+"experiments (method tests)","experiment migr-test budget-armA",a0c4ff32,2026-06-10,2026-06-10,"Migrate expense tracker app to React plus Vite","sonnet-4-6",27,31,44674,1821694,72489
+"experiments (method tests)","experiment migr-test budget-armB",4b830b7f,2026-06-10,2026-06-10,"Migrate expense app to React and Vite","sonnet-4-6",27,33,48224,1194679,40398
+"experiments (method tests)","experiment migr-test habit-armA",3e52ba28,2026-06-10,2026-06-10,"Migrate habit tracker to React and Vite","sonnet-4-6",81,93,30224,5617900,77614
+"experiments (method tests)","experiment migr-test habit-armB",ff934bc3,2026-06-10,2026-06-10,"Migrate habit tracker to React with Vite","sonnet-4-6",38,46,56856,2205281,59283
+"experiments (method tests)","experiment stream-test discovery",2babfeab,2026-06-10,2026-06-11,"Implement solution to pass all grader tests","sonnet-4-6",5,7,11116,137954,23423
+"experiments (method tests)","experiment stream-test reverse",3e1abbb8,2026-06-11,2026-06-11,"Deduce and implement solve function from examples","sonnet-4-6",8,10,21213,249189,34027
+"experiments (method tests)","experiment vague-test armA",0b018f95,2026-06-11,2026-06-11,"Modernize expense app to React","sonnet-4-6",47,65,48065,3717519,82877
+"experiments (method tests)","experiment vague-test armB",11cf592f,2026-06-11,2026-06-11,"Modernize expense app with React","sonnet-4-6",47,65,72012,3222465,139429
 "Idee","Idee",4c051993,2026-06-11,2026-06-12,"GitHub/Base_1","opus-4-8 + fable-5",90,6399,270150,12769394,629681
 "Libri-Organizzazione","Libri-Organizzazione",e1fb86f0,2026-05-07,2026-05-31,"Organizzazione","sonnet-4-6 + opus-4-8",397,475,268013,38239180,1204511
 "Libri-Organizzazione","Libri-Organizzazione",77b678d6,2026-05-09,2026-05-20,"Poker_app/BASE","opus-4-7 + sonnet-4-6",440,10373,1024262,83205224,9345956
@@ -31,13 +31,13 @@ gruppo,progetto,sessione,inizio,fine,operazione,modelli,messaggi,token_input,tok
 "poker (Who's the Boss)","poker (Who's the Boss)",c221dbec,2026-07-01,2026-07-10,"WTB/Base_5","opus-4-8 +2",586,35365,794627,313786709,8419285
 "poker (Who's the Boss)","poker (Who's the Boss)",1613de1d,2026-07-03,2026-07-11,"WTB/Base_5","sonnet-5 + opus-4-8",512,33333,519305,207130043,7654933
 "poker (Who's the Boss)","poker (Who's the Boss)",953124bd,2026-07-11,2026-07-14,"WTB/Base_6","opus-4-8 +2",190,9701,266666,39638599,2321784
-"progetto-15","progetto-15",37d34b53,2026-05-29,2026-06-17,"(censurato)","opus-4-8 + fable-5",331,35326,878409,110013029,4138322
-"progetto-15","progetto-15",b57d481e,2026-05-29,2026-07-01,"(censurato)","opus-4-8",1046,111623,1505108,523738795,28741210
-"progetto-15","progetto-15",12b36797,2026-06-29,2026-07-01,"(censurato)","opus-4-8",488,59902,749767,239766985,15613155
-"progetto-15","progetto-15",3460f0f6,2026-07-01,2026-07-12,"(censurato)","opus-4-8 + fable-5",145,26331,414737,40048052,4297809
-"progetto-15","progetto-15",a99c054a,2026-07-01,2026-07-01,"(censurato)","opus-4-8",3,6,13990,879522,26563
-"progetto-16","progetto-16",be99f72b,2026-06-28,2026-06-30,"(censurato)","opus-4-8",55,16806,308457,10939254,1698442
-"progetto-22","progetto-22",72101ad7,2026-06-17,2026-06-17,"(censurato)","opus-4-8",34,7525,51596,2162679,73633
+"progetto-15","progetto-15",37d34b53,2026-05-29,2026-06-17,"(redacted)","opus-4-8 + fable-5",331,35326,878409,110013029,4138322
+"progetto-15","progetto-15",b57d481e,2026-05-29,2026-07-01,"(redacted)","opus-4-8",1046,111623,1505108,523738795,28741210
+"progetto-15","progetto-15",12b36797,2026-06-29,2026-07-01,"(redacted)","opus-4-8",488,59902,749767,239766985,15613155
+"progetto-15","progetto-15",3460f0f6,2026-07-01,2026-07-12,"(redacted)","opus-4-8 + fable-5",145,26331,414737,40048052,4297809
+"progetto-15","progetto-15",a99c054a,2026-07-01,2026-07-01,"(redacted)","opus-4-8",3,6,13990,879522,26563
+"progetto-16","progetto-16",be99f72b,2026-06-28,2026-06-30,"(redacted)","opus-4-8",55,16806,308457,10939254,1698442
+"progetto-22","progetto-22",72101ad7,2026-06-17,2026-06-17,"(redacted)","opus-4-8",34,7525,51596,2162679,73633
 "Programmi (root)","Programmi (root)",77d468fd,2026-05-31,2026-06-19,"Set up personalized data engineering learning program","opus-4-8",124,22925,590144,35667816,6090238
 "Programmi (root)","Programmi (root)",ad9f1413,2026-05-31,2026-06-27,"AWS/Base_1","opus-4-8",79,14003,280830,55537925,9682177
 "Programmi (root)","Programmi (root)",ba28d02b,2026-06-15,2026-06-16,"Colloquio/Base_1","opus-4-8",50,7859,126083,5178540,579273
@@ -49,6 +49,6 @@ gruppo,progetto,sessione,inizio,fine,operazione,modelli,messaggi,token_input,tok
 "SideKick","SideKick",ef473904,2026-06-10,2026-06-12,"SK/Base_2","opus-4-8 + fable-5",216,22035,556502,67782086,2985318
 "SideKick","SideKick",ff1fffd4,2026-06-12,2026-06-12,"SK/Base_3","opus-4-8 + fable-5",55,10039,113670,7553388,517505
 "SideKick","SideKick",137df591,2026-07-16,2026-07-16,"Sidekick data observatory setup","fable-5",23,3149,43275,2219001,109268
-"SideKick","SideKick",198f4e22,2026-07-16,2026-07-16,"Sidekick data observatory setup","fable-5",47,87,90417,9706779,522421
+"SideKick","SideKick",198f4e22,2026-07-16,2026-07-16,"Sidekick data observatory setup","fable-5",79,145,163154,20584532,936247
 "Text-Adventure-Engine","Text-Adventure-Engine",7654955c,2026-05-28,2026-05-29,"Text_game/Base_1","opus-4-7",174,370,466353,54311569,1235975
 "weather-report","weather-report (worktree)",f24c43ea,2026-05-07,2026-05-07,"Weather_report/Prova","opus-4-7 + sonnet-4-6",80,137,42170,6811669,151725

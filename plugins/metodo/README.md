@@ -1,29 +1,30 @@
-# metodo — il metodo di lavoro human+AI di SideKick
+# metodo — SideKick's human+AI working method
 
-Rende il tuo **metodo di lavoro** la **condotta proattiva e auto-evolvente dell'AI**, in ogni
-progetto — senza comandi da ricordare, senza costrizioni.
+Turns your **working method** into the AI's **proactive, self-evolving conduct**, in every
+project — no commands to remember, no constraints.
 
-## Il cuore: la costituzione (nessun comando)
-[`COSTITUZIONE.md`](COSTITUZIONE.md) (IT) — English: [`CONSTITUTION.md`](CONSTITUTION.md) — è il
-metodo reso **istruzioni permanenti**. Copialo in
-`~/.claude/CLAUDE.md` (livello utente → vale per **tutti** i progetti) o nel `CLAUDE.md` di un
-progetto. Da quel momento l'AI, **da sola**:
-- cattura le idee in `_processo/IDEE.md` **senza farti perdere il filo**, e te le **ripropone**;
-- ti tiene su **design-first** e **micro-commit** *quando serve*, **senza forzarti**;
-- **aggiorna la costituzione stessa** quando il metodo cambia.
+## The core: the constitution (no commands)
+[`COSTITUZIONE.md`](COSTITUZIONE.md) (IT) — English: [`CONSTITUTION.md`](CONSTITUTION.md) — is
+the method turned into **permanent instructions**. Copy it into
+`~/.claude/CLAUDE.md` (user level → applies to **all** projects) or into a project's
+`CLAUDE.md`. From that moment the AI, **on its own**:
+- captures ideas in `_processo/IDEE.md` **without making you lose the thread**, and
+  **re-surfaces** them to you;
+- keeps you on **design-first** and **micro-commits** *when it matters*, **without forcing you**;
+- **updates the constitution itself** when the method changes.
 
-→ **Si usa così:** incolli un file, e l'AI *si comporta* così. Niente `/comandi`.
+→ **How you use it:** you paste a file, and the AI *behaves* that way. No `/commands`.
 
-## Opzionale: cattura esplicita
-Per chi la vuole, il plugin offre anche `/metodo:idea <testo>` (salva un'idea al volo). Ma la
-costituzione lo fa già **proattivamente**, quindi è secondario.
+## Optional: explicit capture
+For those who want it, the plugin also offers `/metodo:idea <text>` (save an idea on the fly).
+But the constitution already does this **proactively**, so it's secondary.
 
-## Installa il plugin (opzionale)
+## Install the plugin (optional)
 ```
 /plugin marketplace add robertotommasogrossi7-bit/SideKick
 /plugin install metodo@sidekick
 ```
 
-## Migliora / condividi
-È pensato per una **community che condivide e fa evolvere il proprio metodo con l'AI**: forka,
-migliora la tua `COSTITUZIONE.md`, apri una PR. La versione migliore "sale".
+## Improve / share
+It's meant for a **community that shares and evolves its own method with the AI**: fork,
+improve your own `COSTITUZIONE.md`, open a PR. The best version "rises".

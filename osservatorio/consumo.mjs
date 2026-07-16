@@ -1,21 +1,21 @@
-// osservatorio/consumo.mjs — conta i token di TUTTE le chat di Claude Code sul PC.
+// osservatorio/consumo.mjs — counts the tokens of ALL local Claude Code chats.
 //
-// Legge i transcript in ~/.claude/projects/*/*.jsonl e genera in osservatorio/consumo/:
-//   CONSUMO.md          il CRUSCOTTO: recap, top costi, lezioni, un link per progetto
-//   per-progetto/*.md   un file per progetto: tutte le sue sessioni con titolo
-//   consumo.csv         dati grezzi: progetto × modello × mese
-//   sessioni.csv        dati grezzi: una riga per sessione (cercabile)
+// Reads the transcripts in ~/.claude/projects/*/*.jsonl and generates in osservatorio/consumo/:
+//   CONSUMO.md          the DASHBOARD: recap, top costs, lessons, one link per project
+//   per-progetto/*.md   one file per project: all its sessions with titles
+//   consumo.csv         raw data: project × model × month
+//   sessioni.csv        raw data: ONE ROW PER SESSION, with the operation title (searchable)
 //
-// LEZIONI.md (nella stessa cartella) è CURATO A MANO dall'osservatorio: il cruscotto lo
-// incorpora in testa. Lo script non lo tocca mai.
+// LESSONS.md (same folder) is HAND-CURATED by the observatory: the dashboard embeds it.
+// The script never touches it. (Italian original: versione-italiano/osservatorio/consumo/LEZIONI.md)
 //
-// CENSURA: i progetti con "pubblico": false in osservatorio/censura.local.json escono
-// con l'alias e senza titoli. Quel file è SOLO locale (gitignorato, mai su GitHub).
+// REDACTION: projects with "pubblico": false in osservatorio/censura.local.json appear
+// under an alias and without titles. That file is LOCAL ONLY (gitignored, never on GitHub).
 //
-// AGENTI/WORKFLOW CLOUD: non lasciano transcript sul PC. I loro numeri si tengono a mano
-// in consumo/workflow.csv (una riga per workflow); lo script li rende nel report.
+// CLOUD AGENT WORKFLOWS: they leave no transcripts on the PC. Their numbers are kept by
+// hand in consumo/workflow.csv (one row per workflow); the script renders them.
 //
-// Uso: node osservatorio/consumo.mjs
+// Usage: node osservatorio/consumo.mjs
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -26,35 +26,35 @@ const fileCensura = path.join(qui, 'censura.local.json');
 const dirOut = path.join(qui, 'consumo');
 const dirProg = path.join(dirOut, 'per-progetto');
 const fileWorkflow = path.join(dirOut, 'workflow.csv');
-const fileLezioni = path.join(dirOut, 'LEZIONI.md');
+const fileLessons = path.join(dirOut, 'LESSONS.md');
 
-if (!fs.existsSync(base)) { console.error('Cartella transcript non trovata:', base); process.exit(1); }
+if (!fs.existsSync(base)) { console.error('Transcript folder not found:', base); process.exit(1); }
 fs.rmSync(dirProg, { recursive: true, force: true });
 fs.mkdirSync(dirProg, { recursive: true });
 
-// ---------- censura ----------
+// ---------- redaction ----------
 let censura = {};
 if (fs.existsSync(fileCensura)) censura = JSON.parse(fs.readFileSync(fileCensura, 'utf8'));
 const dirs = fs.readdirSync(base).filter(d => fs.statSync(path.join(base, d)).isDirectory());
 let prossimo = Object.values(censura).filter(v => /^progetto-\d+$/.test(v.alias)).length + 1;
 for (const d of dirs) {
   if (!censura[d]) {
-    // i progetti NUOVI nascono censurati: si scopre il nome mettendo "pubblico": true nel file locale
+    // NEW projects are born redacted: reveal one by setting "pubblico": true in the local file
     censura[d] = { alias: `progetto-${String(prossimo++).padStart(2, '0')}`, pubblico: false };
   }
 }
 fs.writeFileSync(fileCensura, JSON.stringify(censura, null, 2));
 
-// le chat dello stesso progetto si mettono INSIEME (worktree col progetto madre, test in un gruppo)
+// chats of the same project are grouped TOGETHER (worktrees with their parent, tests in one group)
 const gruppoDi = alias => {
-  if (/^esperimento /.test(alias)) return 'esperimenti (test del metodo)';
+  if (/^experiment /.test(alias)) return 'experiments (method tests)';
   if (alias === 'poker (worktree)') return "poker (Who's the Boss)";
   if (alias === 'weather-report (worktree)') return 'weather-report';
   return alias;
 };
 
 const modelloCorto = m => {
-  if (!m || m.startsWith('<')) return null; // '<synthetic>' = messaggi di sistema, senza costo
+  if (!m || m.startsWith('<')) return null; // '<synthetic>' = system messages, no cost
   return m.replace(/^claude-/, '').replace(/-\d{8}$/, '');
 };
 const pulisci = (s, max) => String(s).replace(/\s+/g, ' ').trim().slice(0, max);
@@ -62,10 +62,10 @@ const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, 
 const fmt = n => n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : n >= 1e3 ? Math.round(n / 1e3) + 'k' : String(n);
 const mdEsc = s => String(s).replace(/\|/g, '\\|');
 
-// ---------- scansione ----------
-const agg = new Map();      // alias \x1f modello \x1f mese -> tokens (per il CSV)
-const sessioni = [];        // una voce per file di sessione
-const vistiMsg = new Set(); // dedup: lo stesso message.id ricompare su resume/fork
+// ---------- scan ----------
+const agg = new Map();      // alias \x1f model \x1f month -> tokens (for the CSV)
+const sessioni = [];        // one entry per session file
+const vistiMsg = new Set(); // dedup: the same message.id reappears on resume/fork
 
 for (const d of dirs) {
   const dir = path.join(base, d);
@@ -77,7 +77,7 @@ for (const d of dirs) {
       alias, gruppo: gruppoDi(alias), pubblico, id: f.replace('.jsonl', '').slice(0, 8),
       titolo: null, aiTitolo: null, primoTesto: null,
       primo: null, ultimo: null, msg: 0, input: 0, output: 0, cacheR: 0, cacheW: 0,
-      modelli: new Map(), // modello -> output
+      modelli: new Map(), // model -> output
     };
     for (const ln of testo.split('\n')) {
       if (!ln) continue;
@@ -102,7 +102,7 @@ for (const d of dirs) {
       if (!u || !mod) continue;
       const id = msg.id || o.uuid;
       if (id) { if (vistiMsg.has(id)) continue; vistiMsg.add(id); }
-      const mese = o.timestamp ? o.timestamp.slice(0, 7) : 'sconosciuto';
+      const mese = o.timestamp ? o.timestamp.slice(0, 7) : 'unknown';
       const k = [alias, mod, mese].join('\x1f');
       let r = agg.get(k);
       if (!r) { r = { msg: 0, input: 0, output: 0, cacheR: 0, cacheW: 0 }; agg.set(k, r); }
@@ -117,33 +117,33 @@ for (const d of dirs) {
 }
 
 const descrizione = s => {
-  if (!s.pubblico) return '(censurato)';
-  return s.titolo || s.aiTitolo || s.primoTesto || '(senza titolo)';
+  if (!s.pubblico) return '(redacted)';
+  return s.titolo || s.aiTitolo || s.primoTesto || '(untitled)';
 };
 const modelliDi = s => {
   const ord = [...s.modelli.entries()].sort((a, b) => b[1] - a[1]).map(x => x[0]);
   return ord.length <= 2 ? ord.join(' + ') : `${ord[0]} +${ord.length - 1}`;
 };
 
-// ---------- CSV grezzi (granularità alias, NON gruppo) ----------
+// ---------- raw CSVs (alias granularity, NOT group) ----------
 const righe = [...agg.entries()].map(([k, r]) => {
   const [prog, mod, mese] = k.split('\x1f');
   return { prog, mod, mese, ...r };
 }).sort((a, b) => a.prog.localeCompare(b.prog) || a.mese.localeCompare(b.mese) || a.mod.localeCompare(b.mod));
 
 fs.writeFileSync(path.join(dirOut, 'consumo.csv'),
-  ['progetto,modello,mese,messaggi,token_input,token_output,cache_letta,cache_scritta']
+  ['project,model,month,messages,input_tokens,output_tokens,cache_read,cache_written']
     .concat(righe.map(r => [r.prog, r.mod, r.mese, r.msg, r.input, r.output, r.cacheR, r.cacheW].join(',')))
     .join('\n') + '\n');
 
 const csvq = s => `"${String(s).replace(/"/g, '""')}"`;
 sessioni.sort((a, b) => a.gruppo.localeCompare(b.gruppo) || String(a.primo).localeCompare(String(b.primo)));
 fs.writeFileSync(path.join(dirOut, 'sessioni.csv'),
-  ['gruppo,progetto,sessione,inizio,fine,operazione,modelli,messaggi,token_input,token_output,cache_letta,cache_scritta']
+  ['group,project,session,start,end,operation,models,messages,input_tokens,output_tokens,cache_read,cache_written']
     .concat(sessioni.map(s => [csvq(s.gruppo), csvq(s.alias), s.id, s.primo, s.ultimo, csvq(descrizione(s)), csvq(modelliDi(s)), s.msg, s.input, s.output, s.cacheR, s.cacheW].join(',')))
     .join('\n') + '\n');
 
-// ---------- workflow.csv (agenti cloud, tenuto a mano) ----------
+// ---------- workflow.csv (cloud agents, hand-maintained) ----------
 let workflow = [];
 if (fs.existsSync(fileWorkflow)) {
   const [, ...corpo] = fs.readFileSync(fileWorkflow, 'utf8').trim().split('\n');
@@ -154,8 +154,8 @@ if (fs.existsSync(fileWorkflow)) {
 }
 const totW = workflow.reduce((a, w) => a + w.token, 0);
 
-// ---------- aggregati per GRUPPO (il cruscotto ragiona per progetto vero) ----------
-const gruppi = new Map(); // gruppo -> {sess:[], t:{...}, primo, ultimo}
+// ---------- per-GROUP aggregates (the dashboard thinks in real projects) ----------
+const gruppi = new Map();
 for (const s of sessioni) {
   let g = gruppi.get(s.gruppo);
   if (!g) { g = { sess: [], msg: 0, input: 0, output: 0, cacheR: 0, cacheW: 0, primo: null, ultimo: null, pubblico: s.pubblico }; gruppi.set(s.gruppo, g); }
@@ -166,33 +166,33 @@ for (const s of sessioni) {
 }
 const ordGruppi = [...gruppi.entries()].sort((a, b) => (b[1].input + b[1].output) - (a[1].input + a[1].output));
 
-// ---------- file per progetto ----------
+// ---------- per-project files ----------
 const rigaSess = s => `| ${s.primo}${s.ultimo !== s.primo ? '→' + String(s.ultimo).slice(5) : ''} | ${mdEsc(descrizione(s))}${s.alias !== s.gruppo ? ` *(${mdEsc(s.alias)})*` : ''} | ${modelliDi(s)} | ${fmt(s.msg)} | ${fmt(s.input)} | ${fmt(s.output)} | ${fmt(s.cacheR)} |`;
 
 for (const [nome, g] of ordGruppi) {
   const wf = workflow.filter(w => gruppoDi(w.prog) === nome);
   const sess = [...g.sess].sort((a, b) => String(a.primo).localeCompare(String(b.primo)));
-  const testo = `# ${nome} — consumo token (generato)
+  const testo = `# ${nome} — token usage (generated)
 
-> Torna al cruscotto: [\`../CONSUMO.md\`](../CONSUMO.md). Non modificare a mano.
+> Back to the dashboard: [\`../CONSUMO.md\`](../CONSUMO.md). Do not edit by hand.
 
-**${g.sess.length} sessioni** dal ${g.primo} al ${g.ultimo} · **${fmt(g.output)} output** ·
-${fmt(g.input)} input · ${fmt(g.cacheR)} cache letta · ${fmt(g.msg)} messaggi${wf.length ? ` · **+${fmt(wf.reduce((a, w) => a + w.token, 0))} di agenti cloud** (${wf.length} workflow)` : ''}
+**${g.sess.length} sessions** from ${g.primo} to ${g.ultimo} · **${fmt(g.output)} output** ·
+${fmt(g.input)} input · ${fmt(g.cacheR)} cache read · ${fmt(g.msg)} messages${wf.length ? ` · **+${fmt(wf.reduce((a, w) => a + w.token, 0))} cloud-agent tokens** (${wf.length} workflows)` : ''}
 
-## Le sessioni (in ordine di tempo — il titolo dice cosa si è fatto)
-| Periodo | Operazione | Modelli | Msg | Input | Output | Cache letta |
+## Sessions (in time order — the title says what was done)
+| Period | Operation | Models | Msg | Input | Output | Cache read |
 |---|---|---|---|---|---|---|
 ${sess.map(rigaSess).join('\n')}
 ${wf.length ? `
-## Workflow di agenti cloud su questo progetto
-| Data | Operazione | Agenti | Token agenti | Fonte |
+## Cloud agent workflows on this project
+| Date | Operation | Agents | Agent tokens | Source |
 |---|---|---|---|---|
 ${wf.map(w => `| ${w.data} | ${mdEsc(w.operazione)} | ${w.agenti} | ${fmt(w.token)} | ${mdEsc(w.fonte)} |`).join('\n')}
 ` : ''}`;
   fs.writeFileSync(path.join(dirProg, slug(nome) + '.md'), testo);
 }
 
-// ---------- cruscotto ----------
+// ---------- dashboard ----------
 const T = { msg: 0, input: 0, output: 0, cacheR: 0, cacheW: 0 };
 for (const [, g] of ordGruppi) { T.msg += g.msg; T.input += g.input; T.output += g.output; T.cacheR += g.cacheR; T.cacheW += g.cacheW; }
 
@@ -204,65 +204,65 @@ const totPer = sel => {
 const modelli = [...new Set(righe.map(r => r.mod))].map(m => ({ m, t: totPer(r => r.mod === m) })).sort((a, b) => b.t.output - a.t.output);
 const mesi = [...new Set(righe.map(r => r.mese))].sort().map(m => ({ m, t: totPer(r => r.mese === m) }));
 
-// top costi: sessioni + workflow insieme, per token di output/agenti
+// top costs: sessions + workflows together, by output/agent tokens
 const top = [
   ...sessioni.map(s => ({ tipo: 'chat', nome: `${descrizione(s)} — ${s.gruppo}`, quando: s.primo, tok: s.output })),
-  ...workflow.map(w => ({ tipo: 'agenti cloud', nome: `${w.operazione} — ${gruppoDi(w.prog)}`, quando: w.data, tok: w.token })),
+  ...workflow.map(w => ({ tipo: 'cloud agents', nome: `${w.operazione} — ${gruppoDi(w.prog)}`, quando: w.data, tok: w.token })),
 ].sort((a, b) => b.tok - a.tok).slice(0, 8);
 
-const lezioni = fs.existsSync(fileLezioni)
-  ? fs.readFileSync(fileLezioni, 'utf8').replace(/^# .*\n/, '').trim()
-  : '*(scrivere `LEZIONI.md` in questa cartella: il cruscotto lo incorpora qui)*';
+const lezioni = fs.existsSync(fileLessons)
+  ? fs.readFileSync(fileLessons, 'utf8').replace(/^# .*\n/, '').trim()
+  : '*(write `LESSONS.md` in this folder: the dashboard embeds it here)*';
 
-const md = `# CONSUMO — cruscotto token (generato)
+const md = `# TOKEN USAGE — dashboard (generated)
 
-> Generato da \`osservatorio/consumo.mjs\` il ${new Date().toISOString().slice(0, 10)}. **Non modificare a
-> mano** (tranne \`LEZIONI.md\`, che è curato dall'osservatorio e viene incorporato qui sotto).
-> Il dettaglio di ogni progetto è in \`per-progetto/\` (un file a progetto, tabella per sessione).
-> Dati grezzi: \`consumo.csv\` · \`sessioni.csv\` (cercabile: grep "react", "audit", "Feature_6"…).
-> Progetti riservati censurati (legenda solo locale). *Output* = token generati (i più pesanti);
-> *input* = token letti pieni; *cache letta* = contesto riletto (~1/10 dell'input).
+> Generated by \`osservatorio/consumo.mjs\` on ${new Date().toISOString().slice(0, 10)}. **Do not edit by
+> hand** (except \`LESSONS.md\`, which is curated by the observatory and embedded below).
+> Each project's detail is in \`per-progetto/\` (one file per project, one table row per session).
+> Raw data: \`consumo.csv\` · \`sessioni.csv\` (searchable: grep "react", "audit", "Feature_6"…).
+> Reserved projects are redacted (legend kept local only). *Output* = generated tokens (the
+> heaviest); *input* = tokens read at full price; *cache read* = context re-read (~1/10 of input).
 
-## In breve
-- **${fmt(T.output)} token di output** (+ **${fmt(totW)}** di agenti cloud) in **${sessioni.length} sessioni**
-  su **${ordGruppi.length} progetti**, da ${mesi[0]?.m || '?'} a oggi. ${fmt(T.msg)} messaggi totali.
-- La **cache** ha riletto ${fmt(T.cacheR)} token (≈${Math.round(T.cacheR / (T.input + T.output))}× i token vivi): riprendere una
-  chat con la cache calda è ciò che rende sostenibile il piano — ricominciare da zero la butta.
+## At a glance
+- **${fmt(T.output)} output tokens** (+ **${fmt(totW)}** from cloud agents) across **${sessioni.length} sessions**
+  in **${ordGruppi.length} projects**, from ${mesi[0]?.m || '?'} to today. ${fmt(T.msg)} messages in total.
+- The **cache** re-read ${fmt(T.cacheR)} tokens (≈${Math.round(T.cacheR / (T.input + T.output))}× the live tokens): resuming a chat
+  on a warm cache is what keeps the plan sustainable — restarting from scratch throws it away.
 
-## Le cose che sono costate di più
-| # | Cosa | Tipo | Quando | Token |
+## The most expensive things
+| # | What | Type | When | Tokens |
 |---|---|---|---|---|
 ${top.map((t, i) => `| ${i + 1} | ${mdEsc(t.nome)} | ${t.tipo} | ${t.quando} | ${fmt(t.tok)} |`).join('\n')}
 
-## Cosa abbiamo imparato sul costo (e ridotto davvero)
+## What we learned about cost (and actually reduced)
 ${lezioni}
 
-## Per progetto (clicca per il dettaglio delle sessioni)
-| Progetto | Periodo | Sessioni | Output | Input | Cache letta |
+## By project (click for the per-session detail)
+| Project | Period | Sessions | Output | Input | Cache read |
 |---|---|---|---|---|---|
 ${ordGruppi.map(([nome, g]) => `| [${mdEsc(nome)}](per-progetto/${slug(nome)}.md) | ${g.primo} → ${g.ultimo} | ${g.sess.length} | ${fmt(g.output)} | ${fmt(g.input)} | ${fmt(g.cacheR)} |`).join('\n')}
 
-## Lavoro degli agenti (workflow cloud — registro a mano)
-I workflow multi-agente girano nel cloud e **non lasciano transcript sul PC**: questi numeri
-vengono dai METRICHE/report dei progetti. **Dopo ogni nuovo workflow, aggiungere una riga a
-\`workflow.csv\`** (il rituale dell'osservatorio lo ricorda).
+## Cloud agent work (workflows — hand-maintained register)
+Multi-agent workflows run in the cloud and **leave no transcripts on the PC**: these numbers
+come from the projects' METRICHE/report files. **After every new workflow, add one row to
+\`workflow.csv\`** (the observatory ritual includes the reminder).
 
-| Data | Progetto | Operazione | Agenti | Token agenti |
+| Date | Project | Operation | Agents | Agent tokens |
 |---|---|---|---|---|
-${workflow.map(w => `| ${w.data} | ${mdEsc(gruppoDi(w.prog))} | ${mdEsc(w.operazione)} | ${w.agenti} | ${fmt(w.token)} |`).join('\n') || '| — | — | *(nessuno registrato)* | — | — |'}
+${workflow.map(w => `| ${w.data} | ${mdEsc(gruppoDi(w.prog))} | ${mdEsc(w.operazione)} | ${w.agenti} | ${fmt(w.token)} |`).join('\n') || '| — | — | *(none registered)* | — | — |'}
 
-## Per modello (solo chat locali)
-| Modello | Msg | Input | Output | Cache letta |
+## By model (local chats only)
+| Model | Msg | Input | Output | Cache read |
 |---|---|---|---|---|
 ${modelli.map(({ m, t }) => `| ${m} | ${fmt(t.msg)} | ${fmt(t.input)} | ${fmt(t.output)} | ${fmt(t.cacheR)} |`).join('\n')}
 
-## Per mese
-| Mese | Msg | Input | Output | Cache letta |
+## By month
+| Month | Msg | Input | Output | Cache read |
 |---|---|---|---|---|
 ${mesi.map(({ m, t }) => `| ${m} | ${fmt(t.msg)} | ${fmt(t.input)} | ${fmt(t.output)} | ${fmt(t.cacheR)} |`).join('\n')}
 `;
 fs.writeFileSync(path.join(dirOut, 'CONSUMO.md'), md);
 
-console.log(`OK: ${dirs.length} cartelle, ${ordGruppi.length} progetti, ${sessioni.length} sessioni, ${vistiMsg.size} messaggi unici.`);
-console.log('Scritti: CONSUMO.md (cruscotto), per-progetto/ (' + ordGruppi.length + ' file), consumo.csv, sessioni.csv');
-console.log('Legenda censura (LOCALE, non committare):', fileCensura);
+console.log(`OK: ${dirs.length} folders, ${ordGruppi.length} projects, ${sessioni.length} sessions, ${vistiMsg.size} unique messages.`);
+console.log('Written: CONSUMO.md (dashboard), per-progetto/ (' + ordGruppi.length + ' files), consumo.csv, sessioni.csv');
+console.log('Redaction legend (LOCAL, do not commit):', fileCensura);
