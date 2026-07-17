@@ -191,6 +191,8 @@
   column.
 - **Multi-agent workflow completed** → 1 line in SideKick's `observatory/usage/workflow.csv`
   (cloud workflows don't leave a transcript on the PC: without that line their tokens are lost).
+- **Dates without clock times**: documents record the **day** (`YYYY-MM-DD`), never the hour;
+  time spans are written as **durations** ("30 minutes", "2 hours"), never "from 2:30 to 3".
 
 ## External eyes before going public
 - Before publishing anything **outside private channels** — PRs, issue comments, READMEs, posts,

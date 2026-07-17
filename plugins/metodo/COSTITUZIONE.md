@@ -179,6 +179,8 @@
   quando l'esito si vede — anche mesi dopo — riempi la colonna **Esito osservato**.
 - **Workflow multi-agente concluso** → 1 riga in SideKick `observatory/usage/workflow.csv`
   (i workflow cloud non lasciano transcript sul PC: senza quella riga i loro token si perdono).
+- **Date senza orari**: nei documenti si scrive il **giorno** (`YYYY-MM-DD`), mai le ore; le
+  distanze di tempo come **durate** ("30 minuti", "2 ore"), mai "dalle 2:30 alle 3".
 
 ## Sguardo esterno prima di esporsi
 - Prima di pubblicare qualcosa **fuori dai canali privati** — PR, commenti su issue, README, post,
