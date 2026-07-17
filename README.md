@@ -38,6 +38,8 @@ The committed [dashboard](observatory/usage/DASHBOARD.md) is exactly what the ou
 
 ## The lab (live data)
 
+[![The usage dashboard: totals at a glance and the most expensive operations](docs/img/DASHBOARD.png)](observatory/usage/DASHBOARD.md)
+
 [`observatory/`](observatory/) is the observatory (English; Italian originals in
 [`versione-italiano/`](versione-italiano/LEGGIMI.md)):
 
@@ -52,6 +54,11 @@ The committed [dashboard](observatory/usage/DASHBOARD.md) is exactly what the ou
   fixes are all in the open.
 - [`DATA.md`](observatory/DATA.md) / [`PLAN.md`](observatory/PLAN.md) — what the data can
   and cannot say yet, and what's next.
+
+Every project gets its own drilldown — here is a real app's build history, session by
+session, named operation by named operation:
+
+[![One project's sessions: period, operation title, models, tokens](docs/img/WTB.png)](observatory/usage/per-project/poker-who-s-the-boss.md)
 
 A few sampled findings (details and caveats inside): a heavy multi-agent audit found real
 critical bugs on both projects it ran on, at a known cost (N=2); in a single cross-model

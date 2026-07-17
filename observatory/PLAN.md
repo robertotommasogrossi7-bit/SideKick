@@ -57,8 +57,11 @@ interesting for those who already use Spec Kit.
 - [x] Tests for `usage.mjs` (JSONL fixture: dedup by message.id, redaction of unknown
       projects, model totals, dashboard sums). `cost-meter.mjs` tests: still open.
 - [x] English CONTRIBUTING.md (study participation, attack-the-data, tool PRs).
-- [ ] Dashboard screenshot in the README — Roberto takes it from the GitHub-rendered
-      DASHBOARD.md (guide given), saves to `docs/img/`, then it gets wired in.
+- [x] Dashboard screenshots in the README — taken by Roberto from the GitHub-rendered
+      pages (DASHBOARD.png + WTB.png in `docs/img/`), wired in on 2026-07-17.
+- [ ] Optional, someday: if ccusage's exports ever cover our needs (redaction, per-operation
+      attribution), consider importing its JSON instead of parsing JSONL ourselves. Today:
+      coexist — ccusage for day-to-day console reports, usage.mjs for the publishable dataset.
 - [ ] Full "operating hypotheses" tone pass on CONSTITUTION/COSTITUZIONE (soften NEVER/ALWAYS,
       N next to each claim).
 - [ ] De-Claude sweep of remaining docs (framing done in README title/intro).
