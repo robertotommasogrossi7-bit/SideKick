@@ -1,70 +1,62 @@
-# PLAN — steps agreed on 2026-07-16 (for upcoming sessions)
+# PLAN — the single ordered backlog (updated 2026-07-17)
 
-> Decided with Roberto in the observatory chat. Recommended order top to bottom.
-> Check off when done.
+> Decided with Roberto in the observatory chat. **The backlog below is THE list**: work top
+> to bottom, check off when done. History of completed phases at the bottom.
 
-## 1. Method master in the repo — ✅ DONE 2026-07-16
-- [x] The source of truth is `plugins/metodo/COSTITUZIONE.md` (v1.5); `~/.claude/CLAUDE.md` is
-      the **mirror** regenerated from the master.
-- [x] Protected mirror: `deny` rule on Edit/Write of `~/.claude/CLAUDE.md` in
-      `~/.claude/settings.json` (every chat reads it, none touches it).
-- [x] The observatory ritual compares mirror ↔ master and flags drift.
+## NEXT — ordered backlog (value ÷ effort, post Spec Kit study)
 
-## 2. CONSTITUTION update — v1.5 DONE 2026-07-16, foreign copies remain
-- [x] Data contract integrated (chat titles · ESPERIMENTI · Observed outcome · workflow.csv ·
-      automatic consumption) + handoff-with-numbers rule (cache/window) + Spec Kit section.
-- [x] Spec Kit drop-in `plugins/metodo/spec-kit/constitution.md` realigned (v1.5.0,
-      new principles VIII-XI).
-- [x] `CONSTITUTION.md` (English, stuck at ~v1.0): translate the full v1.5 —
-      **task for a Sonnet chat, effort high** (scoped translation) — DONE 2026-07-17
-      (this translation).
-- [ ] `spec-kit-metodo` repo: copy the v1.5.0 constitution just translated/verified.
+1. [ ] **Fix the two published claims about Spec Kit** (from the double-run study, both
+       verified at the source): (a) "constitution is read-once and passive" is FALSE — it is
+       loaded by every core command and gates `/analyze` as automatically-CRITICAL;
+       (b) "a method ships as a drop-in, not a preset" was true until Spec Kit v0.12.15
+       (2026-07-14), which lets a preset seed the constitution verbatim. Fix in FINDINGS.md,
+       `plugins/metodo/spec-kit/README.md`, and the "Kinship" section of both constitutions —
+       **showing the dated correction**, not hiding it.
+2. [ ] **Fix the three repo bugs** found by the study: CI runs a hardcoded single test file
+       (new tests would silently never run); CONTRIBUTING claims `cost-meter.mjs` has tests
+       (it doesn't); CLAUDE.md still says `consumo/`.
+3. [ ] **Method CHANGELOG + git tag** (`plugins/metodo/CHANGELOG.md`, tag `metodo-v1.5`):
+       a self-amending constitution with no amendment history asserts evolution without
+       evidence. Hand-written, one line per amendment.
+4. [ ] **markdownlint + link checker in CI**: the repo is ~90% prose and ≥1 cross-folder link
+       broke in the rename; today the badge certifies only the JS. (Copy Spec Kit's lint
+       escape hatches; adopt the link-check principle, not their config.)
+5. [ ] **CSV data dictionary** (`observatory/usage/SCHEMA.md`): the headline dataset ships
+       with no column/units documentation.
+6. [ ] **Drop-in cleanup** (`plugins/metodo/spec-kit/constitution.md`): move the top HTML
+       comment to the README (it squats on the slot where `/speckit.constitution` writes its
+       Sync Impact Report); remove leaked `_processo/*` Italian paths from the
+       "depersonalized" variant; fix Governance for forks (on adoption, the fork is the
+       master); soften vendor-specific Principle IX for their ~30-integration ecosystem.
+7. [ ] **Tests for `cost-meter.mjs`** (fixture-based, like usage.mjs) — then the CONTRIBUTING
+       sentence becomes true again in its stronger form.
+8. [ ] **"Operating hypotheses" tone pass** on CONSTITUTION/COSTITUZIONE: soften NEVER/ALWAYS
+       into hypotheses with N; link claims to `observatory/STRATEGIES.md`.
+9. [ ] **Update the spec-kit clone and TEST the preset path empirically** (`specify init`
+       with a preset on ≥0.12.15, diff `.specify/memory/constitution.md`): only then decide
+       whether to ship `plugins/metodo/spec-kit/preset.yml` alongside the drop-in. Also copy
+       the current constitution to the `spec-kit-metodo` repo.
+10. [ ] **De-Claude sweep** of remaining docs (README title/intro already reframed to
+        "AI coding agent").
+11. [ ] **Dataset release v0.1** (git tag + release notes) once the SCHEMA.md exists.
+12. [ ] **MANUAL (Roberto)**: repo description + topics on GitHub; decide on username rename.
+13. [ ] Later, data-driven: METRICHE for progetto-15 (full-vs-incremental A/B) · API
+        cost-equivalent per model (prices verified at source) · CSV→SQLite at hundreds of
+        rows · ccusage-as-input if its exports ever cover redaction + per-operation needs.
 
-## 3. GitHub repositioning — line UPDATED by the 2026-07-16 red team
-Double red team (Claude+ChatGPT) done: verdicts and verifications in
-`observatory/redteam/VERDICTS.md`. New line: **not "method laboratory"
-but "case study with real data + reusable tools"** — the method is an appendix.
-- [x] External pre-publication red team (2026-07-16) + verifications at the source + fixes.
-- [x] Root README in ENGLISH (2026-07-16): (1) what you take away — tool + dataset + FINDINGS —
-      (2) the laboratory — (3) method in appendix as "operating hypotheses". Italian facade
-      in `versione-italiano/LEGGIMI.md`; Italian docs (GUIDA, glossary, library, engine,
-      OSSERVATORIO, CONTRIBUIRE) moved to `versione-italiano/`.
-- [x] Roberto's decisions (2026-07-16): (a) progetto-15 stays as-is, reassessed at launch;
-      (b) Spotify rule → reworded as "industry leader" in the CONSTITUTION.
-- [ ] GitHub repo description + topics (claude-code, spec-kit, token-usage, case-study…).
-- [ ] Budget from here on: ~80% experiments / 20% method maintenance (ROI verdict).
+**Open decision (Roberto)**: keep `versione-italiano/` as frozen originals + live LEGGIMI
+(observatory recommendation: yes — a live full mirror means translating every change twice
+and the two dashboards already drifted apart within a day), or invest in a live mirror.
 
-## 4. Alignment with GitHub Spec Kit (study, then decisions)
-Why: they're further ahead on organization, and speaking their language makes SideKick
-interesting for those who already use Spec Kit.
-- [ ] Study the spec-kit repo structure (local clone in `Programmi/spec-kit`):
-      `.specify/memory/` (constitution), templates (spec/plan/tasks), commands.
-- [ ] Map our artifacts onto their concepts (COSTITUZIONE→constitution;
-      mini-spec→spec template; roadmap/phases→plan/tasks) and adopt what's worthwhile.
-- [ ] Keep the `plugins/metodo/spec-kit/` drop-in always in sync with the master (point 2).
-
-## 5. Consumption data — possible evolutions (as the data grows)
-- [ ] Lightweight METRICHE.md for progetto-15, if we want to save the full-vs-incremental A/B.
-- [ ] Add the estimated API cost-equivalent per model to the report (with prices
-      verified at the source, never from memory).
-- [ ] Move from CSV to SQLite once rows are counted in the hundreds (trivial migration).
-
-## 6. Workshop block (from red team round 2) — largely DONE 2026-07-17
-- [x] Italian folder/file names renamed to English (`observatory/`, `experiments/`, `usage/`,
-      `per-project/`, `DASHBOARD.md`, `usage.csv`, `sessions.csv`, `cost-meter.mjs`, `oracle/`)
-      with a full reference sweep.
-- [x] CI (GitHub Actions) with badge in the README: 4 script tests run on every push.
-- [x] Tests for `usage.mjs` (JSONL fixture: dedup by message.id, redaction of unknown
-      projects, model totals, dashboard sums). `cost-meter.mjs` tests: still open.
-- [x] English CONTRIBUTING.md (study participation, attack-the-data, tool PRs).
-- [x] Dashboard screenshots in the README — taken by Roberto from the GitHub-rendered
-      pages (DASHBOARD.png + WTB.png in `docs/img/`), wired in on 2026-07-17.
-- [ ] Optional, someday: if ccusage's exports ever cover our needs (redaction, per-operation
-      attribution), consider importing its JSON instead of parsing JSONL ourselves. Today:
-      coexist — ccusage for day-to-day console reports, usage.mjs for the publishable dataset.
-- [ ] Full "operating hypotheses" tone pass on CONSTITUTION/COSTITUZIONE (soften NEVER/ALWAYS,
-      N next to each claim).
-- [ ] De-Claude sweep of remaining docs (framing done in README title/intro).
-- [ ] Dataset release/tag (v0.1) + documented CSV schema (columns, units).
-- [ ] MANUAL (Roberto, decided: AFTER the Spec Kit study): repo description + topics;
-      decide on username rename.
+## Done (compressed history)
+- **2026-07-16** — Method master in repo + read-only mirror with deny rule · COSTITUZIONE
+  v1.5 (data contract, handoff economics, Spec Kit kinship) · red team round 1 → repository
+  repositioned as "case study with real data + reusable tools" (verdicts in
+  `redteam/VERDICTS.md`) · progetto-15 kept generic; Spotify rule generalized.
+- **2026-07-17** — Full English facade (11 docs translated incl. CONSTITUTION v1.5; Italian
+  originals frozen in `versione-italiano/`) · red team round 2 worked (ccusage claim
+  rewritten, N=2 degraded, sources linked, 21 FROZEN banners) · English names everywhere
+  (`observatory/`, `experiments/`, `usage/`…) · tests (4 green) + CI badge + English
+  CONTRIBUTING + real screenshots in README · glossary removed from public · **Spec Kit
+  double-run study** (Opus ×2 — first Table-2 data point: union > single run; reports in
+  scratchpad `speckit-run-A/B.md`).

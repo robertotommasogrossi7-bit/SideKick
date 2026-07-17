@@ -10,9 +10,10 @@ Thanks for stopping by. The most useful contributions right now, in order:
    doesn't add up, or a claim isn't supported by the stated N, open an issue — this repo's
    whole point is being verifiable. (Two external AI red-team rounds are already public in
    [`observatory/redteam/VERDICTS.md`](observatory/redteam/VERDICTS.md).)
-3. **Improve the tools.** [`observatory/usage.mjs`](observatory/usage.mjs) and
-   [`experiments/cost-meter.mjs`](experiments/cost-meter.mjs) have tests in
-   [`tests/`](tests/) and CI runs them on every push. PRs with a test are easiest to merge.
+3. **Improve the tools.** [`observatory/usage.mjs`](observatory/usage.mjs) has tests in
+   [`tests/`](tests/) and CI runs them on every push
+   ([`experiments/cost-meter.mjs`](experiments/cost-meter.mjs) doesn't have tests yet —
+   adding them would be a great first PR). PRs with a test are easiest to merge.
 
 Issues and PRs are welcome **in English or Italian**. The legacy track (contributing a
 distilled feature-package) is documented in Italian in

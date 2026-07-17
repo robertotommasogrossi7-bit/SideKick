@@ -13,4 +13,4 @@ jobs:
         with:
           node-version: 20
       - name: "Run script tests (node --test)"
-        run: node --test tests/usage.test.mjs
+        run: node --test tests/*.test.mjs

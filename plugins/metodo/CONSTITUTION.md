@@ -242,9 +242,11 @@
   */plan* + */tasks* · verify before "done" ↔ tasks' *checks*. A **ready-made drop-in** for Spec
   Kit is in `plugins/metodo/spec-kit/constitution.md` and realigns with the master at every
   version — it is also the **depersonalized, reusable variant** of the method (this file is the
-  lived-in copy: it names Roberto and our own files). What our method adds to Spec Kit: **self-amendment** (the method evolves), the
-  **data contract** (the observatory learns from the numbers), and the choice of
-  **model+effort per step**.
+  lived-in copy: it names Roberto and our own files). What our method adds to Spec Kit:
+  **proactive self-amendment** (Spec Kit already has amendments with semantic versioning and
+  sync reports, but only on request: here the agent proposes them unprompted — verified on
+  their code 2026-07-17), the **data contract** (the observatory learns from the numbers),
+  and the choice of **model+effort per step**.
 
 ## The method improves itself
 - If you notice one of these rules **no longer helps**, or that a **better** one is needed,

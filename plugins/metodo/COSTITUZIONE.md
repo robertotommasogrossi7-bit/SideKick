@@ -228,9 +228,10 @@
   */plan* + */tasks* · verifica prima di "fatto" ↔ i *checks* dei task. Un **drop-in pronto**
   per Spec Kit è in `plugins/metodo/spec-kit/constitution.md` e si riallinea al master a ogni
   versione — ed è anche la **variante spersonalizzata e riusabile** del metodo (questo file è la
-  copia vissuta: nomina Roberto e i nostri file). Ciò che il nostro metodo aggiunge a Spec Kit: l'**auto-emendamento** (il metodo
-  evolve), il **contratto dati** (l'osservatorio impara dai numeri) e la scelta
-  **modello+effort per passo**.
+  copia vissuta: nomina Roberto e i nostri file). Ciò che il nostro metodo aggiunge a Spec Kit:
+  l'**auto-emendamento proattivo** (Spec Kit ha già emendamenti con versioni e sync report, ma
+  solo su richiesta: qui è l'agente a proporli da solo — verificato sul loro codice 2026-07-17),
+  il **contratto dati** (l'osservatorio impara dai numeri) e la scelta **modello+effort per passo**.
 
 ## Il metodo si migliora da solo
 - Se noti che una di queste regole **non serve più**, o che ne servirebbe una **migliore**,

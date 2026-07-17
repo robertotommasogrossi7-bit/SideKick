@@ -89,18 +89,25 @@ small with/without study, open an issue on this repo.
   results, and the adversarial external review (`versione-italiano/_processo/`, raw logs in Italian).
 - **A proposal, clearly labeled as untested:** a proactive, self-amending working-method
   constitution (`plugins/metodo/`), also in Spec Kit drop-in format
-  (`plugins/metodo/spec-kit/constitution.md`, placed at `.specify/memory/constitution.md`). Spec
-  Kit's own constitution is read-once and passive; this one instructs the agent to evolve it. No
-  evidence yet that self-amendment improves anything — that's the human study above.
+  (`plugins/metodo/spec-kit/constitution.md`, placed at `.specify/memory/constitution.md`).
+  Spec Kit's constitution is actively enforced and already has amendment machinery (semantic
+  versioning, sync impact reports); what ours adds is only that the amendment is
+  *agent-initiated* — proposed unprompted. No evidence yet that this improves anything —
+  that's the human study above. *(Corrected 2026-07-17: an earlier version called their
+  constitution "read-once and passive" — wrong; every core Spec Kit command loads it and
+  `/analyze` treats conflicts as automatically CRITICAL.)*
 
 ## Relation to Spec Kit
 
 [GitHub Spec Kit](https://github.com/github/spec-kit) ritualizes spec-first development — which is
 plausibly why it's adopted: it scaffolds the *human's* process, not the model's capability. That
 reading is consistent with my probes, but on this evidence it's an interpretation, not a result.
-(Mechanical note for anyone shipping method-content to Spec Kit: presets/extensions override
-*templates* (`spec`/`plan`/`tasks`); a constitution is *memory* (`.specify/memory/`), so a method
-ships as a constitution drop-in, not a preset.)
+(Mechanical note for anyone shipping method-content to Spec Kit: a constitution lives in
+*memory* (`.specify/memory/`) and survives `init`, so a constitution drop-in always works;
+since Spec Kit v0.12.15 (2026-07-14) a *preset* can additionally seed the constitution
+verbatim at init. *Corrected 2026-07-17 — the previous note said "not a preset", which was
+true up to v0.12.14 and then falsified upstream; we caught it during a double-run study of
+their repo.*)
 
 ---
 
