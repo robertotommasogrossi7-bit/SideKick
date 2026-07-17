@@ -1,7 +1,7 @@
 # STRATEGIE del metodo — costi e guadagni (registro onesto)
 
 > ⚠️ **COPIA CONGELATA (2026-07-17)** — originale italiano storico, non più aggiornato.
-> La versione viva è in inglese: [../../osservatorio/STRATEGIES.md](../../osservatorio/STRATEGIES.md)
+> La versione viva è in inglese: [../../observatory/STRATEGIES.md](../../observatory/STRATEGIES.md)
 
 > **Cos'è**: ogni scelta di metodo/processo che stiamo testando, con **quanto ci costa** (token,
 > misurati dove possibile) e **quanto ci ha reso** (benefici osservati, concreti). Stessa onestà

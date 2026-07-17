@@ -1,7 +1,7 @@
 # PIANO — passi decisi il 2026-07-16 (da eseguire nelle prossime sessioni)
 
 > ⚠️ **COPIA CONGELATA (2026-07-17)** — originale italiano storico, non più aggiornato.
-> La versione viva è in inglese: [../../osservatorio/PLAN.md](../../osservatorio/PLAN.md)
+> La versione viva è in inglese: [../../observatory/PLAN.md](../../observatory/PLAN.md)
 
 > Deciso con Roberto nella chat-osservatorio. Ordine consigliato dall'alto in basso.
 > Spuntare quando fatto.

@@ -15,19 +15,19 @@
 2. [ ] **Fix the three repo bugs** found by the study: CI runs a hardcoded single test file
        (new tests would silently never run); CONTRIBUTING claims `cost-meter.mjs` has tests
        (it doesn't); CLAUDE.md still says `consumo/`.
-3. [ ] **Method CHANGELOG + git tag** (`plugins/metodo/CHANGELOG.md`, tag `metodo-v1.5`):
-       a self-amending constitution with no amendment history asserts evolution without
-       evidence. Hand-written, one line per amendment.
-4. [ ] **markdownlint + link checker in CI**: the repo is ~90% prose and ≥1 cross-folder link
-       broke in the rename; today the badge certifies only the JS. (Copy Spec Kit's lint
-       escape hatches; adopt the link-check principle, not their config.)
-5. [ ] **CSV data dictionary** (`observatory/usage/SCHEMA.md`): the headline dataset ships
-       with no column/units documentation.
-6. [ ] **Drop-in cleanup** (`plugins/metodo/spec-kit/constitution.md`): move the top HTML
-       comment to the README (it squats on the slot where `/speckit.constitution` writes its
-       Sync Impact Report); remove leaked `_processo/*` Italian paths from the
-       "depersonalized" variant; fix Governance for forks (on adoption, the fork is the
-       master); soften vendor-specific Principle IX for their ~30-integration ecosystem.
+3. [x] **Method CHANGELOG + git tag** — DONE 2026-07-17: `plugins/metodo/CHANGELOG.md`
+       (v1.0→v1.5.1, incl. one honestly-recorded unversioned amendment) + tag `metodo-v1.5`.
+4. [~] **Link checker in CI** — DONE 2026-07-17 as a zero-dependency test
+       (`tests/links.test.mjs`, runs with the suite): found and fixed 22+ stale links in the
+       frozen banners after the English rename. **markdownlint: deferred** — on ~40 prose
+       files it either screams or needs a config so lenient it certifies little; revisit if
+       contributors arrive.
+5. [x] **CSV data dictionary** — DONE 2026-07-17: `observatory/usage/SCHEMA.md` (columns,
+       units, dedup/redaction caveats), linked from the dashboard header.
+6. [x] **Drop-in cleanup** — DONE 2026-07-17 (v1.5.1): top HTML comment removed (Sync Impact
+       Report slot freed), `_processo/*` paths depersonalized, fork governance ("your copy is
+       now the master"), rationale claims linked to STRATEGIES/CHANGELOG. Principle IX was
+       already vendor-neutral on inspection.
 7. [ ] **Tests for `cost-meter.mjs`** (fixture-based, like usage.mjs) — then the CONTRIBUTING
        sentence becomes true again in its stronger form.
 8. [ ] **"Operating hypotheses" tone pass** on CONSTITUTION/COSTITUZIONE: soften NEVER/ALWAYS
@@ -44,9 +44,9 @@
         cost-equivalent per model (prices verified at source) · CSV→SQLite at hundreds of
         rows · ccusage-as-input if its exports ever cover redaction + per-operation needs.
 
-**Open decision (Roberto)**: keep `versione-italiano/` as frozen originals + live LEGGIMI
-(observatory recommendation: yes — a live full mirror means translating every change twice
-and the two dashboards already drifted apart within a day), or invest in a live mirror.
+**Decision (Roberto, 2026-07-17)**: `versione-italiano/` stays **frozen** (originals + live
+LEGGIMI). A live mirror would cost a double translation on every change for a near-zero
+audience; the generated-dashboard-in-Italian option remains available on request.
 
 ## Done (compressed history)
 - **2026-07-16** — Method master in repo + read-only mirror with deny rule · COSTITUZIONE

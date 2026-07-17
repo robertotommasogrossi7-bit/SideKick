@@ -1,7 +1,7 @@
 # Ricerca - modelli, effort, ultracode (2026-07-03)
 
 > ⚠️ **COPIA CONGELATA (2026-07-17)** — originale italiano storico, non più aggiornato.
-> La versione viva è in inglese: [../../esperimenti/ricerca-modelli-effort-2026-07.md](../../esperimenti/ricerca-modelli-effort-2026-07.md)
+> La versione viva è in inglese: [../../experiments/research-models-effort-2026-07.md](../../experiments/research-models-effort-2026-07.md)
 
 > **Provenienza**: ricerca multi-agente (4 ricercatori Sonnet su angoli diversi + sintesi Opus,
 > ~689k token, fonti citate inline con qualita del dato dichiarata). Commissionata dal progetto

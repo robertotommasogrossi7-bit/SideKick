@@ -1,18 +1,11 @@
-<!--
-Human+AI Working Method — a drop-in constitution for GitHub Spec Kit.
-Place this at `.specify/memory/constitution.md` (or paste it via the `/constitution` command).
-It is Spec Kit-native in form, and adds what Spec Kit's constitution lacks: a self-amending
-principle, so the method evolves instead of going stale.
-Source: github.com/robertotommasogrossi7-bit/SideKick (plugins/metodo).
--->
 # Human+AI Working Method Constitution
 
 ## Core Principles
 
 ### I. Ideas Without Losing Focus
-When an idea, feature, or TODO surfaces that is NOT the current focus, the agent MUST record it (in
-`_processo/IDEE.md`, or `IDEE.md`) with the date and note it in one line — WITHOUT stopping the
-current work. At session start and at turning points, the agent MUST re-surface the *relevant* open
+When an idea, feature, or TODO surfaces that is NOT the current focus, the agent MUST record it
+(in the project's ideas log, e.g. `IDEE.md` or `docs/ideas.md`) with the date and note it in one
+line — WITHOUT stopping the current work. At session start and at turning points, the agent MUST re-surface the *relevant* open
 ideas (not all of them). If it senses an unsaved idea, it MUST ask.
 *Rationale: the human is the weak link for memory; the agent keeps the thread.*
 
@@ -32,8 +25,8 @@ For delicate logic the agent MUST write or run a quick check (a test or a real t
 declaring it done. "It should work" is not acceptance.
 
 ### V. Fresh Handoffs (Cache Economics)
-Process context (e.g. `_processo/CONTESTO.md`) MUST be kept current at milestones so a new chat
-restarts aligned. When a session grows heavy or direction changes, the agent MUST suggest a handoff
+Process context (a handoff file, e.g. `CONTEXT.md`) MUST be kept current at milestones so a new
+chat restarts aligned. When a session grows heavy or direction changes, the agent MUST suggest a handoff
 to a fresh chat.
 *Rationale (measured, 2026-07): warm-cache turns are ~1/10 cost per reread token, but a long chat
 rereads its ENTIRE context every message — the single largest cost we measured (cache reads ≈170×
@@ -94,11 +87,12 @@ and let the human decide. Never pedantic, never bureaucratic.
 ## Governance
 This constitution governs the working *method* (the disciplines above), not project content. It
 supersedes ad-hoc workflow preferences for those disciplines. Amendments follow Principle VI
-(propose → human approval → edit → re-sync to the source repo). Versioning is semantic: MAJOR to
-remove/redefine a principle, MINOR to add one, PATCH for clarifications.
+(propose → human approval → edit in place). Versioning is semantic: MAJOR to remove/redefine a
+principle, MINOR to add one, PATCH for clarifications.
 
-The **master** of the method lives in the source repo (SideKick `plugins/metodo/`), versioned by
-git; any locally active copy is a read-only mirror regenerated from the master after each
-amendment.
+**If you adopted this file in your own project, your copy is now the master**: amend it there.
+Upstream a change to the source repo only if you think it helps everyone. The measured claims in
+the rationales are documented in the source repo's observatory
+(SideKick `observatory/STRATEGIES.md`, amendment history in `plugins/metodo/CHANGELOG.md`).
 
-**Version**: 1.5.0 | **Ratified**: 2026-06-11 | **Last Amended**: 2026-07-16
+**Version**: 1.5.1 | **Ratified**: 2026-06-11 | **Last Amended**: 2026-07-17

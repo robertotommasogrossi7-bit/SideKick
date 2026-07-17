@@ -2,8 +2,8 @@
 
 > Back to the dashboard: [`../DASHBOARD.md`](../DASHBOARD.md). Do not edit by hand.
 
-**11 sessions** from 2026-06-03 to 2026-07-17 · **1.8M output** ·
-116k input · 185.1M cache read · 631 messages · **+412k cloud-agent tokens** (2 workflows)
+**11 sessions** from 2026-06-03 to 2026-07-17 · **1.9M output** ·
+116k input · 194.5M cache read · 650 messages · **+412k cloud-agent tokens** (2 workflows)
 
 ## Sessions (in time order — the title says what was done)
 | Period | Operation | Models | Msg | Input | Output | Cache read |
@@ -18,7 +18,7 @@
 | 2026-07-16 | Sidekick data observatory setup | fable-5 | 23 | 3k | 43k | 2.2M |
 | 2026-07-16 | Sidekick data observatory setup | fable-5 | 112 | 206 | 217k | 35.1M |
 | 2026-07-16→07-17 | Sidekick data observatory setup | fable-5 | 8 | 15 | 6k | 3.5M |
-| 2026-07-16→07-17 | Sidekick data observatory setup | opus-4-8 + fable-5 | 14 | 26 | 22k | 5.4M |
+| 2026-07-16→07-17 | Sidekick data observatory setup | fable-5 + opus-4-8 | 33 | 61 | 57k | 14.8M |
 
 ## Cloud agent workflows on this project
 | Date | Operation | Agents | Agent tokens | Source |

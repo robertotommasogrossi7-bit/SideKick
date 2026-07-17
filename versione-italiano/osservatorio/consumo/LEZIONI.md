@@ -1,7 +1,7 @@
 # LEZIONI (curato a mano dall'osservatorio — incorporato nel cruscotto)
 
 > ⚠️ **COPIA CONGELATA (2026-07-17)** — originale italiano storico, non più aggiornato.
-> La versione viva è in inglese: [../../../osservatorio/consumo/LESSONS.md](../../../osservatorio/consumo/LESSONS.md)
+> La versione viva è in inglese: [../../../observatory/usage/LESSONS.md](../../../observatory/usage/LESSONS.md)
 
 - **Audit multi-agente: il secondo è costato meno della metà.** Primo audit ALTO (poker):
   **67 agenti / 2,6M token**; secondo (progetto-15, con le regole di efficienza: dedup dei

@@ -51,6 +51,6 @@ group,project,session,start,end,operation,models,messages,input_tokens,output_to
 "SideKick","SideKick",137df591,2026-07-16,2026-07-16,"Sidekick data observatory setup","fable-5",23,3149,43275,2219001,109268
 "SideKick","SideKick",198f4e22,2026-07-16,2026-07-16,"Sidekick data observatory setup","fable-5",112,206,217222,35114444,1418597
 "SideKick","SideKick",45b6f48e,2026-07-16,2026-07-17,"Sidekick data observatory setup","fable-5",8,15,5589,3487544,464455
-"SideKick","SideKick",9df7891a,2026-07-16,2026-07-17,"Sidekick data observatory setup","opus-4-8 + fable-5",14,26,21837,5393920,837337
+"SideKick","SideKick",9df7891a,2026-07-16,2026-07-17,"Sidekick data observatory setup","fable-5 + opus-4-8",33,61,56554,14778032,1366984
 "Text-Adventure-Engine","Text-Adventure-Engine",7654955c,2026-05-28,2026-05-29,"Text_game/Base_1","opus-4-7",174,370,466353,54311569,1235975
 "weather-report","weather-report (worktree)",f24c43ea,2026-05-07,2026-05-07,"Weather_report/Prova","opus-4-7 + sonnet-4-6",80,137,42170,6811669,151725

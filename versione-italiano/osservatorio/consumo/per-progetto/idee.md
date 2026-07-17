@@ -1,6 +1,6 @@
 # Idee — consumo token (generato)
 
-> ⚠️ **COPIA CONGELATA (2026-07-17)** — la versione viva (inglese) è in `../../../../osservatorio/consumo/per-progetto/`.
+> ⚠️ **COPIA CONGELATA (2026-07-17)** — la versione viva (inglese) è in `../../../../observatory/usage/per-project/`.
 
 > Torna al cruscotto: [`../CONSUMO.md`](../CONSUMO.md). Non modificare a mano.
 
