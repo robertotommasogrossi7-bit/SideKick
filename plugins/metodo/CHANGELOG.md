@@ -4,6 +4,19 @@
 > evidence. One entry per amendment, hand-written, newest first. Dates from git history of
 > `COSTITUZIONE.md`; each version is also a git tag (`metodo-vX.Y`) from v1.5 onward.
 
+## v1.6 — 2026-07-17 (master only — propagation pending)
+- New section **"Red team: internal agent (with the code) or external chat (blind)?"**, born from a
+  measured comparison (Poker_App R7.2 vs R7.3, logged in `~/.claude/ESPERIMENTI.md`). For reviewing
+  **our own** design/code, an internal agent with repo access beats blind external chats: findings
+  arrive **pre-verified at `file:line`** (source re-verification is the real cost of an external red
+  team), and it can **refute** a suspicion by reading the code instead of guessing. External chats
+  keep two jobs only: the uncontaminated opinion **before going public**, and **meta-review of the
+  dossier** before launching the real red team. The internal agent must always be given calibration
+  (project scale, what's out of scope), a findings cap, and the order to discard theoretical risks
+  itself — otherwise it produces the enterprise list.
+- ⏳ **Not propagated yet** (for the observatory): `CONSTITUTION.md` (depersonalized variant),
+  `spec-kit/constitution.md` drop-in, git tag `metodo-v1.6`.
+
 ## v1.5.1 — 2026-07-17 (Spec Kit drop-in only)
 - Drop-in depersonalized for real: removed leaked `_processo/*` project paths; install notes
   moved out of the file top (that slot belongs to Spec Kit's Sync Impact Report); Governance

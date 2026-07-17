@@ -192,6 +192,26 @@
 - **Verifica sempre alla fonte i fatti citati dai revisori esterni** prima di agire (possono
   sbagliare anche loro).
 
+## Red team: agente interno (col codice) o chat esterna (cieca)? — scegli lo strumento giusto
+> Regola nata da una misura sul campo (Poker_App R7.2 vs R7.3, log in `~/.claude/ESPERIMENTI.md`):
+> stessa revisione, due strumenti, esiti molto diversi.
+- **Red team su roba NOSTRA (design, codice, schema, migrazioni) → agente INTERNO con accesso al
+  repo** (subagente/workflow, di solito Opus). Vince perché ogni finding arriva **già verificato su
+  `file:riga`** — e la ri-verifica alla fonte è il costo vero del red team esterno —, perché può
+  **confutare** un sospetto leggendo il codice invece di ipotizzarlo, e perché vede i vincoli reali.
+  Dagli **sempre**, o tira fuori la lista enterprise: la **calibrazione** (scala del progetto, cosa
+  NON è in scope), un **tetto ai finding** (es. max 10), e l'ordine di **scartare da solo** i rischi
+  teorici, dichiarandoli in tre righe.
+- **Chat ESTERNA pulita (Claude/ChatGPT) → due usi, nessuno dei quali è "revisiona il codice"**:
+  1. **prima di esporsi in pubblico** (vedi sezione sopra): il parere non contaminato dal nostro
+     contesto becca ingenuità, ROI gonfiati e AI-slop che l'interno non vede;
+  2. **meta-review del dossier** prima di lanciare il red team vero ("cosa manca da chiedere?",
+     "dove stai facendo anchoring suggerendo già la soluzione?"): costa poco e migliora la caccia.
+- **Mai** chiedere a una chat esterna di revisionare codice che non può leggere: descriverlo a parole
+  costa tempo, introduce imprecisioni, e poi **ogni** finding va ri-verificato a mano.
+- **Ibrido = default per le fasi delicate**: meta-review esterna del dossier → red team interno col
+  codice → **registro indicizzato** dei finding (ID, verdetto, dove si risolve).
+
 ## Rendicontazione a fine "passo grande"
 - Alla fine di **ogni passo grande**, tieni aggiornato `STATO_PROGETTO.md` ed **elencami lo stato
   completo** in tre parti, sempre lo stesso formato: **Fatto** (per area) · **Manca per pubblicare**
