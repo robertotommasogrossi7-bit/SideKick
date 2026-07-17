@@ -2,8 +2,8 @@
 
 > Back to the dashboard: [`../DASHBOARD.md`](../DASHBOARD.md). Do not edit by hand.
 
-**9 sessions** from 2026-06-03 to 2026-07-16 · **1.8M output** ·
-116k input · 168.6M cache read · 593 messages
+**11 sessions** from 2026-06-03 to 2026-07-17 · **1.8M output** ·
+116k input · 185.1M cache read · 631 messages · **+412k cloud-agent tokens** (2 workflows)
 
 ## Sessions (in time order — the title says what was done)
 | Period | Operation | Models | Msg | Input | Output | Cache read |
@@ -16,4 +16,12 @@
 | 2026-06-10→06-12 | SK/Base_2 | opus-4-8 + fable-5 | 216 | 22k | 557k | 67.8M |
 | 2026-06-12 | SK/Base_3 | opus-4-8 + fable-5 | 55 | 10k | 114k | 7.6M |
 | 2026-07-16 | Sidekick data observatory setup | fable-5 | 23 | 3k | 43k | 2.2M |
-| 2026-07-16 | Sidekick data observatory setup | fable-5 | 96 | 176 | 203k | 27.4M |
+| 2026-07-16 | Sidekick data observatory setup | fable-5 | 112 | 206 | 217k | 35.1M |
+| 2026-07-16→07-17 | Sidekick data observatory setup | fable-5 | 8 | 15 | 6k | 3.5M |
+| 2026-07-16→07-17 | Sidekick data observatory setup | opus-4-8 + fable-5 | 14 | 26 | 22k | 5.4M |
+
+## Cloud agent workflows on this project
+| Date | Operation | Agents | Agent tokens | Source |
+|---|---|---|---|---|
+| 2026-07-17 | English translation of the public facade (11 docs incl. CONSTITUTION v1.5) | 1 | 119k | observatory chat 2026-07-17 |
+| 2026-07-17 | Spec Kit double-run study (Opus x2, identical prompt) + claim verification | 2 | 293k | ESPERIMENTI.md table 2 |
