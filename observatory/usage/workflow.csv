@@ -4,3 +4,4 @@ date,project,operation,agents,agent_tokens,source
 2026-07-03,progetto-15,"Multi-agent HIGH audit (12 confirmed, 1 refuted + Sonnet-vs-Opus shadow check)",21,1070000,project audit report
 2026-07-17,SideKick,"English translation of the public facade (11 docs incl. CONSTITUTION v1.5)",1,118980,"observatory chat 2026-07-17"
 2026-07-17,SideKick,"Spec Kit double-run study (Opus x2, identical prompt) + claim verification",2,292903,"ESPERIMENTI.md table 2"
+2026-07-18,poker (Who's the Boss),"Multi-agent MEDIO audit on R7.4 delta-sync (5 confirmed [1 ALTA], 1 refuted)",10,1042131,"chat WTB/Base_8"
