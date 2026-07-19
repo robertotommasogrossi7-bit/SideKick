@@ -4,6 +4,16 @@
 > evidence. One entry per amendment, hand-written, newest first. Dates from git history of
 > `COSTITUZIONE.md`; each version is also a git tag (`metodo-vX.Y`) from v1.5 onward.
 
+## v1.7 — 2026-07-19 (master only — propagation pending)
+- New section **"Minimum standards of EVERY app (from the first build)"**, requested by Roberto
+  after the WTB phone test: (1) **build version visible in-app** (date + commit, evaluated at
+  bundling) in a standard "Assistenza"-like spot — lesson: a cached bundle (Expo Go/APK without a
+  reachable dev server) silently impersonates the new one, so "the app updates by itself" must
+  never be claimed; (2) **support contact always visible** (Roberto's name + email, tappable).
+  First implementation: Who's the Boss `app.config.js` + Profilo → Assistenza.
+- ⏳ **Not propagated yet** (for the observatory): mirror `~/.claude/CLAUDE.md`,
+  `CONSTITUTION.md`, `spec-kit/constitution.md`, git tag `metodo-v1.7` (v1.6 also still pending).
+
 ## v1.6 — 2026-07-17 (master only — propagation pending)
 - New section **"Red team: internal agent (with the code) or external chat (blind)?"**, born from a
   measured comparison (Poker_App R7.2 vs R7.3, logged in `~/.claude/ESPERIMENTI.md`). For reviewing

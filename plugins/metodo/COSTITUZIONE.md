@@ -80,6 +80,19 @@
   Nota YAML (imparata a spese nostre): **quota i `name:` degli step** se contengono `:`, em-dash o
   caratteri speciali, altrimenti il workflow non si parsa e il run fallisce con *0 job*.
 
+## Standard minimi di OGNI app (dal primo build)
+- **Versione del build VISIBILE nell'app**, in un punto comodo e standard (Profilo/Impostazioni →
+  sezione "Assistenza" o simile): almeno **data del build + commit**, valutati **al bundling**
+  (es. Expo: `app.config.js` → `extra.buildInfo`, con `EAS_BUILD_GIT_COMMIT_HASH` sul server e
+  `git rev-parse` in locale). Lezione (WTB, 2026-07-19): **mai dire "l'app si aggiorna da sola"** —
+  un bundle in cache (Expo Go/APK senza dev server raggiungibile) si spaccia per nuovo in silenzio,
+  e l'utente collauda codice vecchio credendolo nuovo. La versione a schermo è l'unico antidoto.
+- **Contatto assistenza sempre visibile** nello stesso posto: **nome e email di Roberto**
+  (Roberto Tommaso Grossi · robertotommasogrossi7@gmail.com), cliccabile (mailto). Pattern dei
+  leader: WhatsApp/Telegram tengono versione e aiuto in fondo a Impostazioni; le app indie mettono
+  lì il "contatta lo sviluppatore".
+- Vale **per ogni app nuova dal primo build** e si aggiunge alle esistenti alla prima occasione.
+
 ## Supabase (o backend simile): UN SOLO posto per l'SQL, stato esplicito
 - **Tutte** le migration SQL vivono in **una cartella sola versionata** (es. `supabase/migrations/`),
   mai sparse in doc/chat/scratch. Prima di crearne una nuova, **cerca ovunque nel repo** (`**/*.sql` +
