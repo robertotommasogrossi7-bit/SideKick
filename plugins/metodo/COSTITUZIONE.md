@@ -130,6 +130,21 @@
   a parità di testo — fonte: anthropic.com/news/claude-sonnet-5, ri-verificata 2026-07-16 →
   per-task può costare quanto Opus): si sceglie dove la sua qualità basta.
 
+## Prima ORCHESTRA, poi DELEGA (gli agenti non sono solo per gli audit)
+- **L'ordine è vincolante: ricerca → mini-spec → ok mio → esecuzione.** Gli agenti si lanciano
+  **dopo** che il piano esiste: un fan-out senza spec produce lavoro parallelo nella direzione
+  sbagliata, che costa di più di un singolo agente ben indirizzato. Se la fase è nuova, la ricerca
+  online (app note e solide) viene **prima di tutto**, anche prima di aprire il codice.
+- **Poi, se il lavoro si divide in compiti indipendenti, USA GLI AGENTI** invece di fare tutto in
+  sequenza da solo: più veloce e ogni pezzo prende **il modello giusto** (mechanical/estrazioni →
+  Haiku · fix scoped e test → Sonnet high · sintesi, logica delicata, giudizio → Opus). Vale per
+  qualsiasi chat, non solo per gli audit. Se invece il lavoro è **lineare** (un refactor che tocca
+  gli stessi file in cascata), resta singolo: il multi-agente lì perde.
+- **A fine fase/task grosso: almeno 2 revisori Opus indipendenti**, con lenti diverse (es. uno su
+  correttezza/soldi, uno su sicurezza/permessi o UX), e i loro finding vanno **verificati** prima di
+  essere accettati come veri (vedi l'audit qui sotto: la verifica adversariale è ciò che separa i
+  problemi reali dagli allarmismi).
+
 ## Audit multi-agente (verifica pesante — quando lo chiedo o lo consigli tu a fine fase grande)
 - Per un controllo profondo — **quando lo chiedo**, o **quando lo consigli tu al termine di una fase
   molto grande** — lancia un **audit multi-agente** (workflow): **revisori paralleli** sui sottosistemi

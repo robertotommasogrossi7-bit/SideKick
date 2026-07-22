@@ -4,6 +4,17 @@
 > evidence. One entry per amendment, hand-written, newest first. Dates from git history of
 > `COSTITUZIONE.md`; each version is also a git tag (`metodo-vX.Y`) from v1.5 onward.
 
+## v1.8 — 2026-07-19 (master only — propagation pending)
+- New section **"Orchestrate first, then delegate (agents are not just for audits)"**, requested by
+  Roberto: the order **research → mini-spec → my OK → execution** is binding, and agents are
+  launched *after* the plan exists (a fan-out without a spec parallelizes the wrong direction);
+  then, for genuinely divisible work, delegate with the right model per task (Haiku mechanical /
+  Sonnet scoped fixes+tests / Opus synthesis and delicate judgment), staying single-agent for
+  linear work; and **at least 2 independent Opus reviewers with different lenses** at the end of a
+  big phase, their findings verified before being accepted.
+- ⏳ **Not propagated yet**: mirror, `CONSTITUTION.md`, spec-kit drop-in, tag `metodo-v1.8`
+  (v1.6 and v1.7 also still pending).
+
 ## v1.7 — 2026-07-19 (master only — propagation pending)
 - New section **"Minimum standards of EVERY app (from the first build)"**, requested by Roberto
   after the WTB phone test: (1) **build version visible in-app** (date + commit, evaluated at
