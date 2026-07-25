@@ -4,6 +4,22 @@
 > evidence. One entry per amendment, hand-written, newest first. Dates from git history of
 > `COSTITUZIONE.md`; each version is also a git tag (`metodo-vX.Y`) from v1.5 onward.
 
+## v1.9.2 — 2026-07-25 (glossary moves to Studio and fills itself)
+- **Glossary relocated**: from SideKick (`versione-italiano/glossario/`) to the **Studio
+  repo** (`Studio/glossario/`, still gitignored/local-only) — Roberto's decision, since the
+  study app is where terms are actually learned.
+- **New filling mechanism** (spec: `Studio/inbox/SPEC-GLOSSARIO.md`): the study app marks
+  terms **acquired** when covered by correctly-answered questions/exams, leaves the rest
+  "in progress"; the Factory in agent mode measures term **coverage** with a cheap-agent
+  importance score and recommends questions-per-rank; cheap research agents hunt **missing**
+  fundamentals that harder questions take for granted. Implementation planned in a dedicated
+  Studio session.
+- Repo housekeeping (same decision wave): `versione-italiano/` fully removed (useful leftovers
+  in local `old/`, originals in git history); `OSSERVATORIO.md` (the observatory's standing
+  tasks) now lives at the repo root, gitignored; README restructured — SideKick's role and
+  measured results first, the honest failed-measurement story in its own section below
+  (Roberto's editorial call, superseding audit finding AR-11's "leave as is").
+
 ## v1.9.1 — 2026-07-25 (same-day catch-up + full propagation)
 - **Master catch-up caught by the fidelity reviewer** (multi-agent clarity/English pass, 10
   agents): the `5h_windows` data-contract line documented in v1.9 was present in SCHEMA.md and

@@ -20,10 +20,12 @@ Thumbs.db
 # Artefatti transitori del motore di distillazione
 _PROMPT_PRONTO.md
 
-# Cartella italiana storica: SOLO locale dal 2026-07-25 (decisione Roberto post-audit).
-# Contiene OSSERVATORIO.md operativo e il glossario personale; gli originali storici
-# restano nella cronologia git. La versione italiana pubblica e' ITALIANO/.
-versione-italiano/
+# Archivio locale del materiale storico (ex versione-italiano/, decisione Roberto 2026-07-25):
+# mai su GitHub, gli originali restano nella cronologia git. La versione italiana e' ITALIANO/.
+old/
+
+# Compiti permanenti dell'osservatorio (operativo, solo locale)
+/OSSERVATORIO.md
 
 # Banco di prova (copia di app per testare SideKick) - non versionato
 /_test/
@@ -31,4 +33,4 @@ versione-italiano/
 # Legenda della censura dei progetti privati (SOLO locale, mai su GitHub)
 observatory/censura.local.json
 
-# (glossario personale: coperto dalla regola versione-italiano/ qui sopra)
+# (glossario personale: spostato nel repo Studio il 2026-07-25, gitignorato la')

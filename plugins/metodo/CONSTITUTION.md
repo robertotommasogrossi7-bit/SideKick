@@ -1,6 +1,6 @@
 # Constitution — how we work together (me + the AI)
 
-> **Version: v1.9.1** (2026-07-25) — amendment history in the [CHANGELOG](CHANGELOG.md).
+> **Version: v1.9.2** (2026-07-25) — amendment history in the [CHANGELOG](CHANGELOG.md).
 
 > **Installation:** copy (or link) this content into `~/.claude/CLAUDE.md` to have it in **every**
 > project, or into a single project's `CLAUDE.md`. It defines the **method**, not the content.
@@ -304,15 +304,20 @@
 - I'm **just starting out**: when you explain a technical term, it's fine for you to **also name
   it briefly** (ORM, sync layer, OLTP…), so it sinks in over time. Don't simplify to the point of
   never naming them.
-- There's a **personal glossary** (a folder **local only** inside SideKick,
-  `versione-italiano/glossario/` — gitignored, never on GitHub), split by category
+- There's a **personal glossary** (since 2026-07-25: a folder **local only** inside the
+  **Studio** repo, `Studio/glossario/` — gitignored, never on GitHub), split by category
   (**data-engineering**, **app development**, **java**, …).
   It's **the place** where terms I don't know end up. When I say *"I don't know what X is"*,
-  **point me there** (and, if the session is already touching SideKick, add the term yourself).
+  **point me there** (and, if the session is already touching Studio, add the term yourself).
+- **The glossary fills itself from studying, not by hand** (Roberto's decision 2026-07-25,
+  spec in `Studio/inbox/SPEC-GLOSSARIO.md`): the study app marks terms **acquired** when they
+  are covered by questions/exams I answer correctly, and leaves the rest **"in progress"**;
+  the Factory in agent mode measures term **coverage** with an importance score (cheap
+  agents) and recommends how many questions each score rank needs; cheap agent research hunts
+  the **missing** terms, especially the fundamentals that harder questions take for granted.
 - **Do NOT** scatter cross-repo writes for every single term: the **mass collection** (from my
-  study materials, e.g. **AWS**) is done by **SideKick's observatory** — see `OSSERVATORIO.md`.
-  Individual chats just **point** to the glossary and, at most, add a term if they're already
-  working inside SideKick.
+  study materials, e.g. **AWS**) stays an observatory/Factory job, not something individual
+  chats do — they just **point** to the glossary.
 
 ## Relation to GitHub Spec Kit
 - The method speaks **Spec Kit's** language: COSTITUZIONE ↔ *constitution*
@@ -339,4 +344,4 @@
 *Part of [SideKick](https://github.com/robertotommasogrossi7-bit/SideKick) — a shareable,
 forkable, self-evolving human+AI working method. Improve your copy and share it back.*
 
-*English version of the Italian master `COSTITUZIONE.md` — v1.9.1, synced 2026-07-25.*
+*English version of the Italian master `COSTITUZIONE.md` — v1.9.2, synced 2026-07-25.*

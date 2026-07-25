@@ -4,17 +4,23 @@
 
 🇮🇹 *Leggi in italiano: [ITALIANO/README.md](ITALIANO/README.md)*
 
-*"I tried to measure whether captured process helps AI-assisted dev — and couldn't build a
-fair test (yet)."* — [the writeup this repo grew out of](FINDINGS.md)
+**SideKick is where a real human+AI working method gets built, measured, and improved on
+real numbers.** One beginner developer, several real apps, **every transcript measured**.
+What it has produced so far:
 
-Meanwhile, what *did* work is measured too: on both projects where we ran a heavy
-multi-agent audit it found real critical bugs before the users did (N=2, details below).
+- **A living working-method constitution** ([v1.9.1](plugins/metodo/CHANGELOG.md),
+  self-amending, with a Spec Kit drop-in) that the AI applies proactively in every project.
+- **A published, redacted dataset of real agent usage** — months of sessions with named
+  operations, 29M+ cloud-agent tokens registered, plus the zero-dependency generator to
+  rebuild the same dashboard from your own transcripts.
+- **Measured wins**: heavy multi-agent audits found real critical bugs on both projects they
+  ran on, before any user did (N=2); a mass-production "Factory" process generated 555
+  verified study questions in one night with total QC and every solution executed for real.
+- **Honest limits**: sample sizes stated next to every claim; negative results stay published
+  ([FINDINGS.md](FINDINGS.md)).
 
-One beginner developer, several real apps, **every transcript measured**. This repo collects
-real experiments, real token data, and honest negative results about *how* to work with an AI
-coding agent — plus the small tools used to measure it all. Claude Code is the current
-instrument, not the point: the questions (what does each collaboration choice cost and
-return?) apply to AI-assisted software engineering generally.
+Claude Code is the current instrument, not the point: the questions (what does each
+collaboration choice cost and return?) apply to AI-assisted software engineering generally.
 
 > **What this is:** first and foremost the author's own working lab — the data gets published
 > because it may be useful, not because it's a product. Exploratory case studies with the
@@ -92,6 +98,14 @@ Relation to [GitHub Spec Kit](https://github.com/github/spec-kit): Spec Kit orga
 *work* (constitution → spec → plan → tasks); SideKick measures the *collaboration* — what
 each method choice costs and returns — and ships its method as a Spec Kit constitution
 drop-in.
+
+## Where this started (and what we still can't claim)
+
+*"I tried to measure whether captured process helps AI-assisted dev — and couldn't build a
+fair test (yet)."* — [the writeup this repo grew out of](FINDINGS.md). That first measurement
+failed honestly (contaminated arms, N too small to mean anything) and it stays published: it
+is the reason the observatory exists. What we *can* show today is above; what we still can't
+claim is spelled out in FINDINGS.md.
 
 ## Honesty rules of this repo
 

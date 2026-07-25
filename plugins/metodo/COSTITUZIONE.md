@@ -1,6 +1,6 @@
 # Costituzione — come lavoriamo insieme (io + l'AI)
 
-> **Versione: v1.9.1** (2026-07-25) — storia degli emendamenti nel [CHANGELOG](CHANGELOG.md).
+> **Versione: v1.9.2** (2026-07-25) — storia degli emendamenti nel [CHANGELOG](CHANGELOG.md).
 
 > **Installazione:** copia (o linka) questo contenuto in `~/.claude/CLAUDE.md` per averlo in
 > **tutti** i progetti, oppure nel `CLAUDE.md` di un singolo progetto. Definisce il **metodo**, non
@@ -285,15 +285,20 @@
 - Sono **agli inizi**: quando spiego un termine tecnico, va bene che tu **me lo nomini anche in breve**
   (ORM, layer di sync, OLTP…), così col tempo mi entrano in testa. Non semplificare al punto di non
   nominarli mai.
-- Esiste un **glossario personale** (cartella **solo locale** dentro SideKick,
-  `versione-italiano/glossario/` — gitignorata, mai su GitHub), diviso per categorie
+- Esiste un **glossario personale** (dal 2026-07-25: cartella **solo locale** nel repo
+  **Studio**, `Studio/glossario/` — gitignorata, mai su GitHub), diviso per categorie
   (**data-engineering**, **sviluppo-app**, **java**, …).
   È **il posto** dove finiscono i termini che non conosco. Quando dico *"non so cosa sia X"*,
-  **rimandami lì** (e, se la sessione tocca già SideKick, aggiungi tu il termine).
-- **NON** disperdere scritture cross-repo a ogni termine: la **raccolta di massa** (dai miei materiali
-  di studio, es. **AWS**) la fa **l'osservatorio di SideKick** — vedi `OSSERVATORIO.md`. Le singole
-  chat si limitano a **puntare** al glossario e, al massimo, ad aggiungere un termine se stanno già
-  lavorando dentro SideKick.
+  **rimandami lì** (e, se la sessione tocca già Studio, aggiungi tu il termine).
+- **Il glossario si riempie dallo studio, non a mano** (decisione Roberto 2026-07-25, spec in
+  `Studio/inbox/SPEC-GLOSSARIO.md`): l'app di studio marca **acquisiti** i termini coperti da
+  domande/esami a cui rispondo correttamente e lascia gli altri **"in studio"**; la fabbrica
+  in modalità agente misura la **copertura** dei termini con punteggio di importanza (agenti
+  a basso costo) e raccomanda quante domande servono per rank; ricerche economiche cercano i
+  termini **mancanti**, specie i fondamentali dati per scontati dalle domande complesse.
+- **NON** disperdere scritture cross-repo a ogni termine: la **raccolta di massa** (dai miei
+  materiali di studio, es. **AWS**) resta un compito d'osservatorio/fabbrica, non delle
+  singole chat, che si limitano a **puntare** al glossario.
 
 ## Parentela con GitHub Spec Kit
 - Il metodo parla la lingua di **Spec Kit**: COSTITUZIONE ↔ *constitution*
