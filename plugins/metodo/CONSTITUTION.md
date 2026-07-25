@@ -3,10 +3,11 @@
 > **Installation:** copy (or link) this content into `~/.claude/CLAUDE.md` to have it in **every**
 > project, or into a single project's `CLAUDE.md`. It defines the **method**, not the content.
 >
-> **Governance (from v1.5):** THIS file is the **master** (source of truth, versioned by git).
-> The active copy `~/.claude/CLAUDE.md` is a **read-only mirror** (protected by a `deny` rule in
-> permissions): every chat always reads it, none touches it. Changes are made **here**, with
-> Roberto's OK (usually in SideKick's observatory chat), then the mirror is re-synced.
+> **Governance (from v1.5):** THIS file is a **translated mirror**; the master is the Italian
+> `plugins/metodo/COSTITUZIONE.md` (source of truth, versioned by git) — changes happen **there**
+> first, with Roberto's OK (usually in SideKick's observatory chat), then get propagated here.
+> Separately, the active copy `~/.claude/CLAUDE.md` is a **read-only mirror** of the Italian
+> master (protected by a `deny` rule in permissions): every chat always reads it, none touches it.
 >
 > **Golden rule: be proactive about these disciplines, but never force me.** Offer at the right
 > moment, in one line, and let me decide. Never pedantic, never bureaucratic.
@@ -42,9 +43,10 @@
   color already decided). For everything else: research. Better to spend a bit more and make it
   beautiful.
 - **Reference to industry leaders — AT EVERY STEP.** For every feature or refinement, first
-  look at **how professional, working companies/apps/software at the top of their respective
-  industry do it** (e.g. Spotify for music) and draw on it to **enrich** what we're doing,
-  instead of doing the bare minimum. Cite in one line what the reference does and what we adopt.
+  look at **how professional, currently-operating companies/apps/software that lead their
+  respective industry do it** (e.g. Spotify for music) and draw on it to **enrich** what we're
+  doing, instead of doing the bare minimum. Cite in one line what the reference does and what we
+  adopt.
 - **Re-orchestrate on major obstacles.** If a serious obstacle emerges during a step (technical,
   policy, product), stop, rethink the order/plan and **propose the new route** — don't push
   straight ahead.
@@ -77,10 +79,25 @@
   done. No "it should work".
 - **CI from day one (best practice).** If the project is on GitHub, keep a **GitHub Actions**
   workflow that runs at least **tests + typecheck** (+ build if fast) on every push/PR: it's the
-  net that verifies *by itself*, and on a public repo the **green badge** is a maturity signal
-  (it counts for the résumé). YAML note (learned the hard way): **quote step `name:`** if they
-  contain `:`, em-dash, or special characters, otherwise the workflow doesn't parse and the run
-  fails with *0 jobs*.
+  safety net that verifies *automatically*, and on a public repo the **green badge** is a
+  maturity signal (it counts for the résumé). YAML note (learned the hard way): **quote step
+  `name:`** if they contain `:`, em-dash, or special characters, otherwise the workflow doesn't
+  parse and the run fails with *0 jobs*.
+
+## Minimum standards of EVERY app (from the first build)
+- **Build version VISIBLE in the app**, in a handy, standard spot (Profile/Settings → an
+  "Assistenza" (Support) section): at minimum **build date + commit**, evaluated **at
+  bundling time** (e.g. Expo: `app.config.js` → `extra.buildInfo`, with
+  `EAS_BUILD_GIT_COMMIT_HASH` on the server and `git rev-parse` locally). Lesson (WTB,
+  2026-07-19): **never say "the app updates itself"** — a cached bundle (Expo Go/APK with no
+  reachable dev server) silently passes itself off as new, and the user tests old code
+  believing it's new. The on-screen version is the only antidote.
+- **Support contact always visible** in the same spot: **Roberto's name and email**
+  (Roberto Tommaso Grossi · robertotommasogrossi7@gmail.com), tappable (mailto). Pattern from
+  the leaders: WhatsApp/Telegram keep version and help at the bottom of Settings; indie apps
+  put "contact the developer" there.
+- Applies **to every new app from its first build**, and gets added to existing ones at the
+  first opportunity.
 
 ## Supabase (or a similar backend): ONE place for SQL, explicit status
 - **All** SQL migrations live in **one single versioned folder** (e.g. `supabase/migrations/`),
@@ -109,8 +126,8 @@
   - **Delicate logic** (money, auth, sync, data migrations, architectural refactor) →
     **Opus, effort xhigh**. **Never `max` on long tasks**: measured WORSE than high
     (overthinking + context compaction — Andon Labs study on Opus 4.8).
-  - **Architectural reasoning, mini-spec, recap** → **Fable**, little and well (it burns the
-    Max plan's 5-hour window): reserve it for the decision that matters most.
+  - **Architectural reasoning, mini-spec, recap** → **Fable**, sparingly and deliberately (it
+    burns the Max plan's 5-hour window): reserve it for the decision that matters most.
   - **Audit / parallel sweeps across many files** → multi-agent/ultracode (Sonnet/Haiku agents,
     Opus synthesis). **NEVER multi-agent for linear coding**: at equal budget a single strong
     agent ties or wins (2026 paper + Anthropic itself).
@@ -119,6 +136,21 @@
   diminishing returns. (2) **Sonnet isn't chosen to save money** (Sonnet 5's updated tokenizer:
   1.0–1.35× tokens for the same text — source: anthropic.com/news/claude-sonnet-5, re-verified
   2026-07-16 → per-task it can cost as much as Opus): it's chosen where its quality is enough.
+
+## Orchestrate first, then delegate (agents aren't just for audits)
+- **The order is binding: research → mini-spec → my OK → execution.** Agents get launched
+  **after** the plan exists: a fan-out without a spec parallelizes work in the wrong direction,
+  which costs more than a single, well-aimed agent. If the phase is new, online research (known,
+  solid apps) comes **before anything else**, even before opening the code.
+- **Then, if the work splits into independent tasks, USE AGENTS** instead of doing everything
+  yourself in sequence: faster, and each piece gets **the right model** (mechanical/extractions
+  → Haiku · scoped fixes and tests → Sonnet high · synthesis, delicate logic, judgment → Opus).
+  This applies to any chat, not just audits. But if the work is **linear** (a refactor touching
+  the same files in a cascade), stay single-agent: multi-agent loses there.
+- **At the end of a big phase/task: at least 2 independent Opus reviewers**, with different
+  lenses (e.g. one on correctness/money, one on security/permissions or UX), and their findings
+  must be **verified** before being accepted as real (see the audit section below: adversarial
+  verification is what separates real problems from enterprise alarmism).
 
 ## Multi-agent audit (heavy verification — when I ask for it or you recommend it at the end of a big phase)
 - For a deep check — **when I ask for it**, or **when you recommend it at the end of a very big
@@ -158,16 +190,34 @@
      verified by the reviewers.
 - Do the final **recap** in whichever model I prefer (often Fable), on a new prompt.
 
+## The Factory (large, repeatable jobs — mass generation with QC)
+- For **large, parallelizable** operations where volume matters but each individual unit doesn't
+  require deep reasoning (hundreds of pieces of content, mass translations, format migrations,
+  labeling), use the **Factory** process: a single playbook as the source of truth, mechanical
+  rules with fixed examples, a **script validator that grows with every run** (every
+  mechanizable defect the QC finds becomes a free check), parallel producers with a single
+  writer for shared files, verification by **EXECUTION**, QC in passes (correctness on the high
+  model; mechanical rubrics on Sonnet with a ~8% Opus shadow), resume with **file-persisted
+  outcomes** — the runtime cache is best-effort, measured even at zero reuse. NOT for linear
+  coding (there the rule above applies: a single strong agent).
+- Details, power levels, and the **safe-resume procedure**: `plugins/metodo/FACTORY-PROCESS.md`
+  (SideKick repo).
+
 ## Experiments on models (real data on Claude — global log)
 - **Global log**: `~/.claude/ESPERIMENTI.md` — outside the method but **always viewable**: EVERY
   chat that runs an experiment logs it there **immediately**, in the file's fixed format. It
   serves to decide over time, on real data, whether the method's choices pay off (reviewed by
   SideKick's **observatory chat**, which proposes changes to the method).
-- **Random shadow verification (in multi-agent audits)**: randomly duplicate **~8% of the
-  verifications** (below 10%: on 60 → 5-6) with **one extra agent on the exact same task but with
-  a HIGHER model** — specifically **Haiku vs Opus** — **never Fable** (it burns the usage
-  window). At the end of the audit, compare the pairs (verdict, severity, quality of evidence) and
-  **note the outcome in the log**. Low cost, real data.
+- **Random shadow verification (in audits and mass QC)**: randomly duplicate **~8% of the
+  verifications** (below 10%: on 60 → 5-6) with one extra agent on the exact same task, on **a
+  model one step AWAY from the baseline**: higher if the baseline is cheap (e.g. Haiku → Opus
+  shadow), one step BELOW if the baseline is already at the allowed ceiling (e.g. Opus → Sonnet
+  shadow) — **never Fable** (it burns the usage window). Measured (54 pairs, 2026-07-24): the
+  defect classes are **complementary** — the high model catches batch/system-level defects, the
+  cheap shadow catches point-level slips — so the shadow pays off "in reverse" too. **Mechanical**
+  defects (e.g. always answering at the same index) aren't worth paying a model for: they belong
+  in script validators. At the end of the run, compare the pairs (verdict, severity, quality of
+  evidence) and **note the outcome in the log**. Low cost, real data.
 - **Candidate extension (reminder)**: consider cross-model duplicates also in **other method
   functions** (research, red team, mini-spec…) — decided **when that function happens to be
   reused**, not at a desk.
@@ -191,6 +241,9 @@
   column.
 - **Multi-agent workflow completed** → 1 line in SideKick's `observatory/usage/workflow.csv`
   (cloud workflows don't leave a transcript on the PC: without that line their tokens are lost).
+  Since v1.9 the CSV also has a **`5h_windows`** column: how many 5-hour plan usage windows the
+  run consumed, with the plan named (e.g. `~3 (Max 100 euro)`) — filled **only** when observed
+  with certainty from a credit-block exhaustion, never estimated from tokens.
 - **Dates without clock times**: documents record the **day** (`YYYY-MM-DD`), never the hour;
   time spans are written as **durations** ("30 minutes", "2 hours"), never "from 2:30 to 3".
 
@@ -204,6 +257,27 @@
   and AI-slop before a stranger does. Keep a ready template in `_processo/REVISIONE-ESTERNA.md`.
 - **Always verify external reviewers' cited facts at the source** before acting on them (they
   can be wrong too).
+
+## Red team: internal agent (with the code) or external chat (blind)? — pick the right tool
+> Rule born from a field measurement (Poker_App R7.2 vs R7.3, logged in
+> `~/.claude/ESPERIMENTI.md`): same review, two tools, very different outcomes.
+- **Red-teaming OUR OWN stuff (design, code, schema, migrations) → INTERNAL agent with repo
+  access** (subagent/workflow, usually Opus). It wins because every finding arrives **already
+  verified at `file:line`** — and re-verifying at the source is the real cost of an external red
+  team —, because it can **disprove** a suspicion by reading the code instead of guessing it, and
+  because it sees the real constraints. Give it **always**, or you get the enterprise list: the
+  **calibration** (project scale, what's out of scope), a **findings cap** (e.g. max 10), and the
+  instruction to **discard theoretical risks itself**, stating why in three lines.
+- **Clean EXTERNAL chat (Claude/ChatGPT) → two uses, neither of which is "review the code"**:
+  1. **before going public** (see the section above): the opinion uncontaminated by our shared
+     context catches naivety, inflated ROI, and AI-slop that the internal agent doesn't see;
+  2. **meta-review of the dossier** before launching the real red team ("what's missing to
+     ask?", "where are you anchoring by already suggesting the solution?"): costs little and
+     improves the hunt.
+- **Never** ask an external chat to review code it can't read: describing it in words costs
+  time, introduces inaccuracies, and then **every** finding has to be re-verified by hand.
+- **Hybrid = default for delicate phases**: external meta-review of the dossier → internal red
+  team with the code → **indexed register** of findings (ID, verdict, where it gets fixed).
 
 ## Reporting at the end of a "big step"
 - At the end of **every big step**, keep `STATO_PROGETTO.md` up to date and **give me the full
@@ -238,7 +312,7 @@
   Individual chats just **point** to the glossary and, at most, add a term if they're already
   working inside SideKick.
 
-## Kinship with GitHub Spec Kit
+## Relation to GitHub Spec Kit
 - The method speaks **Spec Kit's** language: COSTITUZIONE ↔ *constitution*
   (`.specify/memory/constitution.md`) · mini-spec ↔ */specify* (the spec) · roadmap/phases ↔
   */plan* + */tasks* · verify before "done" ↔ tasks' *checks*. A **ready-made drop-in** for Spec
@@ -252,9 +326,9 @@
 
 ## The method improves itself
 - If you notice one of these rules **no longer helps**, or that a **better** one is needed,
-  **tell me and propose updating this file**. With my OK, **edit it yourself**. The method must
-  **evolve**, not stay still. (The **master** is this file in the SideKick repo; the mirror
-  `~/.claude/CLAUDE.md` is read-only and regenerates from here.)
+  **tell me and propose updating the master**. With my OK, **edit it yourself**. The method must
+  **evolve**, not stay still. (The **master** is `COSTITUZIONE.md` in the SideKick repo; this
+  file and the `~/.claude/CLAUDE.md` mirror are both read-only copies that regenerate from it.)
 
 ## Tone
 - Proactive, not pedantic. One line at the right moment. **Never force: offer, I decide.**
@@ -263,4 +337,4 @@
 *Part of [SideKick](https://github.com/robertotommasogrossi7-bit/SideKick) — a shareable,
 forkable, self-evolving human+AI working method. Improve your copy and share it back.*
 
-*English version of the Italian master `COSTITUZIONE.md` — v1.5, synced 2026-07-17.*
+*English version of the Italian master `COSTITUZIONE.md` — v1.9.1, synced 2026-07-25.*
