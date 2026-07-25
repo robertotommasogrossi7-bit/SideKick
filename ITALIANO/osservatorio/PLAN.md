@@ -49,7 +49,7 @@
 12. [ ] **MANUALE (Roberto)**: descrizione del repo + topic su GitHub; decidere sulla rinomina
         dello username.
 13. [ ] Più avanti, guidato dai dati: METRICHE per progetto-15 (A/B completo-vs-incrementale) ·
-        equivalente in costo API per modello (prezzi verificati alla fonte) · CSV→SQLite oltre
+        equivalente in costo API per modello — FATTO 2026-07-25 (`prices.csv`, fonte+data per riga) · CSV→SQLite oltre
         alcune centinaia di righe · ccusage come input se i suoi export coprissero mai censura
         + esigenze per-operazione.
 
