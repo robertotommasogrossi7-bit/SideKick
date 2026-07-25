@@ -1,5 +1,7 @@
 # Constitution — how we work together (me + the AI)
 
+> **Version: v1.9.1** (2026-07-25) — amendment history in the [CHANGELOG](CHANGELOG.md).
+
 > **Installation:** copy (or link) this content into `~/.claude/CLAUDE.md` to have it in **every**
 > project, or into a single project's `CLAUDE.md`. It defines the **method**, not the content.
 >
@@ -200,7 +202,7 @@
   model; mechanical rubrics on Sonnet with a ~8% Opus shadow), resume with **file-persisted
   outcomes** — the runtime cache is best-effort, measured even at zero reuse. NOT for linear
   coding (there the rule above applies: a single strong agent).
-- Details, power levels, and the **safe-resume procedure**: `plugins/metodo/FACTORY-PROCESS.md`
+- Details, power levels, and the **safe-resume procedure**: [`FACTORY-PROCESS.md`](FACTORY-PROCESS.md)
   (SideKick repo).
 
 ## Experiments on models (real data on Claude — global log)

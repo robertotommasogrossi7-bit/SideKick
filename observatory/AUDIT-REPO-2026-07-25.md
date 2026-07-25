@@ -107,3 +107,17 @@ Passati **non verificati** per policy di processo (su BASSA la verifica adversar
 - **BASSA non verificati:** i 4 finding della sezione 4 sono per definizione non ri-verificati alla fonte; trattarli come segnalazioni, non come fatti confermati.
 - **Assenza di baseline temporale.** Le staleness (AR-08, AR-10) sono vere al 2026-07-25; un refresh già in coda potrebbe averle sanate tra la lettura e la tua rilettura — verificare la data dei commit degli screenshot prima di agire.
 - **Confutati zero non significa "tutto grave".** Significa che i fatti reggono ma le severità erano gonfie: il vero lavoro del processo qui è stato il *declassamento calibrato*, non lo scarto. Leggere le severità corrette, non quelle grezze dei red team.
+
+---
+
+## Esito (aggiunto il 2026-07-25, stessa giornata)
+
+Roberto ha approvato **tutte** le azioni; le correzioni sono nei commit successivi al report.
+Scelte specifiche di Roberto: **AR-02/03** risolte tenendo UNA sola cartella italiana
+(`ITALIANO/`) e rimuovendo `versione-italiano/` dal repo pubblico (resta in locale non
+tracciata, con OSSERVATORIO.md e glossario, e nella cronologia git per gli originali);
+**AR-08/10** risolte rimuovendo gli screenshot stantii — la ricetta esatta per i prossimi è
+in `docs/img/README.md`; **AR-13** lasciata com'è (scelta di privacy dichiarata, come da
+"cosa NON toccare"). **AR-01 verificato dopo il fix**: con la mappatura `Studio (...)` in
+`gruppoDi()` il drilldown di Studio espone i ~20,5M token cloud prima invisibili (e il
+gruppo worktree di weather_report si è fuso nel progetto). **AR-04** riconciliata a 1.9.1.

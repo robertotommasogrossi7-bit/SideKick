@@ -12,10 +12,16 @@
 - **Propagation completed** (was pending since v1.6): `CONSTITUTION.md` (EN) synced to v1.9
   section by section — its governance banner also corrected: it wrongly declared itself the
   master; **`FACTORY-PROCESS.md` created** (EN version of PROCESSO-FABBRICA.md); spec-kit
-  drop-in realigned to **1.9.0** (new depersonalized principles XII–XVI).
+  drop-in realigned to **1.9.1** (new depersonalized principles XII–XVI, plus the
+  data-contract windows line in Principle XI).
 - English/clarity pass over the public docs (fresh-eyes + native-English + fact-coherence
   analysts, then 2 Opus reviewers): stale ~170× cache figure refreshed to ~187× with dated
   notes, drop-in version race in README fixed, calques cleaned (details in git history).
+- **Post-audit fixes, same day** (full-repo audit `observatory/AUDIT-REPO-2026-07-25.md`,
+  Roberto's approval): version header added to COSTITUZIONE/CONSTITUTION and CHANGELOG linked
+  from the READMEs (AR-05); drop-in version reconciled at **1.9.1** everywhere (AR-04);
+  `versione-italiano/` removed from the public tree — `ITALIANO/` is the single Italian
+  mirror, originals preserved in git history (Roberto's call on AR-02/03).
 
 ## v1.9 — 2026-07-25 (master + mirror re-synced)
 - New section **"The Factory"** (mass generation with QC): playbook as single source of truth,

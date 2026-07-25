@@ -1,5 +1,7 @@
 # Costituzione — come lavoriamo insieme (io + l'AI)
 
+> **Versione: v1.9.1** (2026-07-25) — storia degli emendamenti nel [CHANGELOG](CHANGELOG.md).
+
 > **Installazione:** copia (o linka) questo contenuto in `~/.claude/CLAUDE.md` per averlo in
 > **tutti** i progetti, oppure nel `CLAUDE.md` di un singolo progetto. Definisce il **metodo**, non
 > il contenuto.

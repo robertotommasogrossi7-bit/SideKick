@@ -1,7 +1,11 @@
 # metodo — SideKick's human+AI working method
 
-Turns your **working method** into the AI's **proactive, self-evolving behavior**, in every
-project — no commands to remember, no constraints.
+Turns your **working method** into standing instructions the AI acts on by itself — it
+records stray ideas, proposes specs before delicate code, and amends its own constitution
+(with your OK) — in every project, no commands to remember. Version: see the
+[CHANGELOG](CHANGELOG.md). **Adopting it for yourself?** Start from the depersonalized
+[Spec Kit drop-in](spec-kit/constitution.md) — the files below mention this repo's author
+and files.
 
 ## The core: the constitution (no commands)
 [`COSTITUZIONE.md`](COSTITUZIONE.md) (IT) — English: [`CONSTITUTION.md`](CONSTITUTION.md) — is
