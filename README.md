@@ -66,6 +66,8 @@ most expensive operations, regenerated from the real transcripts at every observ
   fixes are all in the open.
 - [`DATA.md`](observatory/DATA.md) / [`PLAN.md`](observatory/PLAN.md) — what the data can
   and cannot say yet, and what's next.
+- [`AUDIT-REPO-2026-07-25.md`](observatory/AUDIT-REPO-2026-07-25.md) — a 24-agent audit of
+  this very repo (14 confirmed findings, all fixed the same day — outcome inside).
 
 Every project gets its own drilldown — here is a real app's build history, session by
 session, named operation by named operation:

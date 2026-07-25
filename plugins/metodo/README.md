@@ -3,7 +3,8 @@
 Turns your **working method** into standing instructions the AI acts on by itself — it
 records stray ideas, proposes specs before delicate code, and amends its own constitution
 (with your OK) — in every project, no commands to remember. Version: see the
-[CHANGELOG](CHANGELOG.md). **Adopting it for yourself?** Start from the depersonalized
+[CHANGELOG](CHANGELOG.md) — note: the Spec Kit drop-in can lag a version behind when an
+amendment doesn't concern the depersonalized variant. **Adopting it for yourself?** Start from the depersonalized
 [Spec Kit drop-in](spec-kit/constitution.md) — the files below mention this repo's author
 and files.
 

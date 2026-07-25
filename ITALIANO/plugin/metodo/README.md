@@ -3,7 +3,8 @@
 Trasforma il tuo **metodo di lavoro** in istruzioni permanenti su cui l'AI agisce da sola —
 registra le idee al volo, propone le spec prima del codice delicato ed emenda la propria
 costituzione (col tuo ok) — in ogni progetto, senza comandi da ricordare. Versione: vedi il
-[CHANGELOG](CHANGELOG.md). **Vuoi adottarlo per te?** Parti dal [drop-in Spec Kit
+[CHANGELOG](CHANGELOG.md) — nota: il drop-in Spec Kit può restare una versione indietro
+quando un emendamento non riguarda la variante spersonalizzata. **Vuoi adottarlo per te?** Parti dal [drop-in Spec Kit
 spersonalizzato](../../../plugins/metodo/spec-kit/constitution.md) — i file qui sotto
 nominano l'autore e i file di questo repo.
 

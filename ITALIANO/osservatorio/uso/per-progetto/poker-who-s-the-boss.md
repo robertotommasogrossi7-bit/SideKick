@@ -33,6 +33,8 @@
 | 2026-07-17→07-22 | WTB/Base_8 | opus-4-8 | 55 | 101 | 72k | 24.6M |
 
 ## Workflow cloud su questo progetto
+> Nota: le descrizioni delle operazioni restano in **inglese** — sono log tecnici copiati
+> tali e quali dal registro `workflow.csv` e dai titoli delle sessioni (dati, non prosa).
 | Data | Operazione | Agenti | Token agenti | Fonte |
 |---|---|---|---|---|
 | 2026-07-03 | Multi-agent HIGH audit on R6+R7.1 (45 findings confirmed, 11 refuted) | 67 | 2.6M | _processo/METRICHE.md |

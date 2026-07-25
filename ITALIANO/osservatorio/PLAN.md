@@ -5,7 +5,9 @@
 
 ## PROSSIMI — backlog ordinato (valore ÷ sforzo, dopo lo studio Spec Kit)
 
-1. [ ] **Correggere le due affermazioni pubblicate su Spec Kit** (dallo studio a doppio run,
+1. [x] **Correggere le due affermazioni pubblicate su Spec Kit** — VERIFICATO GIÀ FATTO
+       (revisione finale 2026-07-25): entrambe le correzioni datate (2026-07-17) vivono in
+       FINDINGS.md e spec-kit/README.md. Segue il testo originale del task. (dallo studio a doppio run,
        entrambe verificate alla fonte): (a) "la constitution si legge una volta sola ed è
        passiva" è FALSA — viene caricata da ogni comando core e rende `/analyze` automaticamente
        CRITICO; (b) "un metodo si distribuisce come drop-in, non come preset" era vero fino a

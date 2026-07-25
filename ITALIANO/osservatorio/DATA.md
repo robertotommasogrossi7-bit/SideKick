@@ -26,7 +26,7 @@
 ## Le fonti dei dati (tabella creata 2026-07-16, contenuti aggiornati 2026-07-25)
 | Fonte | Cosa contiene | Stato |
 |---|---|---|
-| `observatory/usage/` | token per progetto × modello × mese **e per operazione/sessione** (titoli delle chat), da TUTTE le chat locali (25 cartelle di chat → 13 progetti raggruppati, 64 sessioni da maggio 2026) + registro workflow cloud (ora con colonna `5h_windows`) | ✅ generato automaticamente (workflow.csv a mano) |
+| `observatory/usage/` | token per progetto × modello × mese **e per operazione/sessione** (titoli delle chat), da TUTTE le chat locali (25 cartelle di chat → 12 progetti raggruppati, 65 sessioni da maggio 2026) + registro workflow cloud (ora con colonna `5h_windows`) | ✅ generato automaticamente (workflow.csv a mano) |
 | `~/.claude/ESPERIMENTI.md` | A/B cross-modello e ripetizioni stesso-modello | 6 righe A/B · 1 ripetizione (+1 nota ibrida red-team) |
 | poker: `_processo/METRICHE.md` | per fase: modello+effort, durata (git), volume, token dei workflow | ✅ la serie più ricca |
 | progetto-15: doc di processo in root | DECISIONI + audit, ma **niente METRICHE.md** | ⚠️ braccio scoperto |
@@ -60,8 +60,9 @@ sommati a mano dai METRICHE. La dashboard Anthropic resta l'unica fonte del cost
 - **Ripetizioni stesso-modello**: **zero dati** — la regola in costituzione è ancora fede.
 - **Quali modelli per quali agenti**: la tabella del metodo viene dalla ricerca esterna
   (dossier 2026-07); i nostri dati per ora coprono solo la funzione di "verifica".
-- **Dove vanno i token** (aggiornato 2026-07-25, riconteggio post-audit): 18,1M output +
-  **29,1M token di agenti cloud** (le run della Fabbrica ora superano ogni audit: la sola WR3
+- **Dove vanno i token** (aggiornato alla chiusura del 2026-07-25 — i totali scritti a mano
+  derivano in giornata, la dashboard generata è l'autorità): 18,2M output +
+  **30,2M token di agenti cloud** (le run della Fabbrica ora superano ogni audit: la sola WR3
   11,0M ≈ **~3 finestre di utilizzo di 5 ore del piano Max da 100 euro**, osservato tramite i
   blocchi di credito); la cache letta (~3,5 miliardi) è ~187× i token vivi → la cache calda è
   ciò che rende sostenibile il piano. Opus ha generato ~77% dell'output storico (il "~83%"

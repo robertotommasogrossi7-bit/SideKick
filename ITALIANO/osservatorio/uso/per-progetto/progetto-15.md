@@ -15,6 +15,8 @@
 | 2026-07-01 | (oscurato) | opus-4-8 | 3 | 6 | 14k | 880k |
 
 ## Workflow cloud su questo progetto
+> Nota: le descrizioni delle operazioni restano in **inglese** — sono log tecnici copiati
+> tali e quali dal registro `workflow.csv` e dai titoli delle sessioni (dati, non prosa).
 | Data | Operazione | Agenti | Token agenti | Fonte |
 |---|---|---|---|---|
 | 2026-07-03 | Multi-agent HIGH audit (12 confirmed, 1 refuted + Sonnet-vs-Opus shadow check) | 21 | 1.1M | project audit report |

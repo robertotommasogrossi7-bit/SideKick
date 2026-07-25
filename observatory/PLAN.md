@@ -5,7 +5,9 @@
 
 ## NEXT — ordered backlog (value ÷ effort, post Spec Kit study)
 
-1. [ ] **Fix the two published claims about Spec Kit** (from the double-run study, both
+1. [x] **Fix the two published claims about Spec Kit** — VERIFIED ALREADY DONE (2026-07-25
+       final review): both dated corrections (2026-07-17) live in FINDINGS.md and
+       spec-kit/README.md. Original task text follows. (from the double-run study, both
        verified at the source): (a) "constitution is read-once and passive" is FALSE — it is
        loaded by every core command and gates `/analyze` as automatically-CRITICAL;
        (b) "a method ships as a drop-in, not a preset" was true until Spec Kit v0.12.15

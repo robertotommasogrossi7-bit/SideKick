@@ -213,6 +213,8 @@ come from the projects' METRICHE/report files. **After every new workflow, add o
     summaryLine2: o => `- La **cache** ha riletto ${o.cacheR} token (≈${o.ratio}× i token vivi): riprendere una chat
   su una cache calda è ciò che rende sostenibile il piano — ripartire da zero li butta via.`,
     expensiveHeader: 'Le cose più costose',
+    rawDataNote: `> Nota: le descrizioni delle operazioni restano in **inglese** — sono log tecnici copiati
+> tali e quali dal registro \`workflow.csv\` e dai titoli delle sessioni (dati, non prosa).`,
     colHash: '#', colWhat: 'Cosa', colType: 'Tipo', colWhen: 'Quando', colTokens: 'Token',
     typeChat: 'chat', typeCloudAgents: 'agenti cloud',
     lessonsHeader: 'Cosa abbiamo imparato sul costo (e ridotto davvero)',
@@ -290,7 +292,7 @@ const renderProjectMD = (nome, g, wf, sess, L) => {
     : '';
   const wfSection = wf.length ? `
 ## ${L.cloudWorkflowsHeader}
-| ${L.colDate} | ${L.colOperation} | ${L.colAgents} | ${L.colAgentTokens} | ${L.colSource} |
+${L.rawDataNote ? L.rawDataNote + '\n' : ''}| ${L.colDate} | ${L.colOperation} | ${L.colAgents} | ${L.colAgentTokens} | ${L.colSource} |
 |---|---|---|---|---|
 ${wf.map(w => `| ${w.data} | ${mdEsc(w.operazione)} | ${w.agenti} | ${fmt(w.token)} | ${mdEsc(w.fonte)} |`).join('\n')}
 ` : '';
@@ -358,7 +360,7 @@ ${L.summaryLine1({ output: fmt(T.output), totW: fmt(totW), nSessions: sessioni.l
 ${L.summaryLine2({ cacheR: fmt(T.cacheR), ratio: Math.round(T.cacheR / (T.input + T.output)) })}
 
 ## ${L.expensiveHeader}
-| ${L.colHash} | ${L.colWhat} | ${L.colType} | ${L.colWhen} | ${L.colTokens} |
+${L.rawDataNote ? L.rawDataNote + '\n' : ''}| ${L.colHash} | ${L.colWhat} | ${L.colType} | ${L.colWhen} | ${L.colTokens} |
 |---|---|---|---|---|
 ${top.map((t, i) => topRow(t, i, L)).join('\n')}
 
@@ -372,6 +374,7 @@ ${ordGruppi.map(([nome, g]) => `| [${mdEsc(nome)}](${L.projectDir}/${slug(nome)}
 
 ## ${L.cloudWorkHeader}
 ${L.cloudWorkNote}
+${L.rawDataNote ? '\n' + L.rawDataNote : ''}
 
 | ${L.colDate} | ${L.colProject} | ${L.colOperation} | ${L.colAgents} | ${L.colAgentTokens} |
 |---|---|---|---|---|

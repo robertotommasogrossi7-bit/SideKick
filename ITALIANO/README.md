@@ -40,7 +40,7 @@ generale.
 | **Contametro dei costi per i bracci di esperimenti A/B** | [`experiments/cost-meter.mjs`](../experiments/cost-meter.mjs) | Misura i turni/token di un esperimento con/senza dai suoi transcript. |
 | **Correttore a prova di fuga per test nascosti** | [`experiments/streaming/oracle/`](../experiments/streaming/oracle/) | Verifica se un artefatto di processo aiuta, senza rivelare le risposte al modello. |
 | **L'articolo** | [`FINDINGS.md`](FINDINGS.md) | *"Ho provato a misurare se un processo catturato aiuta lo sviluppo assistito da AI — e non sono riuscito a costruire un test equo (ancora)."* Include il primo tentativo contaminato e la revisione avversariale esterna che ha smontato la v1. |
-| **Un drop-in di constitution per Spec Kit** | [`plugins/metodo/spec-kit/constitution.md`](../plugins/metodo/spec-kit/constitution.md) | Una constitution di metodo di lavoro auto-emendante in formato Spec Kit (v1.9.1 — [storia degli emendamenti](plugin/metodo/CHANGELOG.md)) — la variante spersonalizzata e riusabile del nostro metodo. |
+| **Un drop-in di constitution per Spec Kit** | [`plugins/metodo/spec-kit/constitution.md`](../plugins/metodo/spec-kit/constitution.md) | Una constitution di metodo di lavoro auto-emendante in formato Spec Kit (v1.9.1 — [storia degli emendamenti](plugin/metodo/CHANGELOG.md)) — la variante spersonalizzata e riusabile del nostro metodo (in inglese). |
 
 Avvio rapido per il generatore del dataset (nessuna dipendenza, Node 18+):
 
@@ -72,6 +72,8 @@ questa cartella):
   di un revisore si è rivelata sbagliata) e le correzioni sono tutti alla luce del sole.
 - [`DATA.md`](osservatorio/DATA.md) / [`PLAN.md`](osservatorio/PLAN.md) — cosa i dati possono
   e non possono ancora dire, e cosa viene dopo.
+- [`AUDIT-REPO-2026-07-25.md`](osservatorio/AUDIT-REPO-2026-07-25.md) — un audit da 24 agenti
+  su questo stesso repo (14 finding confermati, tutti corretti in giornata — esito incluso).
 
 Ogni progetto ha il suo approfondimento — ecco la cronologia di build di un'app reale,
 sessione per sessione, operazione nominata per operazione nominata:
@@ -99,7 +101,7 @@ Ogni regola al suo interno è un'ipotesi operativa sostenuta da N piccolo.
 Per usarlo: copia
 [`plugins/metodo/COSTITUZIONE.md`](../plugins/metodo/COSTITUZIONE.md) (o la [versione
 inglese](../plugins/metodo/CONSTITUTION.md)) nel tuo `~/.claude/CLAUDE.md`, oppure metti la
-[constitution Spec Kit](../plugins/metodo/spec-kit/constitution.md) in
+[constitution Spec Kit](../plugins/metodo/spec-kit/constitution.md) (in inglese) in
 `.specify/memory/constitution.md`.
 
 Relazione con [GitHub Spec Kit](https://github.com/github/spec-kit): Spec Kit organizza il

@@ -2,8 +2,8 @@
 
 > Back to the dashboard: [`../DASHBOARD.md`](../DASHBOARD.md). Do not edit by hand.
 
-**4 sessions** from 2026-07-20 to 2026-07-24 · **873k output** ·
-3k input · 353.8M cache read · 753 messages · **+20.5M cloud-agent tokens** (5 workflows)
+**5 sessions** from 2026-07-20 to 2026-07-25 · **893k output** ·
+3k input · 354.8M cache read · 764 messages · **+20.5M cloud-agent tokens** (5 workflows)
 
 ## Sessions (in time order — the title says what was done)
 | Period | Operation | Models | Msg | Input | Output | Cache read |
@@ -12,6 +12,7 @@
 | 2026-07-20 | Consumo crediti Claude anomalo | sonnet-5 | 3 | 6 | 1k | 165k |
 | 2026-07-20 | STUDIO/Base_1 | fable-5 | 1 | 1 | 4k | 32k |
 | 2026-07-22→07-24 | STUDIO/Base_2 | fable-5 + opus-4-8 | 229 | 1k | 227k | 61.0M |
+| 2026-07-25 | STUDIO/Base_3 | fable-5 | 11 | 463 | 19k | 999k |
 
 ## Cloud agent workflows on this project
 | Date | Operation | Agents | Agent tokens | Source |

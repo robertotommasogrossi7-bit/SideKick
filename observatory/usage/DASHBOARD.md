@@ -9,9 +9,9 @@
 > heaviest); *input* = tokens read at full price; *cache read* = context re-read (~1/10 of input).
 
 ## At a glance
-- **18.2M output tokens** (+ **29.8M** from cloud agents) across **64 sessions**
+- **18.2M output tokens** (+ **30.2M** from cloud agents) across **65 sessions**
   in **12 projects**, from 2026-05 to today. 11k messages in total.
-- The **cache** re-read 3551.8M tokens (≈187× the live tokens): resuming a chat
+- The **cache** re-read 3557.5M tokens (≈187× the live tokens): resuming a chat
   on a warm cache is what keeps the plan sustainable — restarting from scratch throws it away.
 
 ## The most expensive things
@@ -23,7 +23,7 @@
 | 4 | Single sq/ app built from the 17 mockups (9 agents: foundations + 4 modules + integration + 2 Opus QC; +2 bugs found by the orchestrator's E2E test) — Studio | cloud agents | 2026-07-21 | 1.8M |
 | 5 | WTB/Base_4 — poker (Who's the Boss) | chat | 2026-06-04 | 1.6M |
 | 6 | Bridge F1: auto-import into 2 apps + 167 questions generated from weather_report (12 batches, QC 3x Opus, Haiku shadow) — Studio | cloud agents | 2026-07-20 | 1.5M |
-| 7 | Full repo audit REPORT-ONLY (Roberto): 3 cheap red-team personas (recruiter/adopter/visitor, 17 findings) -> 5 subsystem reviewers (30) -> Haiku dedup (29 unique) -> adversarial verification on HIGH/MEDIUM -> Opus synthesis. Outcome: 14 confirmed (1 HIGH: usage.mjs misses Studio's workflows in the drilldown, ~20.5M tokens invisible; 8 medium incl. the unexplained double Italian folder and inconsistent drop-in versions), 4 low unverified, 0 refuted; 5 severities downgraded by verification. Report: observatory/AUDIT-REPO-2026-07-25.md, no fix applied — SideKick | cloud agents | 2026-07-25 | 1.5M |
+| 7 | Full repo audit REPORT-ONLY (Roberto): 3 cheap red-team personas (recruiter/adopter/visitor, 17 findings) -> 5 subsystem reviewers (30) -> Haiku dedup (29 unique) -> adversarial verification on HIGH/MEDIUM -> Opus synthesis. Outcome: 14 confirmed (1 HIGH: usage.mjs misses Studio's workflows in the drilldown, ~20.5M tokens invisible; 8 medium incl. the unexplained double Italian folder and inconsistent drop-in versions), 4 low unverified, 0 refuted; 5 severities downgraded by verification. Report: observatory/AUDIT-REPO-2026-07-25.md, no fix applied in THIS run (all fixes were applied later the same day - see the report's Outcome section) — SideKick | cloud agents | 2026-07-25 | 1.5M |
 | 8 | (redacted) — progetto-15 | chat | 2026-05-29 | 1.5M |
 
 ## What we learned about cost (and actually reduced)
@@ -57,10 +57,10 @@
 |---|---|---|---|---|---|
 | [poker (Who's the Boss)](per-project/poker-who-s-the-boss.md) | 2026-05-14 → 2026-07-22 | 23 | 7.6M | 333k | 1685.2M |
 | [progetto-15](per-project/progetto-15.md) | 2026-05-29 → 2026-07-17 | 5 | 3.6M | 233k | 921.0M |
-| [SideKick](per-project/sidekick.md) | 2026-06-03 → 2026-07-25 | 12 | 2.1M | 117k | 253.5M |
+| [SideKick](per-project/sidekick.md) | 2026-06-03 → 2026-07-25 | 12 | 2.1M | 117k | 258.1M |
 | [Libri-Organizzazione](per-project/libri-organizzazione.md) | 2026-05-07 → 2026-05-31 | 2 | 1.3M | 11k | 121.4M |
 | [Programmi (root)](per-project/programmi-root.md) | 2026-05-31 → 2026-06-27 | 3 | 997k | 45k | 96.4M |
-| [Studio](per-project/studio.md) | 2026-07-20 → 2026-07-24 | 4 | 873k | 3k | 353.8M |
+| [Studio](per-project/studio.md) | 2026-07-20 → 2026-07-25 | 5 | 893k | 3k | 354.8M |
 | [Text-Adventure-Engine](per-project/text-adventure-engine.md) | 2026-05-28 → 2026-05-29 | 1 | 466k | 370 | 54.3M |
 | [experiments (method tests)](per-project/experiments-method-tests.md) | 2026-06-04 → 2026-06-11 | 9 | 375k | 5k | 19.1M |
 | [progetto-16](per-project/progetto-16.md) | 2026-06-28 → 2026-06-30 | 1 | 308k | 17k | 10.9M |
@@ -72,6 +72,7 @@
 Multi-agent workflows run in the cloud and **leave no transcripts on the PC**: these numbers
 come from the projects' METRICHE/report files. **After every new workflow, add one row to
 `workflow.csv`** (the observatory ritual includes the reminder).
+
 
 | Date | Project | Operation | Agents | Agent tokens |
 |---|---|---|---|---|
@@ -88,14 +89,15 @@ come from the projects' METRICHE/report files. **After every new workflow, add o
 | 2026-07-25 | Studio | Python question factory WR3: 555 questions/16 batches (Haiku extraction, 16 Sonnet generators, dedup, full QC 2 Opus passes + 8% shadow, fixes, final verification). RESUME INCIDENT (root cause verified by the observatory 2026-07-25 on the journal): at the 3rd relaunch the cache matched NO keys (0/46) despite 30/32 QC prompts byte-identical and a COMPLETE journal - the on-the-spot diagnosis 'journal missing results' was wrong (cache keys not content-addressed in the runtime) -> 46 agents redone (30 Opus + 16 Sonnet), waste ~0.59M live + ~39M cache; stopped by hand; closed with 3 direct agents. Live tokens from transcripts: 1.17M+0.88M+0.65M; cache read ~225M (dominant item). Duration stretched by the 2 credit gaps (~2h and ~3h on a running clock), not the cost | 229 | 11.0M |
 | 2026-07-25 | SideKick | Repo clarity+English (3 phases): 3 Sonnet analysts (fresh eyes, native English, fact coherence; 26 findings) -> 5 Sonnet executors on disjoint files (CONSTITUTION.md brought to v1.9, FACTORY-PROCESS.md created, spec-kit drop-in with new principles XII-XVI, facade, observatory docs) -> 2 Opus reviewers with different lenses (8 findings, 5 real: drop-in version race in README between parallel agents, 170x->187x, 5h_windows line MISSING FROM THE MASTER then added, untranslated 'Assistenza', dashboard to regenerate; 1 refuted: the generator has no hardcoded 170x). Integration and commits by the director | 10 | 838k |
 | 2026-07-25 | SideKick | Italian copy ITALIANO/: 5 Sonnet translators on disjoint blocks (14 docs, ~880 lines) + 1 verifier (completeness, number fidelity, terminology, links). 2 cross-agent slips fixed by the director: README intro note removed by an overzealous verifier (context lost between agents) and FINDINGS link pointed at the original instead of the copy | 6 | 405k |
-| 2026-07-25 | SideKick | Full repo audit REPORT-ONLY (Roberto): 3 cheap red-team personas (recruiter/adopter/visitor, 17 findings) -> 5 subsystem reviewers (30) -> Haiku dedup (29 unique) -> adversarial verification on HIGH/MEDIUM -> Opus synthesis. Outcome: 14 confirmed (1 HIGH: usage.mjs misses Studio's workflows in the drilldown, ~20.5M tokens invisible; 8 medium incl. the unexplained double Italian folder and inconsistent drop-in versions), 4 low unverified, 0 refuted; 5 severities downgraded by verification. Report: observatory/AUDIT-REPO-2026-07-25.md, no fix applied | 24 | 1.5M |
+| 2026-07-25 | SideKick | Full repo audit REPORT-ONLY (Roberto): 3 cheap red-team personas (recruiter/adopter/visitor, 17 findings) -> 5 subsystem reviewers (30) -> Haiku dedup (29 unique) -> adversarial verification on HIGH/MEDIUM -> Opus synthesis. Outcome: 14 confirmed (1 HIGH: usage.mjs misses Studio's workflows in the drilldown, ~20.5M tokens invisible; 8 medium incl. the unexplained double Italian folder and inconsistent drop-in versions), 4 low unverified, 0 refuted; 5 severities downgraded by verification. Report: observatory/AUDIT-REPO-2026-07-25.md, no fix applied in THIS run (all fixes were applied later the same day - see the report's Outcome section) | 24 | 1.5M |
 | 2026-07-25 | SideKick | ITALIANO total translation (6 Sonnet agents): tree restructured with Italian folder names (osservatorio/uso/per-progetto/esperimenti/plugin/documenti), usage.mjs made BILINGUAL (Italian dashboard+drilldowns generated on every run, +2 tests), missing experiment docs translated, audit report turned English in the main tree (Italian original kept in ITALIANO/), full resync with the restructured README; verifier fixed 2 real bugs (4 links pointing at English dashboards instead of the generated Italian ones; degraded accents in one file) and flagged the v1.9.1->v1.9.2 README drift (fixed by the director) | 6 | 685k |
+| 2026-07-25 | SideKick | Final day red-team (Roberto): 3 Sonnet personas on the CURRENT repo state (recruiter on the new README, method adopter, Italian visitor) -> 2 Opus reviewers (bilingual fidelity+method artifacts, whole-repo navigation) with red-team findings as seeds. 16 findings, all small and real, dedup to 7: DATA.md hand-written totals stale vs same-day dashboard (fixed), Italian dashboard cells in English without notice (fixed in the generator: permanent note), PLAN item 1 unticked though done (ticked), missing language markers on drop-in links (added), audit report orphaned from README navigation (linked), drop-in version-lag note (added), register wording (clarified). All applied by the director same day | 5 | 460k |
 
 ## By model (local chats only)
 | Model | Msg | Input | Output | Cache read |
 |---|---|---|---|---|
 | opus-4-8 | 6k | 628k | 11.8M | 2300.2M |
-| fable-5 | 1k | 52k | 2.2M | 457.7M |
+| fable-5 | 1k | 53k | 2.2M | 463.3M |
 | opus-4-7 | 1k | 15k | 2.2M | 259.4M |
 | sonnet-4-6 | 2k | 38k | 1.5M | 137.6M |
 | sonnet-5 | 801 | 43k | 602k | 397.1M |
@@ -105,4 +107,4 @@ come from the projects' METRICHE/report files. **After every new workflow, add o
 |---|---|---|---|---|
 | 2026-05 | 2k | 82k | 4.0M | 396.6M |
 | 2026-06 | 4k | 536k | 9.0M | 1557.8M |
-| 2026-07 | 4k | 159k | 5.2M | 1597.3M |
+| 2026-07 | 4k | 159k | 5.2M | 1603.0M |

@@ -2,8 +2,8 @@
 
 > Torna al cruscotto: [`../DASHBOARD.md`](../DASHBOARD.md). Non modificare a mano.
 
-**4 sessioni** dal 2026-07-20 al 2026-07-24 · **873k output** ·
-3k input · 353.8M cache letta · 753 messaggi · **+20.5M token di agenti cloud** (5 workflow)
+**5 sessioni** dal 2026-07-20 al 2026-07-25 · **893k output** ·
+3k input · 354.8M cache letta · 764 messaggi · **+20.5M token di agenti cloud** (5 workflow)
 
 ## Sessioni (in ordine di tempo — il titolo dice cosa è stato fatto)
 | Periodo | Operazione | Modelli | Msg | Input | Output | Cache letta |
@@ -12,8 +12,11 @@
 | 2026-07-20 | Consumo crediti Claude anomalo | sonnet-5 | 3 | 6 | 1k | 165k |
 | 2026-07-20 | STUDIO/Base_1 | fable-5 | 1 | 1 | 4k | 32k |
 | 2026-07-22→07-24 | STUDIO/Base_2 | fable-5 + opus-4-8 | 229 | 1k | 227k | 61.0M |
+| 2026-07-25 | STUDIO/Base_3 | fable-5 | 11 | 463 | 19k | 999k |
 
 ## Workflow cloud su questo progetto
+> Nota: le descrizioni delle operazioni restano in **inglese** — sono log tecnici copiati
+> tali e quali dal registro `workflow.csv` e dai titoli delle sessioni (dati, non prosa).
 | Data | Operazione | Agenti | Token agenti | Fonte |
 |---|---|---|---|---|
 | 2026-07-20 | Bridge F1: auto-import into 2 apps + 167 questions generated from weather_report (12 batches, QC 3x Opus, Haiku shadow) | 21 | 1.5M | chat Studio-Ponte/Design_1 |
