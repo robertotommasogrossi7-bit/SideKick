@@ -55,7 +55,7 @@ group,project,session,start,end,operation,models,messages,input_tokens,output_to
 "SideKick","SideKick",198f4e22,2026-07-16,2026-07-16,"Sidekick data observatory setup","fable-5",112,206,217222,35114444,1418597
 "SideKick","SideKick",45b6f48e,2026-07-16,2026-07-17,"Sidekick data observatory setup","fable-5",8,15,5589,3487544,464455
 "SideKick","SideKick",9df7891a,2026-07-16,2026-07-17,"SK/Base_4","fable-5 + opus-4-8",50,92,68950,24480491,1386414
-"SideKick","SideKick",f7ae7118,2026-07-25,2026-07-25,"Multi-agent session token consumption","fable-5",74,139,108131,12269653,494078
+"SideKick","SideKick",f7ae7118,2026-07-25,2026-07-25,"Multi-agent session token consumption","fable-5",90,168,136694,16659893,564057
 "Studio","Studio",251677f6,2026-07-20,2026-07-22,"STUDIO/Base_1","fable-5 + opus-4-8",520,1506,640164,292668463,11074941
 "Studio","Studio",392f89b7,2026-07-20,2026-07-20,"Consumo crediti Claude anomalo","sonnet-5",3,6,1497,164700,26644
 "Studio","Studio",dc1fb71c,2026-07-20,2026-07-20,"STUDIO/Base_1","fable-5",1,1,4443,32023,304810
