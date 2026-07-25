@@ -30,11 +30,19 @@ group,project,session,start,end,operation,models,messages,input_tokens,output_to
 "poker (Who's the Boss)","poker (Who's the Boss)",a9f60a98,2026-06-30,2026-07-01,"WTB/Base_4","opus-4-8",177,8073,248740,76666296,5024825
 "poker (Who's the Boss)","poker (Who's the Boss)",c221dbec,2026-07-01,2026-07-10,"WTB/Base_5","opus-4-8 +2",586,35365,794627,313786709,8419285
 "poker (Who's the Boss)","poker (Who's the Boss)",1613de1d,2026-07-03,2026-07-11,"WTB/Base_5","sonnet-5 + opus-4-8",512,33333,519305,207130043,7654933
-"poker (Who's the Boss)","poker (Who's the Boss)",953124bd,2026-07-11,2026-07-14,"WTB/Base_6","opus-4-8 +2",190,9701,266666,39638599,2321784
+"poker (Who's the Boss)","poker (Who's the Boss)",953124bd,2026-07-11,2026-07-17,"WTB/Base_6","opus-4-8 +2",355,11160,496955,121678547,4809222
+"poker (Who's the Boss)","poker (Who's the Boss)",05cea4d1,2026-07-17,2026-07-22,"WTB/Base_8","fable-5",147,6730,252367,49820424,2367144
+"poker (Who's the Boss)","poker (Who's the Boss)",1147f4ee,2026-07-17,2026-07-17,"WTB/Base_7","opus-4-8",354,651,329532,112078256,2963711
+"poker (Who's the Boss)","poker (Who's the Boss)",f232c366,2026-07-17,2026-07-22,"WTB/Base_8","opus-4-8",55,101,72037,24614692,897971
+"progetto-04","progetto-04",251677f6,2026-07-20,2026-07-22,"(redacted)","fable-5 + opus-4-8",520,1506,640164,292668463,11074941
+"progetto-04","progetto-04",392f89b7,2026-07-20,2026-07-20,"(redacted)","sonnet-5",3,6,1497,164700,26644
+"progetto-04","progetto-04",dc1fb71c,2026-07-20,2026-07-20,"(redacted)","fable-5",1,1,4443,32023,304810
+"progetto-04","progetto-04",26917ab3,2026-07-22,2026-07-24,"(redacted)","fable-5 + opus-4-8",229,1245,227394,60954698,577594
+"progetto-05","progetto-05",e3031591,2026-07-24,2026-07-25,"(redacted)","fable-5",61,114,156621,14433851,840736
 "progetto-15","progetto-15",37d34b53,2026-05-29,2026-06-17,"(redacted)","opus-4-8 + fable-5",331,35326,878409,110013029,4138322
 "progetto-15","progetto-15",b57d481e,2026-05-29,2026-07-01,"(redacted)","opus-4-8",1046,111623,1505108,523738795,28741210
 "progetto-15","progetto-15",12b36797,2026-06-29,2026-07-01,"(redacted)","opus-4-8",488,59902,749767,239766985,15613155
-"progetto-15","progetto-15",3460f0f6,2026-07-01,2026-07-12,"(redacted)","opus-4-8 + fable-5",145,26331,414737,40048052,4297809
+"progetto-15","progetto-15",3460f0f6,2026-07-01,2026-07-17,"(redacted)","opus-4-8 + fable-5",158,26355,444717,46603350,5435690
 "progetto-15","progetto-15",a99c054a,2026-07-01,2026-07-01,"(redacted)","opus-4-8",3,6,13990,879522,26563
 "progetto-16","progetto-16",be99f72b,2026-06-28,2026-06-30,"(redacted)","opus-4-8",55,16806,308457,10939254,1698442
 "progetto-22","progetto-22",72101ad7,2026-06-17,2026-06-17,"(redacted)","opus-4-8",34,7525,51596,2162679,73633
@@ -51,6 +59,7 @@ group,project,session,start,end,operation,models,messages,input_tokens,output_to
 "SideKick","SideKick",137df591,2026-07-16,2026-07-16,"Sidekick data observatory setup","fable-5",23,3149,43275,2219001,109268
 "SideKick","SideKick",198f4e22,2026-07-16,2026-07-16,"Sidekick data observatory setup","fable-5",112,206,217222,35114444,1418597
 "SideKick","SideKick",45b6f48e,2026-07-16,2026-07-17,"Sidekick data observatory setup","fable-5",8,15,5589,3487544,464455
-"SideKick","SideKick",9df7891a,2026-07-16,2026-07-17,"Sidekick data observatory setup","fable-5 + opus-4-8",33,61,56554,14778032,1366984
+"SideKick","SideKick",9df7891a,2026-07-16,2026-07-17,"SK/Base_4","fable-5 + opus-4-8",50,92,68950,24480491,1386414
+"SideKick","SideKick",f7ae7118,2026-07-25,2026-07-25,"Multi-agent session token consumption","fable-5",62,117,96192,9576002,477807
 "Text-Adventure-Engine","Text-Adventure-Engine",7654955c,2026-05-28,2026-05-29,"Text_game/Base_1","opus-4-7",174,370,466353,54311569,1235975
 "weather-report","weather-report (worktree)",f24c43ea,2026-05-07,2026-05-07,"Weather_report/Prova","opus-4-7 + sonnet-4-6",80,137,42170,6811669,151725

@@ -4,7 +4,7 @@
 > (tokens, measured where possible) and **how much it has paid off** (benefits observed,
 > concrete). Same honesty as FINDINGS.md: small N = clues; where the cost isn't measurable we
 > say so, we don't make it up. Updated by the observatory chat at the ritual. Last review:
-> **2026-07-16**.
+> **2026-07-25**.
 
 ## MEASURED strategies (cost and benefit with numbers)
 
@@ -23,19 +23,31 @@
   register.
 - **Verdict**: strong clue that it pays off at the end of a big phase. N=2.
 
-### 2. Cross-model shadow verification (inside audits)
-- **Measured cost**: ~39k tokens for 1 duplicated agent (≈8% of the verifications).
+### 2. Cross-model shadow verification (inside audits and mass QC)
+- **Measured cost**: ~39k tokens for 1 duplicated agent (≈8% of the verifications); in the
+  WR3 factory run, ~16 Sonnet shadow agents inside an 11.0M-token run.
 - **Observed gain**: 1 finding out of 2 downgraded with **4 factual errors discovered**
-  inside the finding → wasted remediation work avoided. Pattern found: on **code**
+  inside the finding → wasted remediation work avoided. Pattern on audits: on **code**
   findings the models are equivalent; on **process/config** findings the higher model
-  falsifies better.
-- **Verdict**: minimum cost, useful data. N=2 — continue.
+  falsifies better. New (2026-07-24, 54 pairs, **inverted direction** — Sonnet shadow under
+  an Opus baseline): 87% agreement, and the disagreements show **complementary defect
+  classes** — the high model sees batch-level defects, the cheap shadow catches point-level
+  slips (3/4 confirmed at arbitration, e.g. a stray newline, a wrong line count).
+- **Verdict**: minimum cost, useful in BOTH directions → method v1.9 generalizes it (shadow
+  = one model step away from the baseline; mechanical defects go to script validators).
+  N=4 experiments — continue.
 
 ### 3. Switching chats / cache (context economics)
-- **Measured cost**: read cache ≈**170×** the live tokens (2.8 billion vs 16.5M) — it's the
+- **Measured cost**: read cache ≈**187×** the live tokens (3.5 billion vs ~18.8M) — it's the
   biggest cost item of all; resuming the interrupted audit reused **100%** of the completed
   steps (zero rework).
-- **Verdict**: rule in constitution v1.5 (handoff at milestones, resume when possible).
+- **⚠️ New caveat (2026-07-24, run WR3): the WORKFLOW resume cache is best-effort, not
+  guaranteed** — one resume reused 32/48 keys, the next **0/46** despite byte-identical
+  prompts and a complete journal (waste: ~0.59M live + ~39M cache tokens, 46 agents redone).
+  Chat-resume economics still hold; workflow resumes now require the safe procedure
+  (file-persisted verdicts + 2-minute stop-loss) in `plugins/metodo/PROCESSO-FABBRICA.md`.
+- **Verdict**: rule in constitution v1.5 (handoff at milestones, resume when possible),
+  hardened for workflows in v1.9.
 
 ### 4. Process IMPOSED on a strong model (process packages) — DISCARDED strategy
 - **Measured cost**: the arm with the package used ~**2×** the tokens of the blind arm
@@ -80,6 +92,20 @@
   1.0–1.35× tokens for the same text (official source, re-verified 2026-07-16).
 - **Verdict**: good clue; the table stays based on external research until our own numbers
   are enough.
+
+### 8. The Factory (mass generation with total QC)
+- **Measured cost**: 2 big runs — ponte-v2 (2026-07-20): 34 agents / 5.8M tokens; WR3
+  (2026-07-24/25): 229 agents / 11.0M tokens ≈ **~3 five-hour windows of the Max 100-euro
+  plan** (observed via credit blocks — first row of the new `5h_windows` column).
+- **Observed gain**: 447+555 study elements produced with executed-for-real solutions
+  (188/188 on WR3); the QC found real defect families (corpus-wide positional tell,
+  unbalanced true/false, non-self-contained solutions) **before use**; the script validator
+  kept integration bugs at 0 (vs 1 in the pre-validator run).
+- **Learned efficiency (applied to the process)**: mechanical checks BEFORE model QC;
+  mechanical rubrics on Sonnet with ~8% Opus shadow; post-fix recheck only above a change
+  threshold; safe-resume with file-persisted verdicts.
+- **Verdict**: pays off for content Roberto will use for months; the cost is dominated by
+  cache reads (~225M on WR3) → the levers above target exactly that. N=2.
 
 ## Strategies STILL WITHOUT DATA (declared)
 - **Same-model repetitions** (N runs on the same task): 0 experiments.

@@ -2,8 +2,8 @@
 
 > Back to the dashboard: [`../DASHBOARD.md`](../DASHBOARD.md). Do not edit by hand.
 
-**20 sessions** from 2026-05-14 to 2026-07-14 · **6.7M output** ·
-324k input · 1416.6M cache read · 4k messages · **+3.3M cloud-agent tokens** (2 workflows)
+**23 sessions** from 2026-05-14 to 2026-07-22 · **7.6M output** ·
+333k input · 1685.2M cache read · 5k messages · **+4.4M cloud-agent tokens** (3 workflows)
 
 ## Sessions (in time order — the title says what was done)
 | Period | Operation | Models | Msg | Input | Output | Cache read |
@@ -27,10 +27,14 @@
 | 2026-06-30→07-01 | WTB/Base_4 | opus-4-8 | 177 | 8k | 249k | 76.7M |
 | 2026-07-01→07-10 | WTB/Base_5 | opus-4-8 +2 | 586 | 35k | 795k | 313.8M |
 | 2026-07-03→07-11 | WTB/Base_5 | sonnet-5 + opus-4-8 | 512 | 33k | 519k | 207.1M |
-| 2026-07-11→07-14 | WTB/Base_6 | opus-4-8 +2 | 190 | 10k | 267k | 39.6M |
+| 2026-07-11→07-17 | WTB/Base_6 | opus-4-8 +2 | 355 | 11k | 497k | 121.7M |
+| 2026-07-17→07-22 | WTB/Base_8 | fable-5 | 147 | 7k | 252k | 49.8M |
+| 2026-07-17 | WTB/Base_7 | opus-4-8 | 354 | 651 | 330k | 112.1M |
+| 2026-07-17→07-22 | WTB/Base_8 | opus-4-8 | 55 | 101 | 72k | 24.6M |
 
 ## Cloud agent workflows on this project
 | Date | Operation | Agents | Agent tokens | Source |
 |---|---|---|---|---|
 | 2026-07-03 | Multi-agent HIGH audit on R6+R7.1 (45 findings confirmed, 11 refuted) | 67 | 2.6M | _processo/METRICHE.md |
 | 2026-07-03 | Model/effort research for the method (dossier in experiments/) | 5 | 689k | _processo/METRICHE.md |
+| 2026-07-18 | Multi-agent MEDIO audit on R7.4 delta-sync (5 confirmed [1 ALTA], 1 refuted) | 10 | 1.0M | chat WTB/Base_8 |
