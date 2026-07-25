@@ -6,6 +6,8 @@
 8k input · 2.2M cache read · 34 messages
 
 ## Sessions (in time order — the title says what was done)
-| Period | Operation | Models | Msg | Input | Output | Cache read |
-|---|---|---|---|---|---|---|
-| 2026-06-17 | (redacted) | opus-4-8 | 34 | 8k | 52k | 2.2M |
+| Period | Operation | Models | Msg | Input | Output | Cache read | Cost (API-equiv.) |
+|---|---|---|---|---|---|---|---|
+| 2026-06-17 | (redacted) | opus-4-8 | 34 | 8k | 52k | 2.2M | $2.87 |
+
+\* cost known only in part (some model/date in that row has no verified price — see `prices.csv`)

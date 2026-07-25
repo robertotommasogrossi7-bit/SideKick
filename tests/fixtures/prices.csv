@@ -1,0 +1,2 @@
+model,input_per_mtok,output_per_mtok,cache_read_per_mtok,cache_write_per_mtok,effective_from,effective_until,status,source_url,verified_date
+sonnet-5,2,10,0.2,2.5,,,verified,https://example.test/pricing,2026-07-25

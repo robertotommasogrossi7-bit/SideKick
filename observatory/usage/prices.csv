@@ -1,0 +1,8 @@
+model,input_per_mtok,output_per_mtok,cache_read_per_mtok,cache_write_per_mtok,effective_from,effective_until,status,source_url,verified_date
+opus-4-7,5.00,25.00,0.50,6.25,,,verified,https://platform.claude.com/docs/en/about-claude/pricing,2026-07-25
+opus-4-8,5.00,25.00,0.50,6.25,,,verified,https://platform.claude.com/docs/en/about-claude/pricing,2026-07-25
+sonnet-4-6,3.00,15.00,0.30,3.75,,,verified,https://platform.claude.com/docs/en/about-claude/pricing,2026-07-25
+sonnet-5,2.00,10.00,0.20,2.50,,2026-08-31,verified,https://platform.claude.com/docs/en/about-claude/pricing,2026-07-25
+sonnet-5,3.00,15.00,0.30,3.75,2026-09-01,,verified,https://platform.claude.com/docs/en/about-claude/pricing,2026-07-25
+haiku-4-5,1.00,5.00,0.10,1.25,,,verified,https://platform.claude.com/docs/en/about-claude/pricing,2026-07-25
+fable-5,10.00,50.00,1.00,12.50,,,verified,https://platform.claude.com/docs/en/about-claude/pricing,2026-07-25

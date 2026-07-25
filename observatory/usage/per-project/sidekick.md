@@ -2,24 +2,24 @@
 
 > Back to the dashboard: [`../DASHBOARD.md`](../DASHBOARD.md). Do not edit by hand.
 
-**12 sessions** from 2026-06-03 to 2026-07-25 · **2.1M output** ·
-117k input · 258.1M cache read · 847 messages · **+4.3M cloud-agent tokens** (7 workflows)
+**12 sessions** from 2026-06-03 to 2026-07-25 · **2.2M output** ·
+117k input · 288.2M cache read · 898 messages · **+5.2M cloud-agent tokens** (8 workflows)
 
 ## Sessions (in time order — the title says what was done)
-| Period | Operation | Models | Msg | Input | Output | Cache read |
-|---|---|---|---|---|---|---|
-| 2026-06-03 | Set up poker app project using desktop method | opus-4-8 | 5 | 4k | 3k | 122k |
-| 2026-06-03→06-10 | SK/Base_1 | opus-4-8 | 128 | 62k | 677k | 58.4M |
-| 2026-06-04 | SK/Test_2 | opus-4-8 | 20 | 5k | 39k | 961k |
-| 2026-06-04 | SK/Test_1 | opus-4-8 | 23 | 4k | 53k | 1.5M |
-| 2026-06-10 | BassPedal/Base | opus-4-8 | 27 | 6k | 101k | 2.6M |
-| 2026-06-10→06-12 | SK/Base_2 | opus-4-8 + fable-5 | 216 | 22k | 557k | 67.8M |
-| 2026-06-12 | SK/Base_3 | opus-4-8 + fable-5 | 55 | 10k | 114k | 7.6M |
-| 2026-07-16 | Sidekick data observatory setup | fable-5 | 23 | 3k | 43k | 2.2M |
-| 2026-07-16 | Sidekick data observatory setup | fable-5 | 112 | 206 | 217k | 35.1M |
-| 2026-07-16→07-17 | Sidekick data observatory setup | fable-5 | 8 | 15 | 6k | 3.5M |
-| 2026-07-16→07-17 | SK/Base_4 | fable-5 + opus-4-8 | 50 | 92 | 69k | 24.5M |
-| 2026-07-25 | SK/Base_5 | fable-5 | 180 | 337 | 263k | 53.9M |
+| Period | Operation | Models | Msg | Input | Output | Cache read | Cost (API-equiv.) |
+|---|---|---|---|---|---|---|---|
+| 2026-06-03 | Set up poker app project using desktop method | opus-4-8 | 5 | 4k | 3k | 122k | $0.2995 |
+| 2026-06-03→06-10 | SK/Base_1 | opus-4-8 | 128 | 62k | 677k | 58.4M | $63.33 |
+| 2026-06-04 | SK/Test_2 | opus-4-8 | 20 | 5k | 39k | 961k | $2.12 |
+| 2026-06-04 | SK/Test_1 | opus-4-8 | 23 | 4k | 53k | 1.5M | $3.02 |
+| 2026-06-10 | BassPedal/Base | opus-4-8 | 27 | 6k | 101k | 2.6M | $5.11 |
+| 2026-06-10→06-12 | SK/Base_2 | opus-4-8 + fable-5 | 216 | 22k | 557k | 67.8M | $79.03 |
+| 2026-06-12 | SK/Base_3 | opus-4-8 + fable-5 | 55 | 10k | 114k | 7.6M | $12.63 |
+| 2026-07-16 | Sidekick data observatory setup | fable-5 | 23 | 3k | 43k | 2.2M | $5.78 |
+| 2026-07-16 | Sidekick data observatory setup | fable-5 | 112 | 206 | 217k | 35.1M | $63.71 |
+| 2026-07-16→07-17 | Sidekick data observatory setup | fable-5 | 8 | 15 | 6k | 3.5M | $9.57 |
+| 2026-07-16→07-17 | SK/Base_4 | fable-5 + opus-4-8 | 50 | 92 | 69k | 24.5M | $40.65 |
+| 2026-07-25 | SK/Base_5 | fable-5 | 231 | 432 | 315k | 84.0M | $114.53 |
 
 ## Cloud agent workflows on this project
 | Date | Operation | Agents | Agent tokens | Source |
@@ -31,3 +31,6 @@
 | 2026-07-25 | Full repo audit REPORT-ONLY (Roberto): 3 cheap red-team personas (recruiter/adopter/visitor, 17 findings) -> 5 subsystem reviewers (30) -> Haiku dedup (29 unique) -> adversarial verification on HIGH/MEDIUM -> Opus synthesis. Outcome: 14 confirmed (1 HIGH: usage.mjs misses Studio's workflows in the drilldown, ~20.5M tokens invisible; 8 medium incl. the unexplained double Italian folder and inconsistent drop-in versions), 4 low unverified, 0 refuted; 5 severities downgraded by verification. Report: observatory/AUDIT-REPO-2026-07-25.md, no fix applied in THIS run (all fixes were applied later the same day - see the report's Outcome section) | 24 | 1.5M | chat SideKick/Osservatorio_1 + transcript wf_d0a32840-966 |
 | 2026-07-25 | ITALIANO total translation (6 Sonnet agents): tree restructured with Italian folder names (osservatorio/uso/per-progetto/esperimenti/plugin/documenti), usage.mjs made BILINGUAL (Italian dashboard+drilldowns generated on every run, +2 tests), missing experiment docs translated, audit report turned English in the main tree (Italian original kept in ITALIANO/), full resync with the restructured README; verifier fixed 2 real bugs (4 links pointing at English dashboards instead of the generated Italian ones; degraded accents in one file) and flagged the v1.9.1->v1.9.2 README drift (fixed by the director) | 6 | 685k | chat SideKick/Osservatorio_1 + transcript wf_71f2b859-65e |
 | 2026-07-25 | Final day red-team (Roberto): 3 Sonnet personas on the CURRENT repo state (recruiter on the new README, method adopter, Italian visitor) -> 2 Opus reviewers (bilingual fidelity+method artifacts, whole-repo navigation) with red-team findings as seeds. 16 findings, all small and real, dedup to 7: DATA.md hand-written totals stale vs same-day dashboard (fixed), Italian dashboard cells in English without notice (fixed in the generator: permanent note), PLAN item 1 unticked though done (ticked), missing language markers on drop-in links (added), audit report orphaned from README navigation (linked), drop-in version-lag note (added), register wording (clarified). All applied by the director same day | 5 | 460k | chat SideKick/Osservatorio_1 + transcript wf_03aa20eb-f49 |
+| 2026-07-25 | C1+C3 done well (Roberto): 3 research agents (official Anthropic prices per model VERIFIED AT SOURCE with URL+date each, incl. sonnet-5 two-tier intro/standard price switching 2026-09-01; how ccusage/LiteLLM convert costs; dashboard-presentation comparison -> self-contained HTML viewer recommended over Power BI/markdown-only) -> 1 implementer (prices.csv hand-maintained with validity windows, cost_usd_equiv/cost_partial columns, daily.csv, By day/By week views, bilingual dashboard.html with sortable tables + SVG charts, 6 new tests, limits DECLARED: API-equivalent is not the plan bill, cloud workflows never priced, cache-write at 5m rate) -> 2 Opus verifiers (independent recompute matched to the cent; 4 small real findings, all fixed by the director + 1 visual wrap bug found in the director own browser check). Totals now visible: ~$3.6k API-equivalent for 18.3M output + cache across 65 sessions | 6 | 926k | chat SideKick/Osservatorio_1 + transcript wf_aab22895-638 |
+
+\* cost known only in part (some model/date in that row has no verified price — see `prices.csv`)

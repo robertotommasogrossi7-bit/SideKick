@@ -44,7 +44,7 @@
 11. [ ] **Dataset release v0.1** (git tag + release notes) once the SCHEMA.md exists.
 12. [ ] **MANUAL (Roberto)**: repo description + topics on GitHub; decide on username rename.
 13. [ ] Later, data-driven: METRICHE for progetto-15 (full-vs-incremental A/B) · API
-        cost-equivalent per model (prices verified at source) · CSV→SQLite at hundreds of
+        cost-equivalent per model — DONE 2026-07-25 (`prices.csv`, sources+dates per row) · CSV→SQLite at hundreds of
         rows · ccusage-as-input if its exports ever cover redaction + per-operation needs.
 
 **Decision (Roberto, 2026-07-17)**: `versione-italiano/` stays **frozen** (originals + live

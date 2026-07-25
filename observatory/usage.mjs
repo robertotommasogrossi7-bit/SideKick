@@ -2,9 +2,12 @@
 //
 // Reads the transcripts in ~/.claude/projects/*/*.jsonl and generates in observatory/usage/:
 //   DASHBOARD.md        recap, top costs, lessons, one link per project
+//   dashboard.html       same numbers as an interactive, self-contained page (sortable tables
+//                        + inline SVG bar charts, no CDN, dark/light aware)
 //   per-project/*.md    one file per project: all its sessions with titles
 //   usage.csv           raw data: project × model × month
 //   sessions.csv        raw data: ONE ROW PER SESSION, with the operation title (searchable)
+//   daily.csv           raw data: ONE ROW PER CALENDAR DAY (all projects/models folded together)
 //
 // LESSONS.md (same folder) is HAND-CURATED by the observatory: the dashboard embeds it.
 // The script never touches it. (Italian original: versione-italiano/osservatorio/consumo/LEZIONI.md)
@@ -12,8 +15,18 @@
 // REDACTION: projects with "pubblico": false in observatory/censura.local.json appear
 // under an alias and without titles. That file is LOCAL ONLY (gitignored, never on GitHub).
 //
+// COST (API-equivalent, USD): prices.csv (same folder, hand-maintained, one row per model
+// per validity window, each with a source URL + verified date — see SCHEMA.md) is used to
+// price every message at the model+date that produced it. This is a LISTED-PRICE ESTIMATE
+// of what the tokens would cost on the pay-as-you-go API, NOT what is actually billed on a
+// flat Max/Pro plan (5-hour windows, not per-token) — the dashboard says so every time.
+// A model/date with no verified row in prices.csv contributes $0 and marks the total
+// "partial" (cost_partial column / '*' marker) — never an invented number.
+//
 // CLOUD AGENT WORKFLOWS: they leave no transcripts on the PC. Their numbers are kept by
-// hand in usage/workflow.csv (one row per workflow); the script renders them.
+// hand in usage/workflow.csv (one row per workflow); the script renders them. They have no
+// per-model token breakdown, so they are NEVER included in the USD cost totals (declared
+// limit, see SCHEMA.md).
 //
 // BILINGUAL OUTPUT: the same numbers/tables are also written in Italian, to
 // ITALIANO/osservatorio/uso/ (DASHBOARD.md + per-progetto/*.md). Only the template strings
@@ -41,6 +54,9 @@ const dirOut = path.join(outBase, 'usage');
 const dirProg = path.join(dirOut, 'per-project');
 const fileWorkflow = path.join(dirOut, 'workflow.csv');
 const fileLessons = path.join(dirOut, 'LESSONS.md');
+// prices.csv: hand-maintained price list (USD per MTok), one row per model per validity
+// window — see the "cost API-equivalent" block below and observatory/usage/SCHEMA.md.
+const filePrezzi = opt('prices', path.join(dirOut, 'prices.csv'));
 
 // Italian mirror: defaults to the real ITALIANO/ folder at the repo root (sibling of
 // observatory/), but tests point --out at a scratch dir so --out-it must be derivable from
@@ -85,9 +101,66 @@ const pulisci = (s, max) => String(s).replace(/\s+/g, ' ').trim().slice(0, max);
 const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const fmt = n => n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : n >= 1e3 ? Math.round(n / 1e3) + 'k' : String(n);
 const mdEsc = s => String(s).replace(/\|/g, '\\|');
+// quoted-CSV field splitter, shared by workflow.csv and prices.csv parsing below
+const campiCSV = riga => riga.match(/("([^"]|"")*"|[^,]*)(,|$)/g).map(c => c.replace(/,$/, '').replace(/^"|"$/g, '').replace(/""/g, '"'));
+const fmtUSD = n => n == null ? '—' : n >= 1000 ? '$' + (n / 1000).toFixed(1) + 'k' : n >= 1 ? '$' + n.toFixed(2) : '$' + n.toFixed(4);
+// costoParziale=true means "at least one contributing model/date had no verified price":
+// if the known-priced sum is 0 the cost is fully unknown (shown as em-dash); otherwise the
+// known portion is shown with a '*' so it reads as an undercount, never as a full number.
+const fmtCosto = (costo, parziale) => !parziale ? fmtUSD(costo) : costo > 0 ? fmtUSD(costo) + '*' : '—';
+
+// ---------- prices.csv (hand-maintained, USD per MTok — see SCHEMA.md) ----------
+// One row per model per validity window (effective_from/effective_until, both YYYY-MM-DD or
+// empty = open-ended); a model can have several rows when its price changed over time (e.g.
+// sonnet-5's introductory price expires 2026-08-31). Only status=verified rows price
+// anything — unverified/missing models contribute $0 and mark the total "partial".
+// cache_write_per_mtok is priced at the 5-MINUTE cache-write rate: the transcripts only
+// report one aggregate "cache creation" number, not a 5m/1h split, so a message that used
+// the (pricier, 2x) 1-hour cache is under-priced here — a declared limit, see SCHEMA.md.
+let listinoPrezzi = [];
+if (fs.existsSync(filePrezzi)) {
+  const [, ...corpo] = fs.readFileSync(filePrezzi, 'utf8').trim().split('\n');
+  listinoPrezzi = corpo.filter(Boolean).map(l => {
+    const c = campiCSV(l);
+    return {
+      mod: c[0], input: +c[1], output: +c[2], cacheR: +c[3], cacheW: +c[4],
+      da: c[5] || null, a: c[6] || null, status: c[7], url: c[8], verificato: c[9],
+    };
+  });
+}
+const listinoPerModello = new Map();
+for (const r of listinoPrezzi) {
+  if (!listinoPerModello.has(r.mod)) listinoPerModello.set(r.mod, []);
+  listinoPerModello.get(r.mod).push(r);
+}
+// most recent verified_date across the price list — shown in the dashboard disclaimer
+const dataPrezzi = listinoPrezzi.filter(r => r.status === 'verified' && r.verificato)
+  .map(r => r.verificato).sort().at(-1) || null;
+
+const prezzoPer = (mod, data) => {
+  if (!data) return null;
+  const righeP = listinoPerModello.get(mod);
+  if (!righeP) return null;
+  for (const r of righeP) {
+    if (r.status !== 'verified') continue;
+    if (r.da && data < r.da) continue;
+    if (r.a && data > r.a) continue;
+    return r;
+  }
+  return null;
+};
+// costo of ONE message, priced at the model+day it was produced (dates matter: e.g.
+// sonnet-5 has two different prices before/after 2026-09-01 — see prices.csv)
+const costoMessaggio = (mod, data, inTok, outTok, cR, cW) => {
+  const p = prezzoPer(mod, data);
+  if (!p) return { usd: 0, sconosciuto: true };
+  const usd = (inTok * p.input + outTok * p.output + cR * p.cacheR + cW * p.cacheW) / 1e6;
+  return { usd, sconosciuto: false };
+};
 
 // ---------- scan ----------
 const agg = new Map();      // alias \x1f model \x1f month -> tokens (for the CSV)
+const aggGiorno = new Map(); // YYYY-MM-DD -> tokens/cost, ALL projects/models folded (for daily.csv)
 const sessioni = [];        // one entry per session file
 const vistiMsg = new Set(); // dedup: the same message.id reappears on resume/fork
 
@@ -101,6 +174,7 @@ for (const d of dirs) {
       alias, gruppo: gruppoDi(alias), pubblico, id: f.replace('.jsonl', '').slice(0, 8),
       titolo: null, aiTitolo: null, primoTesto: null,
       primo: null, ultimo: null, msg: 0, input: 0, output: 0, cacheR: 0, cacheW: 0,
+      costo: 0, costoParziale: false, // API-equivalent USD (see prices.csv); see fmtCosto
       modelli: new Map(), // model -> output
     };
     for (const ln of testo.split('\n')) {
@@ -129,12 +203,21 @@ for (const d of dirs) {
       const mese = o.timestamp ? o.timestamp.slice(0, 7) : 'unknown';
       const k = [alias, mod, mese].join('\x1f');
       let r = agg.get(k);
-      if (!r) { r = { msg: 0, input: 0, output: 0, cacheR: 0, cacheW: 0 }; agg.set(k, r); }
+      if (!r) { r = { msg: 0, input: 0, output: 0, cacheR: 0, cacheW: 0, costo: 0, costoParziale: false }; agg.set(k, r); }
       const inTok = u.input_tokens || 0, outTok = u.output_tokens || 0;
       const cR = u.cache_read_input_tokens || 0, cW = u.cache_creation_input_tokens || 0;
+      const { usd, sconosciuto } = costoMessaggio(mod, ts, inTok, outTok, cR, cW);
       r.msg++; r.input += inTok; r.output += outTok; r.cacheR += cR; r.cacheW += cW;
+      r.costo += usd; r.costoParziale = r.costoParziale || sconosciuto;
       s.msg++; s.input += inTok; s.output += outTok; s.cacheR += cR; s.cacheW += cW;
+      s.costo += usd; s.costoParziale = s.costoParziale || sconosciuto;
       s.modelli.set(mod, (s.modelli.get(mod) || 0) + outTok);
+      if (ts) {
+        let giorno = aggGiorno.get(ts);
+        if (!giorno) { giorno = { msg: 0, input: 0, output: 0, cacheR: 0, cacheW: 0, costo: 0, costoParziale: false }; aggGiorno.set(ts, giorno); }
+        giorno.msg++; giorno.input += inTok; giorno.output += outTok; giorno.cacheR += cR; giorno.cacheW += cW;
+        giorno.costo += usd; giorno.costoParziale = giorno.costoParziale || sconosciuto;
+      }
     }
     if (s.msg > 0) sessioni.push(s);
   }
@@ -160,8 +243,9 @@ const LANG = {
     headNote: (data) => `> Generated by \`observatory/usage.mjs\` on ${data}. **Do not edit by
 > hand** (except \`LESSONS.md\`, which is curated by the observatory and embedded below).
 > Each project's detail is in \`per-project/\` (one file per project, one table row per session).
-> Raw data: \`usage.csv\` · \`sessions.csv\` (searchable: grep "react", "audit", "Feature_6"…) —
-> column-by-column schema in \`SCHEMA.md\`.
+> Raw data: \`usage.csv\` · \`sessions.csv\` · \`daily.csv\` · \`prices.csv\` (searchable: grep
+> "react", "audit", "Feature_6"…) — column-by-column schema in \`SCHEMA.md\`. Same numbers as
+> an interactive page: [\`dashboard.html\`](dashboard.html) (sortable tables, bar charts).
 > Reserved projects are redacted (legend kept local only). *Output* = generated tokens (the
 > heaviest); *input* = tokens read at full price; *cache read* = context re-read (~1/10 of input).`,
     atGlanceHeader: 'At a glance',
@@ -169,8 +253,11 @@ const LANG = {
   in **${o.nProjects} projects**, from ${o.firstMonth} to today. ${o.msg} messages in total.`,
     summaryLine2: o => `- The **cache** re-read ${o.cacheR} tokens (≈${o.ratio}× the live tokens): resuming a chat
   on a warm cache is what keeps the plan sustainable — restarting from scratch throws it away.`,
+    summaryLine3: o => `- **API cost-equivalent: ${o.totCosto}**${o.parziale ? ' (partial — some model/dates have no verified price yet, marked with \\*)' : ''}, computed at the prices verified ${o.dataPrezzi ? `on ${o.dataPrezzi}` : '(no verified price found)'} in \`prices.csv\`. **This is NOT what is actually billed** on the Max/Pro plan
+  (flat 5-hour usage windows, not pay-per-token) — it only estimates what the same tokens would cost on the pay-as-you-go API, useful to compare models/workflows. Cloud-agent workflow tokens have
+  no per-model breakdown and are **excluded** from this total (see the cloud agent section below).`,
     expensiveHeader: 'The most expensive things',
-    colHash: '#', colWhat: 'What', colType: 'Type', colWhen: 'When', colTokens: 'Tokens',
+    colHash: '#', colWhat: 'What', colType: 'Type', colWhen: 'When', colTokens: 'Tokens', colCost: 'Cost (API-equiv.)',
     typeChat: 'chat', typeCloudAgents: 'cloud agents',
     lessonsHeader: 'What we learned about cost (and actually reduced)',
     lessonsPlaceholder: '*(write `LESSONS.md` in this folder: the dashboard embeds it here)*',
@@ -180,10 +267,17 @@ const LANG = {
     cloudWorkHeader: 'Cloud agent work (workflows — hand-maintained register)',
     cloudWorkNote: `Multi-agent workflows run in the cloud and **leave no transcripts on the PC**: these numbers
 come from the projects' METRICHE/report files. **After every new workflow, add one row to
-\`workflow.csv\`** (the observatory ritual includes the reminder).`,
+\`workflow.csv\`** (the observatory ritual includes the reminder). No per-model breakdown means
+no USD column here — see \`SCHEMA.md\` for the declared limit.`,
     noneRegistered: '*(none registered)*',
     byModelHeader: 'By model (local chats only)',
     byMonthHeader: 'By month',
+    byDayHeader: 'By day (local chats only)',
+    byWeekHeader: 'By week, ISO week numbers (local chats only)',
+    colDay: 'Day', colWeek: 'Week',
+    dayWindowNote: (shown, total) => shown < total ? `*(showing the last ${shown} of ${total} recorded days; the full series is in \`daily.csv\`)*` : '*(the full recorded history)*',
+    weekWindowNote: (shown, total) => shown < total ? `*(showing the last ${shown} of ${total} recorded weeks)*` : '*(the full recorded history)*',
+    costPartialLegend: '\\* cost known only in part (some model/date in that row has no verified price — see `prices.csv`)',
   },
   it: {
     redacted: '(oscurato)', untitled: '(senza titolo)',
@@ -203,8 +297,10 @@ come from the projects' METRICHE/report files. **After every new workflow, add o
 > mano** (eccetto \`LESSONS.md\`, curato dall'osservatorio e incorporato qui sotto).
 > Il dettaglio di ogni progetto è in \`per-progetto/\` (un file per progetto, una riga di tabella per sessione).
 > Dati grezzi (originali inglesi): [\`usage.csv\`](../../../observatory/usage/usage.csv) ·
-> [\`sessions.csv\`](../../../observatory/usage/sessions.csv) (cercabili: grep "react", "audit", "Feature_6"…) —
-> schema colonna per colonna in [\`SCHEMA.md\`](SCHEMA.md).
+> [\`sessions.csv\`](../../../observatory/usage/sessions.csv) · [\`daily.csv\`](../../../observatory/usage/daily.csv) ·
+> [\`prices.csv\`](../../../observatory/usage/prices.csv) (cercabili: grep "react", "audit", "Feature_6"…) —
+> schema colonna per colonna in [\`SCHEMA.md\`](SCHEMA.md). Stessi numeri come pagina interattiva:
+> [\`dashboard.html\`](dashboard.html) (tabelle ordinabili, grafici a barre).
 > I progetti riservati sono oscurati (la legenda resta solo in locale). *Output* = token generati (i
 > più pesanti); *input* = token letti a prezzo pieno; *cache letta* = contesto riletto (~1/10 dell'input).`,
     atGlanceHeader: 'Colpo d\'occhio',
@@ -212,10 +308,13 @@ come from the projects' METRICHE/report files. **After every new workflow, add o
   in **${o.nProjects} progetti**, dal ${o.firstMonth} a oggi. ${o.msg} messaggi in totale.`,
     summaryLine2: o => `- La **cache** ha riletto ${o.cacheR} token (≈${o.ratio}× i token vivi): riprendere una chat
   su una cache calda è ciò che rende sostenibile il piano — ripartire da zero li butta via.`,
+    summaryLine3: o => `- **Costo API-equivalente: ${o.totCosto}**${o.parziale ? ' (parziale — alcuni modelli/date non hanno ancora un prezzo verificato, segnati con \\*)' : ''}, calcolato coi prezzi verificati ${o.dataPrezzi ? `il ${o.dataPrezzi}` : '(nessun prezzo verificato trovato)'} in \`prices.csv\`. **NON è ciò che si paga davvero** sul piano
+  Max/Pro (finestre da 5 ore flat, non a consumo per token) — stima solo quanto costerebbero quegli stessi token sull'API a consumo, utile per confrontare modelli/workflow. I token dei workflow cloud
+  non hanno un dettaglio per modello e sono **esclusi** da questo totale (vedi la sezione agenti cloud sotto).`,
     expensiveHeader: 'Le cose più costose',
     rawDataNote: `> Nota: le descrizioni delle operazioni restano in **inglese** — sono log tecnici copiati
 > tali e quali dal registro \`workflow.csv\` e dai titoli delle sessioni (dati, non prosa).`,
-    colHash: '#', colWhat: 'Cosa', colType: 'Tipo', colWhen: 'Quando', colTokens: 'Token',
+    colHash: '#', colWhat: 'Cosa', colType: 'Tipo', colWhen: 'Quando', colTokens: 'Token', colCost: 'Costo (API-equiv.)',
     typeChat: 'chat', typeCloudAgents: 'agenti cloud',
     lessonsHeader: 'Cosa abbiamo imparato sul costo (e ridotto davvero)',
     lessonsPlaceholder: '*(scrivi `LESSONS.md` in questa cartella: il cruscotto lo incorpora qui)*',
@@ -225,10 +324,17 @@ come from the projects' METRICHE/report files. **After every new workflow, add o
     cloudWorkHeader: 'Lavoro degli agenti cloud (workflow — registro curato a mano)',
     cloudWorkNote: `I workflow multi-agente girano nel cloud e **non lasciano transcript sul PC**: questi numeri
 vengono dai file METRICHE/report dei progetti. **Dopo ogni nuovo workflow, aggiungi una riga a
-\`workflow.csv\`** (il rituale dell'osservatorio include il promemoria).`,
+\`workflow.csv\`** (il rituale dell'osservatorio include il promemoria). Nessun dettaglio per modello
+significa nessuna colonna USD qui — vedi \`SCHEMA.md\` per il limite dichiarato.`,
     noneRegistered: '*(nessuno registrato)*',
     byModelHeader: 'Per modello (solo chat locali)',
     byMonthHeader: 'Per mese',
+    byDayHeader: 'Per giorno (solo chat locali)',
+    byWeekHeader: 'Per settimana, numeri di settimana ISO (solo chat locali)',
+    colDay: 'Giorno', colWeek: 'Settimana',
+    dayWindowNote: (shown, total) => shown < total ? `*(mostrati gli ultimi ${shown} di ${total} giorni registrati; la serie completa è in \`daily.csv\`)*` : '*(tutta la cronologia registrata)*',
+    weekWindowNote: (shown, total) => shown < total ? `*(mostrate le ultime ${shown} di ${total} settimane registrate)*` : '*(tutta la cronologia registrata)*',
+    costPartialLegend: '\\* costo noto solo in parte (qualche modello/data di quella riga non ha un prezzo verificato — vedi `prices.csv`)',
   },
 };
 
@@ -249,23 +355,55 @@ const righe = [...agg.entries()].map(([k, r]) => {
 
 fs.mkdirSync(dirOut, { recursive: true });
 fs.writeFileSync(path.join(dirOut, 'usage.csv'),
-  ['project,model,month,messages,input_tokens,output_tokens,cache_read,cache_written']
-    .concat(righe.map(r => [r.prog, r.mod, r.mese, r.msg, r.input, r.output, r.cacheR, r.cacheW].join(',')))
+  ['project,model,month,messages,input_tokens,output_tokens,cache_read,cache_written,cost_usd_equiv,cost_partial']
+    .concat(righe.map(r => [r.prog, r.mod, r.mese, r.msg, r.input, r.output, r.cacheR, r.cacheW, r.costo.toFixed(6), r.costoParziale].join(',')))
     .join('\n') + '\n');
 
 const csvq = s => `"${String(s).replace(/"/g, '""')}"`;
 sessioni.sort((a, b) => a.gruppo.localeCompare(b.gruppo) || String(a.primo).localeCompare(String(b.primo)));
 fs.writeFileSync(path.join(dirOut, 'sessions.csv'),
-  ['group,project,session,start,end,operation,models,messages,input_tokens,output_tokens,cache_read,cache_written']
-    .concat(sessioni.map(s => [csvq(s.gruppo), csvq(s.alias), s.id, s.primo, s.ultimo, csvq(descrizione(s)), csvq(modelliDi(s)), s.msg, s.input, s.output, s.cacheR, s.cacheW].join(',')))
+  ['group,project,session,start,end,operation,models,messages,input_tokens,output_tokens,cache_read,cache_written,cost_usd_equiv,cost_partial']
+    .concat(sessioni.map(s => [csvq(s.gruppo), csvq(s.alias), s.id, s.primo, s.ultimo, csvq(descrizione(s)), csvq(modelliDi(s)), s.msg, s.input, s.output, s.cacheR, s.cacheW, s.costo.toFixed(6), s.costoParziale].join(',')))
     .join('\n') + '\n');
+
+// ---------- daily.csv (ALL projects/models folded together, one row per calendar day) ----------
+const giorniOrdinati = [...aggGiorno.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+fs.writeFileSync(path.join(dirOut, 'daily.csv'),
+  ['date,messages,input_tokens,output_tokens,cache_read,cache_written,cost_usd_equiv,cost_partial']
+    .concat(giorniOrdinati.map(([data, t]) => [data, t.msg, t.input, t.output, t.cacheR, t.cacheW, t.costo.toFixed(6), t.costoParziale].join(',')))
+    .join('\n') + '\n');
+
+// ---------- weekly fold (in-memory only, ISO week — no re-scan of transcripts) ----------
+// ISO 8601 week number: Thursday-of-the-week trick (Monday=start of week, week 1 = the
+// week containing the year's first Thursday). Zero dependencies, matches date -u +%V.
+const settimanaISO = dataStr => {
+  const d = new Date(dataStr + 'T00:00:00Z');
+  const giornoLun = (d.getUTCDay() + 6) % 7; // Mon=0 .. Sun=6
+  d.setUTCDate(d.getUTCDate() - giornoLun + 3); // move to this week's Thursday
+  const primoGennaio = new Date(Date.UTC(d.getUTCFullYear(), 0, 4));
+  const settimana = 1 + Math.round(((d - primoGennaio) / 86400000 - 3 + ((primoGennaio.getUTCDay() + 6) % 7)) / 7);
+  return `${d.getUTCFullYear()}-W${String(settimana).padStart(2, '0')}`;
+};
+const aggSettimana = new Map();
+for (const [data, gg] of giorniOrdinati) {
+  const w = settimanaISO(data);
+  let t = aggSettimana.get(w);
+  if (!t) { t = { msg: 0, input: 0, output: 0, cacheR: 0, cacheW: 0, costo: 0, costoParziale: false }; aggSettimana.set(w, t); }
+  t.msg += gg.msg; t.input += gg.input; t.output += gg.output; t.cacheR += gg.cacheR; t.cacheW += gg.cacheW;
+  t.costo += gg.costo; t.costoParziale = t.costoParziale || gg.costoParziale;
+}
+const settimaneOrdinate = [...aggSettimana.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+// dashboard windowing (older history stays in daily.csv / recomputable from it — nothing lost)
+const FINESTRA_GIORNI = 30, FINESTRA_SETTIMANE = 12;
+const giorniVista = giorniOrdinati.slice(-FINESTRA_GIORNI);
+const settimaneVista = settimaneOrdinate.slice(-FINESTRA_SETTIMANE);
 
 // ---------- workflow.csv (cloud agents, hand-maintained) ----------
 let workflow = [];
 if (fs.existsSync(fileWorkflow)) {
   const [, ...corpo] = fs.readFileSync(fileWorkflow, 'utf8').trim().split('\n');
   workflow = corpo.map(l => {
-    const campi = l.match(/("([^"]|"")*"|[^,]*)(,|$)/g).map(c => c.replace(/,$/, '').replace(/^"|"$/g, '').replace(/""/g, '"'));
+    const campi = campiCSV(l);
     return { data: campi[0], prog: campi[1], operazione: campi[2], agenti: campi[3], token: +campi[4] || 0, fonte: campi[5] };
   });
 }
@@ -275,16 +413,17 @@ const totW = workflow.reduce((a, w) => a + w.token, 0);
 const gruppi = new Map();
 for (const s of sessioni) {
   let g = gruppi.get(s.gruppo);
-  if (!g) { g = { sess: [], msg: 0, input: 0, output: 0, cacheR: 0, cacheW: 0, primo: null, ultimo: null, pubblico: s.pubblico }; gruppi.set(s.gruppo, g); }
+  if (!g) { g = { sess: [], msg: 0, input: 0, output: 0, cacheR: 0, cacheW: 0, costo: 0, costoParziale: false, primo: null, ultimo: null, pubblico: s.pubblico }; gruppi.set(s.gruppo, g); }
   g.sess.push(s);
   g.msg += s.msg; g.input += s.input; g.output += s.output; g.cacheR += s.cacheR; g.cacheW += s.cacheW;
+  g.costo += s.costo; g.costoParziale = g.costoParziale || s.costoParziale;
   if (!g.primo || (s.primo && s.primo < g.primo)) g.primo = s.primo;
   if (!g.ultimo || (s.ultimo && s.ultimo > g.ultimo)) g.ultimo = s.ultimo;
 }
 const ordGruppi = [...gruppi.entries()].sort((a, b) => (b[1].input + b[1].output) - (a[1].input + a[1].output));
 
 // ---------- per-project files (rendered once per language, same data) ----------
-const rigaSess = (s, L = LANG.en) => `| ${s.primo}${s.ultimo !== s.primo ? '→' + String(s.ultimo).slice(5) : ''} | ${mdEsc(descrizione(s, L))}${s.alias !== s.gruppo ? ` *(${mdEsc(s.alias)})*` : ''} | ${modelliDi(s)} | ${fmt(s.msg)} | ${fmt(s.input)} | ${fmt(s.output)} | ${fmt(s.cacheR)} |`;
+const rigaSess = (s, L = LANG.en) => `| ${s.primo}${s.ultimo !== s.primo ? '→' + String(s.ultimo).slice(5) : ''} | ${mdEsc(descrizione(s, L))}${s.alias !== s.gruppo ? ` *(${mdEsc(s.alias)})*` : ''} | ${modelliDi(s)} | ${fmt(s.msg)} | ${fmt(s.input)} | ${fmt(s.output)} | ${fmt(s.cacheR)} | ${fmtCosto(s.costo, s.costoParziale)} |`;
 
 const renderProjectMD = (nome, g, wf, sess, L) => {
   const wfLine = wf.length
@@ -304,10 +443,11 @@ ${L.backToDashboard}
 ${fmt(g.input)} ${L.inputWord} · ${fmt(g.cacheR)} ${L.cacheReadWord} · ${fmt(g.msg)} ${L.messagesWord}${wfLine}
 
 ## ${L.sessionsHeader}
-| ${L.colPeriod} | ${L.colOperation} | ${L.colModels} | ${L.colMsg} | ${L.colInput} | ${L.colOutput} | ${L.colCacheRead} |
-|---|---|---|---|---|---|---|
+| ${L.colPeriod} | ${L.colOperation} | ${L.colModels} | ${L.colMsg} | ${L.colInput} | ${L.colOutput} | ${L.colCacheRead} | ${L.colCost} |
+|---|---|---|---|---|---|---|---|
 ${sess.map(s => rigaSess(s, L)).join('\n')}
-${wfSection}`;
+${wfSection}
+${L.costPartialLegend}`;
 };
 
 for (const [nome, g] of ordGruppi) {
@@ -318,12 +458,16 @@ for (const [nome, g] of ordGruppi) {
 }
 
 // ---------- dashboard ----------
-const T = { msg: 0, input: 0, output: 0, cacheR: 0, cacheW: 0 };
-for (const [, g] of ordGruppi) { T.msg += g.msg; T.input += g.input; T.output += g.output; T.cacheR += g.cacheR; T.cacheW += g.cacheW; }
+const T = { msg: 0, input: 0, output: 0, cacheR: 0, cacheW: 0, costo: 0, costoParziale: false };
+for (const [, g] of ordGruppi) { T.msg += g.msg; T.input += g.input; T.output += g.output; T.cacheR += g.cacheR; T.cacheW += g.cacheW; T.costo += g.costo; T.costoParziale = T.costoParziale || g.costoParziale; }
+// The '*' marker means exactly one thing: "some priced row had no verified price". The
+// cloud-workflow exclusion is a SEPARATE declared limit, already spelled out in words in
+// summaryLine3 — folding it into the same marker made the legend lie (final-review finding).
+const totCostoParziale = T.costoParziale;
 
 const totPer = sel => {
-  const t = { msg: 0, input: 0, output: 0, cacheR: 0 };
-  for (const r of righe) if (sel(r)) { t.msg += r.msg; t.input += r.input; t.output += r.output; t.cacheR += r.cacheR; }
+  const t = { msg: 0, input: 0, output: 0, cacheR: 0, costo: 0, costoParziale: false };
+  for (const r of righe) if (sel(r)) { t.msg += r.msg; t.input += r.input; t.output += r.output; t.cacheR += r.cacheR; t.costo += r.costo; t.costoParziale = t.costoParziale || r.costoParziale; }
   return t;
 };
 const modelli = [...new Set(righe.map(r => r.mod))].map(m => ({ m, t: totPer(r => r.mod === m) })).sort((a, b) => b.t.output - a.t.output);
@@ -339,7 +483,9 @@ const top = [
 const topRow = (t, i, L) => {
   const tipo = t.kind === 'chat' ? L.typeChat : L.typeCloudAgents;
   const nome = t.kind === 'chat' ? `${descrizione(t.s, L)} — ${t.s.gruppo}` : `${t.w.operazione} — ${gruppoDi(t.w.prog)}`;
-  return `| ${i + 1} | ${mdEsc(nome)} | ${tipo} | ${t.quando} | ${fmt(t.tok)} |`;
+  // cloud-agent rows have no per-model breakdown, so their cost is always unknown ('—')
+  const costo = t.kind === 'chat' ? fmtCosto(t.s.costo, t.s.costoParziale) : '—';
+  return `| ${i + 1} | ${mdEsc(nome)} | ${tipo} | ${t.quando} | ${fmt(t.tok)} | ${costo} |`;
 };
 
 const lezioniEN = fs.existsSync(fileLessons)
@@ -358,19 +504,20 @@ ${L.headNote(new Date().toISOString().slice(0, 10))}
 ## ${L.atGlanceHeader}
 ${L.summaryLine1({ output: fmt(T.output), totW: fmt(totW), nSessions: sessioni.length, nProjects: ordGruppi.length, firstMonth: mesi[0]?.m || '?', msg: fmt(T.msg) })}
 ${L.summaryLine2({ cacheR: fmt(T.cacheR), ratio: Math.round(T.cacheR / (T.input + T.output)) })}
+${L.summaryLine3({ totCosto: fmtCosto(T.costo, totCostoParziale), parziale: totCostoParziale, dataPrezzi })}
 
 ## ${L.expensiveHeader}
-${L.rawDataNote ? L.rawDataNote + '\n' : ''}| ${L.colHash} | ${L.colWhat} | ${L.colType} | ${L.colWhen} | ${L.colTokens} |
-|---|---|---|---|---|
+${L.rawDataNote ? L.rawDataNote + '\n' : ''}| ${L.colHash} | ${L.colWhat} | ${L.colType} | ${L.colWhen} | ${L.colTokens} | ${L.colCost} |
+|---|---|---|---|---|---|
 ${top.map((t, i) => topRow(t, i, L)).join('\n')}
 
 ## ${L.lessonsHeader}
 ${o.lezioni ?? L.lessonsPlaceholder}
 
 ## ${L.byProjectHeader}
-| ${L.colProject} | ${L.colPeriod} | ${L.colSessions} | ${L.colOutput} | ${L.colInput} | ${L.colCacheRead} |
-|---|---|---|---|---|---|
-${ordGruppi.map(([nome, g]) => `| [${mdEsc(nome)}](${L.projectDir}/${slug(nome)}.md) | ${g.primo} → ${g.ultimo} | ${g.sess.length} | ${fmt(g.output)} | ${fmt(g.input)} | ${fmt(g.cacheR)} |`).join('\n')}
+| ${L.colProject} | ${L.colPeriod} | ${L.colSessions} | ${L.colOutput} | ${L.colInput} | ${L.colCacheRead} | ${L.colCost} |
+|---|---|---|---|---|---|---|
+${ordGruppi.map(([nome, g]) => `| [${mdEsc(nome)}](${L.projectDir}/${slug(nome)}.md) | ${g.primo} → ${g.ultimo} | ${g.sess.length} | ${fmt(g.output)} | ${fmt(g.input)} | ${fmt(g.cacheR)} | ${fmtCosto(g.costo, g.costoParziale)} |`).join('\n')}
 
 ## ${L.cloudWorkHeader}
 ${L.cloudWorkNote}
@@ -381,20 +528,185 @@ ${L.rawDataNote ? '\n' + L.rawDataNote : ''}
 ${workflow.map(w => `| ${w.data} | ${mdEsc(gruppoDi(w.prog))} | ${mdEsc(w.operazione)} | ${w.agenti} | ${fmt(w.token)} |`).join('\n') || `| — | — | ${L.noneRegistered} | — | — |`}
 
 ## ${L.byModelHeader}
-| ${L.colModel} | ${L.colMsg} | ${L.colInput} | ${L.colOutput} | ${L.colCacheRead} |
-|---|---|---|---|---|
-${modelli.map(({ m, t }) => `| ${m} | ${fmt(t.msg)} | ${fmt(t.input)} | ${fmt(t.output)} | ${fmt(t.cacheR)} |`).join('\n')}
+| ${L.colModel} | ${L.colMsg} | ${L.colInput} | ${L.colOutput} | ${L.colCacheRead} | ${L.colCost} |
+|---|---|---|---|---|---|
+${modelli.map(({ m, t }) => `| ${m} | ${fmt(t.msg)} | ${fmt(t.input)} | ${fmt(t.output)} | ${fmt(t.cacheR)} | ${fmtCosto(t.costo, t.costoParziale)} |`).join('\n')}
 
 ## ${L.byMonthHeader}
-| ${L.colMonth} | ${L.colMsg} | ${L.colInput} | ${L.colOutput} | ${L.colCacheRead} |
-|---|---|---|---|---|
-${mesi.map(({ m, t }) => `| ${m} | ${fmt(t.msg)} | ${fmt(t.input)} | ${fmt(t.output)} | ${fmt(t.cacheR)} |`).join('\n')}
+| ${L.colMonth} | ${L.colMsg} | ${L.colInput} | ${L.colOutput} | ${L.colCacheRead} | ${L.colCost} |
+|---|---|---|---|---|---|
+${mesi.map(({ m, t }) => `| ${m} | ${fmt(t.msg)} | ${fmt(t.input)} | ${fmt(t.output)} | ${fmt(t.cacheR)} | ${fmtCosto(t.costo, t.costoParziale)} |`).join('\n')}
+
+## ${L.byWeekHeader}
+${L.weekWindowNote(settimaneVista.length, settimaneOrdinate.length)}
+
+| ${L.colWeek} | ${L.colMsg} | ${L.colInput} | ${L.colOutput} | ${L.colCacheRead} | ${L.colCost} |
+|---|---|---|---|---|---|
+${settimaneVista.map(([w, t]) => `| ${w} | ${fmt(t.msg)} | ${fmt(t.input)} | ${fmt(t.output)} | ${fmt(t.cacheR)} | ${fmtCosto(t.costo, t.costoParziale)} |`).join('\n')}
+
+## ${L.byDayHeader}
+${L.dayWindowNote(giorniVista.length, giorniOrdinati.length)}
+
+| ${L.colDay} | ${L.colMsg} | ${L.colInput} | ${L.colOutput} | ${L.colCacheRead} | ${L.colCost} |
+|---|---|---|---|---|---|
+${giorniVista.map(([d, t]) => `| ${d} | ${fmt(t.msg)} | ${fmt(t.input)} | ${fmt(t.output)} | ${fmt(t.cacheR)} | ${fmtCosto(t.costo, t.costoParziale)} |`).join('\n')}
+
+${L.costPartialLegend}
 `;
 
 fs.writeFileSync(path.join(dirOut, 'DASHBOARD.md'), renderDashboard(LANG.en, { lezioni: lezioniEN }));
 fs.writeFileSync(path.join(dirOutIT, 'DASHBOARD.md'), renderDashboard(LANG.it, { lezioni: lezioniIT }));
 
+// ---------- dashboard.html (same numbers, interactive: sortable tables + inline SVG bars) ----------
+// Zero CDN / zero dependencies (same spirit as the rest of this script): everything —
+// data, CSS, JS — is inlined in the file, so it works offline and needs no build step.
+const mdLite = s => String(s)
+  .replace(/^>\s?/gm, '')
+  .replace(/^-\s+/gm, '')
+  .replace(/\n\s*/g, ' ') // collapse newlines FIRST: bold/em spans can wrap across template lines
+  .replace(/\\\*/g, '\x00') // protect markdown-escaped literal asterisks from the em/strong rules
+  .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+  .replace(/(^|[^*])\*([^*]+)\*(?!\*)/g, '$1<em>$2</em>')
+  .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+  .replace(/`([^`]+)`/g, '<code>$1</code>')
+  .replace(/\x00/g, '*')
+  .trim();
+const tdN = (v, testo) => `<td data-v="${v}">${testo}</td>`;
+const tdT = testo => `<td>${testo}</td>`;
+const tdL = testo => `<td class="l">${testo}</td>`; // long wrapping description cell
+const tabellaHTML = (titolo, headers, righeArr) => `<h3>${titolo}</h3>
+<div class="tw"><table><thead><tr>${headers.map(h => `<th onclick="sortTable(this)">${h}</th>`).join('')}</tr></thead>
+<tbody>${righeArr.map(r => `<tr>${r.join('')}</tr>`).join('')}</tbody></table></div>`;
+// small inline SVG bar chart — no library, hover shows the exact value via <title> (tooltip)
+const svgBarre = (dati, { w = 640, h = 180, colore = 'var(--accent)' } = {}) => {
+  if (!dati.length) return '<p><em>—</em></p>';
+  const max = Math.max(...dati.map(d => d.v), 0.0001);
+  const padL = 8, padB = 22, padT = 8, padR = 8;
+  const areaW = w - padL - padR, areaH = h - padT - padB;
+  const bw = areaW / dati.length;
+  const barre = dati.map((d, i) => {
+    const bh = Math.max((d.v / max) * areaH, d.v > 0 ? 1 : 0);
+    const x = padL + i * bw + bw * 0.15, y = padT + areaH - bh, bwReal = bw * 0.7;
+    return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bwReal.toFixed(1)}" height="${bh.toFixed(1)}" fill="${colore}" rx="2"><title>${mdEsc(d.l)}: ${mdEsc(d.t)}</title></rect>` +
+      `<text x="${(x + bwReal / 2).toFixed(1)}" y="${h - 6}" font-size="10" text-anchor="middle" fill="currentColor">${mdEsc(d.l)}</text>`;
+  }).join('');
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%" style="max-width:${w}px;height:auto" role="img" aria-label="bar chart">
+<line x1="${padL}" y1="${padT + areaH}" x2="${w - padR}" y2="${padT + areaH}" stroke="currentColor" opacity="0.25"/>
+${barre}</svg>`;
+};
+
+const renderDashboardHTML = (L, o) => {
+  const modelRows = modelli.map(({ m, t }) => [tdT(mdEsc(m)), tdN(t.msg, fmt(t.msg)), tdN(t.input, fmt(t.input)), tdN(t.output, fmt(t.output)), tdN(t.cacheR, fmt(t.cacheR)), tdN(t.costo, fmtCosto(t.costo, t.costoParziale))]);
+  const monthRows = mesi.map(({ m, t }) => [tdT(m), tdN(t.msg, fmt(t.msg)), tdN(t.input, fmt(t.input)), tdN(t.output, fmt(t.output)), tdN(t.cacheR, fmt(t.cacheR)), tdN(t.costo, fmtCosto(t.costo, t.costoParziale))]);
+  const weekRows = settimaneVista.map(([w, t]) => [tdT(w), tdN(t.msg, fmt(t.msg)), tdN(t.input, fmt(t.input)), tdN(t.output, fmt(t.output)), tdN(t.cacheR, fmt(t.cacheR)), tdN(t.costo, fmtCosto(t.costo, t.costoParziale))]);
+  const dayRows = giorniVista.map(([d, t]) => [tdT(d), tdN(t.msg, fmt(t.msg)), tdN(t.input, fmt(t.input)), tdN(t.output, fmt(t.output)), tdN(t.cacheR, fmt(t.cacheR)), tdN(t.costo, fmtCosto(t.costo, t.costoParziale))]);
+  const projectRows = ordGruppi.map(([nome, g]) => [tdT(`<a href="${L.projectDir}/${slug(nome)}.md">${mdEsc(nome)}</a>`), tdT(`${g.primo} → ${g.ultimo}`), tdN(g.sess.length, g.sess.length), tdN(g.output, fmt(g.output)), tdN(g.input, fmt(g.input)), tdN(g.cacheR, fmt(g.cacheR)), tdN(g.costo, fmtCosto(g.costo, g.costoParziale))]);
+  const topRows = top.map((t, i) => {
+    const tipo = t.kind === 'chat' ? L.typeChat : L.typeCloudAgents;
+    const nome = t.kind === 'chat' ? `${descrizione(t.s, L)} — ${t.s.gruppo}` : `${t.w.operazione} — ${gruppoDi(t.w.prog)}`;
+    const costoTxt = t.kind === 'chat' ? fmtCosto(t.s.costo, t.s.costoParziale) : '—';
+    return [tdN(i + 1, i + 1), tdL(mdEsc(nome)), tdT(tipo), tdT(t.quando), tdN(t.tok, fmt(t.tok)), tdN(t.kind === 'chat' ? t.s.costo : 0, costoTxt)];
+  });
+  const cloudRows = workflow.map(w => [tdT(w.data), tdT(mdEsc(gruppoDi(w.prog))), tdL(mdEsc(w.operazione)), tdN(w.agenti, w.agenti), tdN(w.token, fmt(w.token))]);
+
+  return `<!doctype html>
+<html lang="${L === LANG.it ? 'it' : 'en'}"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${mdEsc(L.dashboardTitle)}</title>
+<style>
+:root{--bg:#ffffff;--fg:#111827;--muted:#6b7280;--border:#e5e7eb;--accent:#6366f1;--accent2:#10b981;--card:#f9fafb;}
+@media (prefers-color-scheme: dark){:root{--bg:#0b0f19;--fg:#e5e7eb;--muted:#9ca3af;--border:#243042;--accent:#818cf8;--accent2:#34d399;--card:#111827;}}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;margin:0;padding:24px;line-height:1.55;max-width:1000px}
+h1{font-size:1.4rem;margin:0 0 8px} h2{font-size:1.1rem;margin:32px 0 4px;border-bottom:1px solid var(--border);padding-bottom:6px} h3{font-size:0.95rem;color:var(--muted);margin:18px 0 6px}
+p{margin:6px 0} .note{color:var(--muted);font-size:13px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin:10px 0}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:4px 0 18px}
+th,td{padding:5px 9px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}
+/* long description cells (operation titles, workflow notes) wrap instead of forcing a
+   kilometre-wide table layer — numbers/dates stay nowrap (final visual check) */
+td.l{white-space:normal;min-width:22em;text-align:left}
+th:first-child,td:first-child{text-align:left}
+th{cursor:pointer;user-select:none;color:var(--muted);font-weight:600} th:hover{color:var(--fg)}
+a{color:var(--accent)}
+.charts{display:flex;flex-wrap:wrap;gap:24px}
+.charts>div{flex:1 1 300px}
+footer{margin-top:32px;color:var(--muted);font-size:12px}
+</style>
+</head><body>
+<h1>${mdEsc(L.dashboardTitle)}</h1>
+<p class="note">${mdLite(L.headNote(o.data))}</p>
+
+<h2>${L.atGlanceHeader}</h2>
+<div class="card">
+<p>${mdLite(L.summaryLine1({ output: fmt(T.output), totW: fmt(totW), nSessions: sessioni.length, nProjects: ordGruppi.length, firstMonth: mesi[0]?.m || '?', msg: fmt(T.msg) }))}</p>
+<p>${mdLite(L.summaryLine2({ cacheR: fmt(T.cacheR), ratio: Math.round(T.cacheR / (T.input + T.output)) }))}</p>
+<p>${mdLite(L.summaryLine3({ totCosto: fmtCosto(T.costo, totCostoParziale), parziale: totCostoParziale, dataPrezzi }))}</p>
+</div>
+
+<h2>${L.byMonthHeader} / ${L.byWeekHeader}</h2>
+<div class="charts">
+<div><h3>${L.byMonthHeader} — ${L.colOutput}</h3>${svgBarre(mesi.map(({ m, t }) => ({ l: m, v: t.output, t: fmt(t.output) })), { colore: 'var(--accent)' })}</div>
+<div><h3>${L.byWeekHeader} — ${L.colCost}</h3>${svgBarre(settimaneVista.map(([w, t]) => ({ l: w, v: t.costo, t: fmtCosto(t.costo, t.costoParziale) })), { colore: 'var(--accent2)' })}</div>
+</div>
+
+<h2>${L.expensiveHeader}</h2>
+${tabellaHTML('', [L.colHash, L.colWhat, L.colType, L.colWhen, L.colTokens, L.colCost], topRows)}
+
+<h2>${L.byProjectHeader}</h2>
+${tabellaHTML('', [L.colProject, L.colPeriod, L.colSessions, L.colOutput, L.colInput, L.colCacheRead, L.colCost], projectRows)}
+
+<h2>${L.cloudWorkHeader}</h2>
+<p class="note">${mdLite(L.cloudWorkNote)}</p>
+${cloudRows.length ? tabellaHTML('', [L.colDate, L.colProject, L.colOperation, L.colAgents, L.colAgentTokens], cloudRows) : `<p class="note">${L.noneRegistered}</p>`}
+
+<h2>${L.byModelHeader}</h2>
+${tabellaHTML('', [L.colModel, L.colMsg, L.colInput, L.colOutput, L.colCacheRead, L.colCost], modelRows)}
+
+<h2>${L.byMonthHeader}</h2>
+${tabellaHTML('', [L.colMonth, L.colMsg, L.colInput, L.colOutput, L.colCacheRead, L.colCost], monthRows)}
+
+<h2>${L.byWeekHeader}</h2>
+<p class="note">${mdLite(L.weekWindowNote(settimaneVista.length, settimaneOrdinate.length))}</p>
+${tabellaHTML('', [L.colWeek, L.colMsg, L.colInput, L.colOutput, L.colCacheRead, L.colCost], weekRows)}
+
+<h2>${L.byDayHeader}</h2>
+<p class="note">${mdLite(L.dayWindowNote(giorniVista.length, giorniOrdinati.length))}</p>
+${tabellaHTML('', [L.colDay, L.colMsg, L.colInput, L.colOutput, L.colCacheRead, L.colCost], dayRows)}
+
+<p class="note">${mdLite(L.costPartialLegend)}</p>
+<footer><a href="DASHBOARD.md">DASHBOARD.md</a> · <a href="SCHEMA.md">SCHEMA.md</a> · <a href="usage.csv">usage.csv</a> · <a href="sessions.csv">sessions.csv</a> · <a href="daily.csv">daily.csv</a> · <a href="prices.csv">prices.csv</a></footer>
+
+<script>
+function sortTable(th){
+  var table = th.closest('table');
+  var idx = Array.prototype.indexOf.call(th.parentNode.children, th);
+  var tbody = table.tBodies[0];
+  var rows = Array.prototype.slice.call(tbody.rows);
+  var asc = th.dataset.asc !== '1';
+  rows.sort(function(a, b){
+    var ac = a.cells[idx], bc = b.cells[idx];
+    var av = ac.dataset.v !== undefined ? parseFloat(ac.dataset.v) : ac.textContent;
+    var bv = bc.dataset.v !== undefined ? parseFloat(bc.dataset.v) : bc.textContent;
+    var an = parseFloat(av), bn = parseFloat(bv);
+    var cmp = (!isNaN(an) && !isNaN(bn) && ac.dataset.v !== undefined) ? an - bn : String(av).localeCompare(String(bv));
+    return asc ? cmp : -cmp;
+  });
+  rows.forEach(function(r){ tbody.appendChild(r); });
+  Array.prototype.forEach.call(th.parentNode.children, function(h){ h.dataset.asc = ''; });
+  th.dataset.asc = asc ? '1' : '0';
+}
+</script>
+</body></html>
+`;
+};
+
+fs.writeFileSync(path.join(dirOut, 'dashboard.html'), renderDashboardHTML(LANG.en, { data: new Date().toISOString().slice(0, 10) }));
+fs.writeFileSync(path.join(dirOutIT, 'dashboard.html'), renderDashboardHTML(LANG.it, { data: new Date().toISOString().slice(0, 10) }));
+
 console.log(`OK: ${dirs.length} folders, ${ordGruppi.length} projects, ${sessioni.length} sessions, ${vistiMsg.size} unique messages.`);
-console.log('Written: DASHBOARD.md, per-project/ (' + ordGruppi.length + ' files), usage.csv, sessions.csv');
-console.log('Written (Italian mirror): ' + dirOutIT.replace(/\\/g, '/') + '/DASHBOARD.md, per-progetto/ (' + ordGruppi.length + ' files)');
+console.log('Written: DASHBOARD.md, dashboard.html, per-project/ (' + ordGruppi.length + ' files), usage.csv, sessions.csv, daily.csv');
+console.log('Written (Italian mirror): ' + dirOutIT.replace(/\\/g, '/') + '/DASHBOARD.md, dashboard.html, per-progetto/ (' + ordGruppi.length + ' files)');
 console.log('Redaction legend (LOCAL, do not commit):', fileCensura);
+console.log(dataPrezzi ? `Prices loaded from ${filePrezzi.replace(/\\/g, '/')} (verified ${dataPrezzi})` : `No prices.csv found at ${filePrezzi.replace(/\\/g, '/')} — all costs will show as unknown ('—')`);

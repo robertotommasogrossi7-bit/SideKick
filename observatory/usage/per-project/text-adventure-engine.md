@@ -6,6 +6,8 @@
 370 input · 54.3M cache read · 174 messages
 
 ## Sessions (in time order — the title says what was done)
-| Period | Operation | Models | Msg | Input | Output | Cache read |
-|---|---|---|---|---|---|---|
-| 2026-05-28→05-29 | Text_game/Base_1 | opus-4-7 | 174 | 370 | 466k | 54.3M |
+| Period | Operation | Models | Msg | Input | Output | Cache read | Cost (API-equiv.) |
+|---|---|---|---|---|---|---|---|
+| 2026-05-28→05-29 | Text_game/Base_1 | opus-4-7 | 174 | 370 | 466k | 54.3M | $46.54 |
+
+\* cost known only in part (some model/date in that row has no verified price — see `prices.csv`)
