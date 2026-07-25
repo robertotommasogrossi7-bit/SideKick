@@ -46,3 +46,4 @@
 | `agents` | Number of agents in the run. |
 | `agent_tokens` | Total subagent tokens as reported by the run/records. |
 | `source` | Where the number comes from (project METRICHE, run report, chat log). |
+| `5h_windows` | How many 5-hour plan usage windows the run consumed, **with the plan named** (e.g. `~3 (Max 100 euro)`). Filled ONLY when known with certainty from observed credit-block exhaustions — never estimated from tokens. Empty = not observed. Added 2026-07-25 (method v1.9); trailing column, older rows simply lack it. |
