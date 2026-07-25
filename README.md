@@ -49,8 +49,11 @@ The committed [dashboard](observatory/usage/DASHBOARD.md) is exactly what the ou
 
 ## The lab (live data)
 
+[![The usage dashboard: totals at a glance and the most expensive operations](docs/img/DASHBOARD.png)](observatory/usage/DASHBOARD.md)
+
 **[Open the live dashboard →](observatory/usage/DASHBOARD.md)** — totals at a glance and the
-most expensive operations, regenerated from the real transcripts at every observatory review.
+most expensive operations, regenerated from the real transcripts at every observatory review
+(preview above refreshed 2026-07-25).
 
 [`observatory/`](observatory/) is the observatory (English; Italian translation in
 [`ITALIANO/`](ITALIANO/README.md)):
@@ -71,6 +74,9 @@ most expensive operations, regenerated from the real transcripts at every observ
 
 Every project gets its own drilldown — here is a real app's build history, session by
 session, named operation by named operation:
+
+[![One project's sessions: period, operation title, models, tokens](docs/img/WTB.png)](observatory/usage/per-project/poker-who-s-the-boss.md)
+
 **[a real app's per-session table →](observatory/usage/per-project/poker-who-s-the-boss.md)**
 
 A few sample findings (details and caveats inside): a heavy multi-agent audit found real

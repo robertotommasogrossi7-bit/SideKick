@@ -55,8 +55,11 @@ in output.
 
 ## Il laboratorio (dati live)
 
+[![La dashboard di utilizzo: totali a colpo d'occhio e le operazioni più costose](../docs/img/DASHBOARD.png)](osservatorio/uso/DASHBOARD.md)
+
 **[Apri la dashboard live →](osservatorio/uso/DASHBOARD.md)** — totali a colpo d'occhio e
-le operazioni più costose, rigenerata dai transcript reali a ogni revisione dell'osservatorio.
+le operazioni più costose, rigenerata dai transcript reali a ogni revisione dell'osservatorio
+(anteprima qui sopra aggiornata al 2026-07-25).
 
 [`observatory/`](../observatory/) è l'osservatorio (inglese; traduzione italiana in
 questa cartella):
@@ -77,6 +80,8 @@ questa cartella):
 
 Ogni progetto ha il suo approfondimento — ecco la cronologia di build di un'app reale,
 sessione per sessione, operazione nominata per operazione nominata:
+[![Le sessioni di un progetto: periodo, titolo dell'operazione, modelli, token](../docs/img/WTB.png)](osservatorio/uso/per-progetto/poker-who-s-the-boss.md)
+
 **[la tabella per-sessione di un'app reale →](osservatorio/uso/per-progetto/poker-who-s-the-boss.md)**
 
 Alcuni risultati campione (dettagli e avvertenze all'interno): un audit multi-agente pesante
