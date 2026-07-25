@@ -4,6 +4,19 @@
 > evidence. One entry per amendment, hand-written, newest first. Dates from git history of
 > `COSTITUZIONE.md`; each version is also a git tag (`metodo-vX.Y`) from v1.5 onward.
 
+## v1.9.1 — 2026-07-25 (same-day catch-up + full propagation)
+- **Master catch-up caught by the fidelity reviewer** (multi-agent clarity/English pass, 10
+  agents): the `5h_windows` data-contract line documented in v1.9 was present in SCHEMA.md and
+  this changelog but missing from COSTITUZIONE.md's "Contratto dati" and from the drop-in's
+  Principle XI — added to both; mirror re-synced.
+- **Propagation completed** (was pending since v1.6): `CONSTITUTION.md` (EN) synced to v1.9
+  section by section — its governance banner also corrected: it wrongly declared itself the
+  master; **`FACTORY-PROCESS.md` created** (EN version of PROCESSO-FABBRICA.md); spec-kit
+  drop-in realigned to **1.9.0** (new depersonalized principles XII–XVI).
+- English/clarity pass over the public docs (fresh-eyes + native-English + fact-coherence
+  analysts, then 2 Opus reviewers): stale ~170× cache figure refreshed to ~187× with dated
+  notes, drop-in version race in README fixed, calques cleaned (details in git history).
+
 ## v1.9 — 2026-07-25 (master + mirror re-synced)
 - New section **"The Factory"** (mass generation with QC): playbook as single source of truth,
   **growing script validator** (every mechanizable defect found by model-QC becomes a free
