@@ -9,9 +9,9 @@
 > heaviest); *input* = tokens read at full price; *cache read* = context re-read (~1/10 of input).
 
 ## At a glance
-- **18.1M output tokens** (+ **27.2M** from cloud agents) across **64 sessions**
+- **18.1M output tokens** (+ **27.6M** from cloud agents) across **64 sessions**
   in **13 projects**, from 2026-05 to today. 10k messages in total.
-- The **cache** re-read 3519.3M tokens (≈187× the live tokens): resuming a chat
+- The **cache** re-read 3524.5M tokens (≈187× the live tokens): resuming a chat
   on a warm cache is what keeps the plan sustainable — restarting from scratch throws it away.
 
 ## The most expensive things
@@ -57,7 +57,7 @@
 |---|---|---|---|---|---|
 | [poker (Who's the Boss)](per-project/poker-who-s-the-boss.md) | 2026-05-14 → 2026-07-22 | 23 | 7.6M | 333k | 1685.2M |
 | [progetto-15](per-project/progetto-15.md) | 2026-05-29 → 2026-07-17 | 5 | 3.6M | 233k | 921.0M |
-| [SideKick](per-project/sidekick.md) | 2026-06-03 → 2026-07-25 | 12 | 2.0M | 116k | 220.9M |
+| [SideKick](per-project/sidekick.md) | 2026-06-03 → 2026-07-25 | 12 | 2.0M | 116k | 226.1M |
 | [Libri-Organizzazione](per-project/libri-organizzazione.md) | 2026-05-07 → 2026-05-31 | 2 | 1.3M | 11k | 121.4M |
 | [Programmi (root)](per-project/programmi-root.md) | 2026-05-31 → 2026-06-27 | 3 | 997k | 45k | 96.4M |
 | [Studio](per-project/studio.md) | 2026-07-20 → 2026-07-24 | 4 | 873k | 3k | 353.8M |
@@ -88,13 +88,14 @@ come from the projects' METRICHE/report files. **After every new workflow, add o
 | 2026-07-21 | Studio (StudioQuest) | Rifinitura 1: bug P0 + Costellazione + Home v2 + Allenamento/Esami/Pomodoro + Progressi v2. NOTA: interrotto 2 volte da Roberto (fine token); ripresa dalla cache con 6/8 agenti riusati gratis — token reali solo 427.713 dei 3 lanci | 8 | 428k |
 | 2026-07-25 | Studio (StudioQuest) | Fabbrica domande Python WR3: 555 domande/16 lotti (estrazione Haiku, 16 gen Sonnet, dedup, QC totale Opus 2 passate + ombra 8%, fix, verifica finale). INCIDENTE resume (root cause verificata dall'osservatorio 2026-07-25 sul journal): al 3o rilancio la cache non ha agganciato NESSUNA chiave (0/46) con 30/32 prompt QC identici byte-per-byte e journal COMPLETO — la diagnosi a caldo 'journal senza result' era sbagliata (chiavi di cache non content-addressed nel runtime) -> rifatti 46 agenti (30 Opus + 16 Sonnet), spreco ~0,59M vivi + ~39M cache; fermato a mano; chiusura con 3 agenti diretti. Token vivi da transcript: 1,17M+0,88M+0,65M; cache letta ~225M (voce dominante). Durata allungata dai 2 buchi-crediti (~2h e ~3h a orologio attivo), non il costo | 229 | 11.0M |
 | 2026-07-25 | SideKick | Chiarezza+inglese del repo (3 fasi): 3 analisti Sonnet (occhi freschi, madrelingua, coerenza fatti; 26 finding) -> 5 esecutori Sonnet su file disgiunti (CONSTITUTION.md portato a v1.9, FACTORY-PROCESS.md creato, drop-in spec-kit 1.9.x coi principi XII-XVI, facciata, doc observatory) -> 2 revisori Opus a lenti diverse (8 finding, 5 veri: race di versione drop-in nel README tra agenti paralleli, 170x->187x, riga 5h_windows MANCANTE NEL MASTER poi aggiunta, Assistenza non tradotto, dashboard da rigenerare; 1 confutato: il generatore non ha il 170x hardcoded). Integrazione e commit dal regista | 10 | 838k |
+| 2026-07-25 | SideKick | Copia italiana ITALIANO/: 5 traduttori Sonnet su blocchi disgiunti (14 doc, ~880 righe) + 1 verificatore (completezza, fedelta numeri, terminologia, link). 2 sviste incrociate sistemate dal regista: nota iniziale del README rimossa dal verificatore per zelo (contesto perso tra agenti) e link FINDINGS puntato all originale invece che alla copia | 6 | 405k |
 
 ## By model (local chats only)
 | Model | Msg | Input | Output | Cache read |
 |---|---|---|---|---|
 | opus-4-8 | 6k | 628k | 11.8M | 2300.2M |
 | opus-4-7 | 1k | 15k | 2.2M | 259.4M |
-| fable-5 | 1k | 52k | 2.1M | 425.1M |
+| fable-5 | 1k | 52k | 2.1M | 430.3M |
 | sonnet-4-6 | 2k | 38k | 1.5M | 137.6M |
 | sonnet-5 | 801 | 43k | 602k | 397.1M |
 
@@ -103,4 +104,4 @@ come from the projects' METRICHE/report files. **After every new workflow, add o
 |---|---|---|---|---|
 | 2026-05 | 2k | 82k | 4.0M | 396.6M |
 | 2026-06 | 4k | 536k | 9.0M | 1557.8M |
-| 2026-07 | 4k | 159k | 5.1M | 1564.8M |
+| 2026-07 | 4k | 159k | 5.1M | 1570.0M |
