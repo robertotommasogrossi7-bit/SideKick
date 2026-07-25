@@ -4,6 +4,27 @@
 > evidence. One entry per amendment, hand-written, newest first. Dates from git history of
 > `COSTITUZIONE.md`; each version is also a git tag (`metodo-vX.Y`) from v1.5 onward.
 
+## v1.9 — 2026-07-25 (master + mirror re-synced)
+- New section **"The Factory"** (mass generation with QC): playbook as single source of truth,
+  **growing script validator** (every mechanizable defect found by model-QC becomes a free
+  script check), execution-based verification, per-pass QC models (correctness on the high
+  model; mechanical rubrics on Sonnet with ~8% Opus shadow), and a **safe-resume procedure**
+  with file-persisted verdicts. Details in `plugins/metodo/PROCESSO-FABBRICA.md` (adopted
+  2026-07-20, hardened after run WR3's incident A-01: the runtime resume cache measured
+  **best-effort** — 0/46 reuse with byte-identical prompts and a complete journal — so files,
+  not the cache, are the real checkpoints; the on-the-spot diagnosis "journal missing results"
+  was refuted by the observatory on the actual journal).
+- **Shadow verification generalized**: the shadow runs one model step AWAY from the baseline
+  (above a cheap baseline, below a capped one — never Fable). Measured on 54 pairs
+  (2026-07-24): defect classes are **complementary** (batch-level vs point-level); mechanical
+  defects (positional tell) belong to script validators, not models.
+- Data contract: `workflow.csv` gains a **`5h_windows`** column — the observed-with-certainty
+  count of 5-hour plan windows a run consumed, with the plan named (e.g. `~3 (Max 100 euro)`).
+  Only observed credit-block counts, never token estimates.
+- Propagation: mirror `~/.claude/CLAUDE.md` re-synced (was stuck at v1.5); tags
+  `metodo-v1.6`…`metodo-v1.9` created. Still pending: `CONSTITUTION.md` (EN) and the spec-kit
+  drop-in realignment.
+
 ## v1.8 — 2026-07-19 (master only — propagation pending)
 - New section **"Orchestrate first, then delegate (agents are not just for audits)"**, requested by
   Roberto: the order **research → mini-spec → my OK → execution** is binding, and agents are

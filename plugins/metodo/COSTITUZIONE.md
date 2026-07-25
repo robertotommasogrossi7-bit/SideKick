@@ -177,16 +177,34 @@
   6. **Ricerca online solo dove serve validazione esterna** delle scelte; il codice lo verificano i revisori.
 - Il **recap** finale fallo nel modello che preferisco (spesso Fable), su un nuovo prompt.
 
+## La Fabbrica (lavori grandi e ripetibili — generazione di massa con QC)
+- Per operazioni **grandi e parallelizzabili** dove il volume conta ma la singola unità non
+  richiede ragionamento profondo (centinaia di contenuti, traduzioni di massa, migrazioni di
+  formato, etichettature), usa il processo **Fabbrica**: playbook unico fonte di verità, regole
+  meccaniche con esempi fissi, **validatore-script che cresce a ogni run** (ogni difetto
+  meccanizzabile trovato dal QC diventa un check gratuito), produttori paralleli con un solo
+  scrittore per i file condivisi, verifica per **ESECUZIONE**, QC per passate (correttezza sul
+  modello alto; rubriche meccaniche su Sonnet con ombra ~8%), resume con **esiti su file** —
+  la cache del runtime è best-effort, misurata anche a riuso zero. NON per coding lineare (lì
+  vale la regola sopra: singolo agente forte).
+- Dettagli, livelli di potenza e **procedura di resume sicura**: `plugins/metodo/PROCESSO-FABBRICA.md`
+  (repo SideKick).
+
 ## Esperimenti sui modelli (dati reali su Claude — log globale)
 - **Log globale**: `~/.claude/ESPERIMENTI.md` — fuori dal metodo ma **sempre visionabile**: OGNI chat
   che esegue un esperimento lo annota lì **subito**, nel formato fisso del file. Serve a decidere nel
   tempo, su dati reali, se le scelte di metodo convengono (lo rivede la **chat-osservatorio di
   SideKick**, che propone le modifiche al metodo).
-- **Verifica-ombra randomica (negli audit multi-agente)**: duplica a caso **~8% delle verifiche**
-  (sotto il 10%: su 60 → 5-6) con **un agente in più sullo stesso identico compito ma con un modello
-  PIÙ ALTO** — in particolare **Haiku vs Opus** — **mai Fable** (brucia la finestra di utilizzo). A fine audit
-  confronta le coppie (verdetto, severità, qualità delle prove) e **annota l'esito nel log**.
-  Poca spesa, dati veri.
+- **Verifica-ombra randomica (negli audit e nei QC di massa)**: duplica a caso **~8% delle
+  verifiche** (sotto il 10%: su 60 → 5-6) con un agente in più sullo stesso identico compito, su
+  **un modello di un gradino DIVERSO dalla baseline**: più alto se la baseline è economica (es.
+  Haiku → ombra Opus), un gradino SOTTO se la baseline è già al tetto consentito (es. Opus →
+  ombra Sonnet) — **mai Fable** (brucia la finestra di utilizzo). Misurato (54 coppie,
+  2026-07-24): le classi di difetti sono **complementari** — il modello alto vede i difetti di
+  lotto/sistema, l'ombra economica becca le sviste puntuali — quindi l'ombra rende anche "al
+  contrario". I difetti **meccanici** (es. risposta sempre allo stesso indice) non si pagano a
+  modello: vanno nei validatori-script. A fine run confronta le coppie (verdetto, severità,
+  qualità delle prove) e **annota l'esito nel log**. Poca spesa, dati veri.
 - **Estensione candidata (promemoria)**: valutare i duplicati cross-modello anche in **altre funzioni
   del metodo** (ricerca, red team, mini-spec…) — se ne decide **quando capita di riusare quella
   funzione**, non a tavolino.
