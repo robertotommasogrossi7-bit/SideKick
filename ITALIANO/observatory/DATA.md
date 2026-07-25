@@ -1,0 +1,80 @@
+# OSSERVATORIO DATI — cosa dicono i numeri (pagina di lettura)
+
+> **Cos'è**: la pagina che la chat-osservatorio aggiorna a ogni revisione. In una pagina:
+> quali dati abbiamo, cosa dicono, e quali modifiche al metodo suggeriscono. Stessa onestà di
+> FINDINGS.md: **N piccoli = indizi, non prove.**
+> Originale italiano: `../../versione-italiano/osservatorio/DATI.md` (copia congelata).
+> Censura (scelta di Roberto, 2026-07-16): **solo 3 progetti riservati** compaiono con alias
+> (`progetto-15`, `progetto-16`, `progetto-22` — legenda in `censura.local.json`, solo locale);
+> tutti gli altri usano il nome vero. I progetti nuovi nascono censurati finché non si decide.
+> **Ultima revisione: 2026-07-25.**
+
+## Il rituale (quando si apre la chat-osservatorio)
+1. `node observatory/usage.mjs` → aggiorna il cruscotto `usage/DASHBOARD.md`, un file di
+   dettaglio per progetto in `usage/per-project/`, e i dati grezzi `usage.csv` +
+   `sessions.csv` (una riga per sessione col **titolo dell'operazione**, cercabile).
+   Le lezioni in testa al cruscotto sono curate a mano in `usage/LESSONS.md`.
+1b. Se dall'ultima volta è girato un **workflow multi-agente** (audit, ricerca…), aggiungi
+   la sua riga a `usage/workflow.csv` (i workflow cloud non lasciano transcript sul PC).
+2. Confronta la copia attiva del metodo (`~/.claude/CLAUDE.md`) con il **master**
+   (`plugins/metodo/COSTITUZIONE.md`): se divergono, decidi quale vince e risincronizza.
+3. Leggi le righe nuove di `~/.claude/ESPERIMENTI.md` e del METRICHE.md di ogni progetto attivo.
+4. Aggiorna i **verdetti** qui sotto e il registro **`STRATEGIES.md`** (costi/guadagni di ogni
+   scelta di metodo — red team, ricerca, audit…), e proponi (senza imporre) modifiche al
+   metodo.
+
+## Le fonti dei dati (tabella creata 2026-07-16, contenuti aggiornati 2026-07-25)
+| Fonte | Cosa contiene | Stato |
+|---|---|---|
+| `observatory/usage/` | token per progetto × modello × mese **e per operazione/sessione** (titoli delle chat), da TUTTE le chat locali (25 cartelle di chat → 13 progetti raggruppati, 64 sessioni da maggio 2026) + registro workflow cloud (ora con colonna `5h_windows`) | ✅ generato automaticamente (workflow.csv a mano) |
+| `~/.claude/ESPERIMENTI.md` | A/B cross-modello e ripetizioni stesso-modello | 6 righe A/B · 1 ripetizione (+1 nota ibrida red-team) |
+| poker: `_processo/METRICHE.md` | per fase: modello+effort, durata (git), volume, token dei workflow | ✅ la serie più ricca |
+| progetto-15: doc di processo in root | DECISIONI + audit, ma **niente METRICHE.md** | ⚠️ braccio scoperto |
+| Audit (poker `AUDIT_R6_R7.md`, progetto-15 `AUDIT_ALTO_2026-07-03.md`) | finding confermati/confutati + costo | ✅ 2 punti dati |
+| `observatory/STRATEGIES.md` | registro costi/guadagni di OGNI strategia del metodo (audit, red team, ricerca, ombra…) | ✅ creato 2026-07-16 |
+| `FINDINGS.md` + `experiments/` | probe con/senza pacchetto-processo (N=1 per braccio) | ✅ storico, già analizzato |
+| DECISIONI.md (poker, progetto-15) | opzioni, scelta, perché | ⚠️ manca l'**esito osservato in seguito** |
+
+**Limite noto dei dati di consumo**: i workflow cloud (audit multi-agente) non lasciano
+transcript sul PC → i loro token (2,6M + 1,1M nei due audit + 0,7M di ricerca) vanno
+sommati a mano dai METRICHE. La dashboard Anthropic resta l'unica fonte del costo in denaro.
+
+## Verdetti (aggiornati 2026-07-25)
+- **Il processo pesante (audit) paga?** Indizio forte **sì**: 2 audit su 2 hanno trovato
+  bug critici veri (3 ALTA su poker; sul progetto-15 la causa radice di un bug bloccante
+  + 3 falle critiche) a un costo noto e sostenibile. N=2 → indizio.
+- **Verifica-ombra cross-modello**: 4 esperimenti, incluso un lotto da 54 coppie (2026-07-24,
+  ombra Sonnet sotto una baseline Opus — la direzione invertita): 87% di accordo, e i
+  disaccordi hanno rivelato **classi di difetti complementari** — il modello alto vede i
+  difetti a livello di lotto, l'ombra economica coglie gli scivoloni puntuali (3/4 confermati
+  in arbitrato). Verdetto: mantieni l'ombra ~8%, un gradino di modello LONTANO dalla baseline
+  in entrambe le direzioni (metodo v1.9); i difetti meccanici (tell posizionale) vanno ai
+  validatori a script, non ai modelli.
+- **Cache di resume del workflow: best-effort, non garantita** (misurato 2026-07-24, run WR3):
+  un resume ha riusato 32/48 chiavi, il successivo ha riusato **0/46** nonostante prompt
+  identici byte per byte e un journal completo — spreco ~0,59M token vivi + ~39M token di
+  cache. I checkpoint veri sono i file; la procedura di resume sicuro (verdetti persistiti su
+  file + stop-loss a 2 minuti) è ora in `plugins/metodo/PROCESSO-FABBRICA.md`. Nota: la
+  diagnosi a caldo dell'incidente era sbagliata — la forensics del journal dell'osservatorio
+  l'ha corretta (un promemoria che le diagnosi a caldo servono verifica post-hoc).
+- **Ripetizioni stesso-modello**: **zero dati** — la regola in costituzione è ancora fede.
+- **Quali modelli per quali agenti**: la tabella del metodo viene dalla ricerca esterna
+  (dossier 2026-07); i nostri dati per ora coprono solo la funzione di "verifica".
+- **Dove vanno i token** (aggiornato 2026-07-25): 18,0M output + **26,3M token di agenti
+  cloud** (le run della Fabbrica ora superano ogni audit: la sola WR3 11,0M ≈ **~3 finestre
+  di utilizzo di 5 ore del piano Max da 100 euro**, osservato tramite i blocchi di credito);
+  la cache letta (~3,5 miliardi) è ~187× i token vivi → la cache calda è ciò che rende
+  sostenibile il piano. Opus ha generato ~83% dell'output storico; Sonnet/Fable sono entrati
+  da luglio con la regola modello-per-passo.
+- **A/B di processo poker (costruzione completa) vs progetto-15 (incrementale)**:
+  oggi **non misurabile** perché il secondo non logga le fasi. O si aggiunge un METRICHE.md
+  leggero, o si dichiara chiuso. (La nuova tabella per-sessione aiuta: le fasi di poker hanno
+  già titoli come `WTB/Base_4`, `Poker_App/Feature_6`, ecc.)
+
+## Contratto dati minimo (per tutte le chat — costo ~zero)
+1. **Esperimenti** → una riga in `~/.claude/ESPERIMENTI.md`, formato già fissato lì. Regge.
+2. **Scelte importanti** → una riga in DECISIONI.md del progetto (opzioni · scelta · perché)
+   **+ colonna "Esito osservato"** da riempire quando l'esito diventa visibile (anche mesi
+   dopo).
+3. **Consumo token** → **nessuno scrive nulla a mano**: lo estrae `usage.mjs` dai transcript.
+   Più si usa Claude, più dati si accumulano, gratis.

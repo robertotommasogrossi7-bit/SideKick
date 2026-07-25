@@ -35,3 +35,8 @@ nuovi e aggiorna i verdetti. I passi già decisi con Roberto sono in `../observa
 ### 3. (spazio per altri compiti osservatorio)
 Es. rivedere il metodo quando escono modelli nuovi (già previsto nella COSTITUZIONE), consolidare gli
 esperimenti, ecc. Aggiungere qui man mano.
+
+### 3. Copia italiana `ITALIANO/` — tienila in sync
+Dal 2026-07-25 esiste `ITALIANO/` (copia esatta tradotta dei 14 doc inglesi principali,
+decisione di Roberto). **Compito**: a ogni revisione dell'osservatorio, se i doc inglesi
+sono cambiati dall'ultima volta, propagare le modifiche alla copia italiana (agente Sonnet).

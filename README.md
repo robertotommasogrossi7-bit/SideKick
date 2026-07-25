@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/robertotommasogrossi7-bit/SideKick/actions/workflows/ci.yml/badge.svg)](https://github.com/robertotommasogrossi7-bit/SideKick/actions/workflows/ci.yml)
 
+🇮🇹 *Leggi in italiano: [ITALIANO/README.md](ITALIANO/README.md)*
+
 *"I tried to measure whether captured process helps AI-assisted dev — and couldn't build a
 fair test (yet)."* — [the writeup this repo grew out of](FINDINGS.md)
 

@@ -48,6 +48,9 @@
 **Decision (Roberto, 2026-07-17)**: `versione-italiano/` stays **frozen** (originals + live
 LEGGIMI). A live mirror would cost a double translation on every change for a near-zero
 audience; the generated-dashboard-in-Italian option remains available on request.
+**Update (Roberto, 2026-07-25)**: partially reversed — an exact translated copy of the main
+English docs now lives in **`ITALIANO/`** (14 files; kept in sync at each observatory review);
+`versione-italiano/` stays frozen as the historical originals.
 
 ## Done (compressed history)
 - **2026-07-16** — Method master in repo + read-only mirror with deny rule · COSTITUZIONE
