@@ -11,7 +11,7 @@
 ## At a glance
 - **18.0M output tokens** (+ **26.3M** from cloud agents) across **64 sessions**
   in **13 projects**, from 2026-05 to today. 10k messages in total.
-- The **cache** re-read 3512.2M tokens (≈187× the live tokens): resuming a chat
+- The **cache** re-read 3514.9M tokens (≈187× the live tokens): resuming a chat
   on a warm cache is what keeps the plan sustainable — restarting from scratch throws it away.
 
 ## The most expensive things
@@ -55,17 +55,17 @@
 |---|---|---|---|---|---|
 | [poker (Who's the Boss)](per-project/poker-who-s-the-boss.md) | 2026-05-14 → 2026-07-22 | 23 | 7.6M | 333k | 1685.2M |
 | [progetto-15](per-project/progetto-15.md) | 2026-05-29 → 2026-07-17 | 5 | 3.6M | 233k | 921.0M |
-| [SideKick](per-project/sidekick.md) | 2026-06-03 → 2026-07-25 | 12 | 2.0M | 116k | 213.8M |
+| [SideKick](per-project/sidekick.md) | 2026-06-03 → 2026-07-25 | 12 | 2.0M | 116k | 216.5M |
 | [Libri-Organizzazione](per-project/libri-organizzazione.md) | 2026-05-07 → 2026-05-31 | 2 | 1.3M | 11k | 121.4M |
 | [Programmi (root)](per-project/programmi-root.md) | 2026-05-31 → 2026-06-27 | 3 | 997k | 45k | 96.4M |
-| [progetto-04](per-project/progetto-04.md) | 2026-07-20 → 2026-07-24 | 4 | 873k | 3k | 353.8M |
+| [Studio](per-project/studio.md) | 2026-07-20 → 2026-07-24 | 4 | 873k | 3k | 353.8M |
 | [Text-Adventure-Engine](per-project/text-adventure-engine.md) | 2026-05-28 → 2026-05-29 | 1 | 466k | 370 | 54.3M |
 | [experiments (method tests)](per-project/experiments-method-tests.md) | 2026-06-04 → 2026-06-11 | 9 | 375k | 5k | 19.1M |
 | [progetto-16](per-project/progetto-16.md) | 2026-06-28 → 2026-06-30 | 1 | 308k | 17k | 10.9M |
 | [Idee](per-project/idee.md) | 2026-06-11 → 2026-06-12 | 1 | 270k | 6k | 12.8M |
-| [progetto-05](per-project/progetto-05.md) | 2026-07-24 → 2026-07-25 | 1 | 157k | 114 | 14.4M |
+| [weather_report](per-project/weather-report.md) | 2026-07-24 → 2026-07-25 | 1 | 157k | 114 | 14.4M |
 | [progetto-22](per-project/progetto-22.md) | 2026-06-17 → 2026-06-17 | 1 | 52k | 8k | 2.2M |
-| [weather-report](per-project/weather-report.md) | 2026-05-07 → 2026-05-07 | 1 | 42k | 137 | 6.8M |
+| [weather_report (worktree)](per-project/weather-report-worktree.md) | 2026-05-07 → 2026-05-07 | 1 | 42k | 137 | 6.8M |
 
 ## Cloud agent work (workflows — hand-maintained register)
 Multi-agent workflows run in the cloud and **leave no transcripts on the PC**: these numbers
@@ -91,7 +91,7 @@ come from the projects' METRICHE/report files. **After every new workflow, add o
 |---|---|---|---|---|
 | opus-4-8 | 6k | 628k | 11.8M | 2300.2M |
 | opus-4-7 | 1k | 15k | 2.2M | 259.4M |
-| fable-5 | 1k | 52k | 2.0M | 418.0M |
+| fable-5 | 1k | 52k | 2.0M | 420.7M |
 | sonnet-4-6 | 2k | 38k | 1.5M | 137.6M |
 | sonnet-5 | 801 | 43k | 602k | 397.1M |
 
@@ -100,4 +100,4 @@ come from the projects' METRICHE/report files. **After every new workflow, add o
 |---|---|---|---|---|
 | 2026-05 | 2k | 82k | 4.0M | 396.6M |
 | 2026-06 | 4k | 536k | 9.0M | 1557.8M |
-| 2026-07 | 4k | 158k | 5.0M | 1557.7M |
+| 2026-07 | 4k | 158k | 5.0M | 1560.4M |
