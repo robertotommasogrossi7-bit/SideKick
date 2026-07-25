@@ -5,6 +5,24 @@
 > cronologia git di `COSTITUZIONE.md`; ogni versione è anche un tag git (`metodo-vX.Y`) dalla
 > v1.5 in poi.
 
+## v1.9.2 — 2026-07-25 (il glossario si sposta su Studio e si riempie da solo)
+- **Glossario trasferito**: da SideKick (`versione-italiano/glossario/`) al repo **Studio**
+  (`Studio/glossario/`, ancora gitignorato/solo locale) — decisione di Roberto, dato che
+  l'app di studio è dove i termini vengono effettivamente imparati.
+- **Nuovo meccanismo di riempimento** (spec: `Studio/inbox/SPEC-GLOSSARIO.md`): l'app di
+  studio marca i termini come **acquisiti** quando coperti da domande/esami risposti
+  correttamente, lascia il resto "in corso"; la Fabbrica in modalità agente misura la
+  **copertura** dei termini con un punteggio di importanza da agente economico e
+  raccomanda domande-per-rango; agenti di ricerca economici cacciano i fondamentali
+  **mancanti** che le domande più difficili danno per scontati. Implementazione pianificata
+  in una sessione dedicata di Studio.
+- Pulizia del repo (stessa ondata di decisioni): `versione-italiano/` rimossa del tutto
+  (avanzi utili in `old/` locale, originali nella cronologia git); `OSSERVATORIO.md` (i
+  compiti permanenti dell'osservatorio) ora vive nella root del repo, gitignorato; README
+  ristrutturato — il ruolo di SideKick e i risultati misurati per primi, la storia onesta
+  della misurazione fallita nella sua sezione dedicata più sotto (scelta editoriale di
+  Roberto, che sostituisce il finding AR-11 dell'audit "lascia com'è").
+
 ## v1.9.1 — 2026-07-25 (aggiornamento in giornata + propagazione completa)
 - **Aggiornamento del master colto dal revisore di fedeltà** (passata multi-agente di
   chiarezza/inglese, 10 agenti): la riga del contratto dati `5h_windows` documentata nella v1.9

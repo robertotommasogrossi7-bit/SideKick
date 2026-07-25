@@ -7,20 +7,25 @@
 
 🇬🇧 *Read in English: [README.md](../README.md)*
 
-*"Ho provato a misurare se un processo catturato aiuta lo sviluppo assistito da AI — e non
-sono riuscito a costruire un test equo (ancora)."* — [l'articolo da cui è nato questo
-repo](FINDINGS.md)
+**SideKick è il posto dove un metodo di lavoro umano+AI reale viene costruito, misurato e
+migliorato su numeri reali.** Uno sviluppatore alle prime armi, diverse app reali, **ogni
+transcript misurato**. Cosa ha prodotto finora:
 
-Nel frattempo, anche ciò che *ha* funzionato è misurato: su entrambi i progetti dove abbiamo
-lanciato un audit multi-agente pesante, l'audit ha trovato bug critici veri prima degli
-utenti (N=2, dettagli sotto).
+- **Una costituzione di metodo di lavoro viva** ([v1.9.2](plugin/metodo/CHANGELOG.md),
+  auto-emendante, con un drop-in Spec Kit) che l'AI applica proattivamente in ogni progetto.
+- **Un dataset pubblicato e redatto di uso reale dell'agente** — mesi di sessioni con
+  operazioni nominate, 29M+ token di agenti cloud registrati, più il generatore a zero
+  dipendenze per ricostruire la stessa dashboard dai tuoi transcript.
+- **Vittorie misurate**: audit multi-agente pesanti hanno trovato bug critici veri su
+  entrambi i progetti su cui sono girati, prima di qualunque utente (N=2); un processo di
+  produzione di massa "Fabbrica" ha generato 555 domande di studio verificate in una notte
+  con controllo qualità totale e ogni soluzione eseguita per davvero.
+- **Limiti onesti**: le dimensioni del campione sono dichiarate accanto a ogni affermazione;
+  i risultati negativi restano pubblicati ([FINDINGS.md](FINDINGS.md)).
 
-Uno sviluppatore alle prime armi, diverse app reali, **ogni transcript misurato**. Questo
-repo raccoglie esperimenti reali, dati reali sui token e risultati negativi onesti su
-*come* lavorare con un agente AI di coding — più i piccoli strumenti usati per misurare
-tutto questo. Claude Code è lo strumento attuale, non il punto: le domande (quanto costa e
-cosa restituisce ogni scelta di collaborazione?) valgono per lo sviluppo software assistito
-da AI in generale.
+Claude Code è lo strumento attuale, non il punto: le domande (quanto costa e cosa restituisce
+ogni scelta di collaborazione?) valgono per l'ingegneria del software assistita da AI in
+generale.
 
 > **Cos'è questo:** prima di tutto il laboratorio di lavoro personale dell'autore — i dati
 > vengono pubblicati perché possono essere utili, non perché sono un prodotto. Case study
@@ -34,8 +39,8 @@ da AI in generale.
 | **Un dataset pubblicato e redatto di uso reale dell'agente** | [`observatory/usage/`](../observatory/usage/) (CSV + dashboard), generato da [`observatory/usage.mjs`](../observatory/usage.mjs) | Gli *strumenti* per l'uso sono abbondanti — [ccusage](https://github.com/ryoppippi/ccusage) e il suo ecosistema analizzano gli stessi transcript JSONL locali, e lo fanno con più funzioni del nostro piccolo script. Ciò che pubblichiamo e che abbiamo raramente visto altrove (*per quanto ne sappiamo*) sono i **dati stessi**: mesi di uso reale di un principiante, sessione per sessione, con **operazioni nominate** (titoli di sessione come `WTB/Base_4` — WTB = Who's the Boss, una delle app reali, vedi l'approfondimento per progetto), progetti privati oscurati, più un registro tenuto a mano dei workflow degli agenti cloud — tutto in un'unica dashboard, che cresce finché i transcript locali restano abilitati. |
 | **Contametro dei costi per i bracci di esperimenti A/B** | [`experiments/cost-meter.mjs`](../experiments/cost-meter.mjs) | Misura i turni/token di un esperimento con/senza dai suoi transcript. |
 | **Correttore a prova di fuga per test nascosti** | [`experiments/streaming/oracle/`](../experiments/streaming/oracle/) | Verifica se un artefatto di processo aiuta, senza rivelare le risposte al modello. |
-| **L'articolo** | [`FINDINGS.md`](../FINDINGS.md) | *"Ho provato a misurare se un processo catturato aiuta lo sviluppo assistito da AI — e non sono riuscito a costruire un test equo (ancora)."* Include il primo tentativo contaminato e la revisione avversariale esterna che ha smontato la v1. |
-| **Un drop-in di constitution per Spec Kit** | [`plugins/metodo/spec-kit/constitution.md`](../plugins/metodo/spec-kit/constitution.md) | Una constitution di metodo di lavoro auto-emendante in formato Spec Kit (v1.9.1 — [storia degli emendamenti](../plugins/metodo/CHANGELOG.md)) — la variante spersonalizzata e riusabile del nostro metodo. |
+| **L'articolo** | [`FINDINGS.md`](FINDINGS.md) | *"Ho provato a misurare se un processo catturato aiuta lo sviluppo assistito da AI — e non sono riuscito a costruire un test equo (ancora)."* Include il primo tentativo contaminato e la revisione avversariale esterna che ha smontato la v1. |
+| **Un drop-in di constitution per Spec Kit** | [`plugins/metodo/spec-kit/constitution.md`](../plugins/metodo/spec-kit/constitution.md) | Una constitution di metodo di lavoro auto-emendante in formato Spec Kit (v1.9.1 — [storia degli emendamenti](plugin/metodo/CHANGELOG.md)) — la variante spersonalizzata e riusabile del nostro metodo. |
 
 Avvio rapido per il generatore del dataset (nessuna dipendenza, Node 18+):
 
@@ -45,33 +50,32 @@ node observatory/usage.mjs
 # writes observatory/usage/: DASHBOARD.md (dashboard) + usage.csv + sessions.csv + per-project/
 ```
 
-La [dashboard](../observatory/usage/DASHBOARD.md) committata è esattamente ciò che appare
+La [dashboard](osservatorio/uso/DASHBOARD.md) committata è esattamente ciò che appare
 in output.
 
 ## Il laboratorio (dati live)
 
-**[Apri la dashboard live →](../observatory/usage/DASHBOARD.md)** — totali a colpo d'occhio e
+**[Apri la dashboard live →](osservatorio/uso/DASHBOARD.md)** — totali a colpo d'occhio e
 le operazioni più costose, rigenerata dai transcript reali a ogni revisione dell'osservatorio.
 
 [`observatory/`](../observatory/) è l'osservatorio (inglese; traduzione italiana in
 questa cartella):
 
-- [`usage/DASHBOARD.md`](../observatory/usage/DASHBOARD.md) — la dashboard dei costi:
+- [`usage/DASHBOARD.md`](osservatorio/uso/DASHBOARD.md) — la dashboard dei costi:
   totali, le operazioni più costose, approfondimenti per progetto (un file per progetto).
-- [`STRATEGIES.md`](observatory/STRATEGIES.md) — il registro costi/benefici di ogni
+- [`STRATEGIES.md`](osservatorio/STRATEGIES.md) — il registro costi/benefici di ogni
   strategia di metodo di lavoro sotto verifica: audit multi-agente, verifiche-ombra
   cross-modello, red team, **incluse le strategie che sono fallite e sono state abbandonate**.
-- [`redteam/VERDICTS.md`](observatory/redteam/VERDICTS.md) — prima che questo repo
+- [`redteam/VERDICTS.md`](osservatorio/redteam/VERDICTS.md) — prima che questo repo
   diventasse pubblico nella sua forma attuale, due revisori AI indipendenti hanno fatto le
   pulci al dossier; i verdetti, la verifica affermazione per affermazione (una "correzione"
   di un revisore si è rivelata sbagliata) e le correzioni sono tutti alla luce del sole.
-- [`DATA.md`](observatory/DATA.md) / [`PLAN.md`](observatory/PLAN.md) — cosa i dati possono
+- [`DATA.md`](osservatorio/DATA.md) / [`PLAN.md`](osservatorio/PLAN.md) — cosa i dati possono
   e non possono ancora dire, e cosa viene dopo.
 
 Ogni progetto ha il suo approfondimento — ecco la cronologia di build di un'app reale,
 sessione per sessione, operazione nominata per operazione nominata:
-
-**[la tabella per-sessione di un'app reale →](../observatory/usage/per-project/poker-who-s-the-boss.md)**
+**[la tabella per-sessione di un'app reale →](osservatorio/uso/per-progetto/poker-who-s-the-boss.md)**
 
 Alcuni risultati campione (dettagli e avvertenze all'interno): un audit multi-agente pesante
 ha trovato bug critici reali su entrambi i progetti su cui è girato, a un costo noto (N=2);
@@ -103,6 +107,15 @@ Relazione con [GitHub Spec Kit](https://github.com/github/spec-kit): Spec Kit or
 costa e cosa restituisce ogni scelta di metodo — e distribuisce il proprio metodo come
 drop-in di constitution per Spec Kit.
 
+## Da dove è partito questo (e cosa non possiamo ancora affermare)
+
+*"Ho provato a misurare se un processo catturato aiuta lo sviluppo assistito da AI — e non
+sono riuscito a costruire un test equo (ancora)."* — [l'articolo da cui è nato questo
+repo](FINDINGS.md). Quella prima misurazione è fallita onestamente (bracci contaminati, N
+troppo piccolo per significare qualcosa) e resta pubblicata: è la ragione per cui esiste
+l'osservatorio. Quello che *possiamo* mostrare oggi è sopra; quello che ancora non possiamo
+affermare è spiegato in FINDINGS.md.
+
 ## Regole di onestà di questo repo
 
 1. Le dimensioni del campione sono dichiarate accanto a ogni affermazione; un N piccolo è
@@ -113,12 +126,12 @@ drop-in di constitution per Spec Kit.
 3. Qualunque cosa pubblica passa prima da un red team AI esterno — e le affermazioni dei
    revisori vengono verificate anche alla fonte (a volte sbagliano).
 
-## Italiano
+## English
 
-La versione italiana della documentazione principale è questa cartella (`ITALIANO/`):
-una copia esatta ma tradotta del repository, tenuta in sync a ogni revisione
-dell'osservatorio. (Gli originali italiani storici, pre-2026-07-25, restano nella
-cronologia git.)
+La versione inglese della documentazione principale è la root del repository
+[`README.md`](../README.md) — questa cartella (`ITALIANO/`) è una copia esatta ma tradotta,
+tenuta in sync a ogni revisione dell'osservatorio. (Gli originali italiani storici,
+pre-2026-07-25, restano nella cronologia git.)
 
 ## Licenza
 

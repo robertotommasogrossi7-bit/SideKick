@@ -1,123 +1,123 @@
-# Audit del repository SideKick — sintesi finale
+# SideKick repository audit — final synthesis
 
-**Data del run:** 2026-07-25 · **Perimetro:** repository personale-vetrina `C:/Users/rober/Desktop/Programmi/SideKick` (case study con dati veri, N piccoli dichiarati) · **Modalità:** sola lettura, nessuna correzione applicata.
+**Run date:** 2026-07-25 · **Scope:** personal-showcase repository `C:/Users/rober/Desktop/Programmi/SideKick` (case study with real data, small N declared) · **Mode:** read-only, no fixes applied.
 
-## 1. Scopo, perimetro e processo
+## 1. Purpose, scope, and process
 
-**Scopo.** Verificare la coerenza, la credibilità e la navigabilità del repo così come lo incontra un lettore esterno — recruiter, adottante del metodo, visitatore curioso — senza applicare la lente enterprise: è un laboratorio personale di uno sviluppatore alle prime armi, con N=1-2 dichiarati e risultati anche negativi pubblicati apposta. I rischi puramente teorici sono stati scartati in fase di verifica.
+**Purpose.** Verify the coherence, credibility, and navigability of the repo as an outside reader encounters it — recruiter, method adopter, curious visitor — without applying an enterprise lens: this is a personal lab run by a beginner developer, with N=1-2 declared and negative results published on purpose. Purely theoretical risks were discarded during verification.
 
-**Perimetro.** README pubblici (root + `ITALIANO/`), documentazione del metodo (`plugins/metodo/`), dati dell'osservatorio (`observatory/`: `DATA.md`, dashboard token, drilldown per-progetto, `workflow.csv`), screenshot di anteprima (`docs/img/`), e il ponte italiano (`versione-italiano/`).
+**Scope.** Public READMEs (root + `ITALIANO/`), method documentation (`plugins/metodo/`), observatory data (`observatory/`: `DATA.md`, token dashboard, per-project drilldowns, `workflow.csv`), preview screenshots (`docs/img/`), and the Italian bridge (`versione-italiano/`).
 
-**Processo (multi-agente, con verifica adversariale).**
-- **3 red team** interni con lenti diverse (prima impressione/credibilità · coerenza dati/versioni · navigazione/i18n) hanno prodotto i finding grezzi.
-- **5 revisori** hanno esteso la copertura su codice generatore (`usage.mjs`), CSV sorgente e cronologia git.
-- **Dedup** dei finding sovrapposti prima delle verifiche (per non pagare due volte lo stesso bug).
-- **Verifica adversariale per-finding:** un secondo agente ha provato a *confutare* ogni finding leggendo i file reali e la storia dei commit, ricalibrando la severità verso il basso quando il contesto attenuava il problema.
-- **Sintesi unica** (questo documento).
+**Process (multi-agent, with adversarial verification).**
+- **3 internal red teams** with different lenses (first impression/credibility · data/version consistency · navigation/i18n) produced the raw findings.
+- **5 reviewers** extended coverage to the generator code (`usage.mjs`), source CSVs, and git history.
+- **Dedup** of overlapping findings before verification (so the same bug isn't paid for twice).
+- **Per-finding adversarial verification:** a second agent tried to *refute* each finding by reading the actual files and commit history, recalibrating severity downward when context softened the problem.
+- **Single synthesis** (this document).
 
-**Conteggi.**
-- Finding **CONFERMATI** e verificati: **14** — di cui **1 alta**, **8 media**, **5 bassa** (queste ultime confermate ma declassate in verifica da media/alta a bassa).
-- Finding **BASSA non verificati** (passati non verificati per policy, costano più della loro utilità): **4**.
-- Finding **CONFUTATI** dalla verifica: **0**.
-- **Nota di calibrazione:** la verifica ha declassato **5** severità su 14 (una da alta a media, quattro da media a bassa) e ne ha **confermata 1** che il red team aveva già alzato ad alta (`studio.md`). Nessun allarmismo è sopravvissuto come "alta" ingiustificata.
+**Counts.**
+- **CONFIRMED** and verified findings: **14** — of which **1 high**, **8 medium**, **5 low** (the latter confirmed but downgraded during verification from medium/high to low).
+- **Low, unverified** findings (passed unverified by policy, they cost more than their usefulness): **4**.
+- Findings **REFUTED** by verification: **0**.
+- **Calibration note:** verification downgraded **5** of 14 severities (one from high to medium, four from medium to low) and **confirmed 1** that the red team had already raised to high (`studio.md`). No alarmism survived as an unjustified "high."
 
-## 2. Cosa dicono le 3 personas
+## 2. What the 3 personas say
 
-**Il recruiter (prima impressione).** Apre il README e la prima cosa sostanziosa che legge è una citazione a esito negativo ("ho provato a misurare... e non ci sono riuscito, ancora"). Il framing esplorativo è dichiarato bene poche righe sotto e il dato concreto — l'audit multi-agente che ha trovato bug reali — esiste, ma più in basso nel file, non accanto alla citazione. Il repo *funziona* per un recruiter tecnico: è onesto e i dati sono veri. Il rischio è solo di sequenziamento narrativo: la prima schermata vende l'onestà del fallimento prima del risultato ottenuto. Nessun dato falso, nessuna promessa non mantenuta.
+**The recruiter (first impression).** They open the README and the first substantial thing they read is a quote about a negative outcome ("I tried to measure... and I haven't managed to, yet"). The exploratory framing is stated well a few lines below, and the concrete data point — the multi-agent audit that found real bugs — exists, but further down in the file, not next to the quote. The repo *works* for a technical recruiter: it's honest and the data is real. The risk is purely one of narrative sequencing: the first screen sells the honesty of failure before the result achieved. No false data, no broken promise.
 
-**L'adottante del metodo (chi vuole copiare la costituzione).** Qui c'è la lacuna più fastidiosa per questo pubblico: il file `COSTITUZIONE.md` che gli utenti sono invitati a copiare in `~/.claude/CLAUDE.md` **non riporta mai il proprio numero di versione**, e nessuno dei README linka il `CHANGELOG.md` (unico posto dove il numero vive). In più il drop-in Spec Kit si auto-dichiara `1.9.1` mentre tre fonti indipendenti dicono `1.9.0`. Per un repo che fa del versioning e del data-contract un valore cardine, è una contraddizione col proprio principio — non rompe nulla, ma mina la fiducia proprio dove il metodo promette rigore.
+**The method adopter (someone who wants to copy the constitution).** Here lies the gap most irritating for this audience: the `COSTITUZIONE.md` file that users are invited to copy into `~/.claude/CLAUDE.md` **never states its own version number**, and none of the READMEs link to `CHANGELOG.md` (the only place where the number lives). On top of that, the Spec Kit drop-in self-declares `1.9.1` while three independent sources say `1.9.0`. For a repo that treats versioning and the data contract as a core value, this is a contradiction of its own principle — it breaks nothing, but it undermines trust precisely where the method promises rigor.
 
-**Il visitatore (navigazione e "dati vivi").** Il lettore italiano viene sballottato tra due alberi italiani (`ITALIANO/` e `versione-italiano/`) senza che nessun punto d'ingresso spieghi la differenza, e la pagina d'atterraggio (`LEGGIMI.md`) non nomina nemmeno l'esistenza del mirror più recente. Sul fronte dati: la sezione "live data" mostra screenshot fermi al 2026-07-17 mentre i numeri veri (nel `.md`, aggiornati oggi) sono cresciuti — e un drilldown per-progetto (`Studio`) nasconde ~20M token per un bug di match di stringa nel generatore. I dati reali ci sono e sono consultabili; è la vetrina attorno che ha debito di manutenzione.
+**The visitor (navigation and "live data").** The Italian reader gets bounced between two Italian trees (`ITALIANO/` and `versione-italiano/`) with no entry point explaining the difference, and the landing page (`LEGGIMI.md`) doesn't even mention the existence of the more recent mirror. On the data front: the "live data" section shows a screenshot frozen at 2026-07-17 while the real numbers (in the `.md`, updated today) have grown — and a per-project drilldown (`Studio`) hides ~20M tokens because of a string-match bug in the generator. The real data exists and is browsable; it's the showcase around it that has maintenance debt.
 
-## 3. Registro indicizzato — finding CONFERMATI (per severità)
+## 3. Indexed register — CONFIRMED findings (by severity)
 
-### ALTA
+### HIGH
 
-| ID | Sev | Dove | Problema | Fix proposto (1 riga) | Fonte |
+| ID | Sev | Where | Problem | Proposed fix (1 line) | Source |
 |----|-----|------|----------|----------------------|-------|
-| **AR-01** | alta | `observatory/usage/per-project/studio.md:1` | Il drilldown di `Studio` mostra 4 sessioni / 873k output e **nessuna** sezione "Cloud agent workflows", omettendo ~20,5M token (5 run): `usage.mjs` `gruppoDi()` ha case speciali solo per `poker`/`weather-report`, così `workflow.csv` con project `Studio (ponte)`/`Studio (StudioQuest)` non combacia col gruppo `Studio` e la sezione viene esclusa in silenzio | Aggiungere in `gruppoDi()` la mappatura dei prefissi `Studio (...)` → `Studio` (come per poker/weather-report), oppure allineare le stringhe `project` di `workflow.csv` | `usage.mjs:54-59` (`gruppoDi`) + `:179` (`wf = workflow.filter(...)`); `workflow.csv:8-12`; `sessions.csv:59-62`; sezione presente in `sidekick.md`/`progetto-15.md`/`poker-who-s-the-boss.md` |
+| **AR-01** | high | `observatory/usage/per-project/studio.md:1` | The `Studio` drilldown shows 4 sessions / 873k output and **no** "Cloud agent workflows" section, omitting ~20.5M tokens (5 runs): `usage.mjs`'s `gruppoDi()` has special cases only for `poker`/`weather-report`, so `workflow.csv` rows with project `Studio (ponte)`/`Studio (StudioQuest)` don't match the `Studio` group and the section is silently excluded | Add a `Studio (...)` → `Studio` prefix mapping in `gruppoDi()` (as already exists for poker/weather-report), or align the `project` strings in `workflow.csv` | `usage.mjs:54-59` (`gruppoDi`) + `:179` (`wf = workflow.filter(...)`); `workflow.csv:8-12`; `sessions.csv:59-62`; section present in `sidekick.md`/`progetto-15.md`/`poker-who-s-the-boss.md` |
 
-### MEDIA
+### MEDIUM
 
-| ID | Sev | Dove | Problema | Fix proposto (1 riga) | Fonte |
+| ID | Sev | Where | Problem | Proposed fix (1 line) | Source |
 |----|-----|------|----------|----------------------|-------|
-| **AR-02** | media | `README.md:5` e `:102-104` | Due link italiani diversi (`ITALIANO/` vs `versione-italiano/`) senza spiegare la relazione; il loop si ripete dentro `ITALIANO/README.md:110-112`, che pur dichiarandosi mirror rimanda ancora all'altra cartella — nessun punto d'ingresso disambigua | Aggiungere in entrambi i README una riga: "`ITALIANO/` = mirror tradotto vivo; `versione-italiano/` = archivio congelato al 2026-07-17" | `README.md:5`, `:102-104`; `ITALIANO/README.md:1-2`, `:110-112`; la spiegazione reale è solo in `versione-italiano/LEGGIMI.md:3-6` |
-| **AR-03** | media | `versione-italiano/LEGGIMI.md:1` | Il file che entrambi i README linkano come "documentazione di lavoro in italiano" non nomina mai `ITALIANO/` (0 occorrenze), pur essendo `ITALIANO/` nato lo stesso 2026-07-25; chi segue il link esce dal mirror senza sapere che esiste | Riga in cima a `LEGGIMI.md` che rimanda a `ITALIANO/` come mirror vivo, o consolidare in una sola cartella italiana | grep `ITALIANO` su `LEGGIMI.md` → 0; `README.md:102-104` + `ITALIANO/README.md:108-112`; `OSSERVATORIO.md:39-40` ("Dal 2026-07-25 esiste ITALIANO/") |
-| **AR-04** | media | `plugins/metodo/spec-kit/constitution.md:168` | Il drop-in si auto-dichiara `Version: 1.9.1`, ma tre fonti indipendenti dicono `1.9.0` (CHANGELOG, entrambi i README) — contraddizione ancora presente in HEAD | Decidere il numero vero e allineare tutte le occorrenze (file stesso, `README.md`, `ITALIANO/README.md`, `CHANGELOG`) | `spec-kit/constitution.md:168`; `CHANGELOG.md:15` ("realigned to 1.9.0"); `README.md:29`; `ITALIANO/README.md:32`; git log commit deae2cb |
-| **AR-05** | media | `plugins/metodo/COSTITUZIONE.md:1` | Il file "master" che gli utenti copiano in `~/.claude/CLAUDE.md` non riporta mai il proprio numero di versione, e nessun README linka il `CHANGELOG.md` (unico posto col numero) — lacuna di tracciabilità che contraddice il valore che il repo dà al versioning | Aggiungere `Versione: v1.9.1` in testa a `COSTITUZIONE.md`/`CONSTITUTION.md` e linkare `CHANGELOG.md` dai README | `COSTITUZIONE.md:1-15` (unica menzione è "Governance da v1.5", storica); `CHANGELOG.md:7`; grep `CHANGELOG` → mai in `plugins/metodo/README.md` né root `README.md` |
-| **AR-06** | media | `observatory/DATA.md:66` | Afferma "Opus generated ~83% of historical output", ma il calcolo reale da `usage.csv` dà 77,1% (13.950.906 / 18.087.586); la tabella "By model" della dashboard conferma 77%. Nessun sottoinsieme plausibile giustifica l'83% | Ricalcolare da `usage.csv` (o linkare la query) e correggere la cifra, o specificare il sottoinsieme | `DATA.md:66`; `usage.csv` aggregato (opus-4-8 11.786.327 + opus-4-7 2.164.579); `DASHBOARD.md:96-100` |
-| **AR-07** | media | `observatory/DATA.md:63` | Dice "26.3M cloud-agent tokens" ma la somma reale di `workflow.csv` è 27.576.803 (~27.6M); il gap di 1.243.042 = le due righe SideKick aggiunte il 2026-07-25 *dopo* l'ultimo commit di `DATA.md`, che però porta l'etichetta "refreshed 2026-07-25" | Aggiornare la prosa di `DATA.md` dal totale di `workflow.csv` a ogni append, anche nella stessa sessione | `DATA.md:63`; `DASHBOARD.md:12` ("27.6M"); `workflow.csv:13-14` (838.112 + 404.930); git: `DATA.md`@85ac181 vs `DASHBOARD.md`@bee0ac4 |
-| **AR-08** | media | `docs/img/DASHBOARD.png:1` | Screenshot fermo al 2026-07-17 (commit 5914afa) mentre `DASHBOARD.md` è stato rigenerato più volte il 2026-07-25 con numeri diversi a colpo d'occhio (15.9M→18.1M, 53→64 sessioni, 11→13 progetti, ≈169×→~187×); la sezione "The lab (live data)" promette dati vivi ma incorpora l'immagine statica | Rigenerare lo screenshot a ogni refresh con lo stesso script, o non mostrare numeri nell'anteprima | `docs/img/DASHBOARD.png` (5914afa, 2026-07-17); `DASHBOARD.md:12-14` (rigenerato 2026-07-25); `README.md:41,43` ("## The lab (live data)" + immagine sotto) |
-| **AR-09** | media | `observatory/usage/DASHBOARD.md:20` | La tabella "The most expensive things" — rilanciata nel README come pezzo forte — ha 4 righe su 8 (#1,2,4,6) in italiano tecnico fittissimo con gergo interno ("Fabbrica WR3", "QC ombra 8%", "INCIDENTE resume") dentro un documento altrimenti in inglese; rompe la leggibilità del dataset pubblicato | Tradurre/riassumere in inglese le descrizioni delle operazioni cloud-agent (debito su voci recenti di `workflow.csv`) | `DASHBOARD.md:20-25` (righe #1,2,4,6 in italiano); `workflow.csv:9,10,12` (operation italiana) vs `:2-7` (inglese); `README.md:43` rilancia con screenshot |
+| **AR-02** | medium | `README.md:5` and `:102-104` | Two different Italian links (`ITALIANO/` vs `versione-italiano/`) with no explanation of the relationship; the loop repeats inside `ITALIANO/README.md:110-112`, which despite declaring itself a mirror still points back to the other folder — no entry point disambiguates | Add one line to both READMEs: "`ITALIANO/` = live translated mirror; `versione-italiano/` = archive frozen at 2026-07-17" | `README.md:5`, `:102-104`; `ITALIANO/README.md:1-2`, `:110-112`; the real explanation exists only in `versione-italiano/LEGGIMI.md:3-6` |
+| **AR-03** | medium | `versione-italiano/LEGGIMI.md:1` | The file both READMEs link as "Italian working documentation" never mentions `ITALIANO/` (0 occurrences), even though `ITALIANO/` was created on that same day, 2026-07-25; anyone following the link leaves the mirror without knowing it exists | Add a line at the top of `LEGGIMI.md` pointing to `ITALIANO/` as the live mirror, or consolidate into a single Italian folder | grep `ITALIANO` on `LEGGIMI.md` → 0; `README.md:102-104` + `ITALIANO/README.md:108-112`; `OSSERVATORIO.md:39-40` ("Since 2026-07-25 ITALIANO/ exists") |
+| **AR-04** | medium | `plugins/metodo/spec-kit/constitution.md:168` | The drop-in self-declares `Version: 1.9.1`, but three independent sources say `1.9.0` (CHANGELOG, both READMEs) — the contradiction is still present in HEAD | Decide the true number and align every occurrence (the file itself, `README.md`, `ITALIANO/README.md`, `CHANGELOG`) | `spec-kit/constitution.md:168`; `CHANGELOG.md:15` ("realigned to 1.9.0"); `README.md:29`; `ITALIANO/README.md:32`; git log commit deae2cb |
+| **AR-05** | medium | `plugins/metodo/COSTITUZIONE.md:1` | The "master" file users copy into `~/.claude/CLAUDE.md` never states its own version number, and no README links to `CHANGELOG.md` (the only place with the number) — a traceability gap that contradicts the value the repo places on versioning | Add `Version: v1.9.1` at the top of `COSTITUZIONE.md`/`CONSTITUTION.md` and link `CHANGELOG.md` from the READMEs | `COSTITUZIONE.md:1-15` (the only mention is "Governance since v1.5," historical); `CHANGELOG.md:7`; grep `CHANGELOG` → never in `plugins/metodo/README.md` nor root `README.md` |
+| **AR-06** | medium | `observatory/DATA.md:66` | States "Opus generated ~83% of historical output," but the real calculation from `usage.csv` gives 77.1% (13,950,906 / 18,087,586); the dashboard's "By model" table confirms 77%. No plausible subset justifies the 83% | Recalculate from `usage.csv` (or link the query) and correct the figure, or specify the subset | `DATA.md:66`; aggregated `usage.csv` (opus-4-8 11,786,327 + opus-4-7 2,164,579); `DASHBOARD.md:96-100` |
+| **AR-07** | medium | `observatory/DATA.md:63` | Says "26.3M cloud-agent tokens" but the real sum from `workflow.csv` is 27,576,803 (~27.6M); the 1,243,042 gap = the two SideKick rows added on 2026-07-25 *after* `DATA.md`'s last commit, which nonetheless carries the label "refreshed 2026-07-25" | Update `DATA.md`'s prose from `workflow.csv`'s total on every append, even within the same session | `DATA.md:63`; `DASHBOARD.md:12` ("27.6M"); `workflow.csv:13-14` (838,112 + 404,930); git: `DATA.md`@85ac181 vs `DASHBOARD.md`@bee0ac4 |
+| **AR-08** | medium | `docs/img/DASHBOARD.png:1` | Screenshot frozen at 2026-07-17 (commit 5914afa) while `DASHBOARD.md` was regenerated multiple times on 2026-07-25 with numbers visibly different (15.9M→18.1M, 53→64 sessions, 11→13 projects, ≈169×→~187×); the "The lab (live data)" section promises live data but embeds the static image | Regenerate the screenshot on every refresh with the same script, or don't show numbers in the preview | `docs/img/DASHBOARD.png` (5914afa, 2026-07-17); `DASHBOARD.md:12-14` (regenerated 2026-07-25); `README.md:41,43` ("## The lab (live data)" + image below) |
+| **AR-09** | medium | `observatory/usage/DASHBOARD.md:20` | The "The most expensive things" table — relaunched in the README as a flagship piece — has 4 of 8 rows (#1,2,4,6) in dense technical Italian with internal jargon ("Fabbrica WR3," "QC ombra 8%," "INCIDENTE resume") inside an otherwise English document; it breaks the readability of the published dataset | Translate/summarize the cloud-agent operation descriptions into English (debt on recent `workflow.csv` entries) | `DASHBOARD.md:20-25` (rows #1,2,4,6 in Italian); `workflow.csv:9,10,12` (Italian operation) vs `:2-7` (English); `README.md:43` relaunches with the screenshot |
 
-### BASSA (confermati, declassati in verifica da media/alta)
+### LOW (confirmed, downgraded during verification from medium/high)
 
-| ID | Sev | Dove | Problema | Fix proposto (1 riga) | Fonte |
+| ID | Sev | Where | Problem | Proposed fix (1 line) | Source |
 |----|-----|------|----------|----------------------|-------|
-| **AR-10** | bassa | `docs/img/WTB.png:1` | Stesso meccanismo di AR-08: screenshot fermo al 2026-07-17 mentre il file live arriva al 2026-07-22. Declassato: nessuna promessa esplicita di "live" accanto all'immagine (`docs/img/README.md` le dice solo "rendered by GitHub") e lo scarto *sottostima* l'attività, non la gonfia | Includere entrambi gli screenshot nello stesso script/hook di rigenerazione | git log `WTB.png` → unico commit 5914afa; `poker-who-s-the-boss.md:5` ("23 sessions... to 2026-07-22"); `docs/img/README.md:3-7` |
-| **AR-11** | bassa | `FINDINGS.md:1` / `README.md` apertura | La citazione d'apertura è un esito negativo/inconcludente. Declassato: il framing esplorativo è dichiarato subito sotto (`ITALIANO/README.md:19-22`), la tabella "cosa porti a casa" è nella stessa schermata, e il dato concreto (audit → bug reali, N=2) esiste a riga 69-70 | Affiancare alla citazione un risultato concreto già ottenuto nella stessa prima schermata, per bilanciare la prima impressione | `ITALIANO/README.md:7-10` (citazione) + `:19-22` (framing) + `:69-70` (dato concreto) |
-| **AR-12** | bassa | `README.md:68` | "~187× the live tokens" senza tradurre il numero in impatto pratico per un lettore non tecnico. Declassato: la frase lega già il dato alla regola "resume invece di restart"; **attenzione**: la riformulazione originale proposta ("costa 1/187 rispetto a ripartire") sarebbe *imprecisa* — 187× è il rapporto cache-read/live-token cumulato, non un moltiplicatore resume-vs-restart | Inciso neutro tipo "indicatore di quanto le chat lunghe rileggono il contesto a ogni messaggio", **senza** inventare un rapporto di costo non supportato dai dati | `README.md:65-71`; `STRATEGIES.md:41` ("187× ... biggest cost item of all") conferma la natura del rapporto |
-| **AR-13** | bassa | `README.md:60` | Le uniche "prove" delle app reali (WTB, poker) sono dashboard di token, non codice o demo. Declassato: `README.md:25` dichiara esplicitamente "private projects redacted" — è una scelta di privacy dichiarata, non un buco di credibilità; le claim del repo (token/metodo/findings) sono già ancorate a dati reali | Nessun'azione obbligata; eventualmente uno screenshot dell'app se la privacy lo consente | `README.md:60-63` (link a `per-project/poker-who-s-the-boss.md`, solo tabella); `README.md:25` ("private projects redacted") |
-| **AR-14** | bassa | `plugins/metodo/README.md:3` | Linguaggio auto-referenziale da self-help ("self-evolving behavior... no constraints") come seconda riga del file. Declassato: le righe 10-14 lo ancorano subito a comportamenti concreti e verificabili (`IDEE.md`, design-first, auto-aggiornamento della costituzione) | Sostituire l'aggettivazione della prima riga con un esempio concreto di comportamento osservato | `plugins/metodo/README.md:3-4`, mitigato da `:10-14` |
+| **AR-10** | low | `docs/img/WTB.png:1` | Same mechanism as AR-08: screenshot frozen at 2026-07-17 while the live file reaches 2026-07-22. Downgraded: no explicit "live" promise next to the image (`docs/img/README.md` only says "rendered by GitHub") and the gap *understates* the activity rather than inflating it | Include both screenshots in the same regeneration script/hook | git log `WTB.png` → single commit 5914afa; `poker-who-s-the-boss.md:5` ("23 sessions... to 2026-07-22"); `docs/img/README.md:3-7` |
+| **AR-11** | low | `FINDINGS.md:1` / `README.md` opening | The opening quote is a negative/inconclusive outcome. Downgraded: the exploratory framing is stated right below (`ITALIANO/README.md:19-22`), the "what you take away" table is on the same screen, and the concrete data point (audit → real bugs, N=2) exists at line 69-70 | Pair the quote with a concrete result already achieved, on the same first screen, to balance the first impression | `ITALIANO/README.md:7-10` (quote) + `:19-22` (framing) + `:69-70` (concrete data point) |
+| **AR-12** | low | `README.md:68` | "~187× the live tokens" without translating the number into practical impact for a non-technical reader. Downgraded: the sentence already ties the figure to the "resume instead of restart" rule; **caution**: the originally proposed rewording ("costs 1/187 compared to restarting") would be *inaccurate* — 187× is the cumulative cache-read/live-token ratio, not a resume-vs-restart cost multiplier | A neutral aside such as "an indicator of how much long chats reread context on every message," **without** inventing a cost ratio the data doesn't support | `README.md:65-71`; `STRATEGIES.md:41` ("187× ... biggest cost item of all") confirms the nature of the ratio |
+| **AR-13** | low | `README.md:60` | The only "proof" of the real apps (WTB, poker) is token dashboards, not code or demos. Downgraded: `README.md:25` explicitly states "private projects redacted" — a declared privacy choice, not a credibility gap; the repo's claims (token/method/findings) are already anchored to real data | No action required; possibly an app screenshot if privacy allows | `README.md:60-63` (link to `per-project/poker-who-s-the-boss.md`, table only); `README.md:25` ("private projects redacted") |
+| **AR-14** | low | `plugins/metodo/README.md:3` | Self-referential self-help language ("self-evolving behavior... no constraints") as the file's second line. Downgraded: lines 10-14 immediately anchor it to concrete, verifiable behaviors (`IDEE.md`, design-first, self-updating constitution) | Replace the first line's adjectives with a concrete example of observed behavior | `plugins/metodo/README.md:3-4`, mitigated by `:10-14` |
 
-## 4. Finding BASSA non verificati (dichiarati non verificati)
+## 4. Unverified LOW findings (declared unverified)
 
-Passati **non verificati** per policy di processo (su BASSA la verifica adversariale costa più della sua utilità). Da valutare al prossimo ritocco, non bloccanti.
+Passed **unverified** by process policy (on LOW, adversarial verification costs more than its usefulness). To be evaluated at the next touch-up, not blocking.
 
-| ID | Dove | Problema | Fix proposto |
+| ID | Where | Problem | Proposed fix |
 |----|------|----------|--------------|
-| AR-B1 | `plugins/metodo/CONSTITUTION.md:8` | La versione inglese "intercambiabile" resta personalizzata (nomina Roberto, "SideKick's observatory chat") mentre il drop-in Spec Kit è spersonalizzato; chi non è Roberto copia riferimenti altrui | Nei README indirizzare l'uso esterno al drop-in Spec Kit spersonalizzato |
-| AR-B2 | `plugins/metodo/CONSTITUTION.md:203` | `FACTORY-PROCESS.md` in backtick non è link markdown cliccabile, incoerente con altri riferimenti | Trasformare in link markdown |
-| AR-B3 | `observatory/usage/per-project/progetto-15.md:6` | Bug cosmetico di pluralizzazione: "(1 workflows)" invece di "(1 workflow)" | Singolarizzazione nel template di `usage.mjs` |
-| AR-B4 | `ITALIANO/README.md:71` | "cross-model" non tradotto (righe 56, 71) mentre altrove è "cross-modello" (`DATA.md:30/46`, `STRATEGIES.md:26`, `VERDICTS.md:59`) | Uniformare a "cross-modello" |
+| AR-B1 | `plugins/metodo/CONSTITUTION.md:8` | The "interchangeable" English version remains personalized (names Roberto, "SideKick's observatory chat") while the Spec Kit drop-in is depersonalized; anyone who isn't Roberto copies someone else's references | In the READMEs, direct external use to the depersonalized Spec Kit drop-in |
+| AR-B2 | `plugins/metodo/CONSTITUTION.md:203` | `FACTORY-PROCESS.md` in backticks is not a clickable markdown link, inconsistent with other references | Turn it into a markdown link |
+| AR-B3 | `observatory/usage/per-project/progetto-15.md:6` | Cosmetic pluralization bug: "(1 workflows)" instead of "(1 workflow)" | Singularize in `usage.mjs`'s template |
+| AR-B4 | `ITALIANO/README.md:71` | "cross-model" left untranslated (lines 56, 71) while elsewhere it's "cross-modello" (`DATA.md:30/46`, `STRATEGIES.md:26`, `VERDICTS.md:59`) | Standardize to "cross-modello" |
 
-## 5. Confutati dalla verifica
+## 5. Refuted by verification
 
-**Nessuno.** Tutti i 14 finding grezzi sono sopravvissuti alla verifica adversariale come *fatti veri*. Il filtro del processo ha agito però sulla **severità**: invece di scartare finding, la verifica ha ricalibrato l'impatto sul contesto reale (repo-vetrina personale, N piccoli dichiarati), declassando 4 finding da media a bassa (AR-10÷AR-14, uno era già alta→media AR-08) e correggendo un'imprecisione nella *soluzione* proposta (AR-12: il rapporto 187× non è un moltiplicatore resume-vs-restart). Questo è il valore del passo di verifica anche a "confutati zero": separa i problemi reali dalle severità gonfiate e dai fix sbagliati.
+**None.** All 14 raw findings survived adversarial verification as *true facts*. The process filter acted instead on **severity**: rather than discarding findings, verification recalibrated impact against real context (personal showcase repo, small N declared), downgrading 4 findings from medium to low (AR-10÷AR-14, one was already high→medium AR-08) and correcting an inaccuracy in the proposed *solution* (AR-12: the 187× ratio is not a resume-vs-restart multiplier). This is the value of the verification step even at "zero refuted": it separates real problems from inflated severities and wrong fixes.
 
-| Finding | Esito verifica | Motivo |
+| Finding | Verification outcome | Reason |
 |---------|----------------|--------|
-| DASHBOARD.png "alta" | declassato a media | Ritardo di rigenerazione di uno screenshot d'anteprima, non falsità: i numeri veri sono nel `.md`, la crescita rafforza semmai la tesi "dataset vivo". Ancoraggio corretto: la frase README:39 si riferisce al `.md` (vero), l'incoerenza reale è titolo "live data" (:41) vs immagine statica (:43) |
-| WTB.png "media" | declassato a bassa | Nessuna promessa "live" accanto all'immagine; lo scarto sottostima l'attività |
-| FINDINGS.md apertura "media" | declassato a bassa | Framing esplorativo dichiarato nella stessa schermata; il dato concreto esiste a `:69-70` |
-| README 187× "media" | declassato a bassa + fix corretto | Pubblico già tecnico; la riformulazione originale era matematicamente imprecisa |
-| README "prove=dashboard" "media" | declassato a bassa | Privacy dichiarata ("private projects redacted"), non buco di credibilità |
-| plugins/metodo README "media" | declassato a bassa | Ancorato a comportamenti concreti nelle righe subito successive |
+| DASHBOARD.png "high" | downgraded to medium | Delay in regenerating a preview screenshot, not falsity: the real numbers are in the `.md`, growth if anything reinforces the "live dataset" claim. Correct anchoring: README:39's sentence refers to the `.md` (true), the real inconsistency is the "live data" title (:41) vs. the static image (:43) |
+| WTB.png "medium" | downgraded to low | No "live" promise next to the image; the gap understates activity |
+| FINDINGS.md opening "medium" | downgraded to low | Exploratory framing stated on the same screen; the concrete data point exists at `:69-70` |
+| README 187× "medium" | downgraded to low + fix corrected | Audience already technical; the original rewording was mathematically inaccurate |
+| README "proof=dashboard" "medium" | downgraded to low | Declared privacy ("private projects redacted"), not a credibility gap |
+| plugins/metodo README "medium" | downgraded to low | Anchored to concrete behaviors in the immediately following lines |
 
-## 6. Top-5 azioni per ROI e cosa NON toccare
+## 6. Top-5 actions by ROI and what NOT to touch
 
-**Top-5 per ROI (impatto / sforzo).**
-1. **AR-01 — bug del generatore `usage.mjs` (`gruppoDi`).** È l'unica **alta**, è un bug *reale* di codice (non di prosa), nasconde ~20M token, e il fix è mirato (aggiungere una mappatura come già c'è per poker/weather-report). Massimo ROI: correttezza del dataset che è il cuore del repo.
-2. **AR-04 + AR-05 — versione del metodo.** Un solo intervento coordinato (numero in testa a `COSTITUZIONE.md`/`CONSTITUTION.md`, allineamento `1.9.0`/`1.9.1`, link al `CHANGELOG` dai README) chiude due finding media su cui il repo è più esposto proprio col pubblico che vuole servire (gli adottanti del metodo).
-3. **AR-06 + AR-07 — numeri sbagliati in `DATA.md`.** Due cifre fattualmente errate (83% vs 77%; 26.3M vs 27.6M) nella pagina che dichiara "what the numbers say". Ricalcolo banale da `usage.csv`/`workflow.csv`, alta resa di credibilità.
-4. **AR-02 + AR-03 — loop di navigazione italiano.** Due righe di disambiguazione (nei README e in cima a `LEGGIMI.md`) risolvono un fastidio che colpisce esattamente il pubblico italiano che la repo vuole servire.
-5. **AR-08 (+AR-10) — screenshot stale.** Rigenerare le due immagini con lo stesso script del refresh dashboard, o togliere i numeri dall'anteprima. Sforzo basso, chiude la contraddizione visiva "live data" vs immagine ferma.
+**Top-5 by ROI (impact / effort).**
+1. **AR-01 — `usage.mjs` generator bug (`gruppoDi`).** It's the only **high**, it's a *real* code bug (not prose), it hides ~20M tokens, and the fix is targeted (add a mapping like the one already there for poker/weather-report). Maximum ROI: correctness of the dataset that is the repo's core.
+2. **AR-04 + AR-05 — method version.** A single coordinated intervention (number at the top of `COSTITUZIONE.md`/`CONSTITUTION.md`, `1.9.0`/`1.9.1` alignment, link to `CHANGELOG` from the READMEs) closes two medium findings on which the repo is most exposed precisely with the audience it wants to serve (method adopters).
+3. **AR-06 + AR-07 — wrong numbers in `DATA.md`.** Two factually wrong figures (83% vs 77%; 26.3M vs 27.6M) on the page that declares "what the numbers say." Trivial recalculation from `usage.csv`/`workflow.csv`, high credibility return.
+4. **AR-02 + AR-03 — Italian navigation loop.** Two lines of disambiguation (in the READMEs and at the top of `LEGGIMI.md`) fix an annoyance that hits exactly the Italian audience the repo wants to serve.
+5. **AR-08 (+AR-10) — stale screenshots.** Regenerate the two images with the same dashboard-refresh script, or drop the numbers from the preview. Low effort, closes the visual "live data" vs. static image contradiction.
 
-**Cosa NON toccare.**
-- **La citazione d'apertura a esito negativo (AR-11)** e **"private projects redacted" (AR-13):** sono scelte editoriali coerenti con l'etica dichiarata del repo (onestà, privacy). Non "correggere" trasformandole in marketing.
-- **`workflow.csv` come note grezze dell'autore:** l'autenticità (anche in italiano) è coerente col repo; l'intervento va sulla *dashboard pubblica* (AR-09), non sul CSV sorgente.
-- **I finding BASSA non verificati (AR-B1÷B4)** e i declassati (AR-10÷14): rifiniture da prossimo ritocco, non aprire cantieri dedicati.
-- **La riformulazione originale di AR-12** ("1/187 rispetto a ripartire"): è *sbagliata*, non applicarla — usare l'inciso neutro.
+**What NOT to touch.**
+- **The negative-outcome opening quote (AR-11)** and **"private projects redacted" (AR-13):** editorial choices consistent with the repo's declared ethics (honesty, privacy). Do not "fix" them into marketing.
+- **`workflow.csv` as the author's raw notes:** its authenticity (even in Italian) is consistent with the repo; the intervention belongs on the *public dashboard* (AR-09), not on the source CSV.
+- **The unverified LOW findings (AR-B1÷B4)** and the downgraded ones (AR-10÷14): touch-ups for the next pass, don't open dedicated workstreams.
+- **AR-12's original rewording** ("1/187 compared to restarting"): it is *wrong*, don't apply it — use the neutral aside instead.
 
-## 7. Nota di onestà sul processo (limiti)
+## 7. Honesty note on the process (limits)
 
-- **Nessuna esecuzione del codice.** `usage.mjs` è stato letto e il bug AR-01 tracciato staticamente (funzione `gruppoDi` + filtro riga 179) confrontando con i dati; **non** è stato eseguito il generatore per riprodurre l'output mancante. La conclusione è basata su lettura del codice + corrispondenza dei dati, non su un run reale.
-- **Verifica per campionamento sui numeri.** Le percentuali/somme (AR-06, AR-07) sono state ricalcolate dagli aggregati CSV citati; non è stato rifatto un ricalcolo esaustivo riga-per-riga dell'intero `usage.csv` (~64 sessioni). Un errore di aggregazione a monte nel CSV non sarebbe stato colto.
-- **Cosa NON è stato guardato:** i contenuti dei progetti privati redatti (per scelta di privacy, giustamente inaccessibili); la correttezza *interna* delle app WTB/poker (fuori repo); i file solo-locali gitignorati (es. `versione-italiano/glossario/`); l'inglese di *tutti* i documenti tradotti in `ITALIANO/` uno per uno (AR-B4 è un campione, non una scansione completa); le migration SQL (assenti/non pertinenti a questo repo di documentazione).
-- **BASSA non verificati:** i 4 finding della sezione 4 sono per definizione non ri-verificati alla fonte; trattarli come segnalazioni, non come fatti confermati.
-- **Assenza di baseline temporale.** Le staleness (AR-08, AR-10) sono vere al 2026-07-25; un refresh già in coda potrebbe averle sanate tra la lettura e la tua rilettura — verificare la data dei commit degli screenshot prima di agire.
-- **Confutati zero non significa "tutto grave".** Significa che i fatti reggono ma le severità erano gonfie: il vero lavoro del processo qui è stato il *declassamento calibrato*, non lo scarto. Leggere le severità corrette, non quelle grezze dei red team.
+- **No code execution.** `usage.mjs` was read and the AR-01 bug traced statically (the `gruppoDi` function + the line-179 filter) by cross-checking against the data; the generator was **not** run to reproduce the missing output. The conclusion rests on code reading + data correspondence, not an actual run.
+- **Sampling-based verification on the numbers.** The percentages/sums (AR-06, AR-07) were recalculated from the cited CSV aggregates; an exhaustive row-by-row recalculation of the entire `usage.csv` (~64 sessions) was not redone. An upstream aggregation error in the CSV would not have been caught.
+- **What was NOT looked at:** the contents of the redacted private projects (by privacy choice, rightly inaccessible); the *internal* correctness of the WTB/poker apps (outside this repo); local-only gitignored files (e.g., `versione-italiano/glossario/`); the English of *every* document translated into `ITALIANO/` one by one (AR-B4 is a sample, not a complete scan); SQL migrations (absent/not relevant to this documentation repo).
+- **Unverified LOW findings:** the 4 findings in section 4 are by definition not re-verified at the source; treat them as reports, not confirmed facts.
+- **No temporal baseline.** The staleness findings (AR-08, AR-10) are true as of 2026-07-25; a refresh already queued may have resolved them between this reading and your re-reading — check the screenshots' commit dates before acting.
+- **Zero refuted does not mean "everything is serious."** It means the facts hold up but the severities were inflated: the real work of the process here was *calibrated downgrading*, not discarding. Read the corrected severities, not the red teams' raw ones.
 
 ---
 
-## Esito (aggiunto il 2026-07-25, stessa giornata)
+## Outcome (added on 2026-07-25, same day)
 
-Roberto ha approvato **tutte** le azioni; le correzioni sono nei commit successivi al report.
-Scelte specifiche di Roberto: **AR-02/03** risolte tenendo UNA sola cartella italiana
-(`ITALIANO/`) e rimuovendo `versione-italiano/` dal repo pubblico (resta in locale non
-tracciata, con OSSERVATORIO.md e glossario, e nella cronologia git per gli originali);
-**AR-08/10** risolte rimuovendo gli screenshot stantii — la ricetta esatta per i prossimi è
-in `docs/img/README.md`; **AR-13** lasciata com'è (scelta di privacy dichiarata, come da
-"cosa NON toccare"). **AR-01 verificato dopo il fix**: con la mappatura `Studio (...)` in
-`gruppoDi()` il drilldown di Studio espone i ~20,5M token cloud prima invisibili (e il
-gruppo worktree di weather_report si è fuso nel progetto). **AR-04** riconciliata a 1.9.1.
+Roberto approved **all** the actions; the fixes are in the commits following the report.
+Roberto's specific choices: **AR-02/03** resolved by keeping ONE single Italian folder
+(`ITALIANO/`) and removing `versione-italiano/` from the public repo (it remains locally
+untracked, with OSSERVATORIO.md and the glossary, and in git history for the originals);
+**AR-08/10** resolved by removing the stale screenshots — the exact recipe for the next
+ones is in `docs/img/README.md`; **AR-13** left as is (a declared privacy choice, per
+"what NOT to touch"). **AR-01 verified after the fix**: with the `Studio (...)` mapping in
+`gruppoDi()`, the Studio drilldown now exposes the ~20.5M cloud tokens previously invisible
+(and the weather_report worktree group merged into the project). **AR-04** reconciled to 1.9.1.

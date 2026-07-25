@@ -8,7 +8,7 @@
 real numbers.** One beginner developer, several real apps, **every transcript measured**.
 What it has produced so far:
 
-- **A living working-method constitution** ([v1.9.1](plugins/metodo/CHANGELOG.md),
+- **A living working-method constitution** ([v1.9.2](plugins/metodo/CHANGELOG.md),
   self-amending, with a Spec Kit drop-in) that the AI applies proactively in every project.
 - **A published, redacted dataset of real agent usage** — months of sessions with named
   operations, 29M+ cloud-agent tokens registered, plus the zero-dependency generator to

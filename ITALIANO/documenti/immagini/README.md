@@ -14,11 +14,11 @@ linkano direttamente alle pagine vive.
      cattura la tabella delle sessioni.
 2. Screenshot con `Win+Shift+S`, ritaglia al contenuto (niente cornice del browser).
 3. Salva ESATTAMENTE come `docs/img/DASHBOARD.png` e `docs/img/WTB.png` (stessi nomi: la
-   cronologia git di ogni file dice cosi' quando l'anteprima e' stata aggiornata l'ultima volta).
+   cronologia git di ogni file dice così quando l'anteprima è stata aggiornata l'ultima volta).
 4. Rimetti gli embed delle immagini in `README.md` e `ITALIANO/README.md` subito sopra i
    rispettivi link "apri la pagina viva", e committa immagini + README insieme.
 5. **Regola da tenere**: aggiorna gli screenshot nella stessa sessione che rigenera la
    dashboard, oppure non mostrare numeri nell'immagine di anteprima — un'immagine con numeri
-   vecchi sotto un titolo "dati live" e' peggio di nessuna immagine. Le immagini devono
+   vecchi sotto un titolo "dati live" è peggio di nessuna immagine. Le immagini devono
    restare committate (non gitignorate): GitHub renderizza solo immagini che vivono nel
-   repo; possono contenere solo dati gia' pubblicati e redatti.
+   repo; possono contenere solo dati già pubblicati e redatti.

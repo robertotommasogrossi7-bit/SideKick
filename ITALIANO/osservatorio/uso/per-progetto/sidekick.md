@@ -1,12 +1,12 @@
-# SideKick — token usage (generated)
+# SideKick — utilizzo token (generato)
 
-> Back to the dashboard: [`../DASHBOARD.md`](../DASHBOARD.md). Do not edit by hand.
+> Torna al cruscotto: [`../DASHBOARD.md`](../DASHBOARD.md). Non modificare a mano.
 
-**12 sessions** from 2026-06-03 to 2026-07-25 · **2.1M output** ·
-116k input · 251.0M cache read · 833 messages · **+3.2M cloud-agent tokens** (5 workflows)
+**12 sessioni** dal 2026-06-03 al 2026-07-25 · **2.1M output** ·
+116k input · 251.0M cache letta · 833 messaggi · **+3.2M token di agenti cloud** (5 workflow)
 
-## Sessions (in time order — the title says what was done)
-| Period | Operation | Models | Msg | Input | Output | Cache read |
+## Sessioni (in ordine di tempo — il titolo dice cosa è stato fatto)
+| Periodo | Operazione | Modelli | Msg | Input | Output | Cache letta |
 |---|---|---|---|---|---|---|
 | 2026-06-03 | Set up poker app project using desktop method | opus-4-8 | 5 | 4k | 3k | 122k |
 | 2026-06-03→06-10 | SK/Base_1 | opus-4-8 | 128 | 62k | 677k | 58.4M |
@@ -21,8 +21,8 @@
 | 2026-07-16→07-17 | SK/Base_4 | fable-5 + opus-4-8 | 50 | 92 | 69k | 24.5M |
 | 2026-07-25 | SK/Base_5 | fable-5 | 166 | 310 | 250k | 46.7M |
 
-## Cloud agent workflows on this project
-| Date | Operation | Agents | Agent tokens | Source |
+## Workflow cloud su questo progetto
+| Data | Operazione | Agenti | Token agenti | Fonte |
 |---|---|---|---|---|
 | 2026-07-17 | English translation of the public facade (11 docs incl. CONSTITUTION v1.5) | 1 | 119k | observatory chat 2026-07-17 |
 | 2026-07-17 | Spec Kit double-run study (Opus x2, identical prompt) + claim verification | 2 | 293k | ESPERIMENTI.md table 2 |

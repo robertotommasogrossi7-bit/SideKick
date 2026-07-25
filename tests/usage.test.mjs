@@ -14,7 +14,10 @@ const script = path.join(repo, 'observatory', 'usage.mjs');
 const fixture = path.join(repo, 'tests', 'fixtures', 'projects');
 
 const out = fs.mkdtempSync(path.join(os.tmpdir(), 'sidekick-usage-'));
-execFileSync(process.execPath, [script, '--base', fixture, '--out', out], { encoding: 'utf8' });
+// --out-it keeps the Italian mirror inside the same scratch dir — otherwise the script's
+// default (repo-root/ITALIANO next to --out) would land outside it since --out is a tmpdir.
+const outIT = path.join(out, 'ITALIANO', 'osservatorio', 'uso');
+execFileSync(process.execPath, [script, '--base', fixture, '--out', out, '--out-it', outIT], { encoding: 'utf8' });
 
 const usageCsv = fs.readFileSync(path.join(out, 'usage', 'usage.csv'), 'utf8').trim().split('\n');
 const sessionsCsv = fs.readFileSync(path.join(out, 'usage', 'sessions.csv'), 'utf8').trim().split('\n');
@@ -48,4 +51,22 @@ test('unknown projects are born redacted, with alias and hidden title', () => {
 test('dashboard totals add up (live tokens = input+output of unique messages)', () => {
   assert.match(dashboard, /\| 2026-07 \| 2 \| 110 \| 220 \| 1k \|/); // month,msgs,in,out,cacheR
   assert.match(dashboard, /\*\*220 output tokens\*\*/);
+});
+
+test('Italian mirror: same numbers, translated labels, redaction preserved', () => {
+  const dashboardIT = fs.readFileSync(path.join(outIT, 'DASHBOARD.md'), 'utf8');
+  assert.match(dashboardIT, /\| 2026-07 \| 2 \| 110 \| 220 \| 1k \|/, 'same numbers as the English dashboard');
+  assert.match(dashboardIT, /\*\*220 token di output\*\*/, 'template strings are translated');
+  assert.ok(dashboardIT.includes('## Colpo d\'occhio'), 'section headers are translated');
+  assert.ok(!dashboardIT.includes('progetto-segreto'), 'real folder name must not leak in the Italian mirror either');
+  assert.ok(dashboardIT.includes('(oscurato)'), 'redaction placeholder is translated');
+  assert.ok(dashboardIT.includes('../../../observatory/usage/usage.csv'), 'CSV links point at the English originals');
+});
+
+test('Italian mirror: per-progetto drilldown exists with translated table headers', () => {
+  const dirProgIT = path.join(outIT, 'per-progetto');
+  const files = fs.readdirSync(dirProgIT);
+  assert.ok(files.length > 0, 'at least one per-progetto file was written');
+  const testo = fs.readFileSync(path.join(dirProgIT, files[0]), 'utf8');
+  assert.ok(testo.includes('| Periodo | Operazione | Modelli |'), 'session table header is translated');
 });
