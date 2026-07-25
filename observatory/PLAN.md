@@ -12,9 +12,10 @@
        (2026-07-14), which lets a preset seed the constitution verbatim. Fix in FINDINGS.md,
        `plugins/metodo/spec-kit/README.md`, and the "Kinship" section of both constitutions —
        **showing the dated correction**, not hiding it.
-2. [ ] **Fix the three repo bugs** found by the study: CI runs a hardcoded single test file
-       (new tests would silently never run); CONTRIBUTING claims `cost-meter.mjs` has tests
-       (it doesn't); CLAUDE.md still says `consumo/`.
+2. [x] **Fix the three repo bugs** found by the study — DONE (verified 2026-07-25): CI now
+       runs `node --test tests/*.test.mjs` (a glob, not a hardcoded single file — confirmed in
+       `.github/workflows/ci.yml`); CONTRIBUTING.md now says `cost-meter.mjs` "doesn't have
+       tests yet" (no longer claims it does); root `CLAUDE.md` no longer contains `consumo/`.
 3. [x] **Method CHANGELOG + git tag** — DONE 2026-07-17: `plugins/metodo/CHANGELOG.md`
        (v1.0→v1.5.1, incl. one honestly-recorded unversioned amendment) + tag `metodo-v1.5`.
 4. [~] **Link checker in CI** — DONE 2026-07-17 as a zero-dependency test

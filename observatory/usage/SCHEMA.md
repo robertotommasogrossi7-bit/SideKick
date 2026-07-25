@@ -37,7 +37,7 @@
 | `models` | Models used, ordered by output share (`a + b` or `a +N`). |
 | `messages`, `input_tokens`, `output_tokens`, `cache_read`, `cache_written` | As above, summed over the session. |
 
-## `workflow.csv` — one row per cloud multi-agent workflow (hand-kept)
+## `workflow.csv` — one row per cloud multi-agent workflow (hand-maintained)
 | Column | Meaning |
 |---|---|
 | `date` | Run date (`YYYY-MM-DD`). |

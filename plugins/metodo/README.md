@@ -1,6 +1,6 @@
 # metodo — SideKick's human+AI working method
 
-Turns your **working method** into the AI's **proactive, self-evolving conduct**, in every
+Turns your **working method** into the AI's **proactive, self-evolving behavior**, in every
 project — no commands to remember, no constraints.
 
 ## The core: the constitution (no commands)
@@ -27,4 +27,4 @@ But the constitution already does this **proactively**, so it's secondary.
 
 ## Improve / share
 It's meant for a **community that shares and evolves its own method with the AI**: fork,
-improve your own `COSTITUZIONE.md`, open a PR. The best version "rises".
+improve your own `COSTITUZIONE.md`, open a PR. The best version wins out.

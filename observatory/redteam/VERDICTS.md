@@ -27,7 +27,7 @@
 | "45 confirmed = agents verifying agents, circular" (Claude) | **Answer existed but wasn't written down**: over 30 findings were then fixed and validated by green tests/typecheck | Added "anti-circularity" in STRATEGIES ✅ |
 | Inconsistencies 23 vs 11 projects · 6.1M vs 6.7M (Claude) | **True** (folders vs. grouped; without/with worktree) | Both clarified in DATA ✅ |
 | "progetto-15 redaction is cosmetic, you're telling third parties' bugs" (Claude) | **Partially**: it's a project OF Roberto's (not a third party's), not yet public | ✅ Decided 2026-07-16: keep the generic phrasing ("found and fixed before launch" is a good story); reassess at the app's launch |
-| "Spotify rule = beginner cargo-cult in public" (both, different tones) | Opinion, not fact | ✅ Decided 2026-07-16: rule reworded as "industry leader" (professional companies/apps/software, working and at the top of their respective industry; Spotify only as an example) — and kept out of the public showcase |
+| "Spotify rule = beginner cargo-cult in public" (both, different tones) | Opinion, not fact | ✅ Decided 2026-07-16: rule reworded as "industry leader" (professional, currently-operating companies/apps/software at the top of their respective industries; Spotify only as an example) — and kept out of the public showcase |
 | "Benchmarks are needed, not case studies" (ChatGPT) | True as framing | The repo presents itself as a **case study/exploratory research**, never as a benchmark |
 
 ## Actions for the repositioning (update PLAN §3)

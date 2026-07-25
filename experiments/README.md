@@ -29,5 +29,5 @@ each arm's commit history is in `_git-history.txt`).
 - In the **human-side** test the package even **misaligned**: the human wanted a redesign, the
   package imposed "identical behavior" → the blind arm did **better**.
 - Lesson: the value isn't imposing a process (it can do harm in the wrong context), but
-  offering **non-derivable**, **relevant** knowledge, chosen by the human. That's what F3
-  aims at.
+  offering **non-derivable**, **relevant** knowledge, chosen by the human. That's the
+  direction the next iteration of the package library aims at.

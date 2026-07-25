@@ -6,10 +6,12 @@
   targeted hunts): **21 agents / 1.1M**, still finding the real critical bugs. ⚠️ Honesty:
   **different** projects and scope — it's an indication (N=1+1), not a clean comparison of
   the same audit.
-- **Starting over from scratch is the biggest waste.** In our data the cache reread ~170× the
-  live tokens (it's the normal mechanics of prompt caching in long chats — the actionable point
-  is ours): resuming an interrupted chat/audit **reusing the cache** (the poker audit's resume
-  reused 100% of the completed steps) costs ~1/10; starting over throws it all away.
+- **Starting over from scratch is the biggest waste.** In our data cache reads were ~187× the
+  live tokens (2026-07-25 refresh; was ~170× at the prior count — same mechanic, more data
+  accumulated since) — it's the normal mechanics of prompt caching in long chats (the
+  actionable point is ours): resuming an interrupted chat/audit **reusing the cache** (the
+  poker audit's resume reused 100% of the completed steps) costs ~1/10; starting over throws
+  it all away.
 - **Fable on long jobs doesn't pay off**: the poker audit on Fable stopped because of the
   **5-hour usage window** of the Max plan (the usage limit, not the context window) → rule:
   heavy jobs on Opus, **Fable only for the decisions that matter and recaps** (little and

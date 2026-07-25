@@ -18,12 +18,12 @@
    its row to `usage/workflow.csv` (cloud workflows leave no transcript on the PC).
 2. Compare the active copy of the method (`~/.claude/CLAUDE.md`) with the **master**
    (`plugins/metodo/COSTITUZIONE.md`): if they diverge, decide which one wins and re-sync.
-3. Read the new lines of `~/.claude/ESPERIMENTI.md` and of the active projects' METRICHE.md.
+3. Read the new lines of `~/.claude/ESPERIMENTI.md` and of each active project's METRICHE.md.
 4. Update the **verdicts** below and the **`STRATEGIES.md`** register (costs/gains of every
    method choice — red team, research, audit…), and propose (don't impose) changes to the
    method.
 
-## The data sources (census 2026-07-16)
+## The data sources (table created 2026-07-16, contents refreshed 2026-07-25)
 | Source | What it contains | Status |
 |---|---|---|
 | `observatory/usage/` | tokens per project × model × month **and per operation/session** (chat titles), from ALL local chats (25 chat folders → 13 grouped projects, 64 sessions since May 2026) + cloud workflow register (now with `5h_windows` column) | ✅ auto-generated (workflow.csv by hand) |

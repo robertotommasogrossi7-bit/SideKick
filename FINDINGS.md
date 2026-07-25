@@ -97,7 +97,7 @@ small with/without study, open an issue on this repo.
   constitution "read-once and passive" — wrong; every core Spec Kit command loads it and
   `/analyze` treats conflicts as automatically CRITICAL.)*
 
-## Relation to Spec Kit
+## Relation to GitHub Spec Kit
 
 [GitHub Spec Kit](https://github.com/github/spec-kit) ritualizes spec-first development — which is
 plausibly why it's adopted: it scaffolds the *human's* process, not the model's capability. That
