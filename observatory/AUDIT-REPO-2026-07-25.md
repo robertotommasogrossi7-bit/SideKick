@@ -117,7 +117,7 @@ Roberto's specific choices: **AR-02/03** resolved by keeping ONE single Italian 
 (`ITALIANO/`) and removing `versione-italiano/` from the public repo (it remains locally
 untracked, with OSSERVATORIO.md and the glossary, and in git history for the originals);
 **AR-08/10** resolved by removing the stale screenshots — the exact recipe for the next
-ones is in `docs/img/README.md`; **AR-13** left as is (a declared privacy choice, per
+ones moved to the local-only OSSERVATORIO.md on Roberto's call (no public how-to); **AR-13** left as is (a declared privacy choice, per
 "what NOT to touch"). **AR-01 verified after the fix**: with the `Studio (...)` mapping in
 `gruppoDi()`, the Studio drilldown now exposes the ~20.5M cloud tokens previously invisible
 (and the weather_report worktree group merged into the project). **AR-04** reconciled to 1.9.1.

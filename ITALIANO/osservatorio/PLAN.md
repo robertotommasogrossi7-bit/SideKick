@@ -65,6 +65,17 @@ giorno (sopravvive in locale, non tracciata, con OSSERVATORIO.md e il glossario,
 cronologia git per gli originali).
 
 ## Fatto (storico compresso)
+- **2026-07-25** — Il giorno della maratona: forensics sull'incidente resume WR3 (diagnosi a
+  caldo smentita sul journal; procedura di resume sicura in PROCESSO-FABBRICA) · metodo
+  v1.9→v1.9.2 (sezione Fabbrica, ombra bidirezionale, contratto 5h_windows, glossario
+  spostato in Studio) · propagazione inglese completa (CONSTITUTION sincronizzata,
+  FACTORY-PROCESS.md creato, drop-in 1.9.1 coi principi XII–XVI) · audit del repo da 24
+  agenti (14 confermati, 1 ALTA: bug di usage.mjs corretto — ~20,5M token di Studio erano
+  invisibili) · README ristrutturato (ruolo+risultati in cima) · **traduzione TOTALE di
+  ITALIANO/** (cartelle in italiano, usage.mjs bilingue, dashboard autogenerate in entrambe
+  le lingue) · un solo albero italiano (versione-italiano rimossa) · passata finale 3 red
+  team + 2 revisori Opus, tutti e 7 i finding applicati. 5 workflow, ~3,9M token di agenti,
+  tutti in workflow.csv.
 - **2026-07-16** — Master del metodo nel repo + specchio in sola lettura con regola deny ·
   COSTITUZIONE v1.5 (contratto dati, economia dell'handoff, parentela con Spec Kit) · red team
   round 1 → repository riposizionato come "case study con dati reali + strumenti riusabili"

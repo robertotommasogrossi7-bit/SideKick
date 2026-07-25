@@ -57,6 +57,16 @@ after the repo audit (AR-02/03) Roberto chose to keep **only one** Italian tree:
 untracked, with OSSERVATORIO.md and the glossary, and in git history for the originals).
 
 ## Done (compressed history)
+- **2026-07-25** — The marathon day: WR3 resume-incident forensics (on-the-spot diagnosis
+  refuted on the journal; safe-resume procedure into PROCESSO-FABBRICA) · method v1.9→v1.9.2
+  (Factory section, bidirectional shadow, 5h_windows contract, glossary moved to Studio) ·
+  full EN propagation (CONSTITUTION synced, FACTORY-PROCESS.md created, drop-in 1.9.1 with
+  principles XII–XVI) · 24-agent repo audit (14 confirmed, 1 HIGH usage.mjs bug fixed:
+  ~20.5M Studio tokens were invisible) · README restructured (role+results first) ·
+  **ITALIANO/ total translation** (Italian folder names, bilingual usage.mjs, dashboards
+  auto-generated in both languages) · one Italian tree only (versione-italiano removed) ·
+  final 3-red-team + 2-Opus-reviewer pass, all 7 findings applied. 5 workflows, ~3.9M agent
+  tokens, all in workflow.csv.
 - **2026-07-16** — Method master in repo + read-only mirror with deny rule · COSTITUZIONE
   v1.5 (data contract, handoff economics, Spec Kit kinship) · red team round 1 → repository
   repositioned as "case study with real data + reusable tools" (verdicts in
