@@ -3,7 +3,7 @@
 > Back to the dashboard: [`../DASHBOARD.md`](../DASHBOARD.md). Do not edit by hand.
 
 **12 sessions** from 2026-06-03 to 2026-07-25 · **2.0M output** ·
-116k input · 226.1M cache read · 774 messages · **+1.7M cloud-agent tokens** (4 workflows)
+116k input · 227.2M cache read · 777 messages · **+3.2M cloud-agent tokens** (5 workflows)
 
 ## Sessions (in time order — the title says what was done)
 | Period | Operation | Models | Msg | Input | Output | Cache read |
@@ -19,7 +19,7 @@
 | 2026-07-16 | Sidekick data observatory setup | fable-5 | 112 | 206 | 217k | 35.1M |
 | 2026-07-16→07-17 | Sidekick data observatory setup | fable-5 | 8 | 15 | 6k | 3.5M |
 | 2026-07-16→07-17 | SK/Base_4 | fable-5 + opus-4-8 | 50 | 92 | 69k | 24.5M |
-| 2026-07-25 | SK/Base_5 | fable-5 | 107 | 201 | 159k | 21.9M |
+| 2026-07-25 | SK/Base_5 | fable-5 | 110 | 207 | 167k | 23.0M |
 
 ## Cloud agent workflows on this project
 | Date | Operation | Agents | Agent tokens | Source |
@@ -28,3 +28,4 @@
 | 2026-07-17 | Spec Kit double-run study (Opus x2, identical prompt) + claim verification | 2 | 293k | ESPERIMENTI.md table 2 |
 | 2026-07-25 | Chiarezza+inglese del repo (3 fasi): 3 analisti Sonnet (occhi freschi, madrelingua, coerenza fatti; 26 finding) -> 5 esecutori Sonnet su file disgiunti (CONSTITUTION.md portato a v1.9, FACTORY-PROCESS.md creato, drop-in spec-kit 1.9.x coi principi XII-XVI, facciata, doc observatory) -> 2 revisori Opus a lenti diverse (8 finding, 5 veri: race di versione drop-in nel README tra agenti paralleli, 170x->187x, riga 5h_windows MANCANTE NEL MASTER poi aggiunta, Assistenza non tradotto, dashboard da rigenerare; 1 confutato: il generatore non ha il 170x hardcoded). Integrazione e commit dal regista | 10 | 838k | chat SideKick/Osservatorio_1 + transcript wf_a2acea15-23a |
 | 2026-07-25 | Copia italiana ITALIANO/: 5 traduttori Sonnet su blocchi disgiunti (14 doc, ~880 righe) + 1 verificatore (completezza, fedelta numeri, terminologia, link). 2 sviste incrociate sistemate dal regista: nota iniziale del README rimossa dal verificatore per zelo (contesto perso tra agenti) e link FINDINGS puntato all originale invece che alla copia | 6 | 405k | chat SideKick/Osservatorio_1 + transcript wf_7978359d-81d |
+| 2026-07-25 | Audit totale repo SOLO-REPORT (Roberto): 3 red team economici (recruiter/adottante/visitatore, 17 finding) -> 5 revisori sottosistema (30) -> dedup Haiku (29 unici) -> verifica adversariale ALTA/MEDIA -> sintesi Opus. Esito: 14 confermati (1 ALTA: usage.mjs non aggancia i workflow di Studio nel drilldown, ~20,5M token invisibili; 8 media tra cui doppia cartella italiana senza spiegazione e versioni drop-in incoerenti), 4 bassa non verificati, 0 confutati; 5 severita declassate dalla verifica. Report: observatory/AUDIT-REPO-2026-07-25.md, nessuna correzione applicata | 24 | 1.5M | chat SideKick/Osservatorio_1 + transcript wf_d0a32840-966 |
