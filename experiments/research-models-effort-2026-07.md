@@ -1,4 +1,4 @@
-> Italian original: `../versione-italiano/esperimenti/ricerca-modelli-effort-2026-07.md`.
+> Italian original: in the repo's git history (`versione-italiano/esperimenti/ricerca-modelli-effort-2026-07.md`, up to 2026-07-25).
 
 # Research - models, effort, ultracode (2026-07-03)
 

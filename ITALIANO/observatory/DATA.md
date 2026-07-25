@@ -3,7 +3,7 @@
 > **Cos'è**: la pagina che la chat-osservatorio aggiorna a ogni revisione. In una pagina:
 > quali dati abbiamo, cosa dicono, e quali modifiche al metodo suggeriscono. Stessa onestà di
 > FINDINGS.md: **N piccoli = indizi, non prove.**
-> Originale italiano: `../../versione-italiano/osservatorio/DATI.md` (copia congelata).
+> Originale inglese: `../../observatory/DATA.md` (questo file ne è la traduzione).
 > Censura (scelta di Roberto, 2026-07-16): **solo 3 progetti riservati** compaiono con alias
 > (`progetto-15`, `progetto-16`, `progetto-22` — legenda in `censura.local.json`, solo locale);
 > tutti gli altri usano il nome vero. I progetti nuovi nascono censurati finché non si decide.
@@ -60,12 +60,13 @@ sommati a mano dai METRICHE. La dashboard Anthropic resta l'unica fonte del cost
 - **Ripetizioni stesso-modello**: **zero dati** — la regola in costituzione è ancora fede.
 - **Quali modelli per quali agenti**: la tabella del metodo viene dalla ricerca esterna
   (dossier 2026-07); i nostri dati per ora coprono solo la funzione di "verifica".
-- **Dove vanno i token** (aggiornato 2026-07-25): 18,0M output + **26,3M token di agenti
-  cloud** (le run della Fabbrica ora superano ogni audit: la sola WR3 11,0M ≈ **~3 finestre
-  di utilizzo di 5 ore del piano Max da 100 euro**, osservato tramite i blocchi di credito);
-  la cache letta (~3,5 miliardi) è ~187× i token vivi → la cache calda è ciò che rende
-  sostenibile il piano. Opus ha generato ~83% dell'output storico; Sonnet/Fable sono entrati
-  da luglio con la regola modello-per-passo.
+- **Dove vanno i token** (aggiornato 2026-07-25, riconteggio post-audit): 18,1M output +
+  **29,1M token di agenti cloud** (le run della Fabbrica ora superano ogni audit: la sola WR3
+  11,0M ≈ **~3 finestre di utilizzo di 5 ore del piano Max da 100 euro**, osservato tramite i
+  blocchi di credito); la cache letta (~3,5 miliardi) è ~187× i token vivi → la cache calda è
+  ciò che rende sostenibile il piano. Opus ha generato ~77% dell'output storico (il "~83%"
+  pubblicato prima era sbagliato — finding AR-06 dell'audit, ricalcolato da `usage.csv`);
+  Sonnet/Fable sono entrati da luglio con la regola modello-per-passo.
 - **A/B di processo poker (costruzione completa) vs progetto-15 (incrementale)**:
   oggi **non misurabile** perché il secondo non logga le fasi. O si aggiunge un METRICHE.md
   leggero, o si dichiara chiuso. (La nuova tabella per-sessione aiuta: le fasi di poker hanno

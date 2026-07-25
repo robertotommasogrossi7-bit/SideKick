@@ -15,6 +15,6 @@ Thanks for stopping by. The most useful contributions right now, in order:
    ([`experiments/cost-meter.mjs`](experiments/cost-meter.mjs) doesn't have tests yet —
    adding them would be a great first PR). PRs with a test are easiest to merge.
 
-Issues and PRs are welcome **in English or Italian**. The legacy track (contributing a
-distilled feature-package) is documented in Italian in
-[`versione-italiano/CONTRIBUIRE.md`](versione-italiano/CONTRIBUIRE.md).
+Issues and PRs are welcome **in English or Italian**. An Italian translation of this guide
+lives in [`ITALIANO/CONTRIBUTING.md`](ITALIANO/CONTRIBUTING.md); the legacy Italian docs
+(pre-2026-07-25) are preserved in the repo's git history.

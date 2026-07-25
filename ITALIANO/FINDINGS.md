@@ -97,8 +97,8 @@ un piccolo studio con/senza, apri una issue su questo repo.
   (`experiments/streaming/oracle/`) per verificare se un artefatto di processo aiuta, senza
   rivelare le risposte.
 - **Il log completo e pubblico dell'esperimento** — incluso il primo tentativo contaminato, i
-  risultati negativi e la revisione esterna adversariale (`versione-italiano/_processo/`, log
-  grezzi in italiano).
+  risultati negativi e la revisione esterna adversariale (log grezzi in italiano conservati
+  nella cronologia git del repo, cartella `versione-italiano/_processo/` fino al 2026-07-25).
 - **Una proposta, chiaramente etichettata come non testata:** una costituzione di metodo di lavoro
   proattiva e auto-emendante (`plugins/metodo/`), anche in formato drop-in per Spec Kit
   (`plugins/metodo/spec-kit/constitution.md`, da posizionare in
@@ -124,7 +124,6 @@ doppio run del loro repo.*)
 
 ---
 
-*Parte di [SideKick](https://github.com/robertotommasogrossi7-bit/SideKick). Log dell'esperimento:
-`versione-italiano/_processo/DECISIONI.md` · verdetti della revisione esterna:
-`versione-italiano/_processo/VALUTAZIONE-ESTERNA.md` ·
-le probe stesse: `experiments/`.*
+*Parte di [SideKick](https://github.com/robertotommasogrossi7-bit/SideKick). Log
+dell'esperimento e verdetti della revisione esterna: nella cronologia git del repo
+(`versione-italiano/_processo/`, fino al 2026-07-25) · le probe stesse: `experiments/`.*

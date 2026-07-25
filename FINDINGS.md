@@ -86,7 +86,8 @@ small with/without study, open an issue on this repo.
   and a **leak-proof hidden-test grader** (`experiments/streaming/oracle/`) for testing whether a
   process artifact helps, without revealing answers.
 - **The full, public experiment log** — including the contaminated first attempt, the negative
-  results, and the adversarial external review (`versione-italiano/_processo/`, raw logs in Italian).
+  results, and the adversarial external review (raw Italian logs preserved in the repo's git
+  history, folder `versione-italiano/_processo/` up to 2026-07-25).
 - **A proposal, clearly labeled as untested:** a proactive, self-amending working-method
   constitution (`plugins/metodo/`), also in Spec Kit drop-in format
   (`plugins/metodo/spec-kit/constitution.md`, placed at `.specify/memory/constitution.md`).
@@ -111,7 +112,6 @@ their repo.*)
 
 ---
 
-*Part of [SideKick](https://github.com/robertotommasogrossi7-bit/SideKick). Experiment log:
-`versione-italiano/_processo/DECISIONI.md` · external review verdicts:
-`versione-italiano/_processo/VALUTAZIONE-ESTERNA.md` ·
-the probes themselves: `experiments/`.*
+*Part of [SideKick](https://github.com/robertotommasogrossi7-bit/SideKick). Experiment log
+and external-review verdicts: in the repo's git history (`versione-italiano/_processo/`,
+up to 2026-07-25) · the probes themselves: `experiments/`.*

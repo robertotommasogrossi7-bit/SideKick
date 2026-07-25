@@ -15,6 +15,6 @@ Grazie per essere passato di qui. I contributi più utili ora, in ordine:
    ([`experiments/cost-meter.mjs`](../experiments/cost-meter.mjs) non ha ancora test —
    aggiungerli sarebbe un'ottima prima PR). Le PR con un test sono le più facili da mergiare.
 
-Issue e PR sono benvenute **in inglese o in italiano**. Il percorso legacy (contribuire un
-pacchetto-feature distillato) è documentato in italiano in
-[`versione-italiano/CONTRIBUIRE.md`](../versione-italiano/CONTRIBUIRE.md).
+Issue e PR sono benvenute **in inglese o in italiano**. Questa guida in inglese è
+[`CONTRIBUTING.md`](../CONTRIBUTING.md); i doc italiani storici (pre-2026-07-25) sono
+conservati nella cronologia git del repo.

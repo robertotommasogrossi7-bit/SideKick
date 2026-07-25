@@ -7,6 +7,9 @@
 *"I tried to measure whether captured process helps AI-assisted dev — and couldn't build a
 fair test (yet)."* — [the writeup this repo grew out of](FINDINGS.md)
 
+Meanwhile, what *did* work is measured too: on both projects where we ran a heavy
+multi-agent audit it found real critical bugs before the users did (N=2, details below).
+
 One beginner developer, several real apps, **every transcript measured**. This repo collects
 real experiments, real token data, and honest negative results about *how* to work with an AI
 coding agent — plus the small tools used to measure it all. Claude Code is the current
@@ -26,7 +29,7 @@ return?) apply to AI-assisted software engineering generally.
 | **Cost meter for A/B experiment arms** | [`experiments/cost-meter.mjs`](experiments/cost-meter.mjs) | Measures turns/tokens of a with/without experiment from its transcripts. |
 | **Leak-proof hidden-test grader** | [`experiments/streaming/oracle/`](experiments/streaming/oracle/) | Tests whether a process artifact helps, without revealing the answers to the model. |
 | **The writeup** | [`FINDINGS.md`](FINDINGS.md) | *"I tried to measure whether captured process helps AI-assisted dev — and couldn't build a fair test (yet)."* Includes the contaminated first attempt and the external adversarial review that tore up v1. |
-| **A Spec Kit constitution drop-in** | [`plugins/metodo/spec-kit/constitution.md`](plugins/metodo/spec-kit/constitution.md) | A self-amending working-method constitution in Spec Kit format (v1.9.0) — the depersonalized, reusable variant of our method. |
+| **A Spec Kit constitution drop-in** | [`plugins/metodo/spec-kit/constitution.md`](plugins/metodo/spec-kit/constitution.md) | A self-amending working-method constitution in Spec Kit format (v1.9.1 — [amendment history](plugins/metodo/CHANGELOG.md)) — the depersonalized, reusable variant of our method. |
 
 Quickstart for the dataset generator (no dependencies, Node 18+):
 
@@ -40,10 +43,11 @@ The committed [dashboard](observatory/usage/DASHBOARD.md) is exactly what the ou
 
 ## The lab (live data)
 
-[![The usage dashboard: totals at a glance and the most expensive operations](docs/img/DASHBOARD.png)](observatory/usage/DASHBOARD.md)
+**[Open the live dashboard →](observatory/usage/DASHBOARD.md)** — totals at a glance and the
+most expensive operations, regenerated from the real transcripts at every observatory review.
 
-[`observatory/`](observatory/) is the observatory (English; Italian originals in
-[`versione-italiano/`](versione-italiano/LEGGIMI.md)):
+[`observatory/`](observatory/) is the observatory (English; Italian translation in
+[`ITALIANO/`](ITALIANO/README.md)):
 
 - [`usage/DASHBOARD.md`](observatory/usage/DASHBOARD.md) — the cost dashboard: totals, the
   most expensive operations, per-project drilldowns (one file per project).
@@ -59,16 +63,16 @@ The committed [dashboard](observatory/usage/DASHBOARD.md) is exactly what the ou
 
 Every project gets its own drilldown — here is a real app's build history, session by
 session, named operation by named operation:
-
-[![One project's sessions: period, operation title, models, tokens](docs/img/WTB.png)](observatory/usage/per-project/poker-who-s-the-boss.md)
+**[a real app's per-session table →](observatory/usage/per-project/poker-who-s-the-boss.md)**
 
 A few sample findings (details and caveats inside): a heavy multi-agent audit found real
 critical bugs on both projects it ran on, at a known cost (N=2); in a single cross-model
 shadow check (N=2) small and large models tied on code verification — an indication we keep
 testing, not a trend; cache reads were ~187× the live tokens across all chats (2026-07-25
-count; ~170× at the prior one) — our operating
-rule ("resume interrupted work instead of restarting") comes from that mechanic plus one
-measured resume that reused 100% of completed steps, not from an A/B test.
+count; ~170× at the prior one — a gauge of how much long chats re-read their context at every
+message) — our operating rule ("resume interrupted work instead of restarting") comes from
+that mechanic plus one measured resume that reused 100% of completed steps, not from an A/B
+test.
 
 ## The method (appendix — operating hypotheses, not proven rules)
 
@@ -93,15 +97,16 @@ drop-in.
 
 1. Sample sizes stated next to every claim; small N is called an *indication*, never proof.
 2. Negative results and dropped strategies stay published (`FINDINGS.md`, the raw Italian
-   logs in `versione-italiano/_processo/`, the "dropped" section of `STRATEGIES.md`).
+   logs preserved in this repo's git history, the "dropped" section of `STRATEGIES.md`).
 3. Anything public goes through an external AI red team first — and the reviewers' claims get
    verified at the source too (they're sometimes wrong).
 
 ## Italiano
 
-Tutta la documentazione di lavoro in italiano è in
-[`versione-italiano/`](versione-italiano/LEGGIMI.md) (guida, libreria dei pacchetti,
-motore di distillazione, compiti dell'osservatorio).
+La versione italiana della documentazione principale è in [`ITALIANO/`](ITALIANO/README.md):
+una copia esatta ma tradotta del repository, tenuta in sync a ogni revisione
+dell'osservatorio. (Gli originali italiani storici, pre-2026-07-25, restano nella
+cronologia git.)
 
 ## License
 

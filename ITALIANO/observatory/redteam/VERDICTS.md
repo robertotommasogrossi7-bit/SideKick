@@ -5,8 +5,8 @@
 > originalità 9/10, comunicazione 5,5/10). Regola applicata: **ogni affermazione dei
 > revisori è stata verificata prima di agire**. I testi completi sono nella chat-osservatorio
 > del 2026-07-16. Il kit operativo del red team (prompt cinico + dossier autocontenuto da
-> incollare in chat AI nuove) è in italiano in `../../../versione-italiano/osservatorio/redteam/`
-> (PROMPT.md, DOSSIER.md).
+> incollare in chat AI nuove) è in italiano nella cronologia git del repo
+> (`versione-italiano/osservatorio/redteam/`, PROMPT.md e DOSSIER.md, fino al 2026-07-25).
 
 ## Dove i due verdetti CONVERGONO (→ riga per il README)
 1. **Il valore per uno sconosciuto è**: FINDINGS.md (fallimento raccontato onestamente) + gli

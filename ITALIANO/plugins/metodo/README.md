@@ -1,7 +1,11 @@
 # metodo — il metodo di lavoro human+AI di SideKick
 
-Rende il tuo **metodo di lavoro** la condotta **proattiva e auto-evolvente** dell'AI, in ogni
-progetto — senza comandi da ricordare, senza costrizioni.
+Trasforma il tuo **metodo di lavoro** in istruzioni permanenti su cui l'AI agisce da sola —
+registra le idee al volo, propone le spec prima del codice delicato ed emenda la propria
+costituzione (col tuo ok) — in ogni progetto, senza comandi da ricordare. Versione: vedi il
+[CHANGELOG](CHANGELOG.md). **Vuoi adottarlo per te?** Parti dal [drop-in Spec Kit
+spersonalizzato](../../../plugins/metodo/spec-kit/constitution.md) — i file qui sotto
+nominano l'autore e i file di questo repo.
 
 ## Il cuore: la costituzione (nessun comando)
 [`COSTITUZIONE.md`](../../../plugins/metodo/COSTITUZIONE.md) (IT) — inglese:

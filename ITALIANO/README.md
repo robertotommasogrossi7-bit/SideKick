@@ -5,9 +5,15 @@
 
 [![CI](https://github.com/robertotommasogrossi7-bit/SideKick/actions/workflows/ci.yml/badge.svg)](https://github.com/robertotommasogrossi7-bit/SideKick/actions/workflows/ci.yml)
 
+🇬🇧 *Read in English: [README.md](../README.md)*
+
 *"Ho provato a misurare se un processo catturato aiuta lo sviluppo assistito da AI — e non
 sono riuscito a costruire un test equo (ancora)."* — [l'articolo da cui è nato questo
 repo](FINDINGS.md)
+
+Nel frattempo, anche ciò che *ha* funzionato è misurato: su entrambi i progetti dove abbiamo
+lanciato un audit multi-agente pesante, l'audit ha trovato bug critici veri prima degli
+utenti (N=2, dettagli sotto).
 
 Uno sviluppatore alle prime armi, diverse app reali, **ogni transcript misurato**. Questo
 repo raccoglie esperimenti reali, dati reali sui token e risultati negativi onesti su
@@ -29,7 +35,7 @@ da AI in generale.
 | **Contametro dei costi per i bracci di esperimenti A/B** | [`experiments/cost-meter.mjs`](../experiments/cost-meter.mjs) | Misura i turni/token di un esperimento con/senza dai suoi transcript. |
 | **Correttore a prova di fuga per test nascosti** | [`experiments/streaming/oracle/`](../experiments/streaming/oracle/) | Verifica se un artefatto di processo aiuta, senza rivelare le risposte al modello. |
 | **L'articolo** | [`FINDINGS.md`](../FINDINGS.md) | *"Ho provato a misurare se un processo catturato aiuta lo sviluppo assistito da AI — e non sono riuscito a costruire un test equo (ancora)."* Include il primo tentativo contaminato e la revisione avversariale esterna che ha smontato la v1. |
-| **Un drop-in di constitution per Spec Kit** | [`plugins/metodo/spec-kit/constitution.md`](../plugins/metodo/spec-kit/constitution.md) | Una constitution di metodo di lavoro auto-emendante in formato Spec Kit (v1.9.0) — la variante spersonalizzata e riusabile del nostro metodo. |
+| **Un drop-in di constitution per Spec Kit** | [`plugins/metodo/spec-kit/constitution.md`](../plugins/metodo/spec-kit/constitution.md) | Una constitution di metodo di lavoro auto-emendante in formato Spec Kit (v1.9.1 — [storia degli emendamenti](../plugins/metodo/CHANGELOG.md)) — la variante spersonalizzata e riusabile del nostro metodo. |
 
 Avvio rapido per il generatore del dataset (nessuna dipendenza, Node 18+):
 
@@ -44,16 +50,17 @@ in output.
 
 ## Il laboratorio (dati live)
 
-[![La dashboard di utilizzo: totali a colpo d'occhio e le operazioni più costose](../docs/img/DASHBOARD.png)](../observatory/usage/DASHBOARD.md)
+**[Apri la dashboard live →](../observatory/usage/DASHBOARD.md)** — totali a colpo d'occhio e
+le operazioni più costose, rigenerata dai transcript reali a ogni revisione dell'osservatorio.
 
-[`observatory/`](../observatory/) è l'osservatorio (inglese; originali italiani in
-[`versione-italiano/`](../versione-italiano/LEGGIMI.md)):
+[`observatory/`](../observatory/) è l'osservatorio (inglese; traduzione italiana in
+questa cartella):
 
 - [`usage/DASHBOARD.md`](../observatory/usage/DASHBOARD.md) — la dashboard dei costi:
   totali, le operazioni più costose, approfondimenti per progetto (un file per progetto).
 - [`STRATEGIES.md`](observatory/STRATEGIES.md) — il registro costi/benefici di ogni
   strategia di metodo di lavoro sotto verifica: audit multi-agente, verifiche-ombra
-  cross-model, red team, **incluse le strategie che sono fallite e sono state abbandonate**.
+  cross-modello, red team, **incluse le strategie che sono fallite e sono state abbandonate**.
 - [`redteam/VERDICTS.md`](observatory/redteam/VERDICTS.md) — prima che questo repo
   diventasse pubblico nella sua forma attuale, due revisori AI indipendenti hanno fatto le
   pulci al dossier; i verdetti, la verifica affermazione per affermazione (una "correzione"
@@ -64,14 +71,15 @@ in output.
 Ogni progetto ha il suo approfondimento — ecco la cronologia di build di un'app reale,
 sessione per sessione, operazione nominata per operazione nominata:
 
-[![La sessioni di un progetto: periodo, titolo dell'operazione, modelli, token](../docs/img/WTB.png)](../observatory/usage/per-project/poker-who-s-the-boss.md)
+**[la tabella per-sessione di un'app reale →](../observatory/usage/per-project/poker-who-s-the-boss.md)**
 
 Alcuni risultati campione (dettagli e avvertenze all'interno): un audit multi-agente pesante
 ha trovato bug critici reali su entrambi i progetti su cui è girato, a un costo noto (N=2);
-in un'unica verifica-ombra cross-model (N=2) modelli piccoli e grandi hanno pareggiato sulla
+in un'unica verifica-ombra cross-modello (N=2) modelli piccoli e grandi hanno pareggiato sulla
 verifica del codice — un'indicazione che continuiamo a testare, non una tendenza; le letture
 di cache erano ~187× i token vivi su tutte le chat (conteggio del 2026-07-25; ~170× nel
-conteggio precedente) — la nostra regola operativa ("riprendi il lavoro interrotto invece di
+conteggio precedente — un indicatore di quanto le chat lunghe rileggono il contesto a ogni
+messaggio) — la nostra regola operativa ("riprendi il lavoro interrotto invece di
 ripartire da zero") viene da questa meccanica più una ripresa misurata che ha riusato il
 100% dei passi completati, non da un test A/B.
 
@@ -100,16 +108,17 @@ drop-in di constitution per Spec Kit.
 1. Le dimensioni del campione sono dichiarate accanto a ogni affermazione; un N piccolo è
    chiamato *indicazione*, mai prova.
 2. I risultati negativi e le strategie abbandonate restano pubblicati (`FINDINGS.md`, i log
-   grezzi in italiano in `versione-italiano/_processo/`, la sezione "abbandonate" di
+   grezzi in italiano conservati nella cronologia git del repo, la sezione "abbandonate" di
    `STRATEGIES.md`).
 3. Qualunque cosa pubblica passa prima da un red team AI esterno — e le affermazioni dei
    revisori vengono verificate anche alla fonte (a volte sbagliano).
 
 ## Italiano
 
-Tutta la documentazione di lavoro in italiano è in
-[`versione-italiano/`](../versione-italiano/LEGGIMI.md) (guida, libreria dei pacchetti,
-motore di distillazione, compiti dell'osservatorio).
+La versione italiana della documentazione principale è questa cartella (`ITALIANO/`):
+una copia esatta ma tradotta del repository, tenuta in sync a ogni revisione
+dell'osservatorio. (Gli originali italiani storici, pre-2026-07-25, restano nella
+cronologia git.)
 
 ## Licenza
 

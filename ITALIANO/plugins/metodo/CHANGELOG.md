@@ -13,12 +13,19 @@
 - **Propagazione completata** (era in sospeso dalla v1.6): `CONSTITUTION.md` (EN) sincronizzato
   alla v1.9 sezione per sezione — corretto anche il suo banner di governance: dichiarava
   erroneamente di essere il master; **creato `FACTORY-PROCESS.md`** (versione EN di
-  PROCESSO-FABBRICA.md); drop-in spec-kit riallineato a **1.9.0** (nuovi principi
-  depersonalizzati XII–XVI).
+  PROCESSO-FABBRICA.md); drop-in spec-kit riallineato a **1.9.1** (nuovi principi
+  depersonalizzati XII–XVI, più la riga finestre-di-utilizzo del contratto dati nel
+  Principio XI).
 - Passata di inglese/chiarezza sui documenti pubblici (analisti fresh-eyes + madrelingua
   inglese + coerenza fattuale, poi 2 revisori Opus): cifra obsoleta ~170× della cache
   aggiornata a ~187× con note datate, corsa alle versioni del drop-in nel README sistemata,
   calchi ripuliti (dettagli nella cronologia git).
+- **Correzioni post-audit, stesso giorno** (audit completo del repo
+  `observatory/AUDIT-REPO-2026-07-25.md`, approvazione di Roberto): header di versione
+  aggiunto a COSTITUZIONE/CONSTITUTION e CHANGELOG linkato dai README (AR-05); versione del
+  drop-in riconciliata a **1.9.1** ovunque (AR-04); `versione-italiano/` rimossa dall'albero
+  pubblico — `ITALIANO/` è l'unico specchio italiano, originali conservati nella cronologia
+  git (decisione di Roberto su AR-02/03).
 
 ## v1.9 — 2026-07-25 (master + specchio risincronizzati)
 - Nuova sezione **"La Fabbrica"** (generazione di massa con controllo qualità): playbook come

@@ -48,9 +48,11 @@
 **Decision (Roberto, 2026-07-17)**: `versione-italiano/` stays **frozen** (originals + live
 LEGGIMI). A live mirror would cost a double translation on every change for a near-zero
 audience; the generated-dashboard-in-Italian option remains available on request.
-**Update (Roberto, 2026-07-25)**: partially reversed — an exact translated copy of the main
-English docs now lives in **`ITALIANO/`** (14 files; kept in sync at each observatory review);
-`versione-italiano/` stays frozen as the historical originals.
+**Update (Roberto, 2026-07-25)**: reversed — an exact translated copy of the main English
+docs now lives in **`ITALIANO/`** (14 files; kept in sync at each observatory review), and
+after the repo audit (AR-02/03) Roberto chose to keep **only one** Italian tree:
+`versione-italiano/` was removed from the public repo the same day (it survives locally,
+untracked, with OSSERVATORIO.md and the glossary, and in git history for the originals).
 
 ## Done (compressed history)
 - **2026-07-16** — Method master in repo + read-only mirror with deny rule · COSTITUZIONE

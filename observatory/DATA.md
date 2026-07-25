@@ -3,7 +3,7 @@
 > **What it is**: the page the observatory chat updates at every review. On one page: what data
 > we have, what it says, and what changes to the method it suggests. Same honesty as
 > FINDINGS.md: **small N = clues, not proof.**
-> Italian original: `../versione-italiano/osservatorio/DATI.md` (frozen copy).
+> Italian translation: `../ITALIANO/observatory/DATA.md`.
 > Redaction (Roberto's choice, 2026-07-16): **only 3 reserved projects** appear with an alias
 > (`progetto-15`, `progetto-16`, `progetto-22` — legend in `censura.local.json`, local only);
 > all others use the real name. New projects start redacted until decided otherwise.
@@ -60,11 +60,13 @@ money.
 - **Same-model repetitions**: **zero data** — the rule in the constitution is still faith.
 - **Which models for which agents**: the method's table comes from external research
   (2026-07 dossier); our data so far only covers the "verification" function.
-- **Where the tokens go** (refreshed 2026-07-25): 18.0M output + **26.3M cloud-agent tokens**
-  (the Factory runs now outweigh every audit: WR3 alone 11.0M ≈ **~3 five-hour windows of the
-  Max 100-euro plan**, observed via credit blocks); the read cache (~3.5 billion) is ~187× the
-  live tokens → the warm cache is what makes the plan sustainable. Opus generated ~83% of
-  historical output; Sonnet/Fable came in from July with the model-per-step rule.
+- **Where the tokens go** (refreshed 2026-07-25, post-audit recount): 18.1M output + **29.1M
+  cloud-agent tokens** (the Factory runs now outweigh every audit: WR3 alone 11.0M ≈ **~3
+  five-hour windows of the Max 100-euro plan**, observed via credit blocks); the read cache
+  (~3.5 billion) is ~187× the live tokens → the warm cache is what makes the plan sustainable.
+  Opus generated ~77% of historical output (the "~83%" published earlier was wrong — audit
+  finding AR-06, recomputed from `usage.csv`); Sonnet/Fable came in from July with the
+  model-per-step rule.
 - **Poker's process A/B (full build) vs progetto-15 (incremental)**:
   today **not measurable** because the second doesn't log phases. Either add a lightweight
   METRICHE.md, or declare it closed. (The new per-session table helps: poker's phases already

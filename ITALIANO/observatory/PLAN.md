@@ -55,9 +55,12 @@
 LEGGIMI vivo). Uno specchio vivo costerebbe una doppia traduzione a ogni modifica per un
 pubblico quasi nullo; l'opzione del cruscotto generato in italiano resta disponibile a
 richiesta.
-**Aggiornamento (Roberto, 2026-07-25)**: parzialmente rovesciata — una copia esatta tradotta
-dei principali doc inglesi vive ora in **`ITALIANO/`** (14 file; tenuta in sync a ogni
-revisione dell'osservatorio); `versione-italiano/` resta congelata come originali storici.
+**Aggiornamento (Roberto, 2026-07-25)**: rovesciata — una copia esatta tradotta dei
+principali doc inglesi vive ora in **`ITALIANO/`** (14 file; tenuta in sync a ogni revisione
+dell'osservatorio), e dopo l'audit del repo (AR-02/03) Roberto ha scelto di tenere **una
+sola** cartella italiana: `versione-italiano/` è stata rimossa dal repo pubblico lo stesso
+giorno (sopravvive in locale, non tracciata, con OSSERVATORIO.md e il glossario, e nella
+cronologia git per gli originali).
 
 ## Fatto (storico compresso)
 - **2026-07-16** — Master del metodo nel repo + specchio in sola lettura con regola deny ·

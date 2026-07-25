@@ -5,7 +5,8 @@
 > originality 9/10, communication 5.5/10). Rule applied: **every reviewer claim was
 > verified before acting on it**. The full texts are in the 2026-07-16 observatory chat.
 > The operational red-team kit (cynical prompt + self-contained dossier to paste into fresh AI
-> chats) is in Italian at `../../versione-italiano/osservatorio/redteam/` (PROMPT.md, DOSSIER.md).
+> chats) is in Italian in the repo's git history (`versione-italiano/osservatorio/redteam/`,
+> PROMPT.md and DOSSIER.md, up to 2026-07-25).
 
 ## Where the two verdicts CONVERGE (→ line for the README)
 1. **The value for a stranger is**: FINDINGS.md (honestly told failure) + the **reusable
