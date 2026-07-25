@@ -54,7 +54,8 @@ fs.writeFileSync(fileCensura, JSON.stringify(censura, null, 2));
 const gruppoDi = alias => {
   if (/^experiment /.test(alias)) return 'experiments (method tests)';
   if (alias === 'poker (worktree)') return "poker (Who's the Boss)";
-  if (alias === 'weather-report (worktree)') return 'weather-report';
+  if (/^weather.report(\s|$)/.test(alias)) return 'weather_report'; // worktree + old hyphen alias
+  if (/^Studio(\s*\(|$)/.test(alias)) return 'Studio'; // "Studio (ponte)", "Studio (StudioQuest)" — AR-01
   return alias;
 };
 
@@ -183,7 +184,7 @@ for (const [nome, g] of ordGruppi) {
 > Back to the dashboard: [\`../DASHBOARD.md\`](../DASHBOARD.md). Do not edit by hand.
 
 **${g.sess.length} sessions** from ${g.primo} to ${g.ultimo} · **${fmt(g.output)} output** ·
-${fmt(g.input)} input · ${fmt(g.cacheR)} cache read · ${fmt(g.msg)} messages${wf.length ? ` · **+${fmt(wf.reduce((a, w) => a + w.token, 0))} cloud-agent tokens** (${wf.length} workflows)` : ''}
+${fmt(g.input)} input · ${fmt(g.cacheR)} cache read · ${fmt(g.msg)} messages${wf.length ? ` · **+${fmt(wf.reduce((a, w) => a + w.token, 0))} cloud-agent tokens** (${wf.length} workflow${wf.length === 1 ? '' : 's'})` : ''}
 
 ## Sessions (in time order — the title says what was done)
 | Period | Operation | Models | Msg | Input | Output | Cache read |

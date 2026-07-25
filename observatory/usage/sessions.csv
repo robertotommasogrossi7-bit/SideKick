@@ -55,11 +55,11 @@ group,project,session,start,end,operation,models,messages,input_tokens,output_to
 "SideKick","SideKick",198f4e22,2026-07-16,2026-07-16,"Sidekick data observatory setup","fable-5",112,206,217222,35114444,1418597
 "SideKick","SideKick",45b6f48e,2026-07-16,2026-07-17,"Sidekick data observatory setup","fable-5",8,15,5589,3487544,464455
 "SideKick","SideKick",9df7891a,2026-07-16,2026-07-17,"SK/Base_4","fable-5 + opus-4-8",50,92,68950,24480491,1386414
-"SideKick","SideKick",f7ae7118,2026-07-25,2026-07-25,"SK/Base_5","fable-5",110,207,167036,22965507,922593
+"SideKick","SideKick",f7ae7118,2026-07-25,2026-07-25,"SK/Base_5","fable-5",143,267,215187,36211362,991719
 "Studio","Studio",251677f6,2026-07-20,2026-07-22,"STUDIO/Base_1","fable-5 + opus-4-8",520,1506,640164,292668463,11074941
 "Studio","Studio",392f89b7,2026-07-20,2026-07-20,"Consumo crediti Claude anomalo","sonnet-5",3,6,1497,164700,26644
 "Studio","Studio",dc1fb71c,2026-07-20,2026-07-20,"STUDIO/Base_1","fable-5",1,1,4443,32023,304810
 "Studio","Studio",26917ab3,2026-07-22,2026-07-24,"STUDIO/Base_2","fable-5 + opus-4-8",229,1245,227394,60954698,577594
 "Text-Adventure-Engine","Text-Adventure-Engine",7654955c,2026-05-28,2026-05-29,"Text_game/Base_1","opus-4-7",174,370,466353,54311569,1235975
+"weather_report","weather_report (worktree)",f24c43ea,2026-05-07,2026-05-07,"Weather_report/Prova","opus-4-7 + sonnet-4-6",80,137,42170,6811669,151725
 "weather_report","weather_report",e3031591,2026-07-24,2026-07-25,"Studio/Fabbrica_Python_1","fable-5",61,114,156621,14433851,840736
-"weather_report (worktree)","weather_report (worktree)",f24c43ea,2026-05-07,2026-05-07,"Weather_report/Prova","opus-4-7 + sonnet-4-6",80,137,42170,6811669,151725

@@ -10,20 +10,20 @@
 
 ## At a glance
 - **18.1M output tokens** (+ **29.1M** from cloud agents) across **64 sessions**
-  in **13 projects**, from 2026-05 to today. 10k messages in total.
-- The **cache** re-read 3525.6M tokens (≈187× the live tokens): resuming a chat
+  in **12 projects**, from 2026-05 to today. 11k messages in total.
+- The **cache** re-read 3538.8M tokens (≈187× the live tokens): resuming a chat
   on a warm cache is what keeps the plan sustainable — restarting from scratch throws it away.
 
 ## The most expensive things
 | # | What | Type | When | Tokens |
 |---|---|---|---|---|
-| 1 | Fabbrica domande Python WR3: 555 domande/16 lotti (estrazione Haiku, 16 gen Sonnet, dedup, QC totale Opus 2 passate + ombra 8%, fix, verifica finale). INCIDENTE resume (root cause verificata dall'osservatorio 2026-07-25 sul journal): al 3o rilancio la cache non ha agganciato NESSUNA chiave (0/46) con 30/32 prompt QC identici byte-per-byte e journal COMPLETO — la diagnosi a caldo 'journal senza result' era sbagliata (chiavi di cache non content-addressed nel runtime) -> rifatti 46 agenti (30 Opus + 16 Sonnet), spreco ~0,59M vivi + ~39M cache; fermato a mano; chiusura con 3 agenti diretti. Token vivi da transcript: 1,17M+0,88M+0,65M; cache letta ~225M (voce dominante). Durata allungata dai 2 buchi-crediti (~2h e ~3h a orologio attivo), non il costo — Studio (StudioQuest) | cloud agents | 2026-07-25 | 11.0M |
-| 2 | Fabbrica v2 MASSIMA: 447 elementi nuovi + retrofit 167 + runner SQL + QC totale 4x Opus + niente-per-scontato (25 buchi -> 22 fondamenta). NOTA OSSERVATORIO: run interrotto da fine-sessione con ~2h di buco A OROLOGIO ATTIVO (durata gonfiata); ripresa dalla cache: 30/34 agenti riusati gratis, token reali solo per i 4 mancanti — Studio (ponte) | cloud agents | 2026-07-20 | 5.8M |
+| 1 | Python question factory WR3: 555 questions/16 batches (Haiku extraction, 16 Sonnet generators, dedup, full QC 2 Opus passes + 8% shadow, fixes, final verification). RESUME INCIDENT (root cause verified by the observatory 2026-07-25 on the journal): at the 3rd relaunch the cache matched NO keys (0/46) despite 30/32 QC prompts byte-identical and a COMPLETE journal - the on-the-spot diagnosis 'journal missing results' was wrong (cache keys not content-addressed in the runtime) -> 46 agents redone (30 Opus + 16 Sonnet), waste ~0.59M live + ~39M cache; stopped by hand; closed with 3 direct agents. Live tokens from transcripts: 1.17M+0.88M+0.65M; cache read ~225M (dominant item). Duration stretched by the 2 credit gaps (~2h and ~3h on a running clock), not the cost — Studio | cloud agents | 2026-07-25 | 11.0M |
+| 2 | Factory v2 MAXIMUM: 447 new elements + retrofit of 167 + SQL runner + full QC 4x Opus + take-nothing-for-granted (25 gaps -> 22 fundamentals). OBSERVATORY NOTE: run interrupted by session end with a ~2h gap ON A RUNNING CLOCK (duration inflated); resumed from cache: 30/34 agents reused free, real tokens only for the 4 missing — Studio | cloud agents | 2026-07-20 | 5.8M |
 | 3 | Multi-agent HIGH audit on R6+R7.1 (45 findings confirmed, 11 refuted) — poker (Who's the Boss) | cloud agents | 2026-07-03 | 2.6M |
-| 4 | Costruzione app unica sq/ sui 17 mockup (9 agenti: fondamenta+4 moduli+integrazione+2 QC Opus; +2 bug trovati dal collaudo E2E dell'orchestratore) — Studio (StudioQuest) | cloud agents | 2026-07-21 | 1.8M |
+| 4 | Single sq/ app built from the 17 mockups (9 agents: foundations + 4 modules + integration + 2 Opus QC; +2 bugs found by the orchestrator's E2E test) — Studio | cloud agents | 2026-07-21 | 1.8M |
 | 5 | WTB/Base_4 — poker (Who's the Boss) | chat | 2026-06-04 | 1.6M |
-| 6 | Ponte F1: auto-import in 2 app + 167 domande da weather_report (12 lotti, QC 3x Opus, ombra Haiku) — Studio (ponte) | cloud agents | 2026-07-20 | 1.5M |
-| 7 | Audit totale repo SOLO-REPORT (Roberto): 3 red team economici (recruiter/adottante/visitatore, 17 finding) -> 5 revisori sottosistema (30) -> dedup Haiku (29 unici) -> verifica adversariale ALTA/MEDIA -> sintesi Opus. Esito: 14 confermati (1 ALTA: usage.mjs non aggancia i workflow di Studio nel drilldown, ~20,5M token invisibili; 8 media tra cui doppia cartella italiana senza spiegazione e versioni drop-in incoerenti), 4 bassa non verificati, 0 confutati; 5 severita declassate dalla verifica. Report: observatory/AUDIT-REPO-2026-07-25.md, nessuna correzione applicata — SideKick | cloud agents | 2026-07-25 | 1.5M |
+| 6 | Bridge F1: auto-import into 2 apps + 167 questions generated from weather_report (12 batches, QC 3x Opus, Haiku shadow) — Studio | cloud agents | 2026-07-20 | 1.5M |
+| 7 | Full repo audit REPORT-ONLY (Roberto): 3 cheap red-team personas (recruiter/adopter/visitor, 17 findings) -> 5 subsystem reviewers (30) -> Haiku dedup (29 unique) -> adversarial verification on HIGH/MEDIUM -> Opus synthesis. Outcome: 14 confirmed (1 HIGH: usage.mjs misses Studio's workflows in the drilldown, ~20.5M tokens invisible; 8 medium incl. the unexplained double Italian folder and inconsistent drop-in versions), 4 low unverified, 0 refuted; 5 severities downgraded by verification. Report: observatory/AUDIT-REPO-2026-07-25.md, no fix applied — SideKick | cloud agents | 2026-07-25 | 1.5M |
 | 8 | (redacted) — progetto-15 | chat | 2026-05-29 | 1.5M |
 
 ## What we learned about cost (and actually reduced)
@@ -57,7 +57,7 @@
 |---|---|---|---|---|---|
 | [poker (Who's the Boss)](per-project/poker-who-s-the-boss.md) | 2026-05-14 → 2026-07-22 | 23 | 7.6M | 333k | 1685.2M |
 | [progetto-15](per-project/progetto-15.md) | 2026-05-29 → 2026-07-17 | 5 | 3.6M | 233k | 921.0M |
-| [SideKick](per-project/sidekick.md) | 2026-06-03 → 2026-07-25 | 12 | 2.0M | 116k | 227.2M |
+| [SideKick](per-project/sidekick.md) | 2026-06-03 → 2026-07-25 | 12 | 2.1M | 116k | 240.4M |
 | [Libri-Organizzazione](per-project/libri-organizzazione.md) | 2026-05-07 → 2026-05-31 | 2 | 1.3M | 11k | 121.4M |
 | [Programmi (root)](per-project/programmi-root.md) | 2026-05-31 → 2026-06-27 | 3 | 997k | 45k | 96.4M |
 | [Studio](per-project/studio.md) | 2026-07-20 → 2026-07-24 | 4 | 873k | 3k | 353.8M |
@@ -65,9 +65,8 @@
 | [experiments (method tests)](per-project/experiments-method-tests.md) | 2026-06-04 → 2026-06-11 | 9 | 375k | 5k | 19.1M |
 | [progetto-16](per-project/progetto-16.md) | 2026-06-28 → 2026-06-30 | 1 | 308k | 17k | 10.9M |
 | [Idee](per-project/idee.md) | 2026-06-11 → 2026-06-12 | 1 | 270k | 6k | 12.8M |
-| [weather_report](per-project/weather-report.md) | 2026-07-24 → 2026-07-25 | 1 | 157k | 114 | 14.4M |
+| [weather_report](per-project/weather-report.md) | 2026-05-07 → 2026-07-25 | 2 | 199k | 251 | 21.2M |
 | [progetto-22](per-project/progetto-22.md) | 2026-06-17 → 2026-06-17 | 1 | 52k | 8k | 2.2M |
-| [weather_report (worktree)](per-project/weather-report-worktree.md) | 2026-05-07 → 2026-05-07 | 1 | 42k | 137 | 6.8M |
 
 ## Cloud agent work (workflows — hand-maintained register)
 Multi-agent workflows run in the cloud and **leave no transcripts on the PC**: these numbers
@@ -82,21 +81,21 @@ come from the projects' METRICHE/report files. **After every new workflow, add o
 | 2026-07-17 | SideKick | English translation of the public facade (11 docs incl. CONSTITUTION v1.5) | 1 | 119k |
 | 2026-07-17 | SideKick | Spec Kit double-run study (Opus x2, identical prompt) + claim verification | 2 | 293k |
 | 2026-07-18 | poker (Who's the Boss) | Multi-agent MEDIO audit on R7.4 delta-sync (5 confirmed [1 ALTA], 1 refuted) | 10 | 1.0M |
-| 2026-07-20 | Studio (ponte) | Ponte F1: auto-import in 2 app + 167 domande da weather_report (12 lotti, QC 3x Opus, ombra Haiku) | 21 | 1.5M |
-| 2026-07-20 | Studio (ponte) | Fabbrica v2 MASSIMA: 447 elementi nuovi + retrofit 167 + runner SQL + QC totale 4x Opus + niente-per-scontato (25 buchi -> 22 fondamenta). NOTA OSSERVATORIO: run interrotto da fine-sessione con ~2h di buco A OROLOGIO ATTIVO (durata gonfiata); ripresa dalla cache: 30/34 agenti riusati gratis, token reali solo per i 4 mancanti | 34 | 5.8M |
-| 2026-07-21 | Studio (StudioQuest) | Costruzione app unica sq/ sui 17 mockup (9 agenti: fondamenta+4 moduli+integrazione+2 QC Opus; +2 bug trovati dal collaudo E2E dell'orchestratore) | 9 | 1.8M |
-| 2026-07-21 | Studio (StudioQuest) | Rifinitura 1: bug P0 + Costellazione + Home v2 + Allenamento/Esami/Pomodoro + Progressi v2. NOTA: interrotto 2 volte da Roberto (fine token); ripresa dalla cache con 6/8 agenti riusati gratis — token reali solo 427.713 dei 3 lanci | 8 | 428k |
-| 2026-07-25 | Studio (StudioQuest) | Fabbrica domande Python WR3: 555 domande/16 lotti (estrazione Haiku, 16 gen Sonnet, dedup, QC totale Opus 2 passate + ombra 8%, fix, verifica finale). INCIDENTE resume (root cause verificata dall'osservatorio 2026-07-25 sul journal): al 3o rilancio la cache non ha agganciato NESSUNA chiave (0/46) con 30/32 prompt QC identici byte-per-byte e journal COMPLETO — la diagnosi a caldo 'journal senza result' era sbagliata (chiavi di cache non content-addressed nel runtime) -> rifatti 46 agenti (30 Opus + 16 Sonnet), spreco ~0,59M vivi + ~39M cache; fermato a mano; chiusura con 3 agenti diretti. Token vivi da transcript: 1,17M+0,88M+0,65M; cache letta ~225M (voce dominante). Durata allungata dai 2 buchi-crediti (~2h e ~3h a orologio attivo), non il costo | 229 | 11.0M |
-| 2026-07-25 | SideKick | Chiarezza+inglese del repo (3 fasi): 3 analisti Sonnet (occhi freschi, madrelingua, coerenza fatti; 26 finding) -> 5 esecutori Sonnet su file disgiunti (CONSTITUTION.md portato a v1.9, FACTORY-PROCESS.md creato, drop-in spec-kit 1.9.x coi principi XII-XVI, facciata, doc observatory) -> 2 revisori Opus a lenti diverse (8 finding, 5 veri: race di versione drop-in nel README tra agenti paralleli, 170x->187x, riga 5h_windows MANCANTE NEL MASTER poi aggiunta, Assistenza non tradotto, dashboard da rigenerare; 1 confutato: il generatore non ha il 170x hardcoded). Integrazione e commit dal regista | 10 | 838k |
-| 2026-07-25 | SideKick | Copia italiana ITALIANO/: 5 traduttori Sonnet su blocchi disgiunti (14 doc, ~880 righe) + 1 verificatore (completezza, fedelta numeri, terminologia, link). 2 sviste incrociate sistemate dal regista: nota iniziale del README rimossa dal verificatore per zelo (contesto perso tra agenti) e link FINDINGS puntato all originale invece che alla copia | 6 | 405k |
-| 2026-07-25 | SideKick | Audit totale repo SOLO-REPORT (Roberto): 3 red team economici (recruiter/adottante/visitatore, 17 finding) -> 5 revisori sottosistema (30) -> dedup Haiku (29 unici) -> verifica adversariale ALTA/MEDIA -> sintesi Opus. Esito: 14 confermati (1 ALTA: usage.mjs non aggancia i workflow di Studio nel drilldown, ~20,5M token invisibili; 8 media tra cui doppia cartella italiana senza spiegazione e versioni drop-in incoerenti), 4 bassa non verificati, 0 confutati; 5 severita declassate dalla verifica. Report: observatory/AUDIT-REPO-2026-07-25.md, nessuna correzione applicata | 24 | 1.5M |
+| 2026-07-20 | Studio | Bridge F1: auto-import into 2 apps + 167 questions generated from weather_report (12 batches, QC 3x Opus, Haiku shadow) | 21 | 1.5M |
+| 2026-07-20 | Studio | Factory v2 MAXIMUM: 447 new elements + retrofit of 167 + SQL runner + full QC 4x Opus + take-nothing-for-granted (25 gaps -> 22 fundamentals). OBSERVATORY NOTE: run interrupted by session end with a ~2h gap ON A RUNNING CLOCK (duration inflated); resumed from cache: 30/34 agents reused free, real tokens only for the 4 missing | 34 | 5.8M |
+| 2026-07-21 | Studio | Single sq/ app built from the 17 mockups (9 agents: foundations + 4 modules + integration + 2 Opus QC; +2 bugs found by the orchestrator's E2E test) | 9 | 1.8M |
+| 2026-07-21 | Studio | Polish 1: P0 bugs + Constellation + Home v2 + Training/Exams/Pomodoro + Progress v2. NOTE: interrupted twice by Roberto (out of tokens); resumed from cache with 6/8 agents reused free - real tokens only 427,713 across the 3 launches | 8 | 428k |
+| 2026-07-25 | Studio | Python question factory WR3: 555 questions/16 batches (Haiku extraction, 16 Sonnet generators, dedup, full QC 2 Opus passes + 8% shadow, fixes, final verification). RESUME INCIDENT (root cause verified by the observatory 2026-07-25 on the journal): at the 3rd relaunch the cache matched NO keys (0/46) despite 30/32 QC prompts byte-identical and a COMPLETE journal - the on-the-spot diagnosis 'journal missing results' was wrong (cache keys not content-addressed in the runtime) -> 46 agents redone (30 Opus + 16 Sonnet), waste ~0.59M live + ~39M cache; stopped by hand; closed with 3 direct agents. Live tokens from transcripts: 1.17M+0.88M+0.65M; cache read ~225M (dominant item). Duration stretched by the 2 credit gaps (~2h and ~3h on a running clock), not the cost | 229 | 11.0M |
+| 2026-07-25 | SideKick | Repo clarity+English (3 phases): 3 Sonnet analysts (fresh eyes, native English, fact coherence; 26 findings) -> 5 Sonnet executors on disjoint files (CONSTITUTION.md brought to v1.9, FACTORY-PROCESS.md created, spec-kit drop-in with new principles XII-XVI, facade, observatory docs) -> 2 Opus reviewers with different lenses (8 findings, 5 real: drop-in version race in README between parallel agents, 170x->187x, 5h_windows line MISSING FROM THE MASTER then added, untranslated 'Assistenza', dashboard to regenerate; 1 refuted: the generator has no hardcoded 170x). Integration and commits by the director | 10 | 838k |
+| 2026-07-25 | SideKick | Italian copy ITALIANO/: 5 Sonnet translators on disjoint blocks (14 docs, ~880 lines) + 1 verifier (completeness, number fidelity, terminology, links). 2 cross-agent slips fixed by the director: README intro note removed by an overzealous verifier (context lost between agents) and FINDINGS link pointed at the original instead of the copy | 6 | 405k |
+| 2026-07-25 | SideKick | Full repo audit REPORT-ONLY (Roberto): 3 cheap red-team personas (recruiter/adopter/visitor, 17 findings) -> 5 subsystem reviewers (30) -> Haiku dedup (29 unique) -> adversarial verification on HIGH/MEDIUM -> Opus synthesis. Outcome: 14 confirmed (1 HIGH: usage.mjs misses Studio's workflows in the drilldown, ~20.5M tokens invisible; 8 medium incl. the unexplained double Italian folder and inconsistent drop-in versions), 4 low unverified, 0 refuted; 5 severities downgraded by verification. Report: observatory/AUDIT-REPO-2026-07-25.md, no fix applied | 24 | 1.5M |
 
 ## By model (local chats only)
 | Model | Msg | Input | Output | Cache read |
 |---|---|---|---|---|
 | opus-4-8 | 6k | 628k | 11.8M | 2300.2M |
 | opus-4-7 | 1k | 15k | 2.2M | 259.4M |
-| fable-5 | 1k | 52k | 2.1M | 431.4M |
+| fable-5 | 1k | 52k | 2.1M | 444.6M |
 | sonnet-4-6 | 2k | 38k | 1.5M | 137.6M |
 | sonnet-5 | 801 | 43k | 602k | 397.1M |
 
@@ -105,4 +104,4 @@ come from the projects' METRICHE/report files. **After every new workflow, add o
 |---|---|---|---|---|
 | 2026-05 | 2k | 82k | 4.0M | 396.6M |
 | 2026-06 | 4k | 536k | 9.0M | 1557.8M |
-| 2026-07 | 4k | 159k | 5.1M | 1571.1M |
+| 2026-07 | 4k | 159k | 5.1M | 1584.3M |

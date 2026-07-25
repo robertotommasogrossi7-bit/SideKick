@@ -3,7 +3,7 @@
 > Back to the dashboard: [`../DASHBOARD.md`](../DASHBOARD.md). Do not edit by hand.
 
 **5 sessions** from 2026-05-29 to 2026-07-17 · **3.6M output** ·
-233k input · 921.0M cache read · 2k messages · **+1.1M cloud-agent tokens** (1 workflows)
+233k input · 921.0M cache read · 2k messages · **+1.1M cloud-agent tokens** (1 workflow)
 
 ## Sessions (in time order — the title says what was done)
 | Period | Operation | Models | Msg | Input | Output | Cache read |

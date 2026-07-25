@@ -2,8 +2,8 @@
 
 > Back to the dashboard: [`../DASHBOARD.md`](../DASHBOARD.md). Do not edit by hand.
 
-**12 sessions** from 2026-06-03 to 2026-07-25 · **2.0M output** ·
-116k input · 227.2M cache read · 777 messages · **+3.2M cloud-agent tokens** (5 workflows)
+**12 sessions** from 2026-06-03 to 2026-07-25 · **2.1M output** ·
+116k input · 240.4M cache read · 810 messages · **+3.2M cloud-agent tokens** (5 workflows)
 
 ## Sessions (in time order — the title says what was done)
 | Period | Operation | Models | Msg | Input | Output | Cache read |
@@ -19,13 +19,13 @@
 | 2026-07-16 | Sidekick data observatory setup | fable-5 | 112 | 206 | 217k | 35.1M |
 | 2026-07-16→07-17 | Sidekick data observatory setup | fable-5 | 8 | 15 | 6k | 3.5M |
 | 2026-07-16→07-17 | SK/Base_4 | fable-5 + opus-4-8 | 50 | 92 | 69k | 24.5M |
-| 2026-07-25 | SK/Base_5 | fable-5 | 110 | 207 | 167k | 23.0M |
+| 2026-07-25 | SK/Base_5 | fable-5 | 143 | 267 | 215k | 36.2M |
 
 ## Cloud agent workflows on this project
 | Date | Operation | Agents | Agent tokens | Source |
 |---|---|---|---|---|
 | 2026-07-17 | English translation of the public facade (11 docs incl. CONSTITUTION v1.5) | 1 | 119k | observatory chat 2026-07-17 |
 | 2026-07-17 | Spec Kit double-run study (Opus x2, identical prompt) + claim verification | 2 | 293k | ESPERIMENTI.md table 2 |
-| 2026-07-25 | Chiarezza+inglese del repo (3 fasi): 3 analisti Sonnet (occhi freschi, madrelingua, coerenza fatti; 26 finding) -> 5 esecutori Sonnet su file disgiunti (CONSTITUTION.md portato a v1.9, FACTORY-PROCESS.md creato, drop-in spec-kit 1.9.x coi principi XII-XVI, facciata, doc observatory) -> 2 revisori Opus a lenti diverse (8 finding, 5 veri: race di versione drop-in nel README tra agenti paralleli, 170x->187x, riga 5h_windows MANCANTE NEL MASTER poi aggiunta, Assistenza non tradotto, dashboard da rigenerare; 1 confutato: il generatore non ha il 170x hardcoded). Integrazione e commit dal regista | 10 | 838k | chat SideKick/Osservatorio_1 + transcript wf_a2acea15-23a |
-| 2026-07-25 | Copia italiana ITALIANO/: 5 traduttori Sonnet su blocchi disgiunti (14 doc, ~880 righe) + 1 verificatore (completezza, fedelta numeri, terminologia, link). 2 sviste incrociate sistemate dal regista: nota iniziale del README rimossa dal verificatore per zelo (contesto perso tra agenti) e link FINDINGS puntato all originale invece che alla copia | 6 | 405k | chat SideKick/Osservatorio_1 + transcript wf_7978359d-81d |
-| 2026-07-25 | Audit totale repo SOLO-REPORT (Roberto): 3 red team economici (recruiter/adottante/visitatore, 17 finding) -> 5 revisori sottosistema (30) -> dedup Haiku (29 unici) -> verifica adversariale ALTA/MEDIA -> sintesi Opus. Esito: 14 confermati (1 ALTA: usage.mjs non aggancia i workflow di Studio nel drilldown, ~20,5M token invisibili; 8 media tra cui doppia cartella italiana senza spiegazione e versioni drop-in incoerenti), 4 bassa non verificati, 0 confutati; 5 severita declassate dalla verifica. Report: observatory/AUDIT-REPO-2026-07-25.md, nessuna correzione applicata | 24 | 1.5M | chat SideKick/Osservatorio_1 + transcript wf_d0a32840-966 |
+| 2026-07-25 | Repo clarity+English (3 phases): 3 Sonnet analysts (fresh eyes, native English, fact coherence; 26 findings) -> 5 Sonnet executors on disjoint files (CONSTITUTION.md brought to v1.9, FACTORY-PROCESS.md created, spec-kit drop-in with new principles XII-XVI, facade, observatory docs) -> 2 Opus reviewers with different lenses (8 findings, 5 real: drop-in version race in README between parallel agents, 170x->187x, 5h_windows line MISSING FROM THE MASTER then added, untranslated 'Assistenza', dashboard to regenerate; 1 refuted: the generator has no hardcoded 170x). Integration and commits by the director | 10 | 838k | chat SideKick/Osservatorio_1 + transcript wf_a2acea15-23a |
+| 2026-07-25 | Italian copy ITALIANO/: 5 Sonnet translators on disjoint blocks (14 docs, ~880 lines) + 1 verifier (completeness, number fidelity, terminology, links). 2 cross-agent slips fixed by the director: README intro note removed by an overzealous verifier (context lost between agents) and FINDINGS link pointed at the original instead of the copy | 6 | 405k | chat SideKick/Osservatorio_1 + transcript wf_7978359d-81d |
+| 2026-07-25 | Full repo audit REPORT-ONLY (Roberto): 3 cheap red-team personas (recruiter/adopter/visitor, 17 findings) -> 5 subsystem reviewers (30) -> Haiku dedup (29 unique) -> adversarial verification on HIGH/MEDIUM -> Opus synthesis. Outcome: 14 confirmed (1 HIGH: usage.mjs misses Studio's workflows in the drilldown, ~20.5M tokens invisible; 8 medium incl. the unexplained double Italian folder and inconsistent drop-in versions), 4 low unverified, 0 refuted; 5 severities downgraded by verification. Report: observatory/AUDIT-REPO-2026-07-25.md, no fix applied | 24 | 1.5M | chat SideKick/Osservatorio_1 + transcript wf_d0a32840-966 |
