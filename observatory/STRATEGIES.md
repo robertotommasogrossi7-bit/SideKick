@@ -104,8 +104,19 @@
 - **Learned efficiency (applied to the process)**: mechanical checks BEFORE model QC;
   mechanical rubrics on Sonnet with ~8% Opus shadow; post-fix recheck only above a change
   threshold; safe-resume with file-persisted verdicts.
+- **Run 3 = the optimization check (books factory, 2026-07-26)**: 78 agents / 9.9M tokens /
+  **$131.50 measured** for 628 new questions + 355 repaired + 194 positional rotations +
+  glossary update — vs WR3's 229 agents / 11.0M / **$137.79 measured** for 555 new questions
+  (incident included). The 2026-07-25 hardening was applied end-to-end: results-on-file
+  (no resume incident), grown validator with `--files-strict`, recheck only above threshold
+  (11 groups). It also FUSED the QC passes (further than the method had approved) and the 8%
+  shadow caught the fusion's quality cost: 5/69 weak near-misses, all on the same dimension
+  → run-2 hypothesis: targeted near-miss shadow or a dedicated cheap near-miss pass.
+  Honest caveat: different book/domain, so not a clean A/B — but agents −66%, cost per new
+  question −16%, incidents zero is a consistent direction.
 - **Verdict**: pays off for content Roberto will use for months; the cost is dominated by
-  cache reads (~225M on WR3) → the levers above target exactly that. N=2.
+  cache reads (~225M on WR3) → the levers above target exactly that. The process-hardening
+  measurably paid on the very next run. N=3.
 
 ## Strategies STILL WITHOUT DATA (declared)
 - **Same-model repetitions** (N runs on the same task): 0 experiments.

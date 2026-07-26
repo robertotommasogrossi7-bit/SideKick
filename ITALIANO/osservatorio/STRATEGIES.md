@@ -109,8 +109,19 @@
 - **Efficienza appresa (applicata al processo)**: controlli meccanici PRIMA della QC a
   modello; rubriche meccaniche su Sonnet con ~8% di ombra Opus; ricontrollo post-fix solo
   sopra una soglia di cambiamento; ripresa sicura con verdetti persistiti su file.
+- **Run 3 = la prova dell'ottimizzazione (fabbrica libri, 2026-07-26)**: 78 agenti / 9,9M
+  token / **$131,50 misurati** per 628 domande nuove + 355 riparate + 194 rotazioni
+  posizionali + aggiornamento glossario — contro i 229 agenti / 11,0M / **$137,79 misurati**
+  di WR3 per 555 domande nuove (incidente incluso). L'irrobustimento del 2026-07-25 è stato
+  applicato per intero: esiti su file (nessun incidente di resume), validatore cresciuto con
+  `--files-strict`, ricontrollo solo sopra soglia (11 gruppi). Ha anche FUSO le passate QC
+  (oltre quanto il metodo aveva approvato) e l'ombra 8% ha beccato il costo della fusione:
+  5/69 near-miss deboli, tutti sulla stessa dimensione → ipotesi per il run 2: ombra mirata
+  sui near-miss o passata near-miss dedicata economica. Avvertenza onesta: libro/dominio
+  diversi, non è un A/B pulito — ma agenti −66%, costo per domanda nuova −16%, incidenti
+  zero è una direzione consistente.
 - **Verdetto**: ripaga per contenuti che Roberto userà per mesi; il costo è dominato dalle
-  letture di cache (~225M su WR3) → le leve sopra puntano esattamente lì. N=2.
+  letture di cache (~225M su WR3) → le leve sopra puntano esattamente lì. Il processo irrobustito ha reso in modo misurabile già al run successivo. N=3.
 
 ## Strategie ANCORA SENZA DATI (dichiarate)
 - **Ripetizioni stesso-modello** (N run sullo stesso task): 0 esperimenti.

@@ -485,8 +485,14 @@ if (fs.existsSync(fileWorkflow)) {
   });
 }
 for (const w of workflow) {
-  const rif = (String(w.fonte).match(/wf_[a-z0-9-]+/) || [])[0];
-  w.mis = rif ? wfMisurati.get(rif) : undefined; // undefined = no local transcripts -> '—'
+  // a row's source can cite SEVERAL wf ids (multi-launch runs): sum the measured dirs
+  const rifs = String(w.fonte).match(/wf_[a-z0-9-]+/g) || [];
+  let mis;
+  for (const rif of rifs) {
+    const m = wfMisurati.get(rif);
+    if (m) { if (!mis) mis = { usd: 0, sconosciuto: false }; mis.usd += m.usd; mis.sconosciuto = mis.sconosciuto || m.sconosciuto; }
+  }
+  w.mis = mis; // undefined = no local transcripts -> '—'
 }
 const totW = workflow.reduce((a, w) => a + w.token, 0);
 const wfConMisura = workflow.filter(w => w.mis);
