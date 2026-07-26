@@ -23,10 +23,12 @@
 // A model/date with no verified row in prices.csv contributes $0 and marks the total
 // "partial" (cost_partial column / '*' marker) — never an invented number.
 //
-// CLOUD AGENT WORKFLOWS: they leave no transcripts on the PC. Their numbers are kept by
-// hand in usage/workflow.csv (one row per workflow); the script renders them. They have no
-// per-model token breakdown, so they are NEVER included in the USD cost totals (declared
-// limit, see SCHEMA.md).
+// AGENT WORKFLOWS: registered by hand in usage/workflow.csv (one row per workflow). When
+// a run executed on THIS machine, its per-agent transcripts (under <project>/<session>/
+// subagents/workflows/wf_*/) are priced message-by-message and shown as a MEASURED cost,
+// matched via the wf_... id in the row's `source`; runs that executed in the cloud leave
+// nothing local and stay unpriced (never estimated). Workflow costs are shown as their own
+// line/column and are NOT folded into the chats' total (see SCHEMA.md).
 //
 // BILINGUAL OUTPUT: the same numbers/tables are also written in Italian, to
 // ITALIANO/osservatorio/uso/ (DASHBOARD.md + per-progetto/*.md). Only the template strings
@@ -95,7 +97,7 @@ const gruppoDi = alias => {
 
 const modelloCorto = m => {
   if (!m || m.startsWith('<')) return null; // '<synthetic>' = system messages, no cost
-  return m.replace(/^claude-/, '').replace(/-\d{8}$/, '');
+  return m.replace(/^claude-/, '').replace(/\[1m\]$/, '').replace(/-\d{8}$/, '');
 };
 const pulisci = (s, max) => String(s).replace(/\s+/g, ' ').trim().slice(0, max);
 const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -153,10 +155,15 @@ const prezzoPer = (mod, data) => {
 // sonnet-5 has two different prices before/after 2026-09-01 — see prices.csv)
 const costoMessaggio = (mod, data, inTok, outTok, cR, cW) => {
   const p = prezzoPer(mod, data);
-  if (!p) return { usd: 0, sconosciuto: true };
-  const usd = (inTok * p.input + outTok * p.output + cR * p.cacheR + cW * p.cacheW) / 1e6;
-  return { usd, sconosciuto: false };
+  if (!p) return { usd: 0, sconosciuto: true, comp: null };
+  const comp = { inp: inTok * p.input / 1e6, out: outTok * p.output / 1e6,
+                 cR: cR * p.cacheR / 1e6, cW: cW * p.cacheW / 1e6 };
+  return { usd: comp.inp + comp.out + comp.cR + comp.cW, sconosciuto: false, comp };
 };
+
+// running composition of the chats' API-equivalent by token kind — feeds the
+// "where the money would go" line in the dashboards (only priced messages contribute)
+const costoTipi = { inp: 0, out: 0, cR: 0, cW: 0 };
 
 // ---------- scan ----------
 const agg = new Map();      // alias \x1f model \x1f month -> tokens (for the CSV)
@@ -206,7 +213,8 @@ for (const d of dirs) {
       if (!r) { r = { msg: 0, input: 0, output: 0, cacheR: 0, cacheW: 0, costo: 0, costoParziale: false }; agg.set(k, r); }
       const inTok = u.input_tokens || 0, outTok = u.output_tokens || 0;
       const cR = u.cache_read_input_tokens || 0, cW = u.cache_creation_input_tokens || 0;
-      const { usd, sconosciuto } = costoMessaggio(mod, ts, inTok, outTok, cR, cW);
+      const { usd, sconosciuto, comp } = costoMessaggio(mod, ts, inTok, outTok, cR, cW);
+      if (comp) { costoTipi.inp += comp.inp; costoTipi.out += comp.out; costoTipi.cR += comp.cR; costoTipi.cW += comp.cW; }
       r.msg++; r.input += inTok; r.output += outTok; r.cacheR += cR; r.cacheW += cW;
       r.costo += usd; r.costoParziale = r.costoParziale || sconosciuto;
       s.msg++; s.input += inTok; s.output += outTok; s.cacheR += cR; s.cacheW += cW;
@@ -256,6 +264,14 @@ const LANG = {
     summaryLine3: o => `- **API cost-equivalent: ${o.totCosto}**${o.parziale ? ' (partial — some model/dates have no verified price yet, marked with \\*)' : ''}, computed at the prices verified ${o.dataPrezzi ? `on ${o.dataPrezzi}` : '(no verified price found)'} in \`prices.csv\`. **This is NOT what is actually billed** on the Max/Pro plan
   (flat 5-hour usage windows, not pay-per-token) — it only estimates what the same tokens would cost on the pay-as-you-go API, useful to compare models/workflows. Cloud-agent workflow tokens have
   no per-model breakdown and are **excluded** from this total (see the cloud agent section below).`,
+    summaryComp: o => `- **Where the API-equivalent goes** (local chats): cache read ${o.cr} (${o.crPct}%) + cache write ${o.cw} (${o.cwPct}%) + output ${o.out} (${o.outPct}%) + input ${o.inp} — the cache IS the
+  working style (long chats, resumes, agents re-reading context), and it is affordable
+  precisely because the flat plan makes re-reading free.`,
+    summaryWf: o => `- **Agent workflows measured from local transcripts: ${o.usd} across ${o.n} of ${o.tot} registered runs** — priced message-by-message from the per-agent transcripts this machine kept;
+  the other runs executed in the cloud and stay unpriced ('—'), never estimated.`,
+    wfMeasuredNote: `Cost is **measured** from the local per-agent transcripts when a run left them on this
+machine (matched via the \`wf_...\` id in Source); '—' = no local transcripts (cloud run),
+never an estimate.`,
     expensiveHeader: 'The most expensive things',
     colHash: '#', colWhat: 'What', colType: 'Type', colWhen: 'When', colTokens: 'Tokens', colCost: 'Cost (API-equiv.)',
     typeChat: 'chat', typeCloudAgents: 'cloud agents',
@@ -311,6 +327,14 @@ no USD column here — see \`SCHEMA.md\` for the declared limit.`,
     summaryLine3: o => `- **Costo API-equivalente: ${o.totCosto}**${o.parziale ? ' (parziale — alcuni modelli/date non hanno ancora un prezzo verificato, segnati con \\*)' : ''}, calcolato coi prezzi verificati ${o.dataPrezzi ? `il ${o.dataPrezzi}` : '(nessun prezzo verificato trovato)'} in \`prices.csv\`. **NON è ciò che si paga davvero** sul piano
   Max/Pro (finestre da 5 ore flat, non a consumo per token) — stima solo quanto costerebbero quegli stessi token sull'API a consumo, utile per confrontare modelli/workflow. I token dei workflow cloud
   non hanno un dettaglio per modello e sono **esclusi** da questo totale (vedi la sezione agenti cloud sotto).`,
+    summaryComp: o => `- **Dove va l'equivalente API** (chat locali): cache letta ${o.cr} (${o.crPct}%) + cache scritta ${o.cw} (${o.cwPct}%) + output ${o.out} (${o.outPct}%) + input ${o.inp} — la cache È lo stile
+  di lavoro (chat lunghe, resume, agenti che rileggono il contesto), ed è sostenibile proprio
+  perché il piano flat rende gratis rileggere.`,
+    summaryWf: o => `- **Workflow di agenti misurati dai transcript locali: ${o.usd} su ${o.n} dei ${o.tot} run registrati** — prezzati messaggio per messaggio dai transcript per-agente rimasti su questa macchina;
+  gli altri run sono girati nel cloud e restano senza prezzo ('—'), mai stimati.`,
+    wfMeasuredNote: `Il costo è **misurato** dai transcript per-agente locali quando un run li ha lasciati su
+questa macchina (aggancio tramite l'id \`wf_...\` nella Fonte); '—' = niente transcript
+locali (run nel cloud), mai una stima.`,
     expensiveHeader: 'Le cose più costose',
     rawDataNote: `> Nota: le descrizioni delle operazioni restano in **inglese** — sono log tecnici copiati
 > tali e quali dal registro \`workflow.csv\` e dai titoli delle sessioni (dati, non prosa).`,
@@ -398,6 +422,59 @@ const FINESTRA_GIORNI = 30, FINESTRA_SETTIMANE = 12;
 const giorniVista = giorniOrdinati.slice(-FINESTRA_GIORNI);
 const settimaneVista = settimaneOrdinate.slice(-FINESTRA_SETTIMANE);
 
+// ---------- local workflow-agent transcripts (exact cost where they exist) ----------
+// Multi-agent workflows are registered by hand in workflow.csv (aggregate tokens, no
+// per-model breakdown). BUT when a run executed on THIS machine, its per-agent transcripts
+// sit under <project>/<session>/subagents/workflows/wf_*/agent-*.jsonl — here they are
+// priced message-by-message (same prices.csv, same dedup idea) and keyed by wf id, then
+// matched to workflow.csv rows via the `wf_...` reference in their `source` column.
+// Runs that executed in the cloud leave nothing local and stay unpriced ('—'), never estimated.
+const wfMisurati = new Map(); // wf id -> { usd, sconosciuto }
+const vistiMsgWf = new Set();
+for (const d of dirs) {
+  const dir = path.join(base, d);
+  for (const sub of fs.readdirSync(dir)) {
+    const wfRoot = path.join(dir, sub, 'subagents', 'workflows');
+    let ok = false;
+    try { ok = fs.statSync(path.join(dir, sub)).isDirectory() && fs.existsSync(wfRoot); } catch { ok = false; }
+    if (!ok) continue;
+    for (const wfDir of fs.readdirSync(wfRoot).filter(x => x.startsWith('wf_'))) {
+      const acc = wfMisurati.get(wfDir) || { usd: 0, sconosciuto: false };
+      let file;
+      try { file = fs.readdirSync(path.join(wfRoot, wfDir)).filter(f => f.startsWith('agent-') && f.endsWith('.jsonl')); } catch { continue; }
+      // AGENT transcripts differ from chat transcripts: the same message.id shows up in
+      // several records with GROWING usage (streaming snapshots) — the LAST one is the real
+      // total. So dedup here is last-wins per id. (Chat transcripts repeat ids with
+      // IDENTICAL usage — verified 2026-07-25 on a 679-id chat, 0 divergent — so the main
+      // scan's first-wins stays correct there.)
+      const perId = new Map();
+      for (const f of file) {
+        let testo;
+        try { testo = fs.readFileSync(path.join(wfRoot, wfDir, f), 'utf8'); } catch { continue; }
+        for (const ln of testo.split('\n')) {
+          if (!ln) continue;
+          let o; try { o = JSON.parse(ln); } catch { continue; }
+          if (o.type !== 'assistant') continue;
+          const msg = o.message || {};
+          const u = msg.usage;
+          const mod = modelloCorto(msg.model);
+          if (!u || !mod) continue;
+          const id = msg.id || o.uuid;
+          if (!id || vistiMsgWf.has(id)) continue; // cross-run safety only
+          const ts = o.timestamp ? o.timestamp.slice(0, 10) : null;
+          perId.set(id, { mod, ts, u }); // last record per id wins (final snapshot)
+        }
+      }
+      for (const [id, r] of perId) {
+        vistiMsgWf.add(id);
+        const { usd, sconosciuto } = costoMessaggio(r.mod, r.ts, r.u.input_tokens || 0, r.u.output_tokens || 0, r.u.cache_read_input_tokens || 0, r.u.cache_creation_input_tokens || 0);
+        acc.usd += usd; acc.sconosciuto = acc.sconosciuto || sconosciuto;
+      }
+      wfMisurati.set(wfDir, acc);
+    }
+  }
+}
+
 // ---------- workflow.csv (cloud agents, hand-maintained) ----------
 let workflow = [];
 if (fs.existsSync(fileWorkflow)) {
@@ -407,7 +484,14 @@ if (fs.existsSync(fileWorkflow)) {
     return { data: campi[0], prog: campi[1], operazione: campi[2], agenti: campi[3], token: +campi[4] || 0, fonte: campi[5] };
   });
 }
+for (const w of workflow) {
+  const rif = (String(w.fonte).match(/wf_[a-z0-9-]+/) || [])[0];
+  w.mis = rif ? wfMisurati.get(rif) : undefined; // undefined = no local transcripts -> '—'
+}
 const totW = workflow.reduce((a, w) => a + w.token, 0);
+const wfConMisura = workflow.filter(w => w.mis);
+const totWfUsd = wfConMisura.reduce((a, w) => a + w.mis.usd, 0);
+const fmtCostoWf = w => w.mis ? fmtCosto(w.mis.usd, w.mis.sconosciuto) : '—';
 
 // ---------- per-GROUP aggregates (the dashboard thinks in real projects) ----------
 const gruppi = new Map();
@@ -431,9 +515,9 @@ const renderProjectMD = (nome, g, wf, sess, L) => {
     : '';
   const wfSection = wf.length ? `
 ## ${L.cloudWorkflowsHeader}
-${L.rawDataNote ? L.rawDataNote + '\n' : ''}| ${L.colDate} | ${L.colOperation} | ${L.colAgents} | ${L.colAgentTokens} | ${L.colSource} |
-|---|---|---|---|---|
-${wf.map(w => `| ${w.data} | ${mdEsc(w.operazione)} | ${w.agenti} | ${fmt(w.token)} | ${mdEsc(w.fonte)} |`).join('\n')}
+${L.rawDataNote ? L.rawDataNote + '\n' : ''}| ${L.colDate} | ${L.colOperation} | ${L.colAgents} | ${L.colAgentTokens} | ${L.colCost} | ${L.colSource} |
+|---|---|---|---|---|---|
+${wf.map(w => `| ${w.data} | ${mdEsc(w.operazione)} | ${w.agenti} | ${fmt(w.token)} | ${fmtCostoWf(w)} | ${mdEsc(w.fonte)} |`).join('\n')}
 ` : '';
   return `# ${nome} — ${L.projectSuffix}
 
@@ -483,8 +567,8 @@ const top = [
 const topRow = (t, i, L) => {
   const tipo = t.kind === 'chat' ? L.typeChat : L.typeCloudAgents;
   const nome = t.kind === 'chat' ? `${descrizione(t.s, L)} — ${t.s.gruppo}` : `${t.w.operazione} — ${gruppoDi(t.w.prog)}`;
-  // cloud-agent rows have no per-model breakdown, so their cost is always unknown ('—')
-  const costo = t.kind === 'chat' ? fmtCosto(t.s.costo, t.s.costoParziale) : '—';
+  // cloud rows: measured from local agent transcripts when available, '—' otherwise
+  const costo = t.kind === 'chat' ? fmtCosto(t.s.costo, t.s.costoParziale) : fmtCostoWf(t.w);
   return `| ${i + 1} | ${mdEsc(nome)} | ${tipo} | ${t.quando} | ${fmt(t.tok)} | ${costo} |`;
 };
 
@@ -497,6 +581,12 @@ const lezioniIT = fs.existsSync(fileLessonsIT)
     ? `*(nota: \`LESSONS.md\` italiano non trovato in questa cartella — mostrata la versione inglese)*\n\n${lezioniEN}`
     : null;
 
+const compPer = () => {
+  const tot = costoTipi.inp + costoTipi.out + costoTipi.cR + costoTipi.cW;
+  const pct = v => tot > 0 ? Math.round(v / tot * 100) : 0;
+  return { cr: fmtUSD(costoTipi.cR), crPct: pct(costoTipi.cR), cw: fmtUSD(costoTipi.cW), cwPct: pct(costoTipi.cW),
+           out: fmtUSD(costoTipi.out), outPct: pct(costoTipi.out), inp: fmtUSD(costoTipi.inp) };
+};
 const renderDashboard = (L, o) => `# ${L.dashboardTitle}
 
 ${L.headNote(new Date().toISOString().slice(0, 10))}
@@ -505,6 +595,8 @@ ${L.headNote(new Date().toISOString().slice(0, 10))}
 ${L.summaryLine1({ output: fmt(T.output), totW: fmt(totW), nSessions: sessioni.length, nProjects: ordGruppi.length, firstMonth: mesi[0]?.m || '?', msg: fmt(T.msg) })}
 ${L.summaryLine2({ cacheR: fmt(T.cacheR), ratio: Math.round(T.cacheR / (T.input + T.output)) })}
 ${L.summaryLine3({ totCosto: fmtCosto(T.costo, totCostoParziale), parziale: totCostoParziale, dataPrezzi })}
+${L.summaryComp(compPer())}
+${L.summaryWf({ usd: fmtUSD(totWfUsd), n: wfConMisura.length, tot: workflow.length })}
 
 ## ${L.expensiveHeader}
 ${L.rawDataNote ? L.rawDataNote + '\n' : ''}| ${L.colHash} | ${L.colWhat} | ${L.colType} | ${L.colWhen} | ${L.colTokens} | ${L.colCost} |
@@ -523,9 +615,11 @@ ${ordGruppi.map(([nome, g]) => `| [${mdEsc(nome)}](${L.projectDir}/${slug(nome)}
 ${L.cloudWorkNote}
 ${L.rawDataNote ? '\n' + L.rawDataNote : ''}
 
-| ${L.colDate} | ${L.colProject} | ${L.colOperation} | ${L.colAgents} | ${L.colAgentTokens} |
-|---|---|---|---|---|
-${workflow.map(w => `| ${w.data} | ${mdEsc(gruppoDi(w.prog))} | ${mdEsc(w.operazione)} | ${w.agenti} | ${fmt(w.token)} |`).join('\n') || `| — | — | ${L.noneRegistered} | — | — |`}
+${L.wfMeasuredNote}
+
+| ${L.colDate} | ${L.colProject} | ${L.colOperation} | ${L.colAgents} | ${L.colAgentTokens} | ${L.colCost} |
+|---|---|---|---|---|---|
+${workflow.map(w => `| ${w.data} | ${mdEsc(gruppoDi(w.prog))} | ${mdEsc(w.operazione)} | ${w.agenti} | ${fmt(w.token)} | ${fmtCostoWf(w)} |`).join('\n') || `| — | — | ${L.noneRegistered} | — | — | — |`}
 
 ## ${L.byModelHeader}
 | ${L.colModel} | ${L.colMsg} | ${L.colInput} | ${L.colOutput} | ${L.colCacheRead} | ${L.colCost} |
@@ -604,10 +698,10 @@ const renderDashboardHTML = (L, o) => {
   const topRows = top.map((t, i) => {
     const tipo = t.kind === 'chat' ? L.typeChat : L.typeCloudAgents;
     const nome = t.kind === 'chat' ? `${descrizione(t.s, L)} — ${t.s.gruppo}` : `${t.w.operazione} — ${gruppoDi(t.w.prog)}`;
-    const costoTxt = t.kind === 'chat' ? fmtCosto(t.s.costo, t.s.costoParziale) : '—';
+    const costoTxt = t.kind === 'chat' ? fmtCosto(t.s.costo, t.s.costoParziale) : fmtCostoWf(t.w);
     return [tdN(i + 1, i + 1), tdL(mdEsc(nome)), tdT(tipo), tdT(t.quando), tdN(t.tok, fmt(t.tok)), tdN(t.kind === 'chat' ? t.s.costo : 0, costoTxt)];
   });
-  const cloudRows = workflow.map(w => [tdT(w.data), tdT(mdEsc(gruppoDi(w.prog))), tdL(mdEsc(w.operazione)), tdN(w.agenti, w.agenti), tdN(w.token, fmt(w.token))]);
+  const cloudRows = workflow.map(w => [tdT(w.data), tdT(mdEsc(gruppoDi(w.prog))), tdL(mdEsc(w.operazione)), tdN(w.agenti, w.agenti), tdN(w.token, fmt(w.token)), tdN(w.mis ? w.mis.usd : 0, fmtCostoWf(w))]);
 
   return `<!doctype html>
 <html lang="${L === LANG.it ? 'it' : 'en'}"><head>
@@ -643,6 +737,8 @@ footer{margin-top:32px;color:var(--muted);font-size:12px}
 <p>${mdLite(L.summaryLine1({ output: fmt(T.output), totW: fmt(totW), nSessions: sessioni.length, nProjects: ordGruppi.length, firstMonth: mesi[0]?.m || '?', msg: fmt(T.msg) }))}</p>
 <p>${mdLite(L.summaryLine2({ cacheR: fmt(T.cacheR), ratio: Math.round(T.cacheR / (T.input + T.output)) }))}</p>
 <p>${mdLite(L.summaryLine3({ totCosto: fmtCosto(T.costo, totCostoParziale), parziale: totCostoParziale, dataPrezzi }))}</p>
+<p>${mdLite(L.summaryComp(compPer()))}</p>
+<p>${mdLite(L.summaryWf({ usd: fmtUSD(totWfUsd), n: wfConMisura.length, tot: workflow.length }))}</p>
 </div>
 
 <h2>${L.byMonthHeader} / ${L.byWeekHeader}</h2>
@@ -659,7 +755,8 @@ ${tabellaHTML('', [L.colProject, L.colPeriod, L.colSessions, L.colOutput, L.colI
 
 <h2>${L.cloudWorkHeader}</h2>
 <p class="note">${mdLite(L.cloudWorkNote)}</p>
-${cloudRows.length ? tabellaHTML('', [L.colDate, L.colProject, L.colOperation, L.colAgents, L.colAgentTokens], cloudRows) : `<p class="note">${L.noneRegistered}</p>`}
+<p class="note">${mdLite(L.wfMeasuredNote)}</p>
+${cloudRows.length ? tabellaHTML('', [L.colDate, L.colProject, L.colOperation, L.colAgents, L.colAgentTokens, L.colCost], cloudRows) : `<p class="note">${L.noneRegistered}</p>`}
 
 <h2>${L.byModelHeader}</h2>
 ${tabellaHTML('', [L.colModel, L.colMsg, L.colInput, L.colOutput, L.colCacheRead, L.colCost], modelRows)}

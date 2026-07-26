@@ -21,6 +21,12 @@ const out = fs.mkdtempSync(path.join(os.tmpdir(), 'sidekick-usage-'));
 // --out-it keeps the Italian mirror inside the same scratch dir — otherwise the script's
 // default (repo-root/ITALIANO next to --out) would land outside it since --out is a tmpdir.
 const outIT = path.join(out, 'ITALIANO', 'osservatorio', 'uso');
+// a hand-kept workflow register whose `source` cites the fixture wf id: the script must
+// price it from the fixture agent transcript (growing-usage records -> last one wins)
+fs.mkdirSync(path.join(out, 'usage'), { recursive: true });
+fs.writeFileSync(path.join(out, 'usage', 'workflow.csv'),
+  'date,project,operation,agents,agent_tokens,source,5h_windows\n' +
+  '2026-07-01,demo,"Fixture wf run",1,300,"transcript wf_fixt01",\n');
 execFileSync(process.execPath, [script, '--base', fixture, '--out', out, '--out-it', outIT, '--prices', prezzi], { encoding: 'utf8' });
 
 const usageCsv = fs.readFileSync(path.join(out, 'usage', 'usage.csv'), 'utf8').trim().split('\n');
@@ -123,4 +129,19 @@ test('Italian mirror: per-progetto drilldown exists with translated table header
   assert.ok(files.length > 0, 'at least one per-progetto file was written');
   const testo = fs.readFileSync(path.join(dirProgIT, files[0]), 'utf8');
   assert.ok(testo.includes('| Periodo | Operazione | Modelli |'), 'session table header is translated');
+});
+
+test('workflow cost is measured from local agent transcripts, last record per id wins', () => {
+  // fixture agent transcript has the SAME message.id twice with GROWING usage (streaming
+  // snapshots): 100in/5out then 100in/200out. Only the last must be priced:
+  // (100*2 + 200*10)/1e6 = 0.0022 -> "$0.0022" (sonnet-5 fixture prices).
+  assert.ok(dashboard.includes('$0.0022'), 'measured workflow cost from the FINAL snapshot');
+  assert.ok(!dashboard.includes('$0.0032'), 'first+last summed would be 0.00305-ish: must not happen');
+  assert.match(dashboard, /measured from local transcripts: \$0\.0022 across 1 of 1/);
+});
+
+test('cost composition line is present and consistent in both languages', () => {
+  assert.ok(dashboard.includes('Where the API-equivalent goes'), 'EN composition line');
+  const dashIT = fs.readFileSync(path.join(outIT, 'DASHBOARD.md'), 'utf8');
+  assert.ok(dashIT.includes("Dove va l'equivalente API"), 'IT composition line');
 });

@@ -35,10 +35,10 @@
 ## Workflow cloud su questo progetto
 > Nota: le descrizioni delle operazioni restano in **inglese** — sono log tecnici copiati
 > tali e quali dal registro `workflow.csv` e dai titoli delle sessioni (dati, non prosa).
-| Data | Operazione | Agenti | Token agenti | Fonte |
-|---|---|---|---|---|
-| 2026-07-03 | Multi-agent HIGH audit on R6+R7.1 (45 findings confirmed, 11 refuted) | 67 | 2.6M | _processo/METRICHE.md |
-| 2026-07-03 | Model/effort research for the method (dossier in experiments/) | 5 | 689k | _processo/METRICHE.md |
-| 2026-07-18 | Multi-agent MEDIO audit on R7.4 delta-sync (5 confirmed [1 ALTA], 1 refuted) | 10 | 1.0M | chat WTB/Base_8 |
+| Data | Operazione | Agenti | Token agenti | Costo (API-equiv.) | Fonte |
+|---|---|---|---|---|---|
+| 2026-07-03 | Multi-agent HIGH audit on R6+R7.1 (45 findings confirmed, 11 refuted) | 67 | 2.6M | — | _processo/METRICHE.md |
+| 2026-07-03 | Model/effort research for the method (dossier in experiments/) | 5 | 689k | — | _processo/METRICHE.md |
+| 2026-07-18 | Multi-agent MEDIO audit on R7.4 delta-sync (5 confirmed [1 ALTA], 1 refuted) | 10 | 1.0M | — | chat WTB/Base_8 |
 
 \* costo noto solo in parte (qualche modello/data di quella riga non ha un prezzo verificato — vedi `prices.csv`)

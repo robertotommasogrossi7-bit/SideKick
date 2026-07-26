@@ -81,11 +81,15 @@ Current prices (all `verified`, source `https://platform.claude.com/docs/en/abou
 checked 2026-07-25): `opus-4-7`/`opus-4-8` $5/$25, `sonnet-4-6` $3/$15, `sonnet-5` $2/$10 until
 2026-08-31 then $3/$15, `haiku-4-5` $1/$5, `fable-5` $10/$50 (all input/output per MTok).
 
-**Cloud-agent workflows are never priced** (declared limit, not a gap to "fix"): `workflow.csv`
-has no per-model token breakdown (`agent_tokens` is an aggregate across a mixed fleet of
-models), so `costoMessaggio` has nothing to price it against. Their tokens are excluded from
-every USD total in the dashboards; grep the register + the Anthropic Console if a real cost
-figure for a specific workflow is ever needed.
+**Workflow costs: measured where possible, never estimated.** `workflow.csv` itself has no
+per-model breakdown, so rows are NOT priced from their `agent_tokens`. But when a run
+executed on this machine, its per-agent transcripts (`<project>/<session>/subagents/
+workflows/wf_*/agent-*.jsonl`) are priced message-by-message with the same `prices.csv`
+(matched via the `wf_...` id cited in the row's `source`; agent transcripts repeat the same
+`message.id` with GROWING streaming snapshots, so dedup there is last-record-wins — chat
+transcripts repeat ids with identical usage, verified 2026-07-25, and keep first-wins).
+Runs that executed in the cloud leave nothing local and stay `—`. Workflow costs appear as
+their own summary line/column and are never folded into the chats' `cost_usd_equiv` totals.
 
 ## `workflow.csv` — one row per cloud multi-agent workflow (hand-maintained)
 | Column | Meaning |

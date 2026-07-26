@@ -33,10 +33,10 @@
 | 2026-07-17→07-22 | WTB/Base_8 | opus-4-8 | 55 | 101 | 72k | 24.6M | $19.72 |
 
 ## Cloud agent workflows on this project
-| Date | Operation | Agents | Agent tokens | Source |
-|---|---|---|---|---|
-| 2026-07-03 | Multi-agent HIGH audit on R6+R7.1 (45 findings confirmed, 11 refuted) | 67 | 2.6M | _processo/METRICHE.md |
-| 2026-07-03 | Model/effort research for the method (dossier in experiments/) | 5 | 689k | _processo/METRICHE.md |
-| 2026-07-18 | Multi-agent MEDIO audit on R7.4 delta-sync (5 confirmed [1 ALTA], 1 refuted) | 10 | 1.0M | chat WTB/Base_8 |
+| Date | Operation | Agents | Agent tokens | Cost (API-equiv.) | Source |
+|---|---|---|---|---|---|
+| 2026-07-03 | Multi-agent HIGH audit on R6+R7.1 (45 findings confirmed, 11 refuted) | 67 | 2.6M | — | _processo/METRICHE.md |
+| 2026-07-03 | Model/effort research for the method (dossier in experiments/) | 5 | 689k | — | _processo/METRICHE.md |
+| 2026-07-18 | Multi-agent MEDIO audit on R7.4 delta-sync (5 confirmed [1 ALTA], 1 refuted) | 10 | 1.0M | — | chat WTB/Base_8 |
 
 \* cost known only in part (some model/date in that row has no verified price — see `prices.csv`)

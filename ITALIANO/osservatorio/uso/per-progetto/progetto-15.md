@@ -17,8 +17,8 @@
 ## Workflow cloud su questo progetto
 > Nota: le descrizioni delle operazioni restano in **inglese** — sono log tecnici copiati
 > tali e quali dal registro `workflow.csv` e dai titoli delle sessioni (dati, non prosa).
-| Data | Operazione | Agenti | Token agenti | Fonte |
-|---|---|---|---|---|
-| 2026-07-03 | Multi-agent HIGH audit (12 confirmed, 1 refuted + Sonnet-vs-Opus shadow check) | 21 | 1.1M | project audit report |
+| Data | Operazione | Agenti | Token agenti | Costo (API-equiv.) | Fonte |
+|---|---|---|---|---|---|
+| 2026-07-03 | Multi-agent HIGH audit (12 confirmed, 1 refuted + Sonnet-vs-Opus shadow check) | 21 | 1.1M | — | project audit report |
 
 \* costo noto solo in parte (qualche modello/data di quella riga non ha un prezzo verificato — vedi `prices.csv`)

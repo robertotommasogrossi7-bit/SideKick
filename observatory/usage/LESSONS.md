@@ -24,3 +24,10 @@
   with the package used ~2× the tokens of the blind arm, same or worse outcome) → the method now
   *proposes* instead of imposing, and multi-agent is used ONLY for audit/sweep, never for linear
   coding.
+- **What the flat plan is actually worth (2026-07-25 count, API list-price equivalent).**
+  The local chats' tokens would cost **~$3.6k** at pay-as-you-go list prices — and **86% of
+  that is cache** (read ~53% + write ~34%; generated output is only ~14%). Locally-measured
+  agent workflows add **~$174 across 7 runs**. The honest reading: this is the value of the
+  working style the flat plan makes possible (long chats, resumes, agent fleets re-reading
+  context), not money that would otherwise have been spent — priced per token, we would have
+  worked completely differently. Full mechanics + declared limits: `SCHEMA.md`.

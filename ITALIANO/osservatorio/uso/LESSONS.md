@@ -23,3 +23,10 @@
   col pacchetto ha usato ~2× i token del braccio cieco, stesso esito o peggiore) → il metodo
   ora *propone* invece di imporre, e il multi-agente si usa SOLO per audit/sweep, mai per
   coding lineare.
+- **Quanto vale davvero il piano flat (conteggio 2026-07-25, equivalente a listino API).**
+  I token delle chat locali costerebbero **~$3.6k** a prezzi di listino a consumo — e **l'86%
+  è cache** (letta ~53% + scritta ~34%; l'output generato è solo ~14%). I workflow di agenti
+  misurati in locale aggiungono **~$174 su 7 run**. La lettura onesta: è il valore dello
+  stile di lavoro che il piano flat rende possibile (chat lunghe, resume, flotte di agenti
+  che rileggono il contesto), non denaro che altrimenti si sarebbe speso — pagando a token
+  avremmo lavorato in tutt'altro modo. Meccanica completa e limiti dichiarati: `SCHEMA.md`.

@@ -1,6 +1,6 @@
 # UTILIZZO TOKEN — cruscotto (generato)
 
-> Generato da `observatory/usage.mjs` il 2026-07-25. **Non modificare a
+> Generato da `observatory/usage.mjs` il 2026-07-26. **Non modificare a
 > mano** (eccetto `LESSONS.md`, curato dall'osservatorio e incorporato qui sotto).
 > Il dettaglio di ogni progetto è in `per-progetto/` (un file per progetto, una riga di tabella per sessione).
 > Dati grezzi (originali inglesi): [`usage.csv`](../../../observatory/usage/usage.csv) ·
@@ -12,26 +12,31 @@
 > più pesanti); *input* = token letti a prezzo pieno; *cache letta* = contesto riletto (~1/10 dell'input).
 
 ## Colpo d'occhio
-- **18.3M token di output** (+ **31.2M** da agenti cloud) su **65 sessioni**
+- **18.4M token di output** (+ **31.2M** da agenti cloud) su **65 sessioni**
   in **12 progetti**, dal 2026-05 a oggi. 11k messaggi in totale.
-- La **cache** ha riletto 3596.4M token (≈188× i token vivi): riprendere una chat
+- La **cache** ha riletto 3625.5M token (≈189× i token vivi): riprendere una chat
   su una cache calda è ciò che rende sostenibile il piano — ripartire da zero li butta via.
-- **Costo API-equivalente: $3.6k**, calcolato coi prezzi verificati il 2026-07-25 in `prices.csv`. **NON è ciò che si paga davvero** sul piano
+- **Costo API-equivalente: $3.7k**, calcolato coi prezzi verificati il 2026-07-25 in `prices.csv`. **NON è ciò che si paga davvero** sul piano
   Max/Pro (finestre da 5 ore flat, non a consumo per token) — stima solo quanto costerebbero quegli stessi token sull'API a consumo, utile per confrontare modelli/workflow. I token dei workflow cloud
   non hanno un dettaglio per modello e sono **esclusi** da questo totale (vedi la sezione agenti cloud sotto).
+- **Dove va l'equivalente API** (chat locali): cache letta $1.9k (53%) + cache scritta $1.2k (34%) + output $497.19 (14%) + input $3.95 — la cache È lo stile
+  di lavoro (chat lunghe, resume, agenti che rileggono il contesto), ed è sostenibile proprio
+  perché il piano flat rende gratis rileggere.
+- **Workflow di agenti misurati dai transcript locali: $174.20 su 7 dei 17 run registrati** — prezzati messaggio per messaggio dai transcript per-agente rimasti su questa macchina;
+  gli altri run sono girati nel cloud e restano senza prezzo ('—'), mai stimati.
 
 ## Le cose più costose
 > Nota: le descrizioni delle operazioni restano in **inglese** — sono log tecnici copiati
 > tali e quali dal registro `workflow.csv` e dai titoli delle sessioni (dati, non prosa).
 | # | Cosa | Tipo | Quando | Token | Costo (API-equiv.) |
 |---|---|---|---|---|---|
-| 1 | Python question factory WR3: 555 questions/16 batches (Haiku extraction, 16 Sonnet generators, dedup, full QC 2 Opus passes + 8% shadow, fixes, final verification). RESUME INCIDENT (root cause verified by the observatory 2026-07-25 on the journal): at the 3rd relaunch the cache matched NO keys (0/46) despite 30/32 QC prompts byte-identical and a COMPLETE journal - the on-the-spot diagnosis 'journal missing results' was wrong (cache keys not content-addressed in the runtime) -> 46 agents redone (30 Opus + 16 Sonnet), waste ~0.59M live + ~39M cache; stopped by hand; closed with 3 direct agents. Live tokens from transcripts: 1.17M+0.88M+0.65M; cache read ~225M (dominant item). Duration stretched by the 2 credit gaps (~2h and ~3h on a running clock), not the cost — Studio | agenti cloud | 2026-07-25 | 11.0M | — |
+| 1 | Python question factory WR3: 555 questions/16 batches (Haiku extraction, 16 Sonnet generators, dedup, full QC 2 Opus passes + 8% shadow, fixes, final verification). RESUME INCIDENT (root cause verified by the observatory 2026-07-25 on the journal): at the 3rd relaunch the cache matched NO keys (0/46) despite 30/32 QC prompts byte-identical and a COMPLETE journal - the on-the-spot diagnosis 'journal missing results' was wrong (cache keys not content-addressed in the runtime) -> 46 agents redone (30 Opus + 16 Sonnet), waste ~0.59M live + ~39M cache; stopped by hand; closed with 3 direct agents. Live tokens from transcripts: 1.17M+0.88M+0.65M; cache read ~225M (dominant item). Duration stretched by the 2 credit gaps (~2h and ~3h on a running clock), not the cost — Studio | agenti cloud | 2026-07-25 | 11.0M | $137.79 |
 | 2 | Factory v2 MAXIMUM: 447 new elements + retrofit of 167 + SQL runner + full QC 4x Opus + take-nothing-for-granted (25 gaps -> 22 fundamentals). OBSERVATORY NOTE: run interrupted by session end with a ~2h gap ON A RUNNING CLOCK (duration inflated); resumed from cache: 30/34 agents reused free, real tokens only for the 4 missing — Studio | agenti cloud | 2026-07-20 | 5.8M | — |
 | 3 | Multi-agent HIGH audit on R6+R7.1 (45 findings confirmed, 11 refuted) — poker (Who's the Boss) | agenti cloud | 2026-07-03 | 2.6M | — |
 | 4 | Single sq/ app built from the 17 mockups (9 agents: foundations + 4 modules + integration + 2 Opus QC; +2 bugs found by the orchestrator's E2E test) — Studio | agenti cloud | 2026-07-21 | 1.8M | — |
 | 5 | WTB/Base_4 — poker (Who's the Boss) | chat | 2026-06-04 | 1.6M | $337.51 |
 | 6 | Bridge F1: auto-import into 2 apps + 167 questions generated from weather_report (12 batches, QC 3x Opus, Haiku shadow) — Studio | agenti cloud | 2026-07-20 | 1.5M | — |
-| 7 | Full repo audit REPORT-ONLY (Roberto): 3 cheap red-team personas (recruiter/adopter/visitor, 17 findings) -> 5 subsystem reviewers (30) -> Haiku dedup (29 unique) -> adversarial verification on HIGH/MEDIUM -> Opus synthesis. Outcome: 14 confirmed (1 HIGH: usage.mjs misses Studio's workflows in the drilldown, ~20.5M tokens invisible; 8 medium incl. the unexplained double Italian folder and inconsistent drop-in versions), 4 low unverified, 0 refuted; 5 severities downgraded by verification. Report: observatory/AUDIT-REPO-2026-07-25.md, no fix applied in THIS run (all fixes were applied later the same day - see the report's Outcome section) — SideKick | agenti cloud | 2026-07-25 | 1.5M | — |
+| 7 | Full repo audit REPORT-ONLY (Roberto): 3 cheap red-team personas (recruiter/adopter/visitor, 17 findings) -> 5 subsystem reviewers (30) -> Haiku dedup (29 unique) -> adversarial verification on HIGH/MEDIUM -> Opus synthesis. Outcome: 14 confirmed (1 HIGH: usage.mjs misses Studio's workflows in the drilldown, ~20.5M tokens invisible; 8 medium incl. the unexplained double Italian folder and inconsistent drop-in versions), 4 low unverified, 0 refuted; 5 severities downgraded by verification. Report: observatory/AUDIT-REPO-2026-07-25.md, no fix applied in THIS run (all fixes were applied later the same day - see the report's Outcome section) — SideKick | agenti cloud | 2026-07-25 | 1.5M | $7.98 |
 | 8 | (oscurato) — progetto-15 | chat | 2026-05-29 | 1.5M | $479.69 |
 
 ## Cosa abbiamo imparato sul costo (e ridotto davvero)
@@ -58,16 +63,23 @@
   col pacchetto ha usato ~2× i token del braccio cieco, stesso esito o peggiore) → il metodo
   ora *propone* invece di imporre, e il multi-agente si usa SOLO per audit/sweep, mai per
   coding lineare.
+- **Quanto vale davvero il piano flat (conteggio 2026-07-25, equivalente a listino API).**
+  I token delle chat locali costerebbero **~$3.6k** a prezzi di listino a consumo — e **l'86%
+  è cache** (letta ~53% + scritta ~34%; l'output generato è solo ~14%). I workflow di agenti
+  misurati in locale aggiungono **~$174 su 7 run**. La lettura onesta: è il valore dello
+  stile di lavoro che il piano flat rende possibile (chat lunghe, resume, flotte di agenti
+  che rileggono il contesto), non denaro che altrimenti si sarebbe speso — pagando a token
+  avremmo lavorato in tutt'altro modo. Meccanica completa e limiti dichiarati: `SCHEMA.md`.
 
 ## Per progetto (clicca per il dettaglio per sessione)
 | Progetto | Periodo | Sessioni | Output | Input | Cache letta | Costo (API-equiv.) |
 |---|---|---|---|---|---|---|
 | [poker (Who's the Boss)](per-progetto/poker-who-s-the-boss.md) | 2026-05-14 → 2026-07-22 | 23 | 7.6M | 333k | 1685.2M | $1.4k |
 | [progetto-15](per-progetto/progetto-15.md) | 2026-05-29 → 2026-07-17 | 5 | 3.6M | 233k | 921.0M | $935.06 |
-| [SideKick](per-progetto/sidekick.md) | 2026-06-03 → 2026-07-25 | 12 | 2.2M | 117k | 288.2M | $399.78 |
+| [SideKick](per-progetto/sidekick.md) | 2026-06-03 → 2026-07-26 | 12 | 2.2M | 117k | 306.5M | $429.24 |
 | [Libri-Organizzazione](per-progetto/libri-organizzazione.md) | 2026-05-07 → 2026-05-31 | 2 | 1.3M | 11k | 121.4M | $138.83 |
 | [Programmi (root)](per-progetto/programmi-root.md) | 2026-05-31 → 2026-06-27 | 3 | 997k | 45k | 96.4M | $175.54 |
-| [Studio](per-progetto/studio.md) | 2026-07-20 → 2026-07-25 | 5 | 962k | 3k | 363.7M | $431.96 |
+| [Studio](per-progetto/studio.md) | 2026-07-20 → 2026-07-26 | 5 | 998k | 3k | 374.5M | $447.84 |
 | [Text-Adventure-Engine](per-progetto/text-adventure-engine.md) | 2026-05-28 → 2026-05-29 | 1 | 466k | 370 | 54.3M | $46.54 |
 | [experiments (method tests)](per-progetto/experiments-method-tests.md) | 2026-06-04 → 2026-06-11 | 9 | 375k | 5k | 19.1M | $14.64 |
 | [progetto-16](per-progetto/progetto-16.md) | 2026-06-28 → 2026-06-30 | 1 | 308k | 17k | 10.9M | $23.88 |
@@ -84,31 +96,35 @@ significa nessuna colonna USD qui — vedi `SCHEMA.md` per il limite dichiarato.
 > Nota: le descrizioni delle operazioni restano in **inglese** — sono log tecnici copiati
 > tali e quali dal registro `workflow.csv` e dai titoli delle sessioni (dati, non prosa).
 
-| Data | Progetto | Operazione | Agenti | Token agenti |
-|---|---|---|---|---|
-| 2026-07-03 | poker (Who's the Boss) | Multi-agent HIGH audit on R6+R7.1 (45 findings confirmed, 11 refuted) | 67 | 2.6M |
-| 2026-07-03 | poker (Who's the Boss) | Model/effort research for the method (dossier in experiments/) | 5 | 689k |
-| 2026-07-03 | progetto-15 | Multi-agent HIGH audit (12 confirmed, 1 refuted + Sonnet-vs-Opus shadow check) | 21 | 1.1M |
-| 2026-07-17 | SideKick | English translation of the public facade (11 docs incl. CONSTITUTION v1.5) | 1 | 119k |
-| 2026-07-17 | SideKick | Spec Kit double-run study (Opus x2, identical prompt) + claim verification | 2 | 293k |
-| 2026-07-18 | poker (Who's the Boss) | Multi-agent MEDIO audit on R7.4 delta-sync (5 confirmed [1 ALTA], 1 refuted) | 10 | 1.0M |
-| 2026-07-20 | Studio | Bridge F1: auto-import into 2 apps + 167 questions generated from weather_report (12 batches, QC 3x Opus, Haiku shadow) | 21 | 1.5M |
-| 2026-07-20 | Studio | Factory v2 MAXIMUM: 447 new elements + retrofit of 167 + SQL runner + full QC 4x Opus + take-nothing-for-granted (25 gaps -> 22 fundamentals). OBSERVATORY NOTE: run interrupted by session end with a ~2h gap ON A RUNNING CLOCK (duration inflated); resumed from cache: 30/34 agents reused free, real tokens only for the 4 missing | 34 | 5.8M |
-| 2026-07-21 | Studio | Single sq/ app built from the 17 mockups (9 agents: foundations + 4 modules + integration + 2 Opus QC; +2 bugs found by the orchestrator's E2E test) | 9 | 1.8M |
-| 2026-07-21 | Studio | Polish 1: P0 bugs + Constellation + Home v2 + Training/Exams/Pomodoro + Progress v2. NOTE: interrupted twice by Roberto (out of tokens); resumed from cache with 6/8 agents reused free - real tokens only 427,713 across the 3 launches | 8 | 428k |
-| 2026-07-25 | Studio | Python question factory WR3: 555 questions/16 batches (Haiku extraction, 16 Sonnet generators, dedup, full QC 2 Opus passes + 8% shadow, fixes, final verification). RESUME INCIDENT (root cause verified by the observatory 2026-07-25 on the journal): at the 3rd relaunch the cache matched NO keys (0/46) despite 30/32 QC prompts byte-identical and a COMPLETE journal - the on-the-spot diagnosis 'journal missing results' was wrong (cache keys not content-addressed in the runtime) -> 46 agents redone (30 Opus + 16 Sonnet), waste ~0.59M live + ~39M cache; stopped by hand; closed with 3 direct agents. Live tokens from transcripts: 1.17M+0.88M+0.65M; cache read ~225M (dominant item). Duration stretched by the 2 credit gaps (~2h and ~3h on a running clock), not the cost | 229 | 11.0M |
-| 2026-07-25 | SideKick | Repo clarity+English (3 phases): 3 Sonnet analysts (fresh eyes, native English, fact coherence; 26 findings) -> 5 Sonnet executors on disjoint files (CONSTITUTION.md brought to v1.9, FACTORY-PROCESS.md created, spec-kit drop-in with new principles XII-XVI, facade, observatory docs) -> 2 Opus reviewers with different lenses (8 findings, 5 real: drop-in version race in README between parallel agents, 170x->187x, 5h_windows line MISSING FROM THE MASTER then added, untranslated 'Assistenza', dashboard to regenerate; 1 refuted: the generator has no hardcoded 170x). Integration and commits by the director | 10 | 838k |
-| 2026-07-25 | SideKick | Italian copy ITALIANO/: 5 Sonnet translators on disjoint blocks (14 docs, ~880 lines) + 1 verifier (completeness, number fidelity, terminology, links). 2 cross-agent slips fixed by the director: README intro note removed by an overzealous verifier (context lost between agents) and FINDINGS link pointed at the original instead of the copy | 6 | 405k |
-| 2026-07-25 | SideKick | Full repo audit REPORT-ONLY (Roberto): 3 cheap red-team personas (recruiter/adopter/visitor, 17 findings) -> 5 subsystem reviewers (30) -> Haiku dedup (29 unique) -> adversarial verification on HIGH/MEDIUM -> Opus synthesis. Outcome: 14 confirmed (1 HIGH: usage.mjs misses Studio's workflows in the drilldown, ~20.5M tokens invisible; 8 medium incl. the unexplained double Italian folder and inconsistent drop-in versions), 4 low unverified, 0 refuted; 5 severities downgraded by verification. Report: observatory/AUDIT-REPO-2026-07-25.md, no fix applied in THIS run (all fixes were applied later the same day - see the report's Outcome section) | 24 | 1.5M |
-| 2026-07-25 | SideKick | ITALIANO total translation (6 Sonnet agents): tree restructured with Italian folder names (osservatorio/uso/per-progetto/esperimenti/plugin/documenti), usage.mjs made BILINGUAL (Italian dashboard+drilldowns generated on every run, +2 tests), missing experiment docs translated, audit report turned English in the main tree (Italian original kept in ITALIANO/), full resync with the restructured README; verifier fixed 2 real bugs (4 links pointing at English dashboards instead of the generated Italian ones; degraded accents in one file) and flagged the v1.9.1->v1.9.2 README drift (fixed by the director) | 6 | 685k |
-| 2026-07-25 | SideKick | Final day red-team (Roberto): 3 Sonnet personas on the CURRENT repo state (recruiter on the new README, method adopter, Italian visitor) -> 2 Opus reviewers (bilingual fidelity+method artifacts, whole-repo navigation) with red-team findings as seeds. 16 findings, all small and real, dedup to 7: DATA.md hand-written totals stale vs same-day dashboard (fixed), Italian dashboard cells in English without notice (fixed in the generator: permanent note), PLAN item 1 unticked though done (ticked), missing language markers on drop-in links (added), audit report orphaned from README navigation (linked), drop-in version-lag note (added), register wording (clarified). All applied by the director same day | 5 | 460k |
-| 2026-07-25 | SideKick | C1+C3 done well (Roberto): 3 research agents (official Anthropic prices per model VERIFIED AT SOURCE with URL+date each, incl. sonnet-5 two-tier intro/standard price switching 2026-09-01; how ccusage/LiteLLM convert costs; dashboard-presentation comparison -> self-contained HTML viewer recommended over Power BI/markdown-only) -> 1 implementer (prices.csv hand-maintained with validity windows, cost_usd_equiv/cost_partial columns, daily.csv, By day/By week views, bilingual dashboard.html with sortable tables + SVG charts, 6 new tests, limits DECLARED: API-equivalent is not the plan bill, cloud workflows never priced, cache-write at 5m rate) -> 2 Opus verifiers (independent recompute matched to the cent; 4 small real findings, all fixed by the director + 1 visual wrap bug found in the director own browser check). Totals now visible: ~$3.6k API-equivalent for 18.3M output + cache across 65 sessions | 6 | 926k |
+Il costo è **misurato** dai transcript per-agente locali quando un run li ha lasciati su
+questa macchina (aggancio tramite l'id `wf_...` nella Fonte); '—' = niente transcript
+locali (run nel cloud), mai una stima.
+
+| Data | Progetto | Operazione | Agenti | Token agenti | Costo (API-equiv.) |
+|---|---|---|---|---|---|
+| 2026-07-03 | poker (Who's the Boss) | Multi-agent HIGH audit on R6+R7.1 (45 findings confirmed, 11 refuted) | 67 | 2.6M | — |
+| 2026-07-03 | poker (Who's the Boss) | Model/effort research for the method (dossier in experiments/) | 5 | 689k | — |
+| 2026-07-03 | progetto-15 | Multi-agent HIGH audit (12 confirmed, 1 refuted + Sonnet-vs-Opus shadow check) | 21 | 1.1M | — |
+| 2026-07-17 | SideKick | English translation of the public facade (11 docs incl. CONSTITUTION v1.5) | 1 | 119k | — |
+| 2026-07-17 | SideKick | Spec Kit double-run study (Opus x2, identical prompt) + claim verification | 2 | 293k | — |
+| 2026-07-18 | poker (Who's the Boss) | Multi-agent MEDIO audit on R7.4 delta-sync (5 confirmed [1 ALTA], 1 refuted) | 10 | 1.0M | — |
+| 2026-07-20 | Studio | Bridge F1: auto-import into 2 apps + 167 questions generated from weather_report (12 batches, QC 3x Opus, Haiku shadow) | 21 | 1.5M | — |
+| 2026-07-20 | Studio | Factory v2 MAXIMUM: 447 new elements + retrofit of 167 + SQL runner + full QC 4x Opus + take-nothing-for-granted (25 gaps -> 22 fundamentals). OBSERVATORY NOTE: run interrupted by session end with a ~2h gap ON A RUNNING CLOCK (duration inflated); resumed from cache: 30/34 agents reused free, real tokens only for the 4 missing | 34 | 5.8M | — |
+| 2026-07-21 | Studio | Single sq/ app built from the 17 mockups (9 agents: foundations + 4 modules + integration + 2 Opus QC; +2 bugs found by the orchestrator's E2E test) | 9 | 1.8M | — |
+| 2026-07-21 | Studio | Polish 1: P0 bugs + Constellation + Home v2 + Training/Exams/Pomodoro + Progress v2. NOTE: interrupted twice by Roberto (out of tokens); resumed from cache with 6/8 agents reused free - real tokens only 427,713 across the 3 launches | 8 | 428k | — |
+| 2026-07-25 | Studio | Python question factory WR3: 555 questions/16 batches (Haiku extraction, 16 Sonnet generators, dedup, full QC 2 Opus passes + 8% shadow, fixes, final verification). RESUME INCIDENT (root cause verified by the observatory 2026-07-25 on the journal): at the 3rd relaunch the cache matched NO keys (0/46) despite 30/32 QC prompts byte-identical and a COMPLETE journal - the on-the-spot diagnosis 'journal missing results' was wrong (cache keys not content-addressed in the runtime) -> 46 agents redone (30 Opus + 16 Sonnet), waste ~0.59M live + ~39M cache; stopped by hand; closed with 3 direct agents. Live tokens from transcripts: 1.17M+0.88M+0.65M; cache read ~225M (dominant item). Duration stretched by the 2 credit gaps (~2h and ~3h on a running clock), not the cost | 229 | 11.0M | $137.79 |
+| 2026-07-25 | SideKick | Repo clarity+English (3 phases): 3 Sonnet analysts (fresh eyes, native English, fact coherence; 26 findings) -> 5 Sonnet executors on disjoint files (CONSTITUTION.md brought to v1.9, FACTORY-PROCESS.md created, spec-kit drop-in with new principles XII-XVI, facade, observatory docs) -> 2 Opus reviewers with different lenses (8 findings, 5 real: drop-in version race in README between parallel agents, 170x->187x, 5h_windows line MISSING FROM THE MASTER then added, untranslated 'Assistenza', dashboard to regenerate; 1 refuted: the generator has no hardcoded 170x). Integration and commits by the director | 10 | 838k | $6.74 |
+| 2026-07-25 | SideKick | Italian copy ITALIANO/: 5 Sonnet translators on disjoint blocks (14 docs, ~880 lines) + 1 verifier (completeness, number fidelity, terminology, links). 2 cross-agent slips fixed by the director: README intro note removed by an overzealous verifier (context lost between agents) and FINDINGS link pointed at the original instead of the copy | 6 | 405k | $3.07 |
+| 2026-07-25 | SideKick | Full repo audit REPORT-ONLY (Roberto): 3 cheap red-team personas (recruiter/adopter/visitor, 17 findings) -> 5 subsystem reviewers (30) -> Haiku dedup (29 unique) -> adversarial verification on HIGH/MEDIUM -> Opus synthesis. Outcome: 14 confirmed (1 HIGH: usage.mjs misses Studio's workflows in the drilldown, ~20.5M tokens invisible; 8 medium incl. the unexplained double Italian folder and inconsistent drop-in versions), 4 low unverified, 0 refuted; 5 severities downgraded by verification. Report: observatory/AUDIT-REPO-2026-07-25.md, no fix applied in THIS run (all fixes were applied later the same day - see the report's Outcome section) | 24 | 1.5M | $7.98 |
+| 2026-07-25 | SideKick | ITALIANO total translation (6 Sonnet agents): tree restructured with Italian folder names (osservatorio/uso/per-progetto/esperimenti/plugin/documenti), usage.mjs made BILINGUAL (Italian dashboard+drilldowns generated on every run, +2 tests), missing experiment docs translated, audit report turned English in the main tree (Italian original kept in ITALIANO/), full resync with the restructured README; verifier fixed 2 real bugs (4 links pointing at English dashboards instead of the generated Italian ones; degraded accents in one file) and flagged the v1.9.1->v1.9.2 README drift (fixed by the director) | 6 | 685k | $6.18 |
+| 2026-07-25 | SideKick | Final day red-team (Roberto): 3 Sonnet personas on the CURRENT repo state (recruiter on the new README, method adopter, Italian visitor) -> 2 Opus reviewers (bilingual fidelity+method artifacts, whole-repo navigation) with red-team findings as seeds. 16 findings, all small and real, dedup to 7: DATA.md hand-written totals stale vs same-day dashboard (fixed), Italian dashboard cells in English without notice (fixed in the generator: permanent note), PLAN item 1 unticked though done (ticked), missing language markers on drop-in links (added), audit report orphaned from README navigation (linked), drop-in version-lag note (added), register wording (clarified). All applied by the director same day | 5 | 460k | $4.47 |
+| 2026-07-25 | SideKick | C1+C3 done well (Roberto): 3 research agents (official Anthropic prices per model VERIFIED AT SOURCE with URL+date each, incl. sonnet-5 two-tier intro/standard price switching 2026-09-01; how ccusage/LiteLLM convert costs; dashboard-presentation comparison -> self-contained HTML viewer recommended over Power BI/markdown-only) -> 1 implementer (prices.csv hand-maintained with validity windows, cost_usd_equiv/cost_partial columns, daily.csv, By day/By week views, bilingual dashboard.html with sortable tables + SVG charts, 6 new tests, limits DECLARED: API-equivalent is not the plan bill, cloud workflows never priced, cache-write at 5m rate) -> 2 Opus verifiers (independent recompute matched to the cent; 4 small real findings, all fixed by the director + 1 visual wrap bug found in the director own browser check). Totals now visible: ~$3.6k API-equivalent for 18.3M output + cache across 65 sessions | 6 | 926k | $7.98 |
 
 ## Per modello (solo chat locali)
 | Modello | Msg | Input | Output | Cache letta | Costo (API-equiv.) |
 |---|---|---|---|---|---|
 | opus-4-8 | 6k | 628k | 11.8M | 2300.2M | $2.3k |
-| fable-5 | 1k | 53k | 2.3M | 502.2M | $861.75 |
+| fable-5 | 2k | 53k | 2.4M | 531.3M | $907.09 |
 | opus-4-7 | 1k | 15k | 2.2M | 259.4M | $277.90 |
 | sonnet-4-6 | 2k | 38k | 1.5M | 137.6M | $79.57 |
 | sonnet-5 | 801 | 43k | 602k | 397.1M | $107.47 |
@@ -118,7 +134,7 @@ significa nessuna colonna USD qui — vedi `SCHEMA.md` per il limite dichiarato.
 |---|---|---|---|---|---|
 | 2026-05 | 2k | 82k | 4.0M | 396.6M | $382.42 |
 | 2026-06 | 4k | 536k | 9.0M | 1557.8M | $1.7k |
-| 2026-07 | 4k | 159k | 5.3M | 1641.9M | $1.6k |
+| 2026-07 | 4k | 159k | 5.4M | 1671.0M | $1.6k |
 
 ## Per settimana, numeri di settimana ISO (solo chat locali)
 *(tutta la cronologia registrata)*
@@ -136,14 +152,13 @@ significa nessuna colonna USD qui — vedi `SCHEMA.md` per il limite dichiarato.
 | 2026-W27 | 2k | 186k | 3.6M | 907.6M | $822.34 |
 | 2026-W28 | 559 | 44k | 599k | 219.0M | $121.55 |
 | 2026-W29 | 1k | 15k | 1.4M | 351.3M | $422.15 |
-| 2026-W30 | 1k | 4k | 1.5M | 486.7M | $598.98 |
+| 2026-W30 | 1k | 4k | 1.6M | 515.8M | $644.32 |
 
 ## Per giorno (solo chat locali)
-*(mostrati gli ultimi 30 di 58 giorni registrati; la serie completa è in `daily.csv`)*
+*(mostrati gli ultimi 30 di 59 giorni registrati; la serie completa è in `daily.csv`)*
 
 | Giorno | Msg | Input | Output | Cache letta | Costo (API-equiv.) |
 |---|---|---|---|---|---|
-| 2026-06-15 | 41 | 8k | 98k | 3.7M | $6.57 |
 | 2026-06-16 | 9 | 147 | 28k | 1.5M | $2.83 |
 | 2026-06-17 | 258 | 35k | 354k | 80.3M | $68.56 |
 | 2026-06-19 | 89 | 13k | 389k | 38.4M | $68.07 |
@@ -172,6 +187,7 @@ significa nessuna colonna USD qui — vedi `SCHEMA.md` per il limite dichiarato.
 | 2026-07-22 | 197 | 1k | 225k | 74.4M | $70.61 |
 | 2026-07-23 | 63 | 117 | 102k | 17.5M | $26.45 |
 | 2026-07-24 | 101 | 189 | 174k | 31.6M | $47.90 |
-| 2026-07-25 | 311 | 1k | 442k | 101.2M | $144.52 |
+| 2026-07-25 | 317 | 1k | 450k | 105.1M | $148.94 |
+| 2026-07-26 | 64 | 121 | 78k | 25.3M | $40.93 |
 
 \* costo noto solo in parte (qualche modello/data di quella riga non ha un prezzo verificato — vedi `prices.csv`)

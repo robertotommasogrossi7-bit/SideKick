@@ -15,8 +15,8 @@
 | 2026-07-01 | (redacted) | opus-4-8 | 3 | 6 | 14k | 880k | $0.9556 |
 
 ## Cloud agent workflows on this project
-| Date | Operation | Agents | Agent tokens | Source |
-|---|---|---|---|---|
-| 2026-07-03 | Multi-agent HIGH audit (12 confirmed, 1 refuted + Sonnet-vs-Opus shadow check) | 21 | 1.1M | project audit report |
+| Date | Operation | Agents | Agent tokens | Cost (API-equiv.) | Source |
+|---|---|---|---|---|---|
+| 2026-07-03 | Multi-agent HIGH audit (12 confirmed, 1 refuted + Sonnet-vs-Opus shadow check) | 21 | 1.1M | — | project audit report |
 
 \* cost known only in part (some model/date in that row has no verified price — see `prices.csv`)
