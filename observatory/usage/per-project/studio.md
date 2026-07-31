@@ -2,8 +2,8 @@
 
 > Back to the dashboard: [`../DASHBOARD.md`](../DASHBOARD.md). Do not edit by hand.
 
-**6 sessions** from 2026-07-20 to 2026-07-26 · **1.2M output** ·
-11k input · 431.8M cache read · 1k messages · **+30.9M cloud-agent tokens** (7 workflows)
+**9 sessions** from 2026-07-20 to 2026-07-31 · **1.9M output** ·
+13k input · 615.4M cache read · 2k messages · **+40.9M cloud-agent tokens** (8 workflows)
 
 ## Sessions (in time order — the title says what was done)
 | Period | Operation | Models | Msg | Input | Output | Cache read | Cost (API-equiv.) |
@@ -14,6 +14,9 @@
 | 2026-07-22→07-24 | STUDIO/Base_2 | fable-5 + opus-4-8 | 229 | 1k | 227k | 61.0M | $67.15 |
 | 2026-07-25→07-26 | STUDIO/Base_3 | fable-5 | 151 | 726 | 185k | 39.3M | $59.91 |
 | 2026-07-26 | Studio/Fabbrica_Python_2 | fable-5 | 157 | 8k | 166k | 38.7M | $61.28 |
+| 2026-07-28→07-30 | STUDIO/SQL_1 | fable-5 | 182 | 1k | 206k | 45.8M | $79.84 |
+| 2026-07-29→07-30 | STUDIO/SQL_2 | opus-5 | 166 | 389 | 125k | 29.8M | — |
+| 2026-07-29→07-31 | STUDIO/Fabbrica_SQL1 | fable-5 | 236 | 471 | 341k | 108.0M | $175.42 |
 
 ## Cloud agent workflows on this project
 | Date | Operation | Agents | Agent tokens | Cost (API-equiv.) | Source |
@@ -25,5 +28,6 @@
 | 2026-07-25 | Python question factory WR3: 555 questions/16 batches (Haiku extraction, 16 Sonnet generators, dedup, full QC 2 Opus passes + 8% shadow, fixes, final verification). RESUME INCIDENT (root cause verified by the observatory 2026-07-25 on the journal): at the 3rd relaunch the cache matched NO keys (0/46) despite 30/32 QC prompts byte-identical and a COMPLETE journal - the on-the-spot diagnosis 'journal missing results' was wrong (cache keys not content-addressed in the runtime) -> 46 agents redone (30 Opus + 16 Sonnet), waste ~0.59M live + ~39M cache; stopped by hand; closed with 3 direct agents. Live tokens from transcripts: 1.17M+0.88M+0.65M; cache read ~225M (dominant item). Duration stretched by the 2 credit gaps (~2h and ~3h on a running clock), not the cost | 229 | 11.0M | $137.79 | chat weather_report/Fabbrica_Domande_Python + transcript wf_62401bd0-f1e |
 | 2026-07-26 | Fabbrica libri run 1 (Effective Python): 628 domande nuove con QC totale (Opus fuso + ombra 8% Sonnet + ricontrolli) + bonifica files su 355 vecchie + 194 rotazioni posizionali + glossario post-update | 78 | 9.9M | $131.50 | inbox/REPORT-FABBRICA-LIBRI-2026-07-26.md + transcript wf_0e41ef9f-169 wf_27dc2374-d6c wf_477a2395-b6f wf_e3c57cb0-b4d wf_f0a996c1-83f |
 | 2026-07-27 | Riparazione R-06 run 1: riallineamento campo term al glossario (117 su 283 candidati, gap chiusi 17->37) | 5 | 530k | $3.15 | inbox/REPORT-FABBRICA-LIBRI-2026-07-26.md + transcript wf_1a24e505-e3e |
+| 2026-07-31 | Fabbrica SQL pratiche: FASE 0 bonifica corpus + 523 domande nuove (298 pratiche sakila/weather eseguite, 130 T-SQL, 95 teoria) + QC 17/17 con ombra mirata + 5 check meccanici nuovi; agenti e token STIMATI dal report (run cloud, nessun transcript locale) | 85 | 10.0M | — | inbox/REPORT-FABBRICA-SQL-2026-07-31.md |
 
 \* cost known only in part (some model/date in that row has no verified price — see `prices.csv`)
