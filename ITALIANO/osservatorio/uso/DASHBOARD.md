@@ -12,14 +12,14 @@
 > più pesanti); *input* = token letti a prezzo pieno; *cache letta* = contesto riletto (~1/10 dell'input).
 
 ## Colpo d'occhio
-- **19.4M token di output** (+ **51.6M** da agenti cloud) su **70 sessioni**
+- **19.6M token di output** (+ **~51.6M** da agenti cloud) su **70 sessioni**
   in **12 progetti**, dal 2026-05 a oggi. 12k messaggi in totale.
-- La **cache** ha riletto 3885.5M token (≈192× i token vivi): riprendere una chat
+- La **cache** ha riletto 3926.5M token (≈193× i token vivi): riprendere una chat
   su una cache calda è ciò che rende sostenibile il piano — ripartire da zero li butta via.
-- **Costo API-equivalente: $4.0k*** (parziale — alcuni modelli/date non hanno ancora un prezzo verificato, segnati con \*), calcolato coi prezzi verificati il 2026-07-25 in `prices.csv`. **NON è ciò che si paga davvero** sul piano
+- **Costo API-equivalente: $4.1k*** (parziale — alcuni modelli/date non hanno ancora un prezzo verificato, segnati con \*), calcolato coi prezzi verificati il 2026-07-25 in `prices.csv`. **NON è ciò che si paga davvero** sul piano
   Max/Pro (finestre da 5 ore flat, non a consumo per token) — stima solo quanto costerebbero quegli stessi token sull'API a consumo, utile per confrontare modelli/workflow. I token dei workflow cloud
   non hanno un dettaglio per modello e sono **esclusi** da questo totale (vedi la sezione agenti cloud sotto).
-- **Dove va l'equivalente API** (chat locali): cache letta $2.2k (53%) + cache scritta $1.3k (33%) + output $540.59 (13%) + input $4.05 — la cache È lo stile
+- **Dove va l'equivalente API** (chat locali): cache letta $2.2k (54%) + cache scritta $1.4k (33%) + output $548.89 (13%) + input $4.06 — la cache È lo stile
   di lavoro (chat lunghe, resume, agenti che rileggono il contesto), ed è sostenibile proprio
   perché il piano flat rende gratis rileggere.
 - **Workflow di agenti misurati dai transcript locali: $321.07 su 10 dei 20 run registrati** — prezzati messaggio per messaggio dai transcript per-agente rimasti su questa macchina;
@@ -31,8 +31,8 @@
 | # | Cosa | Tipo | Quando | Token | Costo (API-equiv.) |
 |---|---|---|---|---|---|
 | 1 | Python question factory WR3: 555 questions/16 batches (Haiku extraction, 16 Sonnet generators, dedup, full QC 2 Opus passes + 8% shadow, fixes, final verification). RESUME INCIDENT (root cause verified by the observatory 2026-07-25 on the journal): at the 3rd relaunch the cache matched NO keys (0/46) despite 30/32 QC prompts byte-identical and a COMPLETE journal - the on-the-spot diagnosis 'journal missing results' was wrong (cache keys not content-addressed in the runtime) -> 46 agents redone (30 Opus + 16 Sonnet), waste ~0.59M live + ~39M cache; stopped by hand; closed with 3 direct agents. Live tokens from transcripts: 1.17M+0.88M+0.65M; cache read ~225M (dominant item). Duration stretched by the 2 credit gaps (~2h and ~3h on a running clock), not the cost — Studio | agenti cloud | 2026-07-25 | 11.0M | $137.79 |
-| 2 | Fabbrica SQL pratiche: FASE 0 bonifica corpus + 523 domande nuove (298 pratiche sakila/weather eseguite, 130 T-SQL, 95 teoria) + QC 17/17 con ombra mirata + 5 check meccanici nuovi; agenti e token STIMATI dal report (run cloud, nessun transcript locale) — Studio | agenti cloud | 2026-07-31 | 10.0M | — |
-| 3 | Fabbrica libri run 1 (Effective Python): 628 domande nuove con QC totale (Opus fuso + ombra 8% Sonnet + ricontrolli) + bonifica files su 355 vecchie + 194 rotazioni posizionali + glossario post-update — Studio | agenti cloud | 2026-07-26 | 9.9M | $131.50 |
+| 2 | SQL practice factory: PHASE 0 corpus remediation + 523 new questions (298 executable practices actually run on sakila/weather, 130 T-SQL, 95 theory) + QC 17/17 with targeted shadow + 5 new mechanical checks; agents and tokens ESTIMATED from the run report (cloud run, no local transcripts) — Studio | agenti cloud | 2026-07-31 | ~10.0M | — |
+| 3 | Books factory run 1 (Effective Python): 628 new questions with total QC (fused Opus + 8% Sonnet shadow + rechecks) + file remediation on 355 old ones + 194 positional rotations + post-run glossary update — Studio | agenti cloud | 2026-07-26 | 9.9M | $131.50 |
 | 4 | Factory v2 MAXIMUM: 447 new elements + retrofit of 167 + SQL runner + full QC 4x Opus + take-nothing-for-granted (25 gaps -> 22 fundamentals). OBSERVATORY NOTE: run interrupted by session end with a ~2h gap ON A RUNNING CLOCK (duration inflated); resumed from cache: 30/34 agents reused free, real tokens only for the 4 missing — Studio | agenti cloud | 2026-07-20 | 5.8M | — |
 | 5 | Multi-agent HIGH audit on R6+R7.1 (45 findings confirmed, 11 refuted) — poker (Who's the Boss) | agenti cloud | 2026-07-03 | 2.6M | — |
 | 6 | Single sq/ app built from the 17 mockups (9 agents: foundations + 4 modules + integration + 2 Opus QC; +2 bugs found by the orchestrator's E2E test) — Studio | agenti cloud | 2026-07-21 | 1.8M | — |
@@ -45,12 +45,13 @@
   finding PRIMA delle verifiche, verifica adversariale solo su ALTO/MEDIO, cacce mirate):
   **21 agenti / 1,1M**, trovando comunque i bug critici reali. ⚠️ Onestà: progetti e ambito
   **diversi** — è un'indicazione (N=1+1), non un confronto pulito dello stesso audit.
-- **Ripartire da zero è lo spreco più grande.** Nei nostri dati le letture di cache erano
-  ~187× i token vivi (aggiornamento 2026-07-25; era ~170× al conteggio precedente — stessa
-  meccanica, più dati accumulati da allora) — è la normale meccanica del prompt caching nelle
-  chat lunghe (il punto attuabile è nostro): riprendere una chat/audit interrotto **riusando
-  la cache** (la ripresa dell'audit poker ha riusato il 100% dei passi completati) costa
-  ~1/10; ripartire da zero butta via tutto.
+- **Ripartire da zero è lo spreco più grande.** Nei nostri dati le letture di cache superano
+  i token vivi di due ordini di grandezza — il rapporto vivo è nel "Colpo d'occhio" qui
+  sopra (questa pagina ha smesso di ricopiarlo a mano dopo che è derivato due volte: fonte
+  unica, il blocco generato). È la normale meccanica del prompt caching nelle chat lunghe
+  (il punto attuabile è nostro): riprendere una chat/audit interrotto **riusando la cache**
+  (la ripresa dell'audit poker ha riusato il 100% dei passi completati) costa ~1/10;
+  ripartire da zero butta via tutto.
 - **Fable sui lavori lunghi non ripaga**: l'audit poker su Fable si è fermato per la
   **finestra di utilizzo di cinque ore** del piano Max (il limite d'uso, non la finestra di
   contesto) → regola: lavori pesanti su Opus, **Fable solo per le decisioni che contano e i
@@ -63,10 +64,10 @@
   col pacchetto ha usato ~2× i token del braccio cieco, stesso esito o peggiore) → il metodo
   ora *propone* invece di imporre, e il multi-agente si usa SOLO per audit/sweep, mai per
   coding lineare.
-- **Quanto vale davvero il piano flat (conteggio 2026-07-25, equivalente a listino API).**
-  I token delle chat locali costerebbero **~$3.6k** a prezzi di listino a consumo — e **l'86%
-  è cache** (letta ~53% + scritta ~34%; l'output generato è solo ~14%). I workflow di agenti
-  misurati in locale aggiungono **~$174 su 7 run**. La lettura onesta: è il valore dello
+- **Quanto vale davvero il piano flat (equivalente a listino API).** Il totale vivo, la sua
+  composizione dominata dalla cache e la riga dei workflow misurati stanno tutti nel "Colpo
+  d'occhio" qui sopra — la costante di ogni conteggio finora: **il grosso è cache** (letture
+  + scritture; l'output generato è una fetta piccola). La lettura onesta: è il valore dello
   stile di lavoro che il piano flat rende possibile (chat lunghe, resume, flotte di agenti
   che rileggono il contesto), non denaro che altrimenti si sarebbe speso — pagando a token
   avremmo lavorato in tutt'altro modo. Meccanica completa e limiti dichiarati: `SCHEMA.md`.
@@ -76,7 +77,7 @@
 |---|---|---|---|---|---|---|
 | [poker (Who's the Boss)](per-progetto/poker-who-s-the-boss.md) | 2026-05-14 → 2026-07-22 | 23 | 7.6M | 333k | 1685.2M | $1.4k |
 | [progetto-15](per-progetto/progetto-15.md) | 2026-05-29 → 2026-07-17 | 5 | 3.6M | 233k | 921.0M | $935.06 |
-| [SideKick](per-progetto/sidekick.md) | 2026-06-03 → 2026-07-31 | 13 | 2.3M | 117k | 325.6M | $464.41 |
+| [SideKick](per-progetto/sidekick.md) | 2026-06-03 → 2026-07-31 | 13 | 2.5M | 118k | 366.6M | $523.00 |
 | [Studio](per-progetto/studio.md) | 2026-07-20 → 2026-07-31 | 9 | 1.9M | 13k | 615.4M | $791.57* |
 | [Libri-Organizzazione](per-progetto/libri-organizzazione.md) | 2026-05-07 → 2026-05-31 | 2 | 1.3M | 11k | 121.4M | $138.83 |
 | [Programmi (root)](per-progetto/programmi-root.md) | 2026-05-31 → 2026-06-27 | 3 | 997k | 45k | 96.4M | $175.54 |
@@ -91,7 +92,9 @@
 I workflow multi-agente girano nel cloud e **non lasciano transcript sul PC**: questi numeri
 vengono dai file METRICHE/report dei progetti. **Dopo ogni nuovo workflow, aggiungi una riga a
 `workflow.csv`** (il rituale dell'osservatorio include il promemoria). Nessun dettaglio per modello
-significa nessuna colonna USD qui — vedi `SCHEMA.md` per il limite dichiarato.
+significa nessuna colonna USD qui — vedi `SCHEMA.md` per il limite dichiarato. I token marcati
+**~** sono **stime dai report dei run** (colonna `estimated` del registro), non conteggi
+misurati — ogni totale che li contiene è marcato ~ a sua volta.
 
 > Nota: le descrizioni delle operazioni restano in **inglese** — sono log tecnici copiati
 > tali e quali dal registro `workflow.csv` e dai titoli delle sessioni (dati, non prosa).
@@ -119,15 +122,15 @@ locali (run nel cloud), mai una stima.
 | 2026-07-25 | SideKick | ITALIANO total translation (6 Sonnet agents): tree restructured with Italian folder names (osservatorio/uso/per-progetto/esperimenti/plugin/documenti), usage.mjs made BILINGUAL (Italian dashboard+drilldowns generated on every run, +2 tests), missing experiment docs translated, audit report turned English in the main tree (Italian original kept in ITALIANO/), full resync with the restructured README; verifier fixed 2 real bugs (4 links pointing at English dashboards instead of the generated Italian ones; degraded accents in one file) and flagged the v1.9.1->v1.9.2 README drift (fixed by the director) | 6 | 685k | $6.18 |
 | 2026-07-25 | SideKick | Final day red-team (Roberto): 3 Sonnet personas on the CURRENT repo state (recruiter on the new README, method adopter, Italian visitor) -> 2 Opus reviewers (bilingual fidelity+method artifacts, whole-repo navigation) with red-team findings as seeds. 16 findings, all small and real, dedup to 7: DATA.md hand-written totals stale vs same-day dashboard (fixed), Italian dashboard cells in English without notice (fixed in the generator: permanent note), PLAN item 1 unticked though done (ticked), missing language markers on drop-in links (added), audit report orphaned from README navigation (linked), drop-in version-lag note (added), register wording (clarified). All applied by the director same day | 5 | 460k | $4.47 |
 | 2026-07-25 | SideKick | C1+C3 done well (Roberto): 3 research agents (official Anthropic prices per model VERIFIED AT SOURCE with URL+date each, incl. sonnet-5 two-tier intro/standard price switching 2026-09-01; how ccusage/LiteLLM convert costs; dashboard-presentation comparison -> self-contained HTML viewer recommended over Power BI/markdown-only) -> 1 implementer (prices.csv hand-maintained with validity windows, cost_usd_equiv/cost_partial columns, daily.csv, By day/By week views, bilingual dashboard.html with sortable tables + SVG charts, 6 new tests, limits DECLARED: API-equivalent is not the plan bill, cloud workflows never priced, cache-write at 5m rate) -> 2 Opus verifiers (independent recompute matched to the cent; 4 small real findings, all fixed by the director + 1 visual wrap bug found in the director own browser check). Totals now visible: ~$3.6k API-equivalent for 18.3M output + cache across 65 sessions | 6 | 926k | $7.98 |
-| 2026-07-26 | Studio | Fabbrica libri run 1 (Effective Python): 628 domande nuove con QC totale (Opus fuso + ombra 8% Sonnet + ricontrolli) + bonifica files su 355 vecchie + 194 rotazioni posizionali + glossario post-update | 78 | 9.9M | $131.50 |
-| 2026-07-27 | Studio | Riparazione R-06 run 1: riallineamento campo term al glossario (117 su 283 candidati, gap chiusi 17->37) | 5 | 530k | $3.15 |
-| 2026-07-31 | Studio | Fabbrica SQL pratiche: FASE 0 bonifica corpus + 523 domande nuove (298 pratiche sakila/weather eseguite, 130 T-SQL, 95 teoria) + QC 17/17 con ombra mirata + 5 check meccanici nuovi; agenti e token STIMATI dal report (run cloud, nessun transcript locale) | 85 | 10.0M | — |
+| 2026-07-26 | Studio | Books factory run 1 (Effective Python): 628 new questions with total QC (fused Opus + 8% Sonnet shadow + rechecks) + file remediation on 355 old ones + 194 positional rotations + post-run glossary update | 78 | 9.9M | $131.50 |
+| 2026-07-27 | Studio | Repair R-06 run 1: realignment of the term field to the glossary (117 of 283 candidates, gaps closed 17->37) | 5 | 530k | $3.15 |
+| 2026-07-31 | Studio | SQL practice factory: PHASE 0 corpus remediation + 523 new questions (298 executable practices actually run on sakila/weather, 130 T-SQL, 95 theory) + QC 17/17 with targeted shadow + 5 new mechanical checks; agents and tokens ESTIMATED from the run report (cloud run, no local transcripts) | 85 | ~10.0M | — |
 
 ## Per modello (solo chat locali)
 | Modello | Msg | Input | Output | Cache letta | Costo (API-equiv.) |
 |---|---|---|---|---|---|
 | opus-4-8 | 6k | 628k | 11.8M | 2300.2M | $2.3k |
-| fable-5 | 2k | 64k | 3.3M | 761.5M | $1.3k |
+| fable-5 | 2k | 64k | 3.4M | 802.5M | $1.3k |
 | opus-4-7 | 1k | 15k | 2.2M | 259.4M | $277.90 |
 | sonnet-4-6 | 2k | 38k | 1.5M | 137.6M | $79.57 |
 | sonnet-5 | 801 | 43k | 602k | 397.1M | $107.47 |
@@ -138,7 +141,7 @@ locali (run nel cloud), mai una stima.
 |---|---|---|---|---|---|
 | 2026-05 | 2k | 82k | 4.0M | 396.6M | $382.42 |
 | 2026-06 | 4k | 536k | 9.0M | 1557.8M | $1.7k |
-| 2026-07 | 5k | 170k | 6.4M | 1931.0M | $2.0k* |
+| 2026-07 | 5k | 170k | 6.6M | 1972.0M | $2.1k* |
 
 ## Per settimana, numeri di settimana ISO (solo chat locali)
 *(mostrate le ultime 12 di 13 settimane registrate)*
@@ -156,7 +159,7 @@ locali (run nel cloud), mai una stima.
 | 2026-W28 | 559 | 44k | 599k | 219.0M | $121.55 |
 | 2026-W29 | 1k | 15k | 1.4M | 351.3M | $422.15 |
 | 2026-W30 | 1k | 12k | 1.8M | 581.1M | $751.19 |
-| 2026-W31 | 660 | 3k | 740k | 194.7M | $272.04* |
+| 2026-W31 | 773 | 3k | 906k | 235.7M | $330.63* |
 
 ## Per giorno (solo chat locali)
 *(mostrati gli ultimi 30 di 63 giorni registrati; la serie completa è in `daily.csv`)*
@@ -192,6 +195,6 @@ locali (run nel cloud), mai una stima.
 | 2026-07-28 | 14 | 902 | 52k | 1.5M | $5.76 |
 | 2026-07-29 | 286 | 616 | 254k | 56.1M | $70.14* |
 | 2026-07-30 | 166 | 323 | 252k | 51.5M | $69.85* |
-| 2026-07-31 | 194 | 969 | 181k | 85.6M | $126.30 |
+| 2026-07-31 | 307 | 1k | 347k | 126.6M | $184.89 |
 
 \* costo noto solo in parte (qualche modello/data di quella riga non ha un prezzo verificato — vedi `prices.csv`)

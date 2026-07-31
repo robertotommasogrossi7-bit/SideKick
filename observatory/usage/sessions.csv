@@ -56,7 +56,7 @@ group,project,session,start,end,operation,models,messages,input_tokens,output_to
 "SideKick","SideKick",45b6f48e,2026-07-16,2026-07-17,"Sidekick data observatory setup","fable-5",8,15,5589,3487544,464455,9.572831,false
 "SideKick","SideKick",9df7891a,2026-07-16,2026-07-17,"SK/Base_4","fable-5 + opus-4-8",50,92,68950,24480491,1386414,40.654184,false
 "SideKick","SideKick",f7ae7118,2026-07-25,2026-07-26,"SK/Base_5","fable-5",271,507,392895,110237908,2599805,162.385290,false
-"SideKick","SideKick",7a2b91bc,2026-07-31,2026-07-31,"SideKick PLAN esecuzione punti 7-12","fable-5",76,733,67644,11142167,179753,16.778609,false
+"SideKick","SideKick",7a2b91bc,2026-07-31,2026-07-31,"SideKick PLAN esecuzione punti 7-12","fable-5",189,959,233653,52101577,926049,75.369429,false
 "Studio","Studio",251677f6,2026-07-20,2026-07-22,"STUDIO/Base_1","fable-5 + opus-4-8",520,1506,640164,292668463,11074941,343.798914,false
 "Studio","Studio",392f89b7,2026-07-20,2026-07-20,"Consumo crediti Claude anomalo","sonnet-5",3,6,1497,164700,26644,0.114532,false
 "Studio","Studio",dc1fb71c,2026-07-20,2026-07-20,"STUDIO/Base_1","fable-5",1,1,4443,32023,304810,4.064308,false

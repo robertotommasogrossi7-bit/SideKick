@@ -2,8 +2,8 @@
 
 > Back to the dashboard: [`../DASHBOARD.md`](../DASHBOARD.md). Do not edit by hand.
 
-**13 sessions** from 2026-06-03 to 2026-07-31 · **2.3M output** ·
-117k input · 325.6M cache read · 1k messages · **+5.2M cloud-agent tokens** (8 workflows)
+**13 sessions** from 2026-06-03 to 2026-07-31 · **2.5M output** ·
+118k input · 366.6M cache read · 1k messages · **+5.2M cloud-agent tokens** (8 workflows)
 
 ## Sessions (in time order — the title says what was done)
 | Period | Operation | Models | Msg | Input | Output | Cache read | Cost (API-equiv.) |
@@ -20,7 +20,7 @@
 | 2026-07-16→07-17 | Sidekick data observatory setup | fable-5 | 8 | 15 | 6k | 3.5M | $9.57 |
 | 2026-07-16→07-17 | SK/Base_4 | fable-5 + opus-4-8 | 50 | 92 | 69k | 24.5M | $40.65 |
 | 2026-07-25→07-26 | SK/Base_5 | fable-5 | 271 | 507 | 393k | 110.2M | $162.39 |
-| 2026-07-31 | SideKick PLAN esecuzione punti 7-12 | fable-5 | 76 | 733 | 68k | 11.1M | $16.78 |
+| 2026-07-31 | SideKick PLAN esecuzione punti 7-12 | fable-5 | 189 | 959 | 234k | 52.1M | $75.37 |
 
 ## Cloud agent workflows on this project
 | Date | Operation | Agents | Agent tokens | Cost (API-equiv.) | Source |
