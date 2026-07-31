@@ -7,7 +7,9 @@
 > Redaction (Roberto's choice, 2026-07-16): **only 3 reserved projects** appear with an alias
 > (`progetto-15`, `progetto-16`, `progetto-22` — legend in `censura.local.json`, local only);
 > all others use the real name. New projects start redacted until decided otherwise.
-> **Last review: 2026-07-25.**
+> **Last review: 2026-08-01** (the header date moves in the same commit that touches the
+> body). Rule since 2026-08-01, after two same-day drifts: **live totals are stated in ONE
+> place — the generated dashboard — and every other page links them** instead of copying.
 
 ## The ritual (when the observatory chat opens)
 1. `node observatory/usage.mjs` → updates the `usage/DASHBOARD.md` dashboard, a detail file
@@ -23,10 +25,10 @@
    method choice — red team, research, audit…), and propose (don't impose) changes to the
    method.
 
-## The data sources (table created 2026-07-16, contents refreshed 2026-07-25)
+## The data sources (table created 2026-07-16, contents refreshed 2026-08-01)
 | Source | What it contains | Status |
 |---|---|---|
-| `observatory/usage/` | tokens per project × model × month **and per operation/session** (chat titles), from ALL local chats (25 chat folders → 12 grouped projects, 65 sessions since May 2026) + cloud workflow register (now with `5h_windows` column) | ✅ auto-generated (workflow.csv by hand) |
+| `observatory/usage/` | tokens per project × model × month **and per operation/session** (chat titles), from ALL local chats since May 2026 (live counts in the [dashboard](usage/DASHBOARD.md)) + cloud workflow register (`5h_windows` and `estimated` columns) + hand-verified `prices.csv` feeding `cost_usd_equiv` | ✅ auto-generated (workflow.csv and prices.csv by hand) |
 | `~/.claude/ESPERIMENTI.md` | cross-model A/B and same-model repetitions | 6 A/B lines · 1 repetition (+1 hybrid red-team note) |
 | poker: `_processo/METRICHE.md` | per phase: model+effort, duration (git), volume, workflow tokens | ✅ the richest series |
 | progetto-15: process docs at root | DECISIONI + audits, but **no METRICHE.md** | ⚠️ uncovered arm |
@@ -60,14 +62,16 @@ money.
 - **Same-model repetitions**: **zero data** — the rule in the constitution is still faith.
 - **Which models for which agents**: the method's table comes from external research
   (2026-07 dossier); our data so far only covers the "verification" function.
-- **Where the tokens go** (refreshed at the 2026-07-25 close — hand-written totals drift
-  same-day, the generated dashboard is the authority): 18.2M output + **30.2M
-  cloud-agent tokens** (the Factory runs now outweigh every audit: WR3 alone 11.0M ≈ **~3
-  five-hour windows of the Max 100-euro plan**, observed via credit blocks); the read cache
-  (~3.5 billion) is ~187× the live tokens → the warm cache is what makes the plan sustainable.
-  Opus generated ~77% of historical output (the "~83%" published earlier was wrong — audit
-  finding AR-06, recomputed from `usage.csv`); Sonnet/Fable came in from July with the
-  model-per-step rule.
+- **Where the tokens go**: live totals and composition are in the [generated
+  dashboard](usage/DASHBOARD.md) — the single source (this page stopped copying them after
+  drifting a full cycle behind; an external red team caught four different values of the
+  same metric across the repo, 2026-07-31). What stays here is the dated reading, stable:
+  the Factory runs outweigh every audit (WR3 alone 11.0M ≈ **~3 five-hour windows of the
+  Max 100-euro plan**, observed via credit blocks); the read cache dwarfs live tokens by
+  two orders of magnitude → the warm cache is what makes the plan sustainable. Opus
+  generated ~77% of historical output as of 2026-07-25 (the "~83%" published earlier was
+  wrong — audit finding AR-06, recomputed from `usage.csv`); Sonnet/Fable came in from
+  July with the model-per-step rule.
 - **Poker's process A/B (full build) vs progetto-15 (incremental)**:
   today **not measurable** because the second doesn't log phases. Either add a lightweight
   METRICHE.md, or declare it closed. (The new per-session table helps: poker's phases already

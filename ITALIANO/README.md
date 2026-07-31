@@ -16,8 +16,10 @@ transcript misurato**. Cosa ha prodotto finora:
   [inglese](../plugins/metodo/CONSTITUTION.md) · [v1.9.3](plugin/metodo/CHANGELOG.md),
   auto-emendante, con un drop-in Spec Kit) che l'AI applica proattivamente in ogni progetto.
 - **Un dataset pubblicato e redatto di uso reale dell'agente** — mesi di sessioni con
-  operazioni nominate, 29M+ token di agenti cloud registrati, più il generatore a zero
-  dipendenze per ricostruire la stessa dashboard dai tuoi transcript.
+  operazioni nominate e un registro curato a mano di ogni workflow di agenti cloud; totali
+  vivi nella [dashboard](osservatorio/uso/DASHBOARD.md) (i numeri ricopiati a mano qui
+  continuavano a invecchiare, quindi questa pagina li linka invece di ripeterli). Più il
+  generatore a zero dipendenze per ricostruire la stessa dashboard dai tuoi transcript.
 - **Vittorie misurate**: audit multi-agente pesanti hanno trovato bug critici veri su
   entrambi i progetti su cui sono girati, prima di qualunque utente (N=2); un processo di
   produzione di massa "Fabbrica" ha generato 555 domande di studio verificate in una notte
@@ -88,8 +90,9 @@ sessione per sessione, operazione nominata per operazione nominata:
 
 Alcuni risultati campione (dettagli e avvertenze all'interno): un audit multi-agente pesante
 ha trovato bug critici reali su entrambi i progetti su cui è girato, a un costo noto (N=2);
-in un'unica verifica-ombra cross-modello (N=2) modelli piccoli e grandi hanno pareggiato sulla
-verifica del codice — un'indicazione che continuiamo a testare, non una tendenza; le letture
+negli esperimenti-ombra cross-modello (N=4, incluso un lotto da 54 coppie) modelli piccoli e
+grandi hanno pareggiato sulla verifica del **codice** — sui finding di processo/config il
+modello alto confuta meglio — un'indicazione che continuiamo a testare, non una tendenza; le letture
 di cache erano ~187× i token vivi su tutte le chat (conteggio del 2026-07-25; ~170× nel
 conteggio precedente — un indicatore di quanto le chat lunghe rileggono il contesto a ogni
 messaggio) — la nostra regola operativa ("riprendi il lavoro interrotto invece di

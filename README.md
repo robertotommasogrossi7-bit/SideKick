@@ -14,8 +14,10 @@ What it has produced so far:
   self-amending, with a Spec Kit drop-in + preset) that the AI applies proactively in
   every project.
 - **A published, redacted dataset of real agent usage** — months of sessions with named
-  operations, 29M+ cloud-agent tokens registered, plus the zero-dependency generator to
-  rebuild the same dashboard from your own transcripts.
+  operations and a hand-kept register of every cloud-agent workflow; live totals in the
+  [dashboard](observatory/usage/DASHBOARD.md) (hand-copied numbers kept going stale here,
+  so this page links them instead of repeating them). Plus the zero-dependency generator
+  to rebuild the same dashboard from your own transcripts.
 - **Measured wins**: heavy multi-agent audits found real critical bugs on both projects they
   ran on, before any user did (N=2); a mass-production "Factory" process generated 555
   verified study questions in one night with total QC and every solution executed for real.
@@ -83,9 +85,10 @@ session, named operation by named operation:
 **[a real app's per-session table →](observatory/usage/per-project/poker-who-s-the-boss.md)**
 
 A few sample findings (details and caveats inside): a heavy multi-agent audit found real
-critical bugs on both projects it ran on, at a known cost (N=2); in a single cross-model
-shadow check (N=2) small and large models tied on code verification — an indication we keep
-testing, not a trend; cache reads were ~187× the live tokens across all chats (2026-07-25
+critical bugs on both projects it ran on, at a known cost (N=2); across the cross-model
+shadow experiments (N=4, incl. a 54-pair batch) small and large models tied on **code**
+verification — on process/config findings the higher model falsifies better — an indication
+we keep testing, not a trend; cache reads were ~187× the live tokens across all chats (2026-07-25
 count; ~170× at the prior one — a gauge of how much long chats re-read their context at every
 message) — our operating rule ("resume interrupted work instead of restarting") comes from
 that mechanic plus one measured resume that reused 100% of completed steps, not from an A/B

@@ -4,7 +4,7 @@
 > (tokens, measured where possible) and **how much it has paid off** (benefits observed,
 > concrete). Same honesty as FINDINGS.md: small N = clues; where the cost isn't measurable we
 > say so, we don't make it up. Updated by the observatory chat at the ritual. Last review:
-> **2026-07-25**.
+> **2026-08-01** (the header date moves in the same commit that touches the body).
 
 ## MEASURED strategies (cost and benefit with numbers)
 
@@ -38,9 +38,10 @@
   N=4 experiments — continue.
 
 ### 3. Switching chats / cache (context economics)
-- **Measured cost**: read cache ≈**187×** the live tokens (3.5 billion vs ~18.8M) — it's the
-  biggest cost item of all; resuming the interrupted audit reused **100%** of the completed
-  steps (zero rework).
+- **Measured cost** (at the 2026-07-25 count — the live ratio lives in the generated
+  dashboard): read cache ≈**187×** the live tokens (3.5 billion vs ~18.8M) — the biggest
+  cost item of all; resuming the interrupted audit reused **100%** of the completed steps
+  (zero rework on that occasion — see the caveat below).
 - **⚠️ New caveat (2026-07-24, run WR3): the WORKFLOW resume cache is best-effort, not
   guaranteed** — one resume reused 32/48 keys, the next **0/46** despite byte-identical
   prompts and a complete journal (waste: ~0.59M live + ~39M cache tokens, 46 agents redone).

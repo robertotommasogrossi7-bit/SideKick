@@ -1,4 +1,4 @@
-# PLAN — the single ordered backlog (updated 2026-07-17)
+# PLAN — the single ordered backlog (updated 2026-08-01; the header date moves in the same commit that touches the body)
 
 > Decided with Roberto in the observatory chat. **The backlog below is THE list**: work top
 > to bottom, check off when done. History of completed phases at the bottom.
@@ -46,8 +46,9 @@
        `.specify/memory/constitution.md` **byte-identical** (equal SHA256) to the drop-in →
        decision: SHIP — `plugins/metodo/spec-kit/preset.yml` published (points at
        `constitution.md`, one copy), README EN+IT updated with the tested claim.
-       `spec-kit-metodo/memory/constitution.md` realigned to drop-in v1.9.1 (was v1.1.0;
-       folder has no local `.git` — publishing that repo stays manual).
+       `spec-kit-metodo/memory/constitution.md` realigned to drop-in v1.9.1, then to
+       1.9.3 with the same-day method patch (was v1.1.0; folder has no local `.git` —
+       publishing that repo stays manual).
 10. [x] **De-Claude sweep** of remaining docs — DONE 2026-07-31: full grep of
         Claude/Anthropic across all tracked `.md` (33 files); outcome: 1 generalization
         (DATA.md "the more the coding agent is used", EN+IT) — everything else is
@@ -73,7 +74,8 @@
 LEGGIMI). A live mirror would cost a double translation on every change for a near-zero
 audience; the generated-dashboard-in-Italian option remains available on request.
 **Update (Roberto, 2026-07-25)**: reversed — an exact translated copy of the main English
-docs now lives in **`ITALIANO/`** (14 files; kept in sync at each observatory review), and
+docs now lives in **`ITALIANO/`** (14 files at the time — the tree has grown since; kept in
+sync at each observatory review), and
 after the repo audit (AR-02/03) Roberto chose to keep **only one** Italian tree:
 `versione-italiano/` was removed from the public repo the same day (it survives locally,
 untracked, with OSSERVATORIO.md and the glossary, and in git history for the originals).

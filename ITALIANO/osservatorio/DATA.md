@@ -7,7 +7,10 @@
 > Censura (scelta di Roberto, 2026-07-16): **solo 3 progetti riservati** compaiono con alias
 > (`progetto-15`, `progetto-16`, `progetto-22` — legenda in `censura.local.json`, solo locale);
 > tutti gli altri usano il nome vero. I progetti nuovi nascono censurati finché non si decide.
-> **Ultima revisione: 2026-07-25.**
+> **Ultima revisione: 2026-08-01** (la data in testa si muove nello stesso commit che tocca
+> il corpo). Regola dal 2026-08-01, dopo due derive in giornata: **i totali vivi si
+> dichiarano in UN posto solo — la dashboard generata — e ogni altra pagina li linka**
+> invece di ricopiarli.
 
 ## Il rituale (quando si apre la chat-osservatorio)
 1. `node observatory/usage.mjs` → aggiorna il cruscotto `usage/DASHBOARD.md`, un file di
@@ -23,10 +26,10 @@
    scelta di metodo — red team, ricerca, audit…), e proponi (senza imporre) modifiche al
    metodo.
 
-## Le fonti dei dati (tabella creata 2026-07-16, contenuti aggiornati 2026-07-25)
+## Le fonti dei dati (tabella creata 2026-07-16, contenuti aggiornati 2026-08-01)
 | Fonte | Cosa contiene | Stato |
 |---|---|---|
-| `observatory/usage/` | token per progetto × modello × mese **e per operazione/sessione** (titoli delle chat), da TUTTE le chat locali (25 cartelle di chat → 12 progetti raggruppati, 65 sessioni da maggio 2026) + registro workflow cloud (ora con colonna `5h_windows`) | ✅ generato automaticamente (workflow.csv a mano) |
+| `observatory/usage/` | token per progetto × modello × mese **e per operazione/sessione** (titoli delle chat), da TUTTE le chat locali da maggio 2026 (conteggi vivi nella [dashboard](uso/DASHBOARD.md)) + registro workflow cloud (colonne `5h_windows` ed `estimated`) + `prices.csv` verificato a mano che alimenta `cost_usd_equiv` | ✅ generato automaticamente (workflow.csv e prices.csv a mano) |
 | `~/.claude/ESPERIMENTI.md` | A/B cross-modello e ripetizioni stesso-modello | 6 righe A/B · 1 ripetizione (+1 nota ibrida red-team) |
 | poker: `_processo/METRICHE.md` | per fase: modello+effort, durata (git), volume, token dei workflow | ✅ la serie più ricca |
 | progetto-15: doc di processo in root | DECISIONI + audit, ma **niente METRICHE.md** | ⚠️ braccio scoperto |
@@ -60,12 +63,14 @@ sommati a mano dai METRICHE. La dashboard Anthropic resta l'unica fonte del cost
 - **Ripetizioni stesso-modello**: **zero dati** — la regola in costituzione è ancora fede.
 - **Quali modelli per quali agenti**: la tabella del metodo viene dalla ricerca esterna
   (dossier 2026-07); i nostri dati per ora coprono solo la funzione di "verifica".
-- **Dove vanno i token** (aggiornato alla chiusura del 2026-07-25 — i totali scritti a mano
-  derivano in giornata, la dashboard generata è l'autorità): 18,2M output +
-  **30,2M token di agenti cloud** (le run della Fabbrica ora superano ogni audit: la sola WR3
-  11,0M ≈ **~3 finestre di utilizzo di 5 ore del piano Max da 100 euro**, osservato tramite i
-  blocchi di credito); la cache letta (~3,5 miliardi) è ~187× i token vivi → la cache calda è
-  ciò che rende sostenibile il piano. Opus ha generato ~77% dell'output storico (il "~83%"
+- **Dove vanno i token**: totali e composizione vivi stanno nella [dashboard
+  generata](uso/DASHBOARD.md) — la fonte unica (questa pagina ha smesso di ricopiarli dopo
+  essere rimasta indietro di un ciclo intero; un red team esterno ha colto quattro valori
+  diversi della stessa metrica nel repo, 2026-07-31). Qui resta la lettura datata, stabile:
+  le run della Fabbrica superano ogni audit (la sola WR3 11,0M ≈ **~3 finestre di utilizzo
+  di 5 ore del piano Max da 100 euro**, osservato tramite i blocchi di credito); la cache
+  letta supera i token vivi di due ordini di grandezza → la cache calda è ciò che rende
+  sostenibile il piano. Opus ha generato ~77% dell'output storico al 2026-07-25 (il "~83%"
   pubblicato prima era sbagliato — finding AR-06 dell'audit, ricalcolato da `usage.csv`);
   Sonnet/Fable sono entrati da luglio con la regola modello-per-passo.
 - **A/B di processo poker (costruzione completa) vs progetto-15 (incrementale)**:

@@ -6,12 +6,12 @@
   targeted hunts): **21 agents / 1.1M**, still finding the real critical bugs. ⚠️ Honesty:
   **different** projects and scope — it's an indication (N=1+1), not a clean comparison of
   the same audit.
-- **Starting over from scratch is the biggest waste.** In our data cache reads were ~187× the
-  live tokens (2026-07-25 refresh; was ~170× at the prior count — same mechanic, more data
-  accumulated since) — it's the normal mechanics of prompt caching in long chats (the
-  actionable point is ours): resuming an interrupted chat/audit **reusing the cache** (the
-  poker audit's resume reused 100% of the completed steps) costs ~1/10; starting over throws
-  it all away.
+- **Starting over from scratch is the biggest waste.** In our data cache reads dwarf the
+  live tokens by two orders of magnitude — the live ratio is in "At a glance" above (this
+  page stopped copying it by hand after it drifted twice: single source, the generated
+  block). It's the normal mechanics of prompt caching in long chats (the actionable point
+  is ours): resuming an interrupted chat/audit **reusing the cache** (the poker audit's
+  resume reused 100% of the completed steps) costs ~1/10; starting over throws it all away.
 - **Fable on long jobs doesn't pay off**: the poker audit on Fable stopped because of the
   **5-hour usage window** of the Max plan (the usage limit, not the context window) → rule:
   heavy jobs on Opus, **Fable only for the decisions that matter and recaps** (little and
@@ -24,10 +24,10 @@
   with the package used ~2× the tokens of the blind arm, same or worse outcome) → the method now
   *proposes* instead of imposing, and multi-agent is used ONLY for audit/sweep, never for linear
   coding.
-- **What the flat plan is actually worth (2026-07-25 count, API list-price equivalent).**
-  The local chats' tokens would cost **~$3.6k** at pay-as-you-go list prices — and **86% of
-  that is cache** (read ~53% + write ~34%; generated output is only ~14%). Locally-measured
-  agent workflows add **~$174 across 7 runs**. The honest reading: this is the value of the
-  working style the flat plan makes possible (long chats, resumes, agent fleets re-reading
-  context), not money that would otherwise have been spent — priced per token, we would have
-  worked completely differently. Full mechanics + declared limits: `SCHEMA.md`.
+- **What the flat plan is actually worth (API list-price equivalent).** The live total,
+  its cache-dominated composition and the measured workflow line are all in "At a glance"
+  above — the constant across every count so far: **the bulk is cache** (reads + writes;
+  generated output is a small slice). The honest reading: this is the value of the working
+  style the flat plan makes possible (long chats, resumes, agent fleets re-reading
+  context), not money that would otherwise have been spent — priced per token, we would
+  have worked completely differently. Full mechanics + declared limits: `SCHEMA.md`.

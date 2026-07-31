@@ -4,7 +4,7 @@
 > (token, misurati dove possibile) e **quanto ha ripagato** (benefici osservati, concreti).
 > Stessa onestà di FINDINGS.md: N piccolo = indizi; dove il costo non è misurabile lo diciamo,
 > non ce lo inventiamo. Aggiornato dalla chat-osservatorio al rituale. Ultima revisione:
-> **2026-07-25**.
+> **2026-08-01** (la data in testa si muove nello stesso commit che tocca il corpo).
 
 ## Strategie MISURATE (costo e beneficio con numeri)
 
@@ -39,9 +39,10 @@
   script). N=4 esperimenti — continuare.
 
 ### 3. Cambio chat / cache (economia del contesto)
-- **Costo misurato**: la cache in lettura costa ≈**187×** i token vivi (3,5 miliardi contro
-  ~18,8M) — è la voce di costo più grande di tutte; riprendere l'audit interrotto ha riusato
-  il **100%** dei passi completati (zero rilavorazione).
+- **Costo misurato** (al conteggio del 2026-07-25 — il rapporto vivo sta nella dashboard
+  generata): la cache in lettura costa ≈**187×** i token vivi (3,5 miliardi contro ~18,8M) —
+  la voce di costo più grande di tutte; riprendere l'audit interrotto ha riusato il **100%**
+  dei passi completati (zero rilavorazione in quell'occasione — vedi l'avvertenza sotto).
 - **⚠️ Nuova avvertenza (2026-07-24, run WR3): la cache di ripresa del WORKFLOW è a
   best-effort, non garantita** — una ripresa ha riusato 32/48 chiavi, la successiva **0/46**
   nonostante prompt identici byte per byte e un journal completo (spreco: ~0,59M token vivi +
