@@ -22,7 +22,7 @@ cronologia commit di ogni braccio è in `_git-history.txt`).
   con il pacchetto ambientale (CLAUDE.md), braccio B nudo. Il test "lato umano".
 - `cost-meter.mjs` — misura il **costo** (turni/token) di un braccio dai suoi transcript.
 
-## Cosa abbiamo trovato (riassunto; dettaglio in `../_processo/DECISIONI.md`)
+## Cosa abbiamo trovato (riassunto; il dettaglio vive nei repo privati dei progetti)
 - Quando il modello **lo sa già o può derivarlo**, il pacchetto **non migliora** il risultato e
   **costa di più** (migrazione ~2x; streaming risolto in modo pulito; reverse, *senza* una
   spec, +30%).

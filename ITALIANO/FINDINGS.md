@@ -97,8 +97,10 @@ un piccolo studio con/senza, apri una issue su questo repo.
   (`experiments/streaming/oracle/`) per verificare se un artefatto di processo aiuta, senza
   rivelare le risposte.
 - **Il log completo e pubblico dell'esperimento** — incluso il primo tentativo contaminato, i
-  risultati negativi e la revisione esterna adversariale (log grezzi in italiano conservati
-  nella cronologia git del repo, cartella `versione-italiano/_processo/` fino al 2026-07-25).
+  risultati negativi e la revisione esterna adversariale (verdetti in
+  [`osservatorio/redteam/VERDICTS.md`](osservatorio/redteam/VERDICTS.md); log grezzi
+  originali in italiano conservati nella cronologia git del repo, cartella
+  `versione-italiano/_processo/` fino al 2026-07-25).
 - **Una proposta, chiaramente etichettata come non testata:** una costituzione di metodo di lavoro
   proattiva e auto-emendante (`plugins/metodo/`), anche in formato drop-in per Spec Kit
   (`plugins/metodo/spec-kit/constitution.md`, da posizionare in
@@ -125,5 +127,12 @@ doppio run del loro repo.*)
 ---
 
 *Parte di [SideKick](https://github.com/robertotommasogrossi7-bit/SideKick). Log
-dell'esperimento e verdetti della revisione esterna: nella cronologia git del repo
-(`versione-italiano/_processo/`, fino al 2026-07-25) · le probe stesse: `experiments/`.*
+dell'esperimento nella cronologia git del repo (`versione-italiano/_processo/`, fino al
+2026-07-25) · verdetti della revisione esterna:
+[`osservatorio/redteam/VERDICTS.md`](osservatorio/redteam/VERDICTS.md) · le probe stesse:
+`experiments/`.*
+
+*Dove vivono ora i numeri: il dataset di utilizzo
+([`osservatorio/uso/DASHBOARD.md`](osservatorio/uso/DASHBOARD.md)) · il registro delle
+strategie ([`osservatorio/STRATEGIES.md`](osservatorio/STRATEGIES.md)) · i verdetti del red
+team esterno ([`osservatorio/redteam/VERDICTS.md`](osservatorio/redteam/VERDICTS.md)).*
