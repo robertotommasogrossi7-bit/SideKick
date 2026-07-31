@@ -30,7 +30,7 @@ test('default filter (migr-test): one row with the fixture totals', () => {
   // tool_calls = 2, files = 1. Columns: progetto | files | turns | tool_calls | out_tok | in_tok
   assert.match(out, /'C--demo-migr-test-alpha'\s*│\s*1\s*│\s*2\s*│\s*2\s*│\s*220\s*│\s*1160\s*│/,
     'row totals must match the hand-computed fixture numbers');
-  assert.match(out, /out_tok = token generati/, 'the reading-key note is printed');
+  assert.match(out, /out_tok = tokens generated/, 'the reading-key note is printed');
 });
 
 test('projects that do not match the filter are excluded', () => {

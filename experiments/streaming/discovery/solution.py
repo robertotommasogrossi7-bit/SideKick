@@ -2,10 +2,10 @@ from collections import defaultdict
 
 
 def solve(events, gap, lateness):
-    """Vedi SPEC.md. Verìficati con: python grader.py  (obiettivo 11/11).
+    """See SPEC.md. Check yourself with: python grader.py  (target 11/11).
 
-    events: lista di {"key": str, "t": int, "v": number} in ordine d'arrivo.
-    ritorna {"sessions": [{"key","start","end","count","sum"}, ...], "late_dropped": int}
+    events: list of {"key": str, "t": int, "v": number} in arrival order.
+    returns {"sessions": [{"key","start","end","count","sum"}, ...], "late_dropped": int}
     """
     survivors = []
     late_dropped = 0

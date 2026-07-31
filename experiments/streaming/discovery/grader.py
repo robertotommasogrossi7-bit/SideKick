@@ -1,7 +1,7 @@
-"""Grader LEAK-PROOF. Esegue solution.solve sui casi nascosti e confronta l'HASH
-dell'output con quello atteso, senza mai rivelare l'output atteso. Verifica anche
-l'idempotenza (doppia esecuzione). Uso: python grader.py [modulo_solution]  (default: solution)
-Le etichette dei casi falliti sono SUGGERIMENTI sulla trappola, non le risposte."""
+"""LEAK-PROOF grader. Runs solution.solve on the hidden cases and compares the output's
+HASH against the expected one, without ever revealing the expected output. Also checks
+idempotence (double execution). Usage: python grader.py [solution_module]  (default: solution)
+The labels of failed cases are HINTS about the trap, not the answers."""
 import os, sys, json, hashlib, importlib
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -35,7 +35,7 @@ def main():
     for c in cases:
         try:
             ok = h(solmod.solve(c["input"], c["gap"], c["lateness"])) == c["expected_hash"]
-            if ok:  # idempotenza
+            if ok:  # idempotence
                 ok = h(solmod.solve(c["input"], c["gap"], c["lateness"])) == c["expected_hash"]
         except Exception:
             ok = False
@@ -43,8 +43,8 @@ def main():
             passed += 1
         else:
             fails.append(c["label"])
-    print(f"PASSATI {passed}/{len(cases)}")
-    print("FALLITI:", ", ".join(fails) if fails else "(nessuno) - tutti verdi")
+    print(f"PASSED {passed}/{len(cases)}")
+    print("FAILED:", ", ".join(fails) if fails else "(none) - all green")
     return 0 if not fails else 1
 
 

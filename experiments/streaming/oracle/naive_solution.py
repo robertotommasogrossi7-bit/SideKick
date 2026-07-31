@@ -1,6 +1,6 @@
-"""Tentativo NAIVE (la strada del primo istinto): sessionizza per chiave, ordina per t,
-spezza sul gap. NESSUN watermark, NESSUN late-drop. Serve a dimostrare che il naive
-fallisce l'oracolo."""
+"""NAIVE attempt (the first-instinct approach): sessionize by key, sort by t,
+split on the gap. NO watermark, NO late-drop. Meant to show that the naive
+approach fails the oracle."""
 from collections import defaultdict
 
 

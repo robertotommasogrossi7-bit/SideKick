@@ -19,7 +19,8 @@ cannot support, and what a real test would take.
 - A first version of this writeup claimed "we measured it." I had it **adversarially reviewed by
   independent AI models** prompted as skeptical senior engineers; their convergent verdict
   (rigor ≈ 3/10, *"sells a level of rigor it doesn't have"*) led to this rewrite. The full
-  review log is public in this repo.
+  review log lives in [`observatory/redteam/VERDICTS.md`](observatory/redteam/VERDICTS.md);
+  the Italian originals remain in the repo's git history.
 
 ## What I ran (single-shot probes — read as anecdotes)
 
@@ -112,6 +113,10 @@ their repo.*)
 
 ---
 
-*Part of [SideKick](https://github.com/robertotommasogrossi7-bit/SideKick). Experiment log
-and external-review verdicts: in the repo's git history (`versione-italiano/_processo/`,
-up to 2026-07-25) · the probes themselves: `experiments/`.*
+*Part of [SideKick](https://github.com/robertotommasogrossi7-bit/SideKick). Experiment log:
+[`observatory/STRATEGIES.md`](observatory/STRATEGIES.md) · external-review verdicts:
+[`observatory/redteam/VERDICTS.md`](observatory/redteam/VERDICTS.md) — Italian originals in
+the repo's git history (`versione-italiano/_processo/`, up to 2026-07-25) · the probes
+themselves: `experiments/`.*
+
+*Where the numbers live now: the [usage dataset](observatory/usage/DASHBOARD.md) · the [strategy register](observatory/STRATEGIES.md) · the [external red-team verdicts](observatory/redteam/VERDICTS.md).*

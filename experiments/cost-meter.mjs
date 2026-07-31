@@ -1,5 +1,5 @@
-// Misura l'effort dei bracci di un test leggendo i transcript di Claude Code.
-// Uso: node misura-token.mjs <regex-filtro-progetto>   (default: migr-test)
+// Measures the effort of a test's arms by reading Claude Code transcripts.
+// Usage: node experiments/cost-meter.mjs <project-filter-regex>   (default: migr-test)
 import fs from 'fs';
 import path from 'path';
 
@@ -39,6 +39,6 @@ for (const d of dirs) {
 }
 rows.sort((a, b) => a.progetto.localeCompare(b.progetto));
 console.table(rows);
-console.log('\nNota: out_tok = token generati (proxy dello sforzo di ragionamento);',
-  'in_tok = input totale incl. cache (proxy del contesto processato);',
-  'tool_calls = azioni; turns = messaggi assistant.');
+console.log('\nNote: out_tok = tokens generated (proxy for reasoning effort);',
+  'in_tok = total input incl. cache (proxy for context processed);',
+  'tool_calls = actions; turns = assistant messages.');

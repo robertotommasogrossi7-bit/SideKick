@@ -1,32 +1,32 @@
-# Sessionizzazione robusta a eventi tardivi — specifica
+# Robust sessionization under late events — specification
 
-Implementa `solve(events, gap, lateness)` in `solution.py` seguendo questa specifica.
-Verìficati con `python grader.py` (gira la tua `solve` su casi di test nascosti e ti dice
-quanti passano; **non** mostra gli output attesi). Obiettivo: **11/11**.
+Implement `solve(events, gap, lateness)` in `solution.py` following this specification.
+Check yourself with `python grader.py` (runs your `solve` on hidden test cases and tells
+you how many pass; it **does not** show the expected outputs). Target: **11/11**.
 
-## Contratto
-- `events`: lista di `{key, t, v}` in **ordine d'ARRIVO** (lo stream; **NON** ordinato per `t`).
-  `t` intero, `v` numerico, `key` stringa.
-- ritorna `{"sessions": [ {key, start, end, count, sum}, ... ], "late_dropped": int}`,
-  con le sessioni ordinate per `(key, start)`.
+## Contract
+- `events`: list of `{key, t, v}` in **ARRIVAL order** (the stream; **NOT** sorted by `t`).
+  `t` is an integer, `v` is numeric, `key` is a string.
+- returns `{"sessions": [ {key, start, end, count, sum}, ... ], "late_dropped": int}`,
+  with the sessions sorted by `(key, start)`.
 
-## Semantica
-1. **Watermark GLOBALE.** Prima di incorporare l'evento in posizione *n* (0-based),
-   `W = (max t fra gli arrivi 0..n-1, su TUTTE le chiavi) − lateness`. Per il primo evento `W` è
-   indefinito. Il `max` include anche eventi che poi vengono scartati.
-2. **Late-drop.** L'evento `e` è **scartato** se `t_e < W` (confine **stretto**). Si conta in
-   `late_dropped`. Gli altri sono *sopravvissuti*.
-3. **Sessione** (per chiave, sui soli sopravvissuti). Ordina per `t` (tie-break: **indice
-   d'arrivo**), poi spezza in blocchi **massimali** dove ogni coppia consecutiva ha
-   `t_succ − t_prec ≤ gap`.
-4. **Aggregati:** `start=min t`, `end=max t`, `count=#eventi`, `sum=Σv`.
-5. **Output** ordinato per `(key, start)`; più `late_dropped`.
-6. **Funzione pura** (stessa input → stesso output; idempotente).
+## Semantics
+1. **GLOBAL watermark.** Before incorporating the event at position *n* (0-based),
+   `W = (max t among arrivals 0..n-1, across ALL keys) − lateness`. For the first event `W`
+   is undefined. The `max` also includes events that later get dropped.
+2. **Late-drop.** Event `e` is **dropped** if `t_e < W` (**strict** boundary). It is counted
+   in `late_dropped`. The others are *survivors*.
+3. **Session** (per key, over survivors only). Sort by `t` (tie-break: **arrival
+   index**), then split into **maximal** blocks where every consecutive pair has
+   `t_next − t_prev ≤ gap`.
+4. **Aggregates:** `start=min t`, `end=max t`, `count=#events`, `sum=Σv`.
+5. **Output** sorted by `(key, start)`; plus `late_dropped`.
+6. **Pure function** (same input → same output; idempotent).
 
-## Esempio (per capire) — `gap=15, lateness=60`
-Arrivi: `A10, A20, B100, A40, A30, B110, A5, B130, A200, A38`
+## Example (to understand it) — `gap=15, lateness=60`
+Arrivals: `A10, A20, B100, A40, A30, B110, A5, B130, A200, A38`
 
-Output: `late_dropped = 3`; sessioni:
+Output: `late_dropped = 3`; sessions:
 
 | key | start | end | count | sum |
 |---|---|---|---|---|
@@ -36,6 +36,6 @@ Output: `late_dropped = 3`; sessioni:
 | B | 100 | 110 | 2 | 2 |
 | B | 130 | 130 | 1 | 1 |
 
-## Verifica
-`python grader.py` → `PASSATI k/11` + le etichette dei casi falliti (suggeriscono l'**area** del
-problema, non la risposta). Punta a **11/11**.
+## Verification
+`python grader.py` → `PASSED k/11` + the labels of the failed cases (they suggest the
+**area** of the problem, not the answer). Aim for **11/11**.

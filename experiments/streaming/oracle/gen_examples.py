@@ -1,11 +1,12 @@
-"""Per il braccio REVERSE (semantica nascosta): genera examples.md (esempi input->output
-VISIBILI, niente regole) + cases.json con etichette NEUTRE (case_01..), cosi' le label non
-rivelano la regola. Scrive nella cartella del braccio reverse."""
-import os, json
+"""For the REVERSE arm (hidden semantics): generates examples.md (VISIBLE input->output
+examples, no rules stated) + cases.json with NEUTRAL labels (case_01..), so the labels
+don't reveal the rule. Writes into the reverse arm's folder."""
+import os, sys, json
 import reference
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ARM = r"C:\Users\rober\Desktop\Programmi\_stream-test\reverse"
+# Optional CLI arg: target arm folder. Defaults to the sibling reverse/ folder.
+ARM = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "..", "reverse")
 os.makedirs(ARM, exist_ok=True)
 
 
@@ -13,7 +14,7 @@ def ev(seq):
     return [{"key": k, "t": t, "v": v} for (k, t, v) in seq]
 
 
-# Esempi VISIBILI (diversi dai 11 casi nascosti), scelti per rendere deducibile la regola.
+# VISIBLE examples (different from the 11 hidden cases), chosen to make the rule inferable.
 EXAMPLES = [
     {"gap": 20, "lateness": 100, "input": ev([("A", 0, 1), ("A", 10, 1)])},
     {"gap": 20, "lateness": 100, "input": ev([("A", 0, 1), ("A", 50, 1)])},
@@ -23,12 +24,12 @@ EXAMPLES = [
     {"gap": 25, "lateness": 100, "input": ev([("A", 0, 1), ("A", 44, 2), ("A", 22, 3)])},
 ]
 
-lines = ["# Esempi (input d'arrivo -> output). Deduci la regola.\n"]
+lines = ["# Examples (arrival input -> output). Deduce the rule.\n"]
 for i, c in enumerate(EXAMPLES, 1):
     out = reference.solve(c["input"], c["gap"], c["lateness"])
     arr = ", ".join(f'{e["key"]}(t={e["t"]},v={e["v"]})' for e in c["input"])
-    lines.append(f"\n## Esempio {i}  (gap={c['gap']}, lateness={c['lateness']})")
-    lines.append(f"\n**Arrivi:** {arr}\n")
+    lines.append(f"\n## Example {i}  (gap={c['gap']}, lateness={c['lateness']})")
+    lines.append(f"\n**Arrivals:** {arr}\n")
     lines.append(f"\n`late_dropped = {out['late_dropped']}`\n")
     if out["sessions"]:
         lines.append("\n| key | start | end | count | sum |")
@@ -36,7 +37,7 @@ for i, c in enumerate(EXAMPLES, 1):
         for s in out["sessions"]:
             lines.append(f"\n| {s['key']} | {s['start']} | {s['end']} | {s['count']} | {s['sum']} |")
     else:
-        lines.append("\n(nessuna sessione)")
+        lines.append("\n(no sessions)")
     lines.append("\n")
 
 with open(os.path.join(ARM, "examples.md"), "w", encoding="utf-8") as f:
@@ -51,4 +52,4 @@ for i, c in enumerate(cases, 1):
 json.dump(neutral, open(os.path.join(ARM, "cases.json"), "w", encoding="utf-8"),
           ensure_ascii=False, indent=1)
 
-print(f"Scritti {ARM}\\examples.md ({len(EXAMPLES)} esempi) + cases.json (label neutre)")
+print(f"Written {ARM}\\examples.md ({len(EXAMPLES)} examples) + cases.json (neutral labels)")

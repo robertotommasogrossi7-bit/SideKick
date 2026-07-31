@@ -1,10 +1,10 @@
-# Reverse-engineering — deduci la regola
+# Reverse-engineering — deduce the rule
 
-In questa cartella:
-- `examples.md` — esempi **input → output** di una funzione `solve(events, gap, lateness)`.
-- `grader.py` — 11 casi di test **nascosti** (mostra solo quanti passano; etichette `case_NN`
-  senza indizi).
-- `solution.py` — da implementare.
+In this folder:
+- `examples.md` — **input → output** examples of a function `solve(events, gap, lateness)`.
+- `grader.py` — 11 **hidden** test cases (shows only how many pass; labels `case_NN`
+  with no hints).
+- `solution.py` — to be implemented.
 
-**Compito:** *non* c'è una specifica scritta. **Deduci la regola dagli esempi** e implementa
-`solve` finché `python grader.py` dà **11/11**. Lavora solo dentro questa cartella.
+**Task:** there is *no* written specification. **Deduce the rule from the examples** and
+implement `solve` until `python grader.py` gives **11/11**. Work only inside this folder.

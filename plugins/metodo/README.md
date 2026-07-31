@@ -29,6 +29,9 @@ But the constitution already does this **proactively**, so it's secondary.
 /plugin marketplace add robertotommasogrossi7-bit/SideKick
 /plugin install metodo@sidekick
 ```
+This plugin is an **accessory** (just `/metodo:idea`, package version 0.1.1, tracked
+separately from the constitution's own version above) — full adoption of the method is the
+drop-in/preset described above, not this install command.
 
 ## Improve / share
 It's meant for a **community that shares and evolves its own method with the AI**: fork,

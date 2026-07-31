@@ -1,4 +1,5 @@
-> Italian original: in the repo's git history (`versione-italiano/esperimenti/ricerca-modelli-effort-2026-07.md`, up to 2026-07-25).
+> Italian translation: `../ITALIANO/esperimenti/research-models-effort-2026-07.md`. The
+> pre-2026-07-25 Italian original remains in the repo's git history (`versione-italiano/…`).
 
 # Research - models, effort, ultracode (2026-07-03)
 

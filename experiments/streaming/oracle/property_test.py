@@ -1,11 +1,12 @@
-"""Property test: confronta la solution del braccio con la reference su molti input random.
-Se combaciano sempre, la solution e' davvero corretta (non solo sui 11 casi nascosti)."""
+"""Property test: compares the arm's solution against the reference on many random inputs.
+If they always match, the solution is truly correct (not just on the 11 hidden cases)."""
 import sys, os, json, random
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)  # reference.py
-ARM = sys.argv[1] if len(sys.argv) > 1 else r"C:\Users\rober\Desktop\Programmi\_stream-test\discovery"
-sys.path.insert(0, ARM)   # solution.py del braccio
+# Optional CLI arg: target arm folder. Defaults to the sibling discovery/ folder.
+ARM = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "..", "discovery")
+sys.path.insert(0, ARM)   # the arm's own solution.py
 
 import reference
 import solution  # noqa: E402
@@ -40,8 +41,8 @@ for _ in range(N):
         if first is None:
             first = {"events": ev, "gap": gap, "lateness": lat, "got": a, "exp": b}
 
-print(f"property-test: {N - bad}/{N} combaciano con la reference")
+print(f"property-test: {N - bad}/{N} match the reference")
 if first:
-    print("PRIMO MISMATCH:", json.dumps(first, ensure_ascii=False)[:400])
+    print("FIRST MISMATCH:", json.dumps(first, ensure_ascii=False)[:400])
 else:
-    print("Nessun mismatch: la solution e' corretta anche fuori dai casi nascosti.")
+    print("No mismatch: the solution is correct even outside the hidden cases.")

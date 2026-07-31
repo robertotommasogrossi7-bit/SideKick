@@ -1,6 +1,6 @@
-"""Genera la suite nascosta: per ogni caso, calcola l'output con reference.solve e
-salva cases.json (input + gap + lateness + HASH atteso, leak-proof, per il grader nelle
-cartelle dei bracci) + expected_full.json (output completo, PRIVATO, per la mia diagnosi)."""
+"""Generates the hidden suite: for each case, computes the output with reference.solve and
+saves cases.json (input + gap + lateness + expected HASH, leak-proof, for the grader in the
+arms' folders) + expected_full.json (full output, PRIVATE, for diagnosing failures)."""
 import os, json, hashlib
 import reference
 
@@ -69,4 +69,4 @@ json.dump(public, open(os.path.join(HERE, "cases.json"), "w", encoding="utf-8"),
           ensure_ascii=False, indent=1)
 json.dump(full, open(os.path.join(HERE, "expected_full.json"), "w", encoding="utf-8"),
           ensure_ascii=False, indent=1)
-print(f"Generati {len(CASES)} casi -> cases.json (hash) + expected_full.json (privato)")
+print(f"Generated {len(CASES)} cases -> cases.json (hash) + expected_full.json (private)")

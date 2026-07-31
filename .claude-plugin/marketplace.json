@@ -10,8 +10,8 @@
     {
       "name": "metodo",
       "source": "./plugins/metodo",
-      "description": "Operationalizes the working method: idea capture (/metodo:idea); design-first and micro-commit coming next.",
-      "version": "0.1.0",
+      "description": "Ships the /metodo:idea slash-command (idea capture). The full working method is adopted via the drop-in/preset in plugins/metodo/ (constitution version in its own footer/CHANGELOG) — this plugin package version is tracked separately.",
+      "version": "0.1.1",
       "author": {
         "name": "Roberto Tommaso Grossi"
       }

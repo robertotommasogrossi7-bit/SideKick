@@ -22,7 +22,7 @@ each arm's commit history is in `_git-history.txt`).
   the environmental package (CLAUDE.md), arm-B bare. The "human-side" test.
 - `cost-meter.mjs` — measures the **cost** (turns/tokens) of an arm from its transcripts.
 
-## What we found (summary; detail in `../_processo/DECISIONI.md`)
+## What we found (summary; details live in the projects' private repos)
 - When the model **already knows or can derive it**, the package **doesn't improve** the
   outcome and **costs more** (migration ~2x; streaming solved cleanly; reverse, *without* a
   spec, +30%).

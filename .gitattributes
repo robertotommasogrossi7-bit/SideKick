@@ -1,0 +1,4 @@
+# Vendored experiment arms (third-party forked apps, ~12MB): not the author's own work,
+# so GitHub's language stats and diff views should treat them as vendored code.
+experiments/migrazione/** linguist-vendored
+experiments/richiesta-vaga/** linguist-vendored
