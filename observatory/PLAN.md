@@ -51,13 +51,15 @@
         source URLs, the research dossier, red-team verdicts, historical
         CHANGELOG/audit entries, model names in data, generated dashboards, and the
         README's deliberate "Claude Code is the current instrument, not the point".
-11. [x] **Dataset release v0.1** — DONE 2026-07-31: tag `dataset-v0.1` + GitHub release
-        with notes (dashboard regenerated same day: 70 sessions, 12 projects, 19.4M output
-        + 51.6M cloud-agent tokens; novelties cited: `prices.csv`, `cost_usd_equiv`,
-        `daily.csv`, `dashboard.html`, workflow costs measured from local transcripts;
-        limits restated: API-equivalent ≠ plan bill, partial costs never invented,
-        redaction). Screenshot renewal for the README PNGs deferred to the observatory
-        ritual (local-only procedure).
+11. [x] **Dataset release v0.1** — DONE 2026-07-31: tag `dataset-v0.1` pushed + release
+        notes versioned in `observatory/usage/RELEASES.md` (EN+IT mirror); dashboard
+        regenerated same day (70 sessions, 12 projects, 19.4M output + 51.6M cloud-agent
+        tokens); novelties cited: `prices.csv`, `cost_usd_equiv`, `daily.csv`,
+        `dashboard.html`, workflow costs measured from local transcripts; limits restated
+        (API-equivalent ≠ plan bill, partial costs never invented, redaction).
+        MANUAL leftover for Roberto (no `gh` CLI on this machine): on GitHub, tag →
+        *Create release from tag* → paste the RELEASES.md section. Screenshot renewal for
+        the README PNGs deferred to the observatory ritual (local-only procedure).
 12. [ ] **MANUAL (Roberto)**: repo description + topics on GitHub; decide on username rename.
 13. [ ] Later, data-driven: METRICHE for progetto-15 (full-vs-incremental A/B) · API
         cost-equivalent per model — DONE 2026-07-25 (`prices.csv`, sources+dates per row) · CSV→SQLite at hundreds of
