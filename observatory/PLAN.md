@@ -34,8 +34,12 @@
 7. [x] **Tests for `cost-meter.mjs`** — DONE 2026-07-31: 5 fixture-based tests
        (`tests/cost-meter.test.mjs`, fake home via USERPROFILE/HOME override, hand-computed
        totals, declared no-dedup limitation), suite 20/20; CONTRIBUTING EN+IT updated.
-8. [ ] **"Operating hypotheses" tone pass** on CONSTITUTION/COSTITUZIONE: soften NEVER/ALWAYS
-       into hypotheses with N; link claims to `observatory/STRATEGIES.md`.
+8. [x] **"Operating hypotheses" tone pass** — DONE 2026-07-31 (Roberto's OK on the full
+       proposal, 1 Opus reviewer with 8 findings all applied): method **v1.9.3** — measured
+       claims state source, N and limits ("register §N" = STRATEGIES.md); the one
+       measurement-refuted claim fixed (workflow resume best-effort, 0/46 keys); behavioral
+       directives untouched; drop-in + preset.yml realigned to 1.9.3; CHANGELOG EN+IT;
+       mirror re-synced.
 9. [x] **Update the spec-kit clone and TEST the preset path empirically** — DONE 2026-07-31:
        clone fast-forwarded (+562 commits, 0.15.2.dev0); `specify init --preset <local dir>`
        run twice (conventional `templates/` layout AND flat layout), both seeded

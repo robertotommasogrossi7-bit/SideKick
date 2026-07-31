@@ -39,8 +39,12 @@
        (`tests/cost-meter.test.mjs`, home finta via override USERPROFILE/HOME, totali
        calcolati a mano, limite senza-dedup dichiarato), suite 20/20; CONTRIBUTING EN+IT
        aggiornato.
-8. [ ] **Passata di tono "ipotesi operative"** su CONSTITUTION/COSTITUZIONE: ammorbidire
-       MAI/SEMPRE in ipotesi con N; collegare le affermazioni a `observatory/STRATEGIES.md`.
+8. [x] **Passata di tono "ipotesi operative"** — FATTA 2026-07-31 (ok di Roberto sulla
+       proposta completa, 1 revisore Opus con 8 finding tutti recepiti): metodo **v1.9.3** —
+       i claim misurati dichiarano fonte, N e limiti ("registro §N" = STRATEGIES.md);
+       sistemato l'unico claim confutato da una misura (resume workflow best-effort, 0/46
+       chiavi); direttive di comportamento intoccate; drop-in + preset.yml riallineati a
+       1.9.3; CHANGELOG EN+IT; specchio risincronizzato.
 9. [x] **Aggiornare il clone di spec-kit e TESTARE empiricamente il percorso preset** —
        FATTO 2026-07-31: clone in fast-forward (+562 commit, 0.15.2.dev0); `specify init
        --preset <cartella locale>` eseguito due volte (layout convenzionale `templates/` E
