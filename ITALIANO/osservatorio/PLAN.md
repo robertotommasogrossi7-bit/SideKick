@@ -57,7 +57,13 @@
         prezzi, il dossier di ricerca, i verdetti del red team, le voci storiche di
         CHANGELOG/audit, i nomi dei modelli nei dati, le dashboard generate e il
         "Claude Code è lo strumento attuale, non il punto" voluto del README.
-11. [ ] **Rilascio dataset v0.1** (tag git + note di rilascio) una volta esistente SCHEMA.md.
+11. [x] **Rilascio dataset v0.1** — FATTO 2026-07-31: tag `dataset-v0.1` + release GitHub
+        con note (dashboard rigenerata lo stesso giorno: 70 sessioni, 12 progetti, 19,4M
+        token di output + 51,6M da agenti cloud; novità citate: `prices.csv`,
+        `cost_usd_equiv`, `daily.csv`, `dashboard.html`, costi workflow misurati dai
+        transcript locali; limiti ribaditi: equivalente API ≠ bolletta del piano, costi
+        parziali mai inventati, censura). Rinnovo screenshot dei PNG del README rimandato
+        al rituale dell'osservatorio (procedura solo locale).
 12. [ ] **MANUALE (Roberto)**: descrizione del repo + topic su GitHub; decidere sulla rinomina
         dello username.
 13. [ ] Più avanti, guidato dai dati: METRICHE per progetto-15 (A/B completo-vs-incrementale) ·
