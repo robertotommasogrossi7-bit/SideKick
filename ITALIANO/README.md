@@ -70,7 +70,8 @@ vive in `observatory/` e `plugins/`.
 
 **[Apri la dashboard live →](osservatorio/uso/DASHBOARD.md)** — totali a colpo d'occhio e
 le operazioni più costose, rigenerata dai transcript reali a ogni revisione dell'osservatorio
-(anteprima qui sopra aggiornata al 2026-07-25).
+(anteprima qui sopra aggiornata al 2026-08-01 — rigenerata headless dopo ogni refresh
+pushato della dashboard, dal giorno in cui un red team l'ha colta stantia due volte).
 
 [`observatory/`](../observatory/) è l'osservatorio (inglese; traduzione italiana in
 questa cartella):

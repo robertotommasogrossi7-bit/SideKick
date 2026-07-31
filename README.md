@@ -63,7 +63,8 @@ material lives in `observatory/` and `plugins/`.
 
 **[Open the live dashboard →](observatory/usage/DASHBOARD.md)** — totals at a glance and the
 most expensive operations, regenerated from the real transcripts at every observatory review
-(preview above refreshed 2026-07-25).
+(preview above refreshed 2026-08-01 — regenerated headlessly after every pushed dashboard
+refresh since the day a red team caught it stale twice).
 
 [`observatory/`](observatory/) is the observatory (English; Italian translation in
 [`ITALIANO/`](ITALIANO/README.md)):
