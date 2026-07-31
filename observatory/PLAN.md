@@ -36,10 +36,14 @@
        totals, declared no-dedup limitation), suite 20/20; CONTRIBUTING EN+IT updated.
 8. [ ] **"Operating hypotheses" tone pass** on CONSTITUTION/COSTITUZIONE: soften NEVER/ALWAYS
        into hypotheses with N; link claims to `observatory/STRATEGIES.md`.
-9. [ ] **Update the spec-kit clone and TEST the preset path empirically** (`specify init`
-       with a preset on ≥0.12.15, diff `.specify/memory/constitution.md`): only then decide
-       whether to ship `plugins/metodo/spec-kit/preset.yml` alongside the drop-in. Also copy
-       the current constitution to the `spec-kit-metodo` repo.
+9. [x] **Update the spec-kit clone and TEST the preset path empirically** — DONE 2026-07-31:
+       clone fast-forwarded (+562 commits, 0.15.2.dev0); `specify init --preset <local dir>`
+       run twice (conventional `templates/` layout AND flat layout), both seeded
+       `.specify/memory/constitution.md` **byte-identical** (equal SHA256) to the drop-in →
+       decision: SHIP — `plugins/metodo/spec-kit/preset.yml` published (points at
+       `constitution.md`, one copy), README EN+IT updated with the tested claim.
+       `spec-kit-metodo/memory/constitution.md` realigned to drop-in v1.9.1 (was v1.1.0;
+       folder has no local `.git` — publishing that repo stays manual).
 10. [ ] **De-Claude sweep** of remaining docs (README title/intro already reframed to
         "AI coding agent").
 11. [ ] **Dataset release v0.1** (git tag + release notes) once the SCHEMA.md exists.

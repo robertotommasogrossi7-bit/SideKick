@@ -1,0 +1,33 @@
+# Spec Kit preset: seeds the Metodo constitution at `specify init` time.
+# Usage:  specify init <project> --preset path/to/SideKick/plugins/metodo/spec-kit
+# Tested empirically 2026-07-31 on spec-kit 0.15.2.dev0 (constitution seeding exists
+# since v0.12.15): .specify/memory/constitution.md comes out byte-identical (SHA256)
+# to constitution.md in this folder. The `file:` field points at the drop-in directly,
+# so the repo keeps ONE copy of the constitution.
+schema_version: "1.0"
+
+preset:
+  id: "metodo"
+  name: "Metodo (human+AI working method)"
+  version: "1.9.1"
+  description: "Seeds the project constitution with the Metodo working method drop-in, verbatim, at init time"
+  author: "Roberto Tommaso Grossi"
+  repository: "https://github.com/robertotommasogrossi7-bit/SideKick"
+  license: "MIT"
+
+requires:
+  speckit_version: ">=0.12.15"
+
+provides:
+  templates:
+    - type: "template"
+      name: "constitution-template"
+      file: "constitution.md"
+      description: "Ratified constitution: the Metodo drop-in, seeded verbatim into .specify/memory/constitution.md"
+      strategy: "replace"
+      replaces: "constitution-template"
+
+tags:
+  - "constitution"
+  - "method"
+  - "governance"

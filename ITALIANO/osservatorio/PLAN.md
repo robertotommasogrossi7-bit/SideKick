@@ -41,10 +41,15 @@
        aggiornato.
 8. [ ] **Passata di tono "ipotesi operative"** su CONSTITUTION/COSTITUZIONE: ammorbidire
        MAI/SEMPRE in ipotesi con N; collegare le affermazioni a `observatory/STRATEGIES.md`.
-9. [ ] **Aggiornare il clone di spec-kit e TESTARE empiricamente il percorso preset**
-       (`specify init` con un preset su ≥0.12.15, diff di `.specify/memory/constitution.md`):
-       solo allora decidere se distribuire `plugins/metodo/spec-kit/preset.yml` accanto al
-       drop-in. Copiare anche la costituzione corrente nel repo `spec-kit-metodo`.
+9. [x] **Aggiornare il clone di spec-kit e TESTARE empiricamente il percorso preset** —
+       FATTO 2026-07-31: clone in fast-forward (+562 commit, 0.15.2.dev0); `specify init
+       --preset <cartella locale>` eseguito due volte (layout convenzionale `templates/` E
+       layout flat), entrambe hanno seminato `.specify/memory/constitution.md` **identica
+       byte a byte** (stesso SHA256) al drop-in → decisione: SI PUBBLICA —
+       `plugins/metodo/spec-kit/preset.yml` pubblicato (punta a `constitution.md`, una
+       copia sola), README EN+IT aggiornati col claim testato.
+       `spec-kit-metodo/memory/constitution.md` riallineata al drop-in v1.9.1 (era v1.1.0;
+       la cartella non ha `.git` locale — la pubblicazione di quel repo resta manuale).
 10. [ ] **Sweep de-Claude** dei documenti restanti (il titolo/intro del README è già
         reinquadrato su "agente di coding AI").
 11. [ ] **Rilascio dataset v0.1** (tag git + note di rilascio) una volta esistente SCHEMA.md.

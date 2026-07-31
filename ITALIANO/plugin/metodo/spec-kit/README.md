@@ -16,12 +16,23 @@ Da lì l'agente (che legge `.specify/memory/constitution.md` come contesto) segu
 **proattivamente**, e — grazie al **Principio VI (Self-Amending)** — può **aggiornarla da
 sola**.
 
-## Perché un drop-in *constitution* (e, dalla v0.12.15, opzionalmente un preset)
+## Perché un drop-in *constitution* (e, dalla v0.12.15, anche un preset)
 La costituzione vive in **memory** (`.specify/memory/`) e **sopravvive a `specify init`**:
 lasciare questo file lì è il modo più semplice e indipendente dalla versione per consegnare un
 metodo. Da **Spec Kit v0.12.15 (2026-07-14)** anche un *preset* può seminare la costituzione
-verbatim nella memory al momento dell'init — un secondo percorso di consegna che potremmo
-aggiungere una volta testato per davvero.
+verbatim nella memory al momento dell'init — e ora consegniamo anche quel secondo percorso,
+come [`preset.yml`](../../../../plugins/metodo/spec-kit/preset.yml) in quella cartella
+(punta direttamente a `constitution.md`, così il repo tiene una copia sola):
+
+```bash
+specify init <project> --integration <agent> --preset path/to/SideKick/plugins/metodo/spec-kit
+```
+
+**Testato empiricamente il 2026-07-31** su spec-kit 0.15.2.dev0: dopo l'init,
+`.specify/memory/constitution.md` è risultata **identica byte a byte** (stesso SHA256) al
+drop-in, sia col layout convenzionale `templates/` sia con quello flat che consegniamo.
+Caveat: abbiamo testato solo quella versione; il minimo `>=0.12.15` viene dal loro
+changelog, non da nostre prove su versioni più vecchie.
 
 > **Correzione (2026-07-17).** Una versione precedente di questa pagina affermava "preset ed
 > extension fanno override solo dei *template*; una constitution non è un preset". Era vero per
