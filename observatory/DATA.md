@@ -76,10 +76,12 @@ money.
   generated ~77% of historical output as of 2026-07-25 (the "~83%" published earlier was
   wrong — audit finding AR-06, recomputed from `usage.csv`); Sonnet/Fable came in from
   July with the model-per-step rule.
-- **Poker's process A/B (full build) vs progetto-15 (incremental)**:
-  today **not measurable** because the second doesn't log phases. Either add a lightweight
-  METRICHE.md, or declare it closed. (The new per-session table helps: poker's phases already
-  have titles like `WTB/Base_4`, `Poker_App/Feature_6`, etc.)
+- **Poker's process A/B (full build) vs progetto-15 (incremental)**: **CLOSED as
+  unmeasurable, 2026-08-01** (the option this page had offered). The incremental arm never
+  logged phases (5 sessions total, phase-less and redacted, one spanning a month) and has
+  been inactive since 2026-07-17. Reversible by itself: if the project resumes with
+  `Progetto/Fase_N` session titles, the data contract makes the arm measurable again with
+  zero extra bookkeeping.
 
 ## Minimum data contract (for all chats — ~zero cost)
 1. **Experiments** → one line in `~/.claude/ESPERIMENTI.md`, format already fixed there. Holds up.

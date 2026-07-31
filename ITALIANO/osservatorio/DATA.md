@@ -77,10 +77,12 @@ sommati a mano dai METRICHE. La dashboard Anthropic resta l'unica fonte del cost
   sostenibile il piano. Opus ha generato ~77% dell'output storico al 2026-07-25 (il "~83%"
   pubblicato prima era sbagliato — finding AR-06 dell'audit, ricalcolato da `usage.csv`);
   Sonnet/Fable sono entrati da luglio con la regola modello-per-passo.
-- **A/B di processo poker (costruzione completa) vs progetto-15 (incrementale)**:
-  oggi **non misurabile** perché il secondo non logga le fasi. O si aggiunge un METRICHE.md
-  leggero, o si dichiara chiuso. (La nuova tabella per-sessione aiuta: le fasi di poker hanno
-  già titoli come `WTB/Base_4`, `Poker_App/Feature_6`, ecc.)
+- **A/B di processo poker (costruzione completa) vs progetto-15 (incrementale)**: **CHIUSO
+  come non misurabile, 2026-08-01** (l'opzione che questa pagina stessa offriva). Il
+  braccio incrementale non ha mai loggato le fasi (5 sessioni in tutto, senza fasi e
+  censurate, una lunga un mese) ed è fermo dal 2026-07-17. Reversibile da solo: se il
+  progetto riparte coi titoli di sessione `Progetto/Fase_N`, il contratto dati rende il
+  braccio di nuovo misurabile a costo zero di contabilità.
 
 ## Contratto dati minimo (per tutte le chat — costo ~zero)
 1. **Esperimenti** → una riga in `~/.claude/ESPERIMENTI.md`, formato già fissato lì. Regge.

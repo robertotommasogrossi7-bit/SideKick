@@ -73,10 +73,23 @@
         dei PNG del README rimandato al rituale dell'osservatorio (procedura solo locale).
 12. [ ] **MANUALE (Roberto)**: descrizione del repo + topic su GitHub; decidere sulla rinomina
         dello username.
-13. [ ] Più avanti, guidato dai dati: METRICHE per progetto-15 (A/B completo-vs-incrementale) ·
-        equivalente in costo API per modello — FATTO 2026-07-25 (`prices.csv`, fonte+data per riga) · CSV→SQLite oltre
-        alcune centinaia di righe · ccusage come input se i suoi export coprissero mai censura
-        + esigenze per-operazione.
+13. [x] Più avanti, guidato dai dati — **tutti e quattro i trigger verificati sui dati,
+        2026-08-01**:
+        · **A/B completo-vs-incrementale di progetto-15 → CHIUSO come non misurabile**
+          (l'opzione che il backlog stesso offriva): 5 sessioni in tutto, mai un titolo di
+          fase (operazioni censurate E senza fasi — una sessione va dal 2026-05-29 al
+          07-01), nessuna attività dal 2026-07-17. Reversibile: se il progetto riparte coi
+          titoli `Progetto/Fase_N`, il contratto dati lo rende misurabile da solo.
+        · equivalente in costo API per modello — FATTO 2026-07-25 (`prices.csv`, fonte+data
+          per riga).
+        · **CSV→SQLite → soglia non raggiunta** (contate 2026-08-01: usage 45 · sessions 70
+          · daily 63 · workflow 20 · prices 7 righe — max 70 per file, la soglia è
+          "centinaia"). Nota per quando scatterà: Node ≥22.5 ha `node:sqlite` nativo,
+          quindi resterà zero-dipendenze.
+        · **ccusage come input → trigger non scattato** (verificato alla fonte 2026-08-01:
+          niente operazioni titolate, niente censura, niente registro workflow nei suoi
+          export — assenti tutte e tre le capacità necessarie). Da ricontrollare a un
+          rituale futuro se il loro set di funzioni si muove.
 
 **Decisione (Roberto, 2026-07-17)**: `versione-italiano/` resta **congelata** (originali +
 LEGGIMI vivo). Uno specchio vivo costerebbe una doppia traduzione a ogni modifica per un

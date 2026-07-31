@@ -66,9 +66,21 @@
         *Create release from tag* → paste the RELEASES.md section. Screenshot renewal for
         the README PNGs deferred to the observatory ritual (local-only procedure).
 12. [ ] **MANUAL (Roberto)**: repo description + topics on GitHub; decide on username rename.
-13. [ ] Later, data-driven: METRICHE for progetto-15 (full-vs-incremental A/B) · API
-        cost-equivalent per model — DONE 2026-07-25 (`prices.csv`, sources+dates per row) · CSV→SQLite at hundreds of
-        rows · ccusage-as-input if its exports ever cover redaction + per-operation needs.
+13. [x] Later, data-driven — **all four triggers checked against the data, 2026-08-01**:
+        · **progetto-15 full-vs-incremental A/B → CLOSED as unmeasurable** (the option the
+          backlog itself offered): 5 sessions total, no phase titles ever logged (operations
+          redacted AND phase-less — one session spans 2026-05-29→07-01), no activity since
+          2026-07-17. Reversible: if the project resumes with `Progetto/Fase_N` titles, the
+          data contract makes it measurable again by itself.
+        · API cost-equivalent per model — DONE 2026-07-25 (`prices.csv`, sources+dates per
+          row).
+        · **CSV→SQLite → trigger not met** (counted 2026-08-01: usage 45 · sessions 70 ·
+          daily 63 · workflow 20 · prices 7 rows — max 70 per file, threshold is "hundreds").
+          Note for when it fires: Node ≥22.5 ships `node:sqlite`, so it can stay
+          zero-dependency.
+        · **ccusage-as-input → trigger not met** (checked at source 2026-08-01: no titled
+          operations, no redaction, no workflow register in its exports — all three needed
+          capabilities absent). Re-check at a future ritual if their feature set moves.
 
 **Decision (Roberto, 2026-07-17)**: `versione-italiano/` stays **frozen** (originals + live
 LEGGIMI). A live mirror would cost a double translation on every change for a near-zero
