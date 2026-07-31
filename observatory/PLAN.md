@@ -81,6 +81,20 @@ after the repo audit (AR-02/03) Roberto chose to keep **only one** Italian tree:
 untracked, with OSSERVATORIO.md and the glossary, and in git history for the originals).
 
 ## Done (compressed history)
+- **2026-08-01 — Remediation block RB-1 (two red teams, all applied same day, Roberto's
+  order "do them all")**: internal red team (10 findings) + external (senior + Spec Kit
+  adopter hats, 12). Landed: single-source rule for live totals (dashboard = the one
+  authority, every page links; LESSONS/DATA/README de-numbered) · `estimated` column in
+  workflow.csv with `~` marking through the whole pipeline (+2 tests) · no-git fallback
+  in the link checker (the Download-ZIP artifact now passes the suite) · method
+  **v1.9.4** (stale-number pointers, drop-in Scope tags + Principle VI caveat) ·
+  ITALIANO SCHEMA fully resynced · EN-tree language pass (cost-meter/oracle/streaming
+  translated, oracle README born, broken `_processo` pointers truthified) ·
+  `.gitattributes` linguist-vendored · plugin manifests honest (0.1.1, no "coming next") ·
+  audit Outcome corrected with a dated note (screenshots were never removed) · screenshots
+  regenerated headlessly post-push · local positions registry born (`POSIZIONI.local.md`,
+  gitignored) + date headers move with the body by rule. Multi-agent: 5 scanners + 2
+  fixers + 1 reviewer + 1 internal red team, local transcripts (auto-counted).
 - **2026-07-25** — The marathon day: WR3 resume-incident forensics (on-the-spot diagnosis
   refuted on the journal; safe-resume procedure into PROCESSO-FABBRICA) · method v1.9→v1.9.2
   (Factory section, bidirectional shadow, 5h_windows contract, glossary moved to Studio) ·

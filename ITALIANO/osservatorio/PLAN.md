@@ -91,6 +91,21 @@ giorno (sopravvive in locale, non tracciata, con OSSERVATORIO.md e il glossario,
 cronologia git per gli originali).
 
 ## Fatto (storico compresso)
+- **2026-08-01 — Blocco bonifica RB-1 (due red team, tutto applicato in giornata, ordine
+  di Roberto "falle tutte")**: red team interno (10 finding) + esterno (cappelli senior +
+  adottante Spec Kit, 12). Consegnato: regola fonte-unica per i totali vivi (la dashboard
+  è l'unica autorità, ogni pagina linka; LESSONS/DATA/README senza numeri ricopiati) ·
+  colonna `estimated` in workflow.csv con marcatura `~` lungo tutta la filiera (+2 test) ·
+  fallback senza-.git nel link checker (l'artefatto Download-ZIP ora passa la suite) ·
+  metodo **v1.9.4** (puntatori al posto dei numeri stantii, Scope tags nel drop-in +
+  caveat al Principio VI) · SCHEMA ITALIANO risincronizzato per intero · passata lingua
+  sull'albero EN (cost-meter/oracle/streaming tradotti, nato il README di oracle,
+  puntatori `_processo` rotti resi veri) · `.gitattributes` linguist-vendored · manifest
+  del plugin onesti (0.1.1, via il "coming next") · Esito dell'audit corretto con nota
+  datata (gli screenshot non erano mai stati rimossi) · screenshot rigenerati headless
+  dopo il push · nato il registro locale delle posizioni (`POSIZIONI.local.md`,
+  gitignorato) + le date in testa si muovono col corpo per regola. Multi-agente: 5
+  scanner + 2 fixer + 1 revisore + 1 red team interno, transcript locali (contati da soli).
 - **2026-07-25** — Il giorno della maratona: forensics sull'incidente resume WR3 (diagnosi a
   caldo smentita sul journal; procedura di resume sicura in PROCESSO-FABBRICA) · metodo
   v1.9→v1.9.2 (sezione Fabbrica, ombra bidirezionale, contratto 5h_windows, glossario
