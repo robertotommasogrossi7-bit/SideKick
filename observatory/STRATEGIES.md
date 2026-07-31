@@ -114,9 +114,27 @@
   → run-2 hypothesis: targeted near-miss shadow or a dedicated cheap near-miss pass.
   Honest caveat: different book/domain, so not a clean A/B — but agents −66%, cost per new
   question −16%, incidents zero is a consistent direction.
+- **Run 4 = SQL practice factory (2026-07-30/31, MEDIUM-HIGH level)**: ~85 agents / **~10M
+  tokens ESTIMATED** (cloud run, no local transcripts — unlike runs 2-3 this one has no
+  measured cost) for 523 new questions, 298 of them **execution-verified** (real
+  python+sqlite3 runs against a purpose-built deterministic dataset, expected outputs
+  frozen from actual results) + a FASE 0 corpus remediation + 5 new permanent validator
+  checks. What held: file-persisted outcomes survived **2 plan-window cuts with 0 lost
+  batches** (the v1.9 hardening again); the **targeted** near-miss shadow (42 samples,
+  run 3's hypothesis applied) found 8 real problems, incl. one where the cheap shadow had
+  *promoted* defective distractors the high model dismantled — §2's complementary-classes
+  pattern, in the expected direction. Honest ding: the run **started** with 16 parallel
+  Opus QC agents — against run 3's consolidation lesson — and was corrected mid-run on
+  Roberto's request (consolidated QC 2 Opus + 4 Sonnet, second QC pass ~85% cheaper): the
+  optimization was recovered by hand, not planned in. Rough cost per new question ~19k
+  tokens (estimate) vs run 3's ~15.8k measured — but this run also bought execution
+  verification, a new dataset and validator growth the books run didn't need, so the
+  numbers are not directly comparable.
 - **Verdict**: pays off for content Roberto will use for months; the cost is dominated by
   cache reads (~225M on WR3) → the levers above target exactly that. The process-hardening
-  measurably paid on the very next run. N=3.
+  measurably paid on the very next run; run 4 shows the lessons survive contact but only
+  if the run PLAN starts from them (the QC roster didn't, and had to be corrected live).
+  N=4.
 
 ## Strategies STILL WITHOUT DATA (declared)
 - **Same-model repetitions** (N runs on the same task): 0 experiments.

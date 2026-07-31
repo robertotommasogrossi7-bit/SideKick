@@ -120,8 +120,28 @@
   sui near-miss o passata near-miss dedicata economica. Avvertenza onesta: libro/dominio
   diversi, non è un A/B pulito — ma agenti −66%, costo per domanda nuova −16%, incidenti
   zero è una direzione consistente.
+- **Run 4 = fabbrica SQL pratiche (2026-07-30/31, livello MEDIO-ALTO)**: ~85 agenti / **~10M
+  token STIMATI** (run cloud, niente transcript locali — a differenza dei run 2-3 questo non
+  ha un costo misurato) per 523 domande nuove, 298 delle quali **verificate per esecuzione**
+  (esecuzioni reali python+sqlite3 su un dataset deterministico costruito apposta, expected
+  congelati dai risultati veri) + una bonifica FASE 0 del corpus + 5 check permanenti nuovi
+  nel validatore. Cosa ha tenuto: gli esiti su file hanno superato **2 tagli di finestra del
+  piano con 0 lotti persi** (di nuovo l'irrobustimento v1.9); l'ombra **mirata** near-miss
+  (42 campioni, applicata l'ipotesi del run 3) ha trovato 8 problemi veri, incluso uno in
+  cui l'ombra economica aveva *promosso* distrattori difettosi che il modello alto ha
+  smontato — il pattern classi-complementari di §2, nella direzione attesa. Neo onesto: il
+  run è **partito** con 16 QC Opus paralleli — contro la lezione di consolidamento del
+  run 3 — ed è stato corretto a metà corsa su richiesta di Roberto (QC consolidato 2 Opus +
+  4 Sonnet, seconda passata QC ~85% più economica): l'ottimizzazione è stata recuperata a
+  mano, non pianificata. Costo grezzo per domanda nuova ~19k token (stima) contro i ~15,8k
+  misurati del run 3 — ma questo run ha comprato anche la verifica per esecuzione, un
+  dataset nuovo e la crescita del validatore che al run libri non servivano: i numeri non
+  sono confrontabili alla pari.
 - **Verdetto**: ripaga per contenuti che Roberto userà per mesi; il costo è dominato dalle
-  letture di cache (~225M su WR3) → le leve sopra puntano esattamente lì. Il processo irrobustito ha reso in modo misurabile già al run successivo. N=3.
+  letture di cache (~225M su WR3) → le leve sopra puntano esattamente lì. Il processo
+  irrobustito ha reso in modo misurabile già al run successivo; il run 4 mostra che le
+  lezioni reggono all'impatto ma solo se il PIANO del run parte da esse (la squadra QC non
+  lo faceva, ed è stata corretta in corsa). N=4.
 
 ## Strategie ANCORA SENZA DATI (dichiarate)
 - **Ripetizioni stesso-modello** (N run sullo stesso task): 0 esperimenti.
