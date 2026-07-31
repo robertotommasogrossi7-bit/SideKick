@@ -79,4 +79,4 @@ money.
    **+ "Observed outcome" column** to fill in when the outcome becomes visible (even months
    later).
 3. **Token consumption** → **nobody writes anything by hand**: `usage.mjs` extracts it from
-   the transcripts. The more Claude is used, the more data accumulates, for free.
+   the transcripts. The more the coding agent is used, the more data accumulates, for free.

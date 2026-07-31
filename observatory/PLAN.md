@@ -44,8 +44,13 @@
        `constitution.md`, one copy), README EN+IT updated with the tested claim.
        `spec-kit-metodo/memory/constitution.md` realigned to drop-in v1.9.1 (was v1.1.0;
        folder has no local `.git` — publishing that repo stays manual).
-10. [ ] **De-Claude sweep** of remaining docs (README title/intro already reframed to
-        "AI coding agent").
+10. [x] **De-Claude sweep** of remaining docs — DONE 2026-07-31: full grep of
+        Claude/Anthropic across all tracked `.md` (33 files); outcome: 1 generalization
+        (DATA.md "the more the coding agent is used", EN+IT) — everything else is
+        load-bearing fact and stays by the sweep's own rules: `~/.claude/` paths, price
+        source URLs, the research dossier, red-team verdicts, historical
+        CHANGELOG/audit entries, model names in data, generated dashboards, and the
+        README's deliberate "Claude Code is the current instrument, not the point".
 11. [ ] **Dataset release v0.1** (git tag + release notes) once the SCHEMA.md exists.
 12. [ ] **MANUAL (Roberto)**: repo description + topics on GitHub; decide on username rename.
 13. [ ] Later, data-driven: METRICHE for progetto-15 (full-vs-incremental A/B) · API

@@ -79,4 +79,4 @@ sommati a mano dai METRICHE. La dashboard Anthropic resta l'unica fonte del cost
    **+ colonna "Esito osservato"** da riempire quando l'esito diventa visibile (anche mesi
    dopo).
 3. **Consumo token** → **nessuno scrive nulla a mano**: lo estrae `usage.mjs` dai transcript.
-   Più si usa Claude, più dati si accumulano, gratis.
+   Più si usa l'agente di coding, più dati si accumulano, gratis.

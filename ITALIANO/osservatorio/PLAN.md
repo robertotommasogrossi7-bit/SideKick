@@ -50,8 +50,13 @@
        copia sola), README EN+IT aggiornati col claim testato.
        `spec-kit-metodo/memory/constitution.md` riallineata al drop-in v1.9.1 (era v1.1.0;
        la cartella non ha `.git` locale — la pubblicazione di quel repo resta manuale).
-10. [ ] **Sweep de-Claude** dei documenti restanti (il titolo/intro del README è già
-        reinquadrato su "agente di coding AI").
+10. [x] **Sweep de-Claude** dei documenti restanti — FATTO 2026-07-31: grep completo di
+        Claude/Anthropic su tutti i `.md` tracciati (33 file); esito: 1 generalizzazione
+        (DATA.md "più si usa l'agente di coding", EN+IT) — tutto il resto è fatto portante
+        e resta per le regole stesse dello sweep: path `~/.claude/`, URL delle fonti
+        prezzi, il dossier di ricerca, i verdetti del red team, le voci storiche di
+        CHANGELOG/audit, i nomi dei modelli nei dati, le dashboard generate e il
+        "Claude Code è lo strumento attuale, non il punto" voluto del README.
 11. [ ] **Rilascio dataset v0.1** (tag git + note di rilascio) una volta esistente SCHEMA.md.
 12. [ ] **MANUALE (Roberto)**: descrizione del repo + topic su GitHub; decidere sulla rinomina
         dello username.
