@@ -11,7 +11,9 @@
 migliorato su numeri reali.** Uno sviluppatore alle prime armi, diverse app reali, **ogni
 transcript misurato**. Cosa ha prodotto finora:
 
-- **Una costituzione di metodo di lavoro viva** ([v1.9.2](plugin/metodo/CHANGELOG.md),
+- **Una costituzione di metodo di lavoro viva — lo spec di questo repo**
+  ([master italiano](../plugins/metodo/COSTITUZIONE.md) ·
+  [inglese](../plugins/metodo/CONSTITUTION.md) · [v1.9.3](plugin/metodo/CHANGELOG.md),
   auto-emendante, con un drop-in Spec Kit) che l'AI applica proattivamente in ogni progetto.
 - **Un dataset pubblicato e redatto di uso reale dell'agente** — mesi di sessioni con
   operazioni nominate, 29M+ token di agenti cloud registrati, più il generatore a zero
@@ -40,7 +42,7 @@ generale.
 | **Contametro dei costi per i bracci di esperimenti A/B** | [`experiments/cost-meter.mjs`](../experiments/cost-meter.mjs) | Misura i turni/token di un esperimento con/senza dai suoi transcript. |
 | **Correttore a prova di fuga per test nascosti** | [`experiments/streaming/oracle/`](../experiments/streaming/oracle/) | Verifica se un artefatto di processo aiuta, senza rivelare le risposte al modello. |
 | **L'articolo** | [`FINDINGS.md`](FINDINGS.md) | *"Ho provato a misurare se un processo catturato aiuta lo sviluppo assistito da AI — e non sono riuscito a costruire un test equo (ancora)."* Include il primo tentativo contaminato e la revisione avversariale esterna che ha smontato la v1. |
-| **Un drop-in di constitution per Spec Kit** | [`plugins/metodo/spec-kit/constitution.md`](../plugins/metodo/spec-kit/constitution.md) | Una constitution di metodo di lavoro auto-emendante in formato Spec Kit (v1.9.1 — [storia degli emendamenti](plugin/metodo/CHANGELOG.md)) — la variante spersonalizzata e riusabile del nostro metodo (in inglese). |
+| **Un drop-in di constitution per Spec Kit (+ preset testato)** | [`plugins/metodo/spec-kit/`](../plugins/metodo/spec-kit/) | Una constitution di metodo di lavoro auto-emendante in formato Spec Kit (v1.9.3 — [storia degli emendamenti](plugin/metodo/CHANGELOG.md)) — la variante spersonalizzata e riusabile del nostro metodo (in inglese); `preset.yml` la semina a `specify init`, verificata identica byte a byte. |
 
 Avvio rapido per il generatore del dataset (nessuna dipendenza, Node 18+):
 
@@ -94,7 +96,7 @@ messaggio) — la nostra regola operativa ("riprendi il lavoro interrotto invece
 ripartire da zero") viene da questa meccanica più una ripresa misurata che ha riusato il
 100% dei passi completati, non da un test A/B.
 
-## Il metodo (appendice — ipotesi operative, non regole comprovate)
+## Il metodo — lo spec di questo repo (ipotesi operative, non regole comprovate)
 
 Manteniamo anche una **costituzione del metodo di lavoro** per la collaborazione umano+AI:
 cattura delle idee, design-prima-del-codice, ricerca-prima-di-scegliere, modello+effort per

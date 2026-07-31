@@ -8,8 +8,11 @@
 real numbers.** One beginner developer, several real apps, **every transcript measured**.
 What it has produced so far:
 
-- **A living working-method constitution** ([v1.9.2](plugins/metodo/CHANGELOG.md),
-  self-amending, with a Spec Kit drop-in) that the AI applies proactively in every project.
+- **A living working-method constitution — the spec of this repo**
+  ([Italian master](plugins/metodo/COSTITUZIONE.md) ·
+  [English](plugins/metodo/CONSTITUTION.md) · [v1.9.3](plugins/metodo/CHANGELOG.md),
+  self-amending, with a Spec Kit drop-in + preset) that the AI applies proactively in
+  every project.
 - **A published, redacted dataset of real agent usage** — months of sessions with named
   operations, 29M+ cloud-agent tokens registered, plus the zero-dependency generator to
   rebuild the same dashboard from your own transcripts.
@@ -35,7 +38,7 @@ collaboration choice cost and return?) apply to AI-assisted software engineering
 | **Cost meter for A/B experiment arms** | [`experiments/cost-meter.mjs`](experiments/cost-meter.mjs) | Measures turns/tokens of a with/without experiment from its transcripts. |
 | **Leak-proof hidden-test grader** | [`experiments/streaming/oracle/`](experiments/streaming/oracle/) | Tests whether a process artifact helps, without revealing the answers to the model. |
 | **The writeup** | [`FINDINGS.md`](FINDINGS.md) | *"I tried to measure whether captured process helps AI-assisted dev — and couldn't build a fair test (yet)."* Includes the contaminated first attempt and the external adversarial review that tore up v1. |
-| **A Spec Kit constitution drop-in** | [`plugins/metodo/spec-kit/constitution.md`](plugins/metodo/spec-kit/constitution.md) | A self-amending working-method constitution in Spec Kit format (v1.9.1 — [amendment history](plugins/metodo/CHANGELOG.md)) — the depersonalized, reusable variant of our method. |
+| **A Spec Kit constitution drop-in (+ tested preset)** | [`plugins/metodo/spec-kit/`](plugins/metodo/spec-kit/) | A self-amending working-method constitution in Spec Kit format (v1.9.3 — [amendment history](plugins/metodo/CHANGELOG.md)) — the depersonalized, reusable variant of our method; `preset.yml` seeds it at `specify init`, verified byte-identical. |
 
 Quickstart for the dataset generator (no dependencies, Node 18+):
 
@@ -88,7 +91,7 @@ message) — our operating rule ("resume interrupted work instead of restarting"
 that mechanic plus one measured resume that reused 100% of completed steps, not from an A/B
 test.
 
-## The method (appendix — operating hypotheses, not proven rules)
+## The method — the spec of this repo (operating hypotheses, not proven rules)
 
 We also maintain a **working-method constitution** for human+AI collaboration: idea capture,
 design-before-code, research-before-choosing, model+effort per step, a "data contract" so
