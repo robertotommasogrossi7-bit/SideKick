@@ -1,0 +1,5 @@
+{"type":"assistant","message":{"role":"assistant","usage":{"input_tokens":100,"output_tokens":200,"cache_read_input_tokens":1000,"cache_creation_input_tokens":50},"content":[{"type":"text","text":"primo turno"},{"type":"tool_use","name":"Read"},{"type":"tool_use","name":"Bash"}]}}
+questa riga non e' JSON e il meter deve ignorarla senza crashare
+{"type":"user","message":{"role":"user","content":"messaggio utente"}}
+{"type":"assistant","message":{"role":"assistant","content":[{"type":"text","text":"turno assistant SENZA usage: non conta"}]}}
+{"type":"assistant","message":{"role":"assistant","usage":{"input_tokens":10,"output_tokens":20},"content":[{"type":"text","text":"secondo turno, zero tool"}]}}

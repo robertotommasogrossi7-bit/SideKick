@@ -1,0 +1,1 @@
+{"type":"assistant","message":{"role":"assistant","usage":{"input_tokens":1,"output_tokens":999},"content":[{"type":"tool_use","name":"Grep"}]}}
