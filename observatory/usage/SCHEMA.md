@@ -6,7 +6,10 @@
 
 ## Common facts (read first)
 - **Unit**: tokens, as reported by the Claude API in each assistant message's `usage` block
-  of the local transcripts (`~/.claude/projects/**/*.jsonl`). No estimates.
+  of the local transcripts (`~/.claude/projects/**/*.jsonl`). No estimates in any
+  transcript-derived file. The one exception lives in the hand-maintained `workflow.csv`:
+  a row whose `estimated` column is set carries a report estimate, not a count — such rows
+  (and every total that includes them) are displayed with a `~` prefix, never as exact.
 - **Dedup**: the same `message.id` can reappear in transcripts after a resume/fork; it is
   counted **once** (covered by tests).
 - **Redaction**: reserved projects appear as `progetto-NN` with `(redacted)` operations; the
@@ -101,6 +104,7 @@ their own summary line/column and are never folded into the chats' `cost_usd_equ
 | `agent_tokens` | Total subagent tokens as reported by the run/records. |
 | `source` | Where the number comes from (project METRICHE, run report, chat log). |
 | `5h_windows` | How many 5-hour plan usage windows the run consumed, **with the plan named** (e.g. `~3 (Max 100 euro)`). Filled ONLY when known with certainty from observed credit-block exhaustions — never estimated from tokens. Empty = not observed. Added 2026-07-25 (method v1.9); trailing column, older rows simply lack it. |
+| `estimated` | Non-empty (`yes`) = this row's `agents`/`agent_tokens` are **estimates from the run report** (cloud run with no local transcripts), not measured counts. The dashboards prefix these tokens — and any total containing them — with `~`. Added 2026-08-01 (external red-team finding: an unmarked estimate was 19% of the headline cloud total); trailing column, older rows simply lack it. |
 
 ## `dashboard.html` — same numbers as `DASHBOARD.md`, as an interactive page
 Added 2026-07-25. Self-contained (zero CDN, zero build step — CSS/JS inlined, data baked in

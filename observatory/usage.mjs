@@ -284,7 +284,9 @@ never an estimate.`,
     cloudWorkNote: `Multi-agent workflows run in the cloud and **leave no transcripts on the PC**: these numbers
 come from the projects' METRICHE/report files. **After every new workflow, add one row to
 \`workflow.csv\`** (the observatory ritual includes the reminder). No per-model breakdown means
-no USD column here — see \`SCHEMA.md\` for the declared limit.`,
+no USD column here — see \`SCHEMA.md\` for the declared limit. Tokens marked **~** are
+**estimates from run reports** (\`estimated\` column in the register), not measured counts —
+any total containing them is marked ~ too.`,
     noneRegistered: '*(none registered)*',
     byModelHeader: 'By model (local chats only)',
     byMonthHeader: 'By month',
@@ -349,7 +351,9 @@ locali (run nel cloud), mai una stima.`,
     cloudWorkNote: `I workflow multi-agente girano nel cloud e **non lasciano transcript sul PC**: questi numeri
 vengono dai file METRICHE/report dei progetti. **Dopo ogni nuovo workflow, aggiungi una riga a
 \`workflow.csv\`** (il rituale dell'osservatorio include il promemoria). Nessun dettaglio per modello
-significa nessuna colonna USD qui — vedi \`SCHEMA.md\` per il limite dichiarato.`,
+significa nessuna colonna USD qui — vedi \`SCHEMA.md\` per il limite dichiarato. I token marcati
+**~** sono **stime dai report dei run** (colonna \`estimated\` del registro), non conteggi
+misurati — ogni totale che li contiene è marcato ~ a sua volta.`,
     noneRegistered: '*(nessuno registrato)*',
     byModelHeader: 'Per modello (solo chat locali)',
     byMonthHeader: 'Per mese',
@@ -481,7 +485,9 @@ if (fs.existsSync(fileWorkflow)) {
   const [, ...corpo] = fs.readFileSync(fileWorkflow, 'utf8').trim().split('\n');
   workflow = corpo.map(l => {
     const campi = campiCSV(l);
-    return { data: campi[0], prog: campi[1], operazione: campi[2], agenti: campi[3], token: +campi[4] || 0, fonte: campi[5] };
+    // estimated (8th column, added 2026-08-01): non-empty = the tokens are an estimate from
+    // a run report, not a measured count -> displayed with a '~' prefix everywhere
+    return { data: campi[0], prog: campi[1], operazione: campi[2], agenti: campi[3], token: +campi[4] || 0, fonte: campi[5], stima: !!(campi[7] || '').trim() };
   });
 }
 for (const w of workflow) {
@@ -495,6 +501,9 @@ for (const w of workflow) {
   w.mis = mis; // undefined = no local transcripts -> '—'
 }
 const totW = workflow.reduce((a, w) => a + w.token, 0);
+// any estimated row taints the aggregate: the total is then shown as '~N', never as exact
+const totWStima = workflow.some(w => w.stima);
+const fmtTokWf = w => `${w.stima ? '~' : ''}${fmt(w.token)}`;
 const wfConMisura = workflow.filter(w => w.mis);
 const totWfUsd = wfConMisura.reduce((a, w) => a + w.mis.usd, 0);
 const fmtCostoWf = w => w.mis ? fmtCosto(w.mis.usd, w.mis.sconosciuto) : '—';
@@ -517,13 +526,13 @@ const rigaSess = (s, L = LANG.en) => `| ${s.primo}${s.ultimo !== s.primo ? '→'
 
 const renderProjectMD = (nome, g, wf, sess, L) => {
   const wfLine = wf.length
-    ? ` · **+${fmt(wf.reduce((a, w) => a + w.token, 0))} ${L.cloudAgentTokens}** (${wf.length} ${L.workflowWord(wf.length)})`
+    ? ` · **+${wf.some(w => w.stima) ? '~' : ''}${fmt(wf.reduce((a, w) => a + w.token, 0))} ${L.cloudAgentTokens}** (${wf.length} ${L.workflowWord(wf.length)})`
     : '';
   const wfSection = wf.length ? `
 ## ${L.cloudWorkflowsHeader}
 ${L.rawDataNote ? L.rawDataNote + '\n' : ''}| ${L.colDate} | ${L.colOperation} | ${L.colAgents} | ${L.colAgentTokens} | ${L.colCost} | ${L.colSource} |
 |---|---|---|---|---|---|
-${wf.map(w => `| ${w.data} | ${mdEsc(w.operazione)} | ${w.agenti} | ${fmt(w.token)} | ${fmtCostoWf(w)} | ${mdEsc(w.fonte)} |`).join('\n')}
+${wf.map(w => `| ${w.data} | ${mdEsc(w.operazione)} | ${w.agenti} | ${fmtTokWf(w)} | ${fmtCostoWf(w)} | ${mdEsc(w.fonte)} |`).join('\n')}
 ` : '';
   return `# ${nome} — ${L.projectSuffix}
 
@@ -575,7 +584,7 @@ const topRow = (t, i, L) => {
   const nome = t.kind === 'chat' ? `${descrizione(t.s, L)} — ${t.s.gruppo}` : `${t.w.operazione} — ${gruppoDi(t.w.prog)}`;
   // cloud rows: measured from local agent transcripts when available, '—' otherwise
   const costo = t.kind === 'chat' ? fmtCosto(t.s.costo, t.s.costoParziale) : fmtCostoWf(t.w);
-  return `| ${i + 1} | ${mdEsc(nome)} | ${tipo} | ${t.quando} | ${fmt(t.tok)} | ${costo} |`;
+  return `| ${i + 1} | ${mdEsc(nome)} | ${tipo} | ${t.quando} | ${t.kind === 'cloud' && t.w.stima ? '~' : ''}${fmt(t.tok)} | ${costo} |`;
 };
 
 const lezioniEN = fs.existsSync(fileLessons)
@@ -598,7 +607,7 @@ const renderDashboard = (L, o) => `# ${L.dashboardTitle}
 ${L.headNote(new Date().toISOString().slice(0, 10))}
 
 ## ${L.atGlanceHeader}
-${L.summaryLine1({ output: fmt(T.output), totW: fmt(totW), nSessions: sessioni.length, nProjects: ordGruppi.length, firstMonth: mesi[0]?.m || '?', msg: fmt(T.msg) })}
+${L.summaryLine1({ output: fmt(T.output), totW: (totWStima ? '~' : '') + fmt(totW), nSessions: sessioni.length, nProjects: ordGruppi.length, firstMonth: mesi[0]?.m || '?', msg: fmt(T.msg) })}
 ${L.summaryLine2({ cacheR: fmt(T.cacheR), ratio: Math.round(T.cacheR / (T.input + T.output)) })}
 ${L.summaryLine3({ totCosto: fmtCosto(T.costo, totCostoParziale), parziale: totCostoParziale, dataPrezzi })}
 ${L.summaryComp(compPer())}
@@ -625,7 +634,7 @@ ${L.wfMeasuredNote}
 
 | ${L.colDate} | ${L.colProject} | ${L.colOperation} | ${L.colAgents} | ${L.colAgentTokens} | ${L.colCost} |
 |---|---|---|---|---|---|
-${workflow.map(w => `| ${w.data} | ${mdEsc(gruppoDi(w.prog))} | ${mdEsc(w.operazione)} | ${w.agenti} | ${fmt(w.token)} | ${fmtCostoWf(w)} |`).join('\n') || `| — | — | ${L.noneRegistered} | — | — | — |`}
+${workflow.map(w => `| ${w.data} | ${mdEsc(gruppoDi(w.prog))} | ${mdEsc(w.operazione)} | ${w.agenti} | ${fmtTokWf(w)} | ${fmtCostoWf(w)} |`).join('\n') || `| — | — | ${L.noneRegistered} | — | — | — |`}
 
 ## ${L.byModelHeader}
 | ${L.colModel} | ${L.colMsg} | ${L.colInput} | ${L.colOutput} | ${L.colCacheRead} | ${L.colCost} |
@@ -707,7 +716,7 @@ const renderDashboardHTML = (L, o) => {
     const costoTxt = t.kind === 'chat' ? fmtCosto(t.s.costo, t.s.costoParziale) : fmtCostoWf(t.w);
     return [tdN(i + 1, i + 1), tdL(mdEsc(nome)), tdT(tipo), tdT(t.quando), tdN(t.tok, fmt(t.tok)), tdN(t.kind === 'chat' ? t.s.costo : 0, costoTxt)];
   });
-  const cloudRows = workflow.map(w => [tdT(w.data), tdT(mdEsc(gruppoDi(w.prog))), tdL(mdEsc(w.operazione)), tdN(w.agenti, w.agenti), tdN(w.token, fmt(w.token)), tdN(w.mis ? w.mis.usd : 0, fmtCostoWf(w))]);
+  const cloudRows = workflow.map(w => [tdT(w.data), tdT(mdEsc(gruppoDi(w.prog))), tdL(mdEsc(w.operazione)), tdN(w.agenti, w.agenti), tdN(w.token, fmtTokWf(w)), tdN(w.mis ? w.mis.usd : 0, fmtCostoWf(w))]);
 
   return `<!doctype html>
 <html lang="${L === LANG.it ? 'it' : 'en'}"><head>
@@ -740,7 +749,7 @@ footer{margin-top:32px;color:var(--muted);font-size:12px}
 
 <h2>${L.atGlanceHeader}</h2>
 <div class="card">
-<p>${mdLite(L.summaryLine1({ output: fmt(T.output), totW: fmt(totW), nSessions: sessioni.length, nProjects: ordGruppi.length, firstMonth: mesi[0]?.m || '?', msg: fmt(T.msg) }))}</p>
+<p>${mdLite(L.summaryLine1({ output: fmt(T.output), totW: (totWStima ? '~' : '') + fmt(totW), nSessions: sessioni.length, nProjects: ordGruppi.length, firstMonth: mesi[0]?.m || '?', msg: fmt(T.msg) }))}</p>
 <p>${mdLite(L.summaryLine2({ cacheR: fmt(T.cacheR), ratio: Math.round(T.cacheR / (T.input + T.output)) }))}</p>
 <p>${mdLite(L.summaryLine3({ totCosto: fmtCosto(T.costo, totCostoParziale), parziale: totCostoParziale, dataPrezzi }))}</p>
 <p>${mdLite(L.summaryComp(compPer()))}</p>

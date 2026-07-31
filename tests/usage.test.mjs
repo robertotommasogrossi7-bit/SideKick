@@ -25,8 +25,10 @@ const outIT = path.join(out, 'ITALIANO', 'osservatorio', 'uso');
 // price it from the fixture agent transcript (growing-usage records -> last one wins)
 fs.mkdirSync(path.join(out, 'usage'), { recursive: true });
 fs.writeFileSync(path.join(out, 'usage', 'workflow.csv'),
-  'date,project,operation,agents,agent_tokens,source,5h_windows\n' +
-  '2026-07-01,demo,"Fixture wf run",1,300,"transcript wf_fixt01",\n');
+  'date,project,operation,agents,agent_tokens,source,5h_windows,estimated\n' +
+  '2026-07-01,demo,"Fixture wf run",1,300,"transcript wf_fixt01",,\n' +
+  // estimated=yes: report-estimated tokens, must be ~-prefixed and taint the cloud total
+  '2026-07-02,demo,"Estimated cloud run",2,4000,"report only",,yes\n');
 execFileSync(process.execPath, [script, '--base', fixture, '--out', out, '--out-it', outIT, '--prices', prezzi], { encoding: 'utf8' });
 
 const usageCsv = fs.readFileSync(path.join(out, 'usage', 'usage.csv'), 'utf8').trim().split('\n');
@@ -137,7 +139,16 @@ test('workflow cost is measured from local agent transcripts, last record per id
   // (100*2 + 200*10)/1e6 = 0.0022 -> "$0.0022" (sonnet-5 fixture prices).
   assert.ok(dashboard.includes('$0.0022'), 'measured workflow cost from the FINAL snapshot');
   assert.ok(!dashboard.includes('$0.0032'), 'first+last summed would be 0.00305-ish: must not happen');
-  assert.match(dashboard, /measured from local transcripts: \$0\.0022 across 1 of 1/);
+  assert.match(dashboard, /measured from local transcripts: \$0\.0022 across 1 of 2/);
+});
+
+test('estimated workflow rows are marked ~ and taint every total they enter', () => {
+  assert.match(dashboard, /\| Estimated cloud run \| 2 \| ~4k \| — \|/,
+    'estimated row: ~-prefixed tokens, no invented cost');
+  assert.match(dashboard, /\+ \*\*~4k\*\* from cloud agents/,
+    'a cloud total containing an estimate is ~-prefixed too');
+  assert.match(dashboard, /\| Fixture wf run \| 1 \| 300 \| /,
+    'measured rows stay unprefixed');
 });
 
 test('cost composition line is present and consistent in both languages', () => {
