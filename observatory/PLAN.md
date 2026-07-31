@@ -31,8 +31,9 @@
        Report slot freed), `_processo/*` paths depersonalized, fork governance ("your copy is
        now the master"), rationale claims linked to STRATEGIES/CHANGELOG. Principle IX was
        already vendor-neutral on inspection.
-7. [ ] **Tests for `cost-meter.mjs`** (fixture-based, like usage.mjs) — then the CONTRIBUTING
-       sentence becomes true again in its stronger form.
+7. [x] **Tests for `cost-meter.mjs`** — DONE 2026-07-31: 5 fixture-based tests
+       (`tests/cost-meter.test.mjs`, fake home via USERPROFILE/HOME override, hand-computed
+       totals, declared no-dedup limitation), suite 20/20; CONTRIBUTING EN+IT updated.
 8. [ ] **"Operating hypotheses" tone pass** on CONSTITUTION/COSTITUZIONE: soften NEVER/ALWAYS
        into hypotheses with N; link claims to `observatory/STRATEGIES.md`.
 9. [ ] **Update the spec-kit clone and TEST the preset path empirically** (`specify init`

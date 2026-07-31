@@ -35,8 +35,10 @@
        governance del fork ("la tua copia ora è il master"), le affermazioni sul razionale
        collegate a STRATEGIES/CHANGELOG. Il Principio IX era già neutro rispetto al vendor a
        un'ispezione.
-7. [ ] **Test per `cost-meter.mjs`** (basati su fixture, come usage.mjs) — poi la frase di
-       CONTRIBUTING torna vera nella sua forma più forte.
+7. [x] **Test per `cost-meter.mjs`** — FATTO 2026-07-31: 5 test su fixture
+       (`tests/cost-meter.test.mjs`, home finta via override USERPROFILE/HOME, totali
+       calcolati a mano, limite senza-dedup dichiarato), suite 20/20; CONTRIBUTING EN+IT
+       aggiornato.
 8. [ ] **Passata di tono "ipotesi operative"** su CONSTITUTION/COSTITUZIONE: ammorbidire
        MAI/SEMPRE in ipotesi con N; collegare le affermazioni a `observatory/STRATEGIES.md`.
 9. [ ] **Aggiornare il clone di spec-kit e TESTARE empiricamente il percorso preset**
