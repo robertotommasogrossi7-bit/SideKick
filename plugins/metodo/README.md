@@ -1,5 +1,15 @@
 # metodo — SideKick's human+AI working method
 
+> **Why this folder is bilingual (by design, not by accident).** The method's **masters are
+> the Italian files** — [`COSTITUZIONE.md`](COSTITUZIONE.md) and
+> [`PROCESSO-FABBRICA.md`](PROCESSO-FABBRICA.md) — because the author works in Italian and
+> the governance (v1.5, 2026-07-16) pins the master here: the read-only mirror in
+> `~/.claude/CLAUDE.md` and the deny rule point at THIS path. The English files beside them
+> ([`CONSTITUTION.md`](CONSTITUTION.md), [`FACTORY-PROCESS.md`](FACTORY-PROCESS.md)) are
+> their translations for the public. This is the one place in the repo where the two
+> languages live side by side instead of in the `ITALIANO/` mirror — which is exactly why
+> `ITALIANO/plugin/metodo/` carries only README and CHANGELOG, not the constitutions.
+
 Turns your **working method** into standing instructions the AI acts on by itself — it
 records stray ideas, proposes specs before delicate code, and amends its own constitution
 (with your OK) — in every project, no commands to remember. Version: see the
