@@ -1,6 +1,6 @@
 # Constitution — how we work together (me + the AI)
 
-> **Version: v1.9.2** (2026-07-25) — amendment history in the [CHANGELOG](CHANGELOG.md).
+> **Version: v1.9.3** (2026-07-31) — amendment history in the [CHANGELOG](CHANGELOG.md).
 
 > **Installation:** copy (or link) this content into `~/.claude/CLAUDE.md` to have it in **every**
 > project, or into a single project's `CLAUDE.md`. It defines the **method**, not the content.
@@ -13,6 +13,10 @@
 >
 > **Golden rule: be proactive about these disciplines, but never force me.** Offer at the right
 > moment, in one line, and let me decide. Never pedantic, never bureaucratic.
+>
+> **Rules born from measurements are operating hypotheses**: they hold as long as the numbers
+> support them — every claim states its source and N; the honest register is SideKick
+> `observatory/STRATEGIES.md` (in the text: "register §N").
 
 ## Ideas, without losing the thread
 - When an idea, a feature, or a TODO comes up that **isn't the focus right now**, don't stop the
@@ -126,13 +130,15 @@
   - **Scoped fixes verifiable with tests** (targeted bugs, migrations, unit tests, simple UI) →
     **Sonnet, effort high** (the default). Go up to xhigh only if a fix resists.
   - **Delicate logic** (money, auth, sync, data migrations, architectural refactor) →
-    **Opus, effort xhigh**. **Never `max` on long tasks**: measured WORSE than high
-    (overthinking + context compaction — Andon Labs study on Opus 4.8).
+    **Opus, effort xhigh**. **No `max` on long tasks** (operating hypothesis, external
+    source: Andon Labs study on Opus 4.8 — measured WORSE than high due to overthinking +
+    context compaction).
   - **Architectural reasoning, mini-spec, recap** → **Fable**, sparingly and deliberately (it
     burns the Max plan's 5-hour window): reserve it for the decision that matters most.
   - **Audit / parallel sweeps across many files** → multi-agent/ultracode (Sonnet/Haiku agents,
-    Opus synthesis). **NEVER multi-agent for linear coding**: at equal budget a single strong
-    agent ties or wins (2026 paper + Anthropic itself).
+    Opus synthesis). **Multi-agent for linear coding: no** (operating hypothesis on external
+    sources — 2026 paper + Anthropic itself: at equal budget a single strong agent ties or
+    wins; our own measurement: none).
 - **Two traps to remember**: (1) the **effort** lever matters more than switching models between
   adjacent models (official Anthropic doc); the jump that pays off is medium→high, then
   diminishing returns. (2) **Sonnet isn't chosen to save money** (Sonnet 5's updated tokenizer:
@@ -148,11 +154,13 @@
   yourself in sequence: faster, and each piece gets **the right model** (mechanical/extractions
   → Haiku · scoped fixes and tests → Sonnet high · synthesis, delicate logic, judgment → Opus).
   This applies to any chat, not just audits. But if the work is **linear** (a refactor touching
-  the same files in a cascade), stay single-agent: multi-agent loses there.
+  the same files in a cascade), stay single-agent: multi-agent loses there (same operating
+  hypothesis on external sources as the model table; our own measurement: none).
 - **At the end of a big phase/task: at least 2 independent Opus reviewers**, with different
   lenses (e.g. one on correctness/money, one on security/permissions or UX), and their findings
   must be **verified** before being accepted as real (see the audit section below: adversarial
-  verification is what separates real problems from enterprise alarmism).
+  verification is what separates real problems from enterprise alarmism). The heavy audit's
+  yield is measured on N=2 projects (register §1).
 
 ## Multi-agent audit (heavy verification — when I ask for it or you recommend it at the end of a big phase)
 - For a deep check — **when I ask for it**, or **when you recommend it at the end of a very big
@@ -173,8 +181,10 @@
   agents **don't necessarily inherit the expensive model** — by default **Sonnet** (reviewers,
   verifiers, web research), **Haiku** for mechanical steps (extractions, dedup), **Opus ONLY for
   the final synthesis** or the hardest judgment call. (The workflow supports a per-agent model.)
-  Verified in the field: on adversarial verification, quality was equal across models — what pays
-  off is the process design (cross-verification), not the big model everywhere.
+  Verified in the field (N=4 shadow experiments, register §2): on adversarial verification, on
+  **code** findings quality was equal across models — on process/config the higher model
+  falsifies better; what pays off is the process design (cross-verification), not the big model
+  everywhere.
 - **Process efficiency** (lessons learned, apply by default):
   1. **Adversarial verification only on HIGH/MEDIUM**; LOW ones pass unverified (they cost more
      than they're worth).
@@ -187,7 +197,9 @@
      fixes go into the roadmap as a **remediation block BEFORE the next phase** — never a loose
      list.
   5. **Background + resume**: audit launched in the background; if it's interrupted
-     (limits/context), it **resumes from cache** — zero rework. Never start over from scratch.
+     (limits/context), it resumes — but workflow cache reuse is **best-effort, not guaranteed**
+     (one measured resume at 0/46 keys: register §3): keep outcomes on file. Never start over
+     from scratch.
   6. **Online research only where external validation** of choices is needed; the code is
      verified by the reviewers.
 - Do the final **recap** in whichever model I prefer (often Fable), on a new prompt.
@@ -200,8 +212,9 @@
   mechanizable defect the QC finds becomes a free check), parallel producers with a single
   writer for shared files, verification by **EXECUTION**, QC in passes (correctness on the high
   model; mechanical rubrics on Sonnet with a ~8% Opus shadow), resume with **file-persisted
-  outcomes** — the runtime cache is best-effort, measured even at zero reuse. NOT for linear
-  coding (there the rule above applies: a single strong agent).
+  outcomes** — the runtime cache is best-effort, measured even at zero reuse; the Factory's
+  yield is measured on N=3 runs (register §8). NOT for linear coding (same operating
+  hypothesis as the rule above: a single strong agent).
 - Details, power levels, and the **safe-resume procedure**: [`FACTORY-PROCESS.md`](FACTORY-PROCESS.md)
   (SideKick repo).
 
@@ -256,13 +269,14 @@
   soundness, the ROI, and the potential embarrassments. One line at the right moment; I decide
   whether to do it.
 - The point is an opinion *uncontaminated* by our shared context: it catches mistakes, naivety,
-  and AI-slop before a stranger does. Keep a ready template in `_processo/REVISIONE-ESTERNA.md`.
+  and AI-slop before a stranger does (N≈5 concrete internal+external red-team episodes:
+  register §5). Keep a ready template in `_processo/REVISIONE-ESTERNA.md`.
 - **Always verify external reviewers' cited facts at the source** before acting on them (they
   can be wrong too).
 
 ## Red team: internal agent (with the code) or external chat (blind)? — pick the right tool
-> Rule born from a field measurement (Poker_App R7.2 vs R7.3, logged in
-> `~/.claude/ESPERIMENTI.md`): same review, two tools, very different outcomes.
+> Rule born from a field measurement (Poker_App R7.2 vs R7.3, N=1 pair — a strong clue, not a
+> law; logged in `~/.claude/ESPERIMENTI.md`): same review, two tools, very different outcomes.
 - **Red-teaming OUR OWN stuff (design, code, schema, migrations) → INTERNAL agent with repo
   access** (subagent/workflow, usually Opus). It wins because every finding arrives **already
   verified at `file:line`** — and re-verifying at the source is the real cost of an external red
@@ -289,7 +303,8 @@
 
 ## Handoff between chats (when to switch — with the observatory's numbers)
 - Keep `_processo/CONTESTO.md` up to date at milestones, so a **new chat restarts aligned**.
-- **Economics of switching chats (measured, 2026-07)**: continuing with a warm cache costs ~1/10
+- **Economics of switching chats (measured, 2026-07 — numbers and caveats in register §3)**:
+  continuing with a warm cache costs ~1/10
   per re-read token, BUT in a long chat **every message re-reads the whole context** — it's the
   biggest cost item we have (cache read ≈170× the live tokens). A reset has a fixed cost
   (rebuilding the context), so: **no chat switch for every feature**, but **when the window gets
@@ -344,4 +359,4 @@
 *Part of [SideKick](https://github.com/robertotommasogrossi7-bit/SideKick) — a shareable,
 forkable, self-evolving human+AI working method. Improve your copy and share it back.*
 
-*English version of the Italian master `COSTITUZIONE.md` — v1.9.2, synced 2026-07-25.*
+*English version of the Italian master `COSTITUZIONE.md` — v1.9.3, synced 2026-07-31.*

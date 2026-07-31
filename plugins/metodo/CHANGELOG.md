@@ -4,6 +4,27 @@
 > evidence. One entry per amendment, hand-written, newest first. Dates from git history of
 > `COSTITUZIONE.md`; each version is also a git tag (`metodo-vX.Y`) from v1.5 onward.
 
+## v1.9.3 — 2026-07-31 (the "operating hypotheses" tone pass)
+- **Measured claims now state their N and their limits** (PLAN item 8; 1 Opus reviewer, 8
+  findings, all applied): a new header line frames it — *rules born from measurements are
+  operating hypotheses*, register = `observatory/STRATEGIES.md`, cited as "register §N".
+  Concretely: "never `max` on long tasks" and "NEVER multi-agent for linear coding" (plus
+  its twin in Orchestrate-first) become external-source hypotheses with "our own
+  measurement: none"; the 2-reviewers rule cites its N=2 (§1); the cross-model
+  equal-quality claim is qualified as the register has it (equal on **code** findings, the
+  higher model falsifies process/config better — N=4, §2); the internal-red-team field
+  measure declares N=1 pair; external-eyes gains declare N≈5 (§5); handoff economics points
+  at §3; the Factory yield cites N=3 runs (§8).
+- **The one claim a measurement had refuted is fixed** (reviewer's top finding): audit
+  resume "from cache — zero rework" → workflow cache reuse is **best-effort, not
+  guaranteed** (one measured resume at 0/46 keys, §3): keep outcomes on file.
+- Behavioral directives (golden rule, "always propose", the data-contract "never"s)
+  deliberately untouched — preferences, not claims. The reviewer's check confirmed the
+  split and killed a draft edit that would have weakened the research-first directive.
+- **Drop-in realigned to 1.9.3** (and `preset.yml` version with it): the three rationales
+  carrying the same claims now state their N; the linear-coding line is declared an
+  external-sources hypothesis. Mirror `~/.claude/CLAUDE.md` re-synced.
+
 ## v1.9.2 — 2026-07-25 (glossary moves to Studio and fills itself)
 - **Glossary relocated**: from SideKick (`versione-italiano/glossario/`) to the **Studio
   repo** (`Studio/glossario/`, still gitignored/local-only) — Roberto's decision, since the

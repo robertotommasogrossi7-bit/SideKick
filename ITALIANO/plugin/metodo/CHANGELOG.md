@@ -5,6 +5,29 @@
 > cronologia git di `COSTITUZIONE.md`; ogni versione è anche un tag git (`metodo-vX.Y`) dalla
 > v1.5 in poi.
 
+## v1.9.3 — 2026-07-31 (la passata di tono "ipotesi operative")
+- **I claim misurati ora dichiarano il loro N e i loro limiti** (punto 8 del PLAN; 1
+  revisore Opus, 8 finding, tutti recepiti): una riga nuova nell'header dà la cornice —
+  *le regole nate da misure sono ipotesi operative*, registro = `observatory/STRATEGIES.md`,
+  citato come "registro §N". In concreto: "mai `max` su task lunghi" e "MAI multi-agente
+  per coding lineare" (più il gemello in Prima-orchestra) diventano ipotesi su fonti
+  esterne con "misura nostra: nessuna"; la regola dei 2 revisori cita il suo N=2 (§1); il
+  claim di qualità pari tra modelli è qualificato come nel registro (pari sui finding di
+  **codice**, il modello alto confuta meglio processo/config — N=4, §2); la misura sul
+  campo del red team interno dichiara N=1 coppia; lo sguardo esterno dichiara N≈5 (§5);
+  l'economia dell'handoff punta a §3; la resa della Fabbrica cita N=3 run (§8).
+- **Sistemato l'unico claim che una misura aveva confutato** (finding principale del
+  revisore): il resume dell'audit "dalla cache — zero rilavorazione" → il riuso della
+  cache dei workflow è **best-effort, non garantito** (un resume misurato a 0/46 chiavi,
+  §3): tieni gli esiti su file.
+- Le direttive di comportamento (regola d'oro, "proponila sempre", i "mai" del contratto
+  dati) restano intoccate di proposito — preferenze, non claim. La verifica del revisore
+  ha confermato la separazione e ha eliminato un edit in bozza che avrebbe indebolito la
+  direttiva ricerca-prima.
+- **Drop-in riallineato a 1.9.3** (e `preset.yml` con lui): i tre Rationale che portano gli
+  stessi claim ora dichiarano il loro N; la riga sul coding lineare è dichiarata ipotesi su
+  fonti esterne. Specchio `~/.claude/CLAUDE.md` risincronizzato.
+
 ## v1.9.2 — 2026-07-25 (il glossario si sposta su Studio e si riempie da solo)
 - **Glossario trasferito**: da SideKick (`versione-italiano/glossario/`) al repo **Studio**
   (`Studio/glossario/`, ancora gitignorato/solo locale) — decisione di Roberto, dato che

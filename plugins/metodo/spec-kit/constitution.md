@@ -60,15 +60,16 @@ At every workflow decision (roadmap, phase kickoff, task start) the agent MUST p
 line, the best model + reasoning effort for that step (and per-agent models in workflows: cheap
 models for reviewers/mechanical steps, the expensive one only for final synthesis or the hardest
 judgment). The human decides.
-*Rationale: measured 2026-07 — on verification tasks small and large models tied; process design
-pays, not big models everywhere. Effort level matters more than switching adjacent models.*
+*Rationale: measured 2026-07, N=4 shadow experiments — on code-verification tasks small and large
+models tied (on process/config findings the higher tier falsifies better); process design pays,
+not big models everywhere. Effort level matters more than switching adjacent models.*
 
 ### X. Heavy Verification on Demand (Multi-Agent Audit)
 At the end of large phases (or on request) the agent MUST offer a multi-agent audit: parallel
 reviewers per subsystem, each finding adversarially verified by a second agent that tries to refute
 it, deduplicated BEFORE verification, verification only for high/medium severity. Output MUST be an
 indexed register (stable IDs, fix, assigned phase) feeding a remediation block BEFORE the next phase.
-*Rationale: two audits, two batches of real critical bugs found; efficiency rules cut the second
+*Rationale: N=2 audits, two batches of real critical bugs found; efficiency rules cut the second
 audit's cost by ~60%.*
 
 ### XI. Data Contract (the Method Learns From Numbers)
@@ -93,7 +94,8 @@ only: the pre-publish outside opinion, and meta-review of the red-team dossier b
 pass runs. Never ask an external chat to "review the code" it cannot read — every finding would
 then need re-verification by hand, which is the real cost of that mismatch.
 *Rationale: measured head-to-head on the same review, same day, two tools, two very different
-outcomes — the internal agent with repo access won because its findings were pre-verified.*
+outcomes (N=1 pair — a strong clue, not a law) — the internal agent with repo access won because
+its findings were pre-verified.*
 
 ### XIII. Minimum Standards for Every App (From the First Build)
 Every shipped app MUST show, from its first build, in one obvious and standard spot (e.g. a
@@ -112,7 +114,8 @@ more than one well-directed agent. Once a plan exists, if the work splits into i
 USE AGENTS instead of doing it all sequentially alone — each piece gets the right model tier
 (mechanical/extraction → cheapest tier; scoped fixes and tests → mid tier; synthesis and delicate
 judgment → top tier). Stay single-agent for genuinely linear work (e.g. a refactor cascading
-through the same files) — multi-agent loses there. At the end of a large phase, run at least two
+through the same files) — multi-agent loses there (an operating hypothesis from external
+sources; no measurement of our own yet). At the end of a large phase, run at least two
 independent top-tier reviewers with different lenses (e.g. correctness/money vs.
 security-permissions or UX); their findings are verified (Principle X) before being accepted as
 real.
@@ -133,7 +136,7 @@ that trusts file-persisted verdicts over the runtime's own cache — inspect the
 resuming, but treat a complete journal as necessary, not sufficient, for reuse; apply a stop-loss
 (steps already done must return instantly from cache — if they don't, stop and finish the
 remainder manually rather than re-running everything live). Not for linear coding, where one
-strong agent still wins.
+strong agent still wins (same external-sources hypothesis as Principle XIV).
 *Rationale: measured — a validator-less mass run shipped an integration bug that an
 otherwise-identical validator-equipped run caught for free; a later resume reused 0 of 46 already-
 completed agents despite a complete journal and byte-identical prompts, because the runtime's
@@ -165,7 +168,8 @@ Upstream a change to the source repo only if you think it helps everyone. The me
 the rationales are documented in the source repo's observatory
 (SideKick `observatory/STRATEGIES.md`, amendment history in `plugins/metodo/CHANGELOG.md`).
 
-**Version**: 1.9.1 | **Ratified**: 2026-06-11 | **Last Amended**: 2026-07-25 (realigned to
-source-repo master v1.9: adds Principles XII–XVI, depersonalized from the v1.6–v1.9 master
-amendments — internal-vs-external red-teaming, minimum app standards, orchestrate-then-delegate,
-the Factory, and generalized bidirectional shadow verification)
+**Version**: 1.9.3 | **Ratified**: 2026-06-11 | **Last Amended**: 2026-07-31 (realigned to
+source-repo master v1.9.3, the "operating hypotheses" tone pass: measured claims in the
+rationales now state their N and their limits — external-source hypotheses declared as such.
+Previous: 1.9.1, 2026-07-25 — Principles XII–XVI added, depersonalized from the v1.6–v1.9
+master amendments)

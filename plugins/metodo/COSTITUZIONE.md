@@ -1,6 +1,6 @@
 # Costituzione — come lavoriamo insieme (io + l'AI)
 
-> **Versione: v1.9.2** (2026-07-25) — storia degli emendamenti nel [CHANGELOG](CHANGELOG.md).
+> **Versione: v1.9.3** (2026-07-31) — storia degli emendamenti nel [CHANGELOG](CHANGELOG.md).
 
 > **Installazione:** copia (o linka) questo contenuto in `~/.claude/CLAUDE.md` per averlo in
 > **tutti** i progetti, oppure nel `CLAUDE.md` di un singolo progetto. Definisce il **metodo**, non
@@ -14,6 +14,10 @@
 >
 > **Regola d'oro: sii proattivo su queste discipline, ma non costringermi.** Proponi al momento
 > giusto, in una riga, e lasciami decidere. Mai pedante, mai burocratico.
+>
+> **Le regole nate da misure sono ipotesi operative**: valgono finché i numeri le sostengono —
+> ogni claim dichiara fonte e N; il registro onesto è SideKick `observatory/STRATEGIES.md`
+> (nel testo: "registro §N").
 
 ## Idee, senza perdere il filo
 - Quando emerge un'idea, una feature o un TODO che **non è il focus di adesso**, non fermare il
@@ -119,13 +123,15 @@
   - **Fix scoped e verificabili con test** (bug mirati, migration, unit test, UI semplice) →
     **Sonnet, effort high** (il default). Sali a xhigh solo se un fix resiste.
   - **Logica delicata** (soldi, auth, sync, migrazioni dati, refactor architetturale) →
-    **Opus, effort xhigh**. **Mai `max` su task lunghi**: misurato PEGGIO di high
-    (overthinking + compaction del contesto — studio Andon Labs su Opus 4.8).
+    **Opus, effort xhigh**. **Niente `max` sui task lunghi** (ipotesi operativa, fonte
+    esterna: studio Andon Labs su Opus 4.8 — misurato PEGGIO di high per overthinking +
+    compaction del contesto).
   - **Ragionamento architetturale, mini-spec, recap** → **Fable**, poco e bene (brucia la
     finestra 5h del piano Max): riservalo alla decisione che conta di più.
   - **Audit / sweep paralleli su tanti file** → multi-agente/ultracode (agenti Sonnet/Haiku,
-    sintesi Opus). **MAI multi-agente per coding lineare**: a parità di budget il singolo agente
-    forte pareggia o vince (paper 2026 + Anthropic stessa).
+    sintesi Opus). **Multi-agente per coding lineare: no** (ipotesi operativa su fonti
+    esterne — paper 2026 + Anthropic stessa: a parità di budget il singolo agente forte
+    pareggia o vince; misura nostra: nessuna).
 - **Due trappole da ricordare**: (1) la leva **effort** conta più del cambio modello tra modelli
   adiacenti (doc ufficiale Anthropic); il salto che rende è medium→high, poi rendimenti decrescenti.
   (2) **Sonnet non si sceglie per risparmiare** (tokenizer aggiornato di Sonnet 5: 1,0–1,35× token
@@ -141,11 +147,12 @@
   sequenza da solo: più veloce e ogni pezzo prende **il modello giusto** (mechanical/estrazioni →
   Haiku · fix scoped e test → Sonnet high · sintesi, logica delicata, giudizio → Opus). Vale per
   qualsiasi chat, non solo per gli audit. Se invece il lavoro è **lineare** (un refactor che tocca
-  gli stessi file in cascata), resta singolo: il multi-agente lì perde.
+  gli stessi file in cascata), resta singolo: il multi-agente lì perde (stessa ipotesi operativa
+  su fonti esterne della tabella modelli; misura nostra: nessuna).
 - **A fine fase/task grosso: almeno 2 revisori Opus indipendenti**, con lenti diverse (es. uno su
   correttezza/soldi, uno su sicurezza/permessi o UX), e i loro finding vanno **verificati** prima di
   essere accettati come veri (vedi l'audit qui sotto: la verifica adversariale è ciò che separa i
-  problemi reali dagli allarmismi).
+  problemi reali dagli allarmismi). Resa dell'audit pesante misurata su N=2 progetti (registro §1).
 
 ## Audit multi-agente (verifica pesante — quando lo chiedo o lo consigli tu a fine fase grande)
 - Per un controllo profondo — **quando lo chiedo**, o **quando lo consigli tu al termine di una fase
@@ -165,8 +172,9 @@
   del workflow **NON ereditano per forza il modello caro** — di default **Sonnet** (revisori,
   verificatori, ricerca web), **Haiku** per i passaggi meccanici (estrazioni, dedup), **Opus SOLO
   per la sintesi finale** o il giudizio più difficile. (Il workflow supporta il modello per-agente.)
-  Verificato sul campo: sulla verifica adversariale la qualità tra modelli era pari — paga il disegno
-  del processo (verifica incrociata), non il modello grosso ovunque.
+  Verificato sul campo (N=4 esperimenti-ombra, registro §2): sulla verifica adversariale, sui
+  finding di **codice** la qualità tra modelli era pari — sul processo/config il modello alto
+  confuta meglio; paga il disegno del processo (verifica incrociata), non il modello grosso ovunque.
 - **Efficienza del processo** (lezioni apprese, applicarle di default):
   1. **Verifica adversariale solo su ALTA/MEDIA**; i BASSA passano non verificati (costano più della loro utilità).
   2. **Dedup dei finding PRIMA delle verifiche** (i revisori si sovrappongono; non pagare due verifiche per lo stesso bug).
@@ -175,7 +183,8 @@
   4. **Output = registro indicizzato** (ID stabile, dove, fix, fase assegnata, checkbox) e le correzioni
      entrano nella roadmap come **blocco bonifica PRIMA della fase successiva** — mai lista sciolta.
   5. **Background + resume**: audit lanciato in background; se si interrompe (limiti/contesto), si
-     riprende dalla cache — zero rilavorazione. Non ripartire mai da zero.
+     riprende — ma il riuso della cache dei workflow è **best-effort, non garantito** (misurato
+     un resume a 0/46 chiavi: registro §3): tieni gli esiti su file. Non ripartire mai da zero.
   6. **Ricerca online solo dove serve validazione esterna** delle scelte; il codice lo verificano i revisori.
 - Il **recap** finale fallo nel modello che preferisco (spesso Fable), su un nuovo prompt.
 
@@ -187,8 +196,9 @@
   meccanizzabile trovato dal QC diventa un check gratuito), produttori paralleli con un solo
   scrittore per i file condivisi, verifica per **ESECUZIONE**, QC per passate (correttezza sul
   modello alto; rubriche meccaniche su Sonnet con ombra ~8%), resume con **esiti su file** —
-  la cache del runtime è best-effort, misurata anche a riuso zero. NON per coding lineare (lì
-  vale la regola sopra: singolo agente forte).
+  la cache del runtime è best-effort, misurata anche a riuso zero; resa della Fabbrica misurata
+  su N=3 run (registro §8). NON per coding lineare (stessa ipotesi operativa della regola sopra:
+  singolo agente forte).
 - Dettagli, livelli di potenza e **procedura di resume sicura**: `plugins/metodo/PROCESSO-FABBRICA.md`
   (repo SideKick).
 
@@ -239,13 +249,14 @@
   autocontenuto + un prompt cinico da incollare in una chat base (Claude e ChatGPT) che faccia le
   pulci a senso, ROI e figuracce. Una riga al momento giusto; decido io se farlo.
 - Serve il parere *non contaminato* dal nostro contesto condiviso: becca errori, ingenuità e
-  AI-slop prima che lo faccia un estraneo. Tengo un template pronto in `_processo/REVISIONE-ESTERNA.md`.
+  AI-slop prima che lo faccia un estraneo (N≈5 episodi concreti di red team interno+esterno:
+  registro §5). Tengo un template pronto in `_processo/REVISIONE-ESTERNA.md`.
 - **Verifica sempre alla fonte i fatti citati dai revisori esterni** prima di agire (possono
   sbagliare anche loro).
 
 ## Red team: agente interno (col codice) o chat esterna (cieca)? — scegli lo strumento giusto
-> Regola nata da una misura sul campo (Poker_App R7.2 vs R7.3, log in `~/.claude/ESPERIMENTI.md`):
-> stessa revisione, due strumenti, esiti molto diversi.
+> Regola nata da una misura sul campo (Poker_App R7.2 vs R7.3, N=1 coppia — indizio forte, non
+> legge; log in `~/.claude/ESPERIMENTI.md`): stessa revisione, due strumenti, esiti molto diversi.
 - **Red team su roba NOSTRA (design, codice, schema, migrazioni) → agente INTERNO con accesso al
   repo** (subagente/workflow, di solito Opus). Vince perché ogni finding arriva **già verificato su
   `file:riga`** — e la ri-verifica alla fonte è il costo vero del red team esterno —, perché può
@@ -270,7 +281,8 @@
 
 ## Handoff tra chat (quando cambiare — coi numeri dell'osservatorio)
 - Tieni aggiornato `_processo/CONTESTO.md` ai milestone, così una **chat nuova riparte allineata**.
-- **Economia del cambio chat (misurata, 2026-07)**: proseguire con la cache calda costa ~1/10
+- **Economia del cambio chat (misurata, 2026-07 — numeri e caveat nel registro §3)**: proseguire
+  con la cache calda costa ~1/10
   a token riletto, MA in una chat lunga **ogni messaggio rilegge tutto il contesto** — è la
   voce di costo più grande che abbiamo (cache riletta ≈170× i token vivi). Il reset ha un
   costo fisso (ricostruire il contesto), quindi: **niente cambio chat a ogni feature**, ma
