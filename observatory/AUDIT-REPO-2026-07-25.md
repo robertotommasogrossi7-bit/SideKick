@@ -117,7 +117,12 @@ Roberto's specific choices: **AR-02/03** resolved by keeping ONE single Italian 
 (`ITALIANO/`) and removing `versione-italiano/` from the public repo (it remains locally
 untracked, with OSSERVATORIO.md and the glossary, and in git history for the originals);
 **AR-08/10** resolved by removing the stale screenshots — the exact recipe for the next
-ones moved to the local-only OSSERVATORIO.md on Roberto's call (no public how-to); **AR-13** left as is (a declared privacy choice, per
+ones moved to the local-only OSSERVATORIO.md on Roberto's call (no public how-to)
+*(→ **Correction, 2026-08-01**: this line was wrong — the screenshots were in fact
+regenerated on 2026-07-25, not removed, and went stale again by 2026-07-31; an external
+red team caught the contradiction between this Outcome and the files. Closed for real on
+2026-08-01: the images are regenerated headlessly after every pushed dashboard refresh,
+recipe in the local ritual)*; **AR-13** left as is (a declared privacy choice, per
 "what NOT to touch"). **AR-01 verified after the fix**: with the `Studio (...)` mapping in
 `gruppoDi()`, the Studio drilldown now exposes the ~20.5M cloud tokens previously invisible
 (and the weather_report worktree group merged into the project). **AR-04** reconciled to 1.9.1.

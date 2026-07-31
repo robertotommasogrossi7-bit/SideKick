@@ -13,8 +13,9 @@ transcript misurato**. Cosa ha prodotto finora:
 
 - **Una costituzione di metodo di lavoro viva — lo spec di questo repo**
   ([master italiano](../plugins/metodo/COSTITUZIONE.md) ·
-  [inglese](../plugins/metodo/CONSTITUTION.md) · [v1.9.3](plugin/metodo/CHANGELOG.md),
-  auto-emendante, con un drop-in Spec Kit) che l'AI applica proattivamente in ogni progetto.
+  [inglese](../plugins/metodo/CONSTITUTION.md) · versione e storia nel
+  [CHANGELOG](plugin/metodo/CHANGELOG.md); auto-emendante, con un drop-in Spec Kit +
+  preset) che l'AI applica proattivamente in ogni progetto.
 - **Un dataset pubblicato e redatto di uso reale dell'agente** — mesi di sessioni con
   operazioni nominate e un registro curato a mano di ogni workflow di agenti cloud; totali
   vivi nella [dashboard](osservatorio/uso/DASHBOARD.md) (i numeri ricopiati a mano qui
@@ -44,7 +45,7 @@ generale.
 | **Contametro dei costi per i bracci di esperimenti A/B** | [`experiments/cost-meter.mjs`](../experiments/cost-meter.mjs) | Misura i turni/token di un esperimento con/senza dai suoi transcript. |
 | **Correttore a prova di fuga per test nascosti** | [`experiments/streaming/oracle/`](../experiments/streaming/oracle/) | Verifica se un artefatto di processo aiuta, senza rivelare le risposte al modello. |
 | **L'articolo** | [`FINDINGS.md`](FINDINGS.md) | *"Ho provato a misurare se un processo catturato aiuta lo sviluppo assistito da AI — e non sono riuscito a costruire un test equo (ancora)."* Include il primo tentativo contaminato e la revisione avversariale esterna che ha smontato la v1. |
-| **Un drop-in di constitution per Spec Kit (+ preset testato)** | [`plugins/metodo/spec-kit/`](../plugins/metodo/spec-kit/) | Una constitution di metodo di lavoro auto-emendante in formato Spec Kit (v1.9.3 — [storia degli emendamenti](plugin/metodo/CHANGELOG.md)) — la variante spersonalizzata e riusabile del nostro metodo (in inglese); `preset.yml` la semina a `specify init`, verificata identica byte a byte. |
+| **Un drop-in di constitution per Spec Kit (+ preset testato)** | [`plugins/metodo/spec-kit/`](../plugins/metodo/spec-kit/) | Una constitution di metodo di lavoro auto-emendante in formato Spec Kit (versione nel footer del file, [storia degli emendamenti](plugin/metodo/CHANGELOG.md)) — la variante spersonalizzata e riusabile del nostro metodo (in inglese); `preset.yml` la semina a `specify init`, verificata identica byte a byte. |
 
 Avvio rapido per il generatore del dataset (nessuna dipendenza, Node 18+):
 
@@ -56,6 +57,12 @@ node observatory/usage.mjs
 
 La [dashboard](osservatorio/uso/DASHBOARD.md) committata è esattamente ciò che appare
 in output.
+
+Avviso per chi sfoglia l'albero dei file: `experiments/` include per intero i bracci
+applicativi degli esperimenti con/senza (due app di terzi forkate per braccio — ~12MB, la
+maggior parte dei byte del repo; spiegato in
+[`experiments/README.md`](../experiments/README.md)). Il materiale proprio del laboratorio
+vive in `observatory/` e `plugins/`.
 
 ## Il laboratorio (dati live)
 

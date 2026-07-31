@@ -1,4 +1,4 @@
-# PLAN — l'unico backlog ordinato (aggiornato 2026-07-17)
+# PLAN — l'unico backlog ordinato (aggiornato 2026-08-01; la data in testa si muove nello stesso commit che tocca il corpo)
 
 > Deciso con Roberto nella chat-osservatorio. **Il backlog qui sotto È la lista**: si lavora
 > dall'alto in basso, si spunta a lavoro fatto. Storico delle fasi completate in fondo.
@@ -52,8 +52,9 @@
        byte a byte** (stesso SHA256) al drop-in → decisione: SI PUBBLICA —
        `plugins/metodo/spec-kit/preset.yml` pubblicato (punta a `constitution.md`, una
        copia sola), README EN+IT aggiornati col claim testato.
-       `spec-kit-metodo/memory/constitution.md` riallineata al drop-in v1.9.1 (era v1.1.0;
-       la cartella non ha `.git` locale — la pubblicazione di quel repo resta manuale).
+       `spec-kit-metodo/memory/constitution.md` riallineata al drop-in corrente — e
+       ri-riallineata a ogni bump del metodo da allora (era v1.1.0; la cartella non ha
+       `.git` locale — la pubblicazione di quel repo resta manuale).
 10. [x] **Sweep de-Claude** dei documenti restanti — FATTO 2026-07-31: grep completo di
         Claude/Anthropic su tutti i `.md` tracciati (33 file); esito: 1 generalizzazione
         (DATA.md "più si usa l'agente di coding", EN+IT) — tutto il resto è fatto portante
@@ -82,7 +83,8 @@ LEGGIMI vivo). Uno specchio vivo costerebbe una doppia traduzione a ogni modific
 pubblico quasi nullo; l'opzione del cruscotto generato in italiano resta disponibile a
 richiesta.
 **Aggiornamento (Roberto, 2026-07-25)**: rovesciata — una copia esatta tradotta dei
-principali doc inglesi vive ora in **`ITALIANO/`** (14 file; tenuta in sync a ogni revisione
+principali doc inglesi vive ora in **`ITALIANO/`** (14 file all'epoca — l'albero è cresciuto
+da allora; tenuta in sync a ogni revisione
 dell'osservatorio), e dopo l'audit del repo (AR-02/03) Roberto ha scelto di tenere **una
 sola** cartella italiana: `versione-italiano/` è stata rimossa dal repo pubblico lo stesso
 giorno (sopravvive in locale, non tracciata, con OSSERVATORIO.md e il glossario, e nella

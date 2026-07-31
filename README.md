@@ -10,9 +10,9 @@ What it has produced so far:
 
 - **A living working-method constitution — the spec of this repo**
   ([Italian master](plugins/metodo/COSTITUZIONE.md) ·
-  [English](plugins/metodo/CONSTITUTION.md) · [v1.9.3](plugins/metodo/CHANGELOG.md),
-  self-amending, with a Spec Kit drop-in + preset) that the AI applies proactively in
-  every project.
+  [English](plugins/metodo/CONSTITUTION.md) · version and history in the
+  [CHANGELOG](plugins/metodo/CHANGELOG.md); self-amending, with a Spec Kit drop-in +
+  preset) that the AI applies proactively in every project.
 - **A published, redacted dataset of real agent usage** — months of sessions with named
   operations and a hand-kept register of every cloud-agent workflow; live totals in the
   [dashboard](observatory/usage/DASHBOARD.md) (hand-copied numbers kept going stale here,
@@ -40,7 +40,7 @@ collaboration choice cost and return?) apply to AI-assisted software engineering
 | **Cost meter for A/B experiment arms** | [`experiments/cost-meter.mjs`](experiments/cost-meter.mjs) | Measures turns/tokens of a with/without experiment from its transcripts. |
 | **Leak-proof hidden-test grader** | [`experiments/streaming/oracle/`](experiments/streaming/oracle/) | Tests whether a process artifact helps, without revealing the answers to the model. |
 | **The writeup** | [`FINDINGS.md`](FINDINGS.md) | *"I tried to measure whether captured process helps AI-assisted dev — and couldn't build a fair test (yet)."* Includes the contaminated first attempt and the external adversarial review that tore up v1. |
-| **A Spec Kit constitution drop-in (+ tested preset)** | [`plugins/metodo/spec-kit/`](plugins/metodo/spec-kit/) | A self-amending working-method constitution in Spec Kit format (v1.9.3 — [amendment history](plugins/metodo/CHANGELOG.md)) — the depersonalized, reusable variant of our method; `preset.yml` seeds it at `specify init`, verified byte-identical. |
+| **A Spec Kit constitution drop-in (+ tested preset)** | [`plugins/metodo/spec-kit/`](plugins/metodo/spec-kit/) | A self-amending working-method constitution in Spec Kit format (version in the file's footer, [amendment history](plugins/metodo/CHANGELOG.md)) — the depersonalized, reusable variant of our method; `preset.yml` seeds it at `specify init`, verified byte-identical. |
 
 Quickstart for the dataset generator (no dependencies, Node 18+):
 
@@ -51,6 +51,11 @@ node observatory/usage.mjs
 ```
 
 The committed [dashboard](observatory/usage/DASHBOARD.md) is exactly what the output looks like.
+
+Heads-up when browsing the file tree: `experiments/` vendors the full app arms of the
+with/without experiments (two third-party apps forked per arm — ~12MB, most of the repo's
+bytes; explained in [`experiments/README.md`](experiments/README.md)). The lab's own
+material lives in `observatory/` and `plugins/`.
 
 ## The lab (live data)
 

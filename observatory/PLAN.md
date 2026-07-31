@@ -46,8 +46,8 @@
        `.specify/memory/constitution.md` **byte-identical** (equal SHA256) to the drop-in →
        decision: SHIP — `plugins/metodo/spec-kit/preset.yml` published (points at
        `constitution.md`, one copy), README EN+IT updated with the tested claim.
-       `spec-kit-metodo/memory/constitution.md` realigned to drop-in v1.9.1, then to
-       1.9.3 with the same-day method patch (was v1.1.0; folder has no local `.git` —
+       `spec-kit-metodo/memory/constitution.md` realigned to the current drop-in — and
+       re-realigned at every method bump since (was v1.1.0; folder has no local `.git` —
        publishing that repo stays manual).
 10. [x] **De-Claude sweep** of remaining docs — DONE 2026-07-31: full grep of
         Claude/Anthropic across all tracked `.md` (33 files); outcome: 1 generalization

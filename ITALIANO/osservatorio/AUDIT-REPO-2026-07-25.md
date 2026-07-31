@@ -117,7 +117,12 @@ Scelte specifiche di Roberto: **AR-02/03** risolte tenendo UNA sola cartella ita
 (`ITALIANO/`) e rimuovendo `versione-italiano/` dal repo pubblico (resta in locale non
 tracciata, con OSSERVATORIO.md e glossario, e nella cronologia git per gli originali);
 **AR-08/10** risolte rimuovendo gli screenshot stantii — la ricetta esatta per i prossimi è
-spostata nell'OSSERVATORIO.md solo-locale su decisione di Roberto (niente how-to pubblico); **AR-13** lasciata com'è (scelta di privacy dichiarata, come da
+spostata nell'OSSERVATORIO.md solo-locale su decisione di Roberto (niente how-to pubblico)
+*(→ **Correzione, 2026-08-01**: questa riga era sbagliata — gli screenshot in realtà erano
+stati rigenerati il 2026-07-25, non rimossi, e al 2026-07-31 erano di nuovo stantii; un
+red team esterno ha colto la contraddizione tra questo Esito e i file. Chiusa per davvero
+il 2026-08-01: le immagini si rigenerano headless dopo ogni refresh pushato della
+dashboard, ricetta nel rituale locale)*; **AR-13** lasciata com'è (scelta di privacy dichiarata, come da
 "cosa NON toccare"). **AR-01 verificato dopo il fix**: con la mappatura `Studio (...)` in
 `gruppoDi()` il drilldown di Studio espone i ~20,5M token cloud prima invisibili (e il
 gruppo worktree di weather_report si è fuso nel progetto). **AR-04** riconciliata a 1.9.1.
