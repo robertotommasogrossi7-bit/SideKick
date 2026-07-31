@@ -32,7 +32,11 @@ specify init <project> --integration <agent> --preset path/to/SideKick/plugins/m
 `.specify/memory/constitution.md` è risultata **identica byte a byte** (stesso SHA256) al
 drop-in, sia col layout convenzionale `templates/` sia con quello flat che consegniamo.
 Caveat: abbiamo testato solo quella versione; il minimo `>=0.12.15` viene dal loro
-changelog, non da nostre prove su versioni più vecchie.
+changelog, non da nostre prove su versioni più vecchie. E nota che `specify init --help`
+documenta `--preset` solo come **ID** di registry — la forma con path locale usata qui
+sopra funziona (verificata nel sorgente della CLI ed eseguendola), ma è non documentata a
+monte e potrebbe irrigidirsi in silenzio in una release futura; in quel caso, ripiega
+sull'installazione via `cp` in cima a questa pagina.
 
 > **Correzione (2026-07-17).** Una versione precedente di questa pagina affermava "preset ed
 > extension fanno override solo dei *template*; una constitution non è un preset". Era vero per

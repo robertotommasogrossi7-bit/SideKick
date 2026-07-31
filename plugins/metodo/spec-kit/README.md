@@ -30,9 +30,12 @@ specify init <project> --integration <agent> --preset path/to/SideKick/plugins/m
 
 **Tested empirically 2026-07-31** on spec-kit 0.15.2.dev0: after init,
 `.specify/memory/constitution.md` was **byte-identical** (equal SHA256) to the drop-in,
-both with the conventional `templates/` layout and with the flat one we ship. Caveat: we
+both with the conventional `templates/` layout and with the flat one we ship. Caveats: we
 tested that one version only; the `>=0.12.15` floor comes from their changelog, not from
-our own runs on older versions.
+our own runs on older versions. And note that `specify init --help` documents `--preset`
+as a registry **ID** only — the local-path form we use above works (verified in the CLI
+source and by running it), but it is undocumented upstream and could tighten silently in
+a future release; if it does, fall back to the `cp` install at the top of this page.
 
 > **Correction (2026-07-17).** An earlier version of this page claimed "presets/extensions
 > override *templates* only; a constitution is not a preset". That was true of Spec Kit up to

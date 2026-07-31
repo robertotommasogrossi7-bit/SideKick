@@ -5,6 +5,26 @@
 > cronologia git di `COSTITUZIONE.md`; ogni versione è anche un tag git (`metodo-vX.Y`) dalla
 > v1.5 in poi.
 
+## v1.9.4 — 2026-08-01 (la passata per l'adottante + numeri a fonte unica, da due red team)
+- **I numeri inline stantii sostituiti da puntatori vivi** (un red team esterno ha colto
+  il rapporto cache ≈170× fossilizzato in tutte e tre le copie della costituzione mentre
+  la dashboard diceva ≈192×, e l'"N=3" della Fabbrica è invecchiato in 24 ore dalla
+  scrittura): il rapporto dell'economia di handoff e l'N della Fabbrica ora puntano
+  all'osservatorio (dashboard + § del registro) invece di portare un numero che marcisce.
+- **Drop-in, fix per l'adottante** (red team esterno, cappello "adottante Spec Kit"):
+  **Scope tags** in testa — Principi I–IV, VI–VIII, X, XII, XIV dichiarati universali;
+  V, IX, XI, XIII, XV–XVI dichiarati legati al contesto (dev solista, caching di un
+  provider, osservatorio in casa, generazione di massa) con permesso esplicito di
+  potare; **caveat onesto dentro il Principio VI** — l'auto-emendamento è la tesi
+  centrale ed è ancora non testato sull'esito che conta (prima stava solo
+  nell'osservatorio, non nel file che si copia); il README spec-kit ora avverte che la
+  CLI documenta `--preset` solo come ID di registry (la forma con path locale è
+  verificata ma non documentata a monte).
+- La sezione Parentela ora cita il `preset.yml` testato accanto al drop-in.
+- Nel repo, stesso giorno (fuori dai file del metodo, stessa ondata di red team): regola
+  fonte-unica per i totali vivi, colonna `estimated` in workflow.csv, fallback dei test
+  senza .git — vedi la cronologia del repo.
+
 ## v1.9.3 — 2026-07-31 (la passata di tono "ipotesi operative")
 - **I claim misurati ora dichiarano il loro N e i loro limiti** (punto 8 del PLAN; 1
   revisore Opus, 8 finding, tutti recepiti): una riga nuova nell'header dà la cornice —

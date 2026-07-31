@@ -38,6 +38,10 @@
 | `FINDINGS.md` + `experiments/` | probe con/senza pacchetto-processo (N=1 per braccio) | ✅ storico, già analizzato |
 | DECISIONI.md (poker, progetto-15) | opzioni, scelta, perché | ⚠️ manca l'**esito osservato in seguito** |
 
+*(I path della tabella che non esistono in questo repo — `_processo/METRICHE.md`, i file
+degli audit, i `DECISIONI.md` per-progetto — vivono nei **repo privati dei progetti**:
+sono nominati come fonti, non linkati.)*
+
 **Limite noto dei dati di consumo**: i workflow cloud (audit multi-agente) non lasciano
 transcript sul PC → i loro token (2,6M + 1,1M nei due audit + 0,7M di ricerca) vanno
 sommati a mano dai METRICHE. La dashboard Anthropic resta l'unica fonte del costo in denaro.

@@ -1,6 +1,6 @@
 # Constitution — how we work together (me + the AI)
 
-> **Version: v1.9.3** (2026-07-31) — amendment history in the [CHANGELOG](CHANGELOG.md).
+> **Version: v1.9.4** (2026-08-01) — amendment history in the [CHANGELOG](CHANGELOG.md).
 
 > **Installation:** copy (or link) this content into `~/.claude/CLAUDE.md` to have it in **every**
 > project, or into a single project's `CLAUDE.md`. It defines the **method**, not the content.
@@ -213,8 +213,9 @@
   writer for shared files, verification by **EXECUTION**, QC in passes (correctness on the high
   model; mechanical rubrics on Sonnet with a ~8% Opus shadow), resume with **file-persisted
   outcomes** — the runtime cache is best-effort, measured even at zero reuse; the Factory's
-  yield is measured on N=3 runs (register §8). NOT for linear coding (same operating
-  hypothesis as the rule above: a single strong agent).
+  yield is measured run after run (live N and numbers in register §8 — the inline N here
+  went stale within 24 hours). NOT for linear coding (same operating hypothesis as the
+  rule above: a single strong agent).
 - Details, power levels, and the **safe-resume procedure**: [`FACTORY-PROCESS.md`](FACTORY-PROCESS.md)
   (SideKick repo).
 
@@ -306,7 +307,8 @@
 - **Economics of switching chats (measured, 2026-07 — numbers and caveats in register §3)**:
   continuing with a warm cache costs ~1/10
   per re-read token, BUT in a long chat **every message re-reads the whole context** — it's the
-  biggest cost item we have (cache read ≈170× the live tokens). A reset has a fixed cost
+  biggest cost item we have (cache read: hundreds of times the live tokens — live ratio in
+  the observatory dashboard, dated measurements in register §3). A reset has a fixed cost
   (rebuilding the context), so: **no chat switch for every feature**, but **when the window gets
   close to full, staying costs MORE than switching** — and quality drops (compaction). Practical
   rule: **switch at milestones, with a clean handoff via CONTESTO.md, without waiting for the
@@ -338,8 +340,8 @@
 - The method speaks **Spec Kit's** language: COSTITUZIONE ↔ *constitution*
   (`.specify/memory/constitution.md`) · mini-spec ↔ */specify* (the spec) · roadmap/phases ↔
   */plan* + */tasks* · verify before "done" ↔ tasks' *checks*. A **ready-made drop-in** for Spec
-  Kit is in `plugins/metodo/spec-kit/constitution.md` and realigns with the master at every
-  version — it is also the **depersonalized, reusable variant** of the method (this file is the
+  Kit is in `plugins/metodo/spec-kit/constitution.md` (with a tested `preset.yml` beside it
+  that seeds it at `specify init`) and realigns with the master at every version — it is also the **depersonalized, reusable variant** of the method (this file is the
   lived-in copy: it names Roberto and our own files). What our method adds to Spec Kit:
   **proactive self-amendment** (Spec Kit already has amendments with semantic versioning and
   sync reports, but only on request: here the agent proposes them unprompted — verified on
@@ -359,4 +361,4 @@
 *Part of [SideKick](https://github.com/robertotommasogrossi7-bit/SideKick) — a shareable,
 forkable, self-evolving human+AI working method. Improve your copy and share it back.*
 
-*English version of the Italian master `COSTITUZIONE.md` — v1.9.3, synced 2026-07-31.*
+*English version of the Italian master `COSTITUZIONE.md` — v1.9.4, synced 2026-08-01.*

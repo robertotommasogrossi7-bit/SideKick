@@ -9,7 +9,7 @@ schema_version: "1.0"
 preset:
   id: "metodo"
   name: "Metodo (human+AI working method)"
-  version: "1.9.3"
+  version: "1.9.4"
   description: "Seeds the project constitution with the Metodo working method drop-in, verbatim, at init time"
   author: "Roberto Tommaso Grossi"
   repository: "https://github.com/robertotommasogrossi7-bit/SideKick"

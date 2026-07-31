@@ -1,6 +1,6 @@
 # Costituzione — come lavoriamo insieme (io + l'AI)
 
-> **Versione: v1.9.3** (2026-07-31) — storia degli emendamenti nel [CHANGELOG](CHANGELOG.md).
+> **Versione: v1.9.4** (2026-08-01) — storia degli emendamenti nel [CHANGELOG](CHANGELOG.md).
 
 > **Installazione:** copia (o linka) questo contenuto in `~/.claude/CLAUDE.md` per averlo in
 > **tutti** i progetti, oppure nel `CLAUDE.md` di un singolo progetto. Definisce il **metodo**, non
@@ -197,8 +197,8 @@
   scrittore per i file condivisi, verifica per **ESECUZIONE**, QC per passate (correttezza sul
   modello alto; rubriche meccaniche su Sonnet con ombra ~8%), resume con **esiti su file** —
   la cache del runtime è best-effort, misurata anche a riuso zero; resa della Fabbrica misurata
-  su N=3 run (registro §8). NON per coding lineare (stessa ipotesi operativa della regola sopra:
-  singolo agente forte).
+  run dopo run (N e numeri vivi nel registro §8 — l'N inline qui derivava in 24 ore). NON per
+  coding lineare (stessa ipotesi operativa della regola sopra: singolo agente forte).
 - Dettagli, livelli di potenza e **procedura di resume sicura**: `plugins/metodo/PROCESSO-FABBRICA.md`
   (repo SideKick).
 
@@ -284,7 +284,8 @@
 - **Economia del cambio chat (misurata, 2026-07 — numeri e caveat nel registro §3)**: proseguire
   con la cache calda costa ~1/10
   a token riletto, MA in una chat lunga **ogni messaggio rilegge tutto il contesto** — è la
-  voce di costo più grande che abbiamo (cache riletta ≈170× i token vivi). Il reset ha un
+  voce di costo più grande che abbiamo (cache riletta: centinaia di volte i token vivi —
+  rapporto vivo nella dashboard dell'osservatorio, misure datate nel registro §3). Il reset ha un
   costo fisso (ricostruire il contesto), quindi: **niente cambio chat a ogni feature**, ma
   **quando la finestra si avvicina al pieno restare costa PIÙ che cambiare** — e la qualità
   cala (compaction). Regola pratica: **cambia ai milestone, con handoff pulito via
@@ -316,8 +317,8 @@
 - Il metodo parla la lingua di **Spec Kit**: COSTITUZIONE ↔ *constitution*
   (`.specify/memory/constitution.md`) · mini-spec ↔ */specify* (la spec) · roadmap/fasi ↔
   */plan* + */tasks* · verifica prima di "fatto" ↔ i *checks* dei task. Un **drop-in pronto**
-  per Spec Kit è in `plugins/metodo/spec-kit/constitution.md` e si riallinea al master a ogni
-  versione — ed è anche la **variante spersonalizzata e riusabile** del metodo (questo file è la
+  per Spec Kit è in `plugins/metodo/spec-kit/constitution.md` (con accanto un `preset.yml`
+  testato che la semina a `specify init`) e si riallinea al master a ogni versione — ed è anche la **variante spersonalizzata e riusabile** del metodo (questo file è la
   copia vissuta: nomina Roberto e i nostri file). Ciò che il nostro metodo aggiunge a Spec Kit:
   l'**auto-emendamento proattivo** (Spec Kit ha già emendamenti con versioni e sync report, ma
   solo su richiesta: qui è l'agente a proporli da solo — verificato sul loro codice 2026-07-17),

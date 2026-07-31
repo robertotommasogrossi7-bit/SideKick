@@ -37,6 +37,10 @@
 | `FINDINGS.md` + `experiments/` | with/without process-package probes (N=1 per arm) | ✅ historical, already analyzed |
 | DECISIONI.md (poker, progetto-15) | options, choice, why | ⚠️ missing the **outcome observed later** |
 
+*(Paths in the table that don't exist in this repo — `_processo/METRICHE.md`, the audit
+files, per-project `DECISIONI.md` — live in the **private project repos**; they are named
+here as sources, not linked.)*
+
 **Known limitation of consumption data**: cloud workflows (multi-agent audits) leave no
 transcript on the PC → their tokens (2.6M + 1.1M across the two audits + 0.7M of research) must
 be added by hand from the METRICHE. The Anthropic dashboard remains the only source for cost in

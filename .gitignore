@@ -1,6 +1,7 @@
-# SideKick — il PROCESSO è pubblico apposta (si condivide), quindi _processo/ NON è ignorato.
+# SideKick — the PROCESS is public on purpose (it gets shared); the historical `_processo/`
+# folders now live only in the local `old/` archive and in git history.
 
-# Config locale di Claude Code / agenti (può contenere credenziali/token)
+# Local Claude Code / agent config (may contain credentials/tokens)
 /.claude/
 
 # Python
@@ -17,20 +18,24 @@ dist/
 .DS_Store
 Thumbs.db
 
-# Artefatti transitori del motore di distillazione
+# Transient artifacts of the distillation engine
 _PROMPT_PRONTO.md
 
-# Archivio locale del materiale storico (ex versione-italiano/, decisione Roberto 2026-07-25):
-# mai su GitHub, gli originali restano nella cronologia git. La versione italiana e' ITALIANO/.
+# Local archive of the historical material (ex versione-italiano/, Roberto's decision
+# 2026-07-25): never on GitHub; the originals remain in git history. The Italian tree is ITALIANO/.
 old/
 
-# Compiti permanenti dell'osservatorio (operativo, solo locale)
+# The observatory's standing tasks (operational, local only)
 /OSSERVATORIO.md
 
-# Banco di prova (copia di app per testare SideKick) - non versionato
+# Test bench (app copies used to test SideKick) - not versioned
 /_test/
 
-# Legenda della censura dei progetti privati (SOLO locale, mai su GitHub)
+# Redaction legend for private projects (LOCAL only, never on GitHub)
 observatory/censura.local.json
 
-# (glossario personale: spostato nel repo Studio il 2026-07-25, gitignorato la')
+# Local-only registries (positions of shared numbers/versions, etc.) — one file per
+# concern, named *.local.md, kept out of the public repo by design
+*.local.md
+
+# (personal glossary: moved to the Studio repo on 2026-07-25, gitignored there)

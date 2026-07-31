@@ -4,6 +4,25 @@
 > evidence. One entry per amendment, hand-written, newest first. Dates from git history of
 > `COSTITUZIONE.md`; each version is also a git tag (`metodo-vX.Y`) from v1.5 onward.
 
+## v1.9.4 — 2026-08-01 (the adopter pass + single-source numbers, from two red teams)
+- **Stale inline numbers replaced by live pointers** (an external red team caught the
+  ≈170× cache ratio fossilized in all three constitution copies while the dashboard read
+  ≈192×, and the Factory's "N=3" went stale within 24 hours of being written): the
+  handoff-economics ratio and the Factory N now point at the observatory (dashboard +
+  register §) instead of carrying a number that rots.
+- **Drop-in, adopter fixes** (external red team, "Spec Kit adopter" hat): **Scope tags**
+  at the top — Principles I–IV, VI–VIII, X, XII, XIV declared universal; V, IX, XI, XIII,
+  XV–XVI declared context-shaped (solo dev, one provider's caching, home observatory,
+  mass generation) with explicit permission to prune; **honest caveat inside Principle
+  VI** — self-amendment is the core thesis and still untested on the outcome that matters
+  (was previously stated only in the observatory, not in the file being copied);
+  spec-kit README now warns that the CLI documents `--preset` as registry-ID only (the
+  local-path form is verified but undocumented upstream).
+- Kinship section now mentions the tested `preset.yml` next to the drop-in.
+- Repo-wide same day (outside the method files, same red-team wave): single-source rule
+  for live totals, `estimated` column in workflow.csv, no-git test fallback — see the
+  repo history.
+
 ## v1.9.3 — 2026-07-31 (the "operating hypotheses" tone pass)
 - **Measured claims now state their N and their limits** (PLAN item 8; 1 Opus reviewer, 8
   findings, all applied): a new header line frames it — *rules born from measurements are

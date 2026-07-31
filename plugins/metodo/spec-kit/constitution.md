@@ -1,5 +1,12 @@
 # Human+AI Working Method Constitution
 
+**Scope tags (read before adopting).** Principles I–IV, VI–VIII, X, XII and XIV are
+**universal**: they assume nothing about your team, provider, or domain. Principles V, IX,
+XI, XIII, XV and XVI are **context-shaped**: they were born from this method's specific
+setup (a solo developer, one provider's caching economics, a home-grown measurement
+observatory, mass content-generation work) — adapt or prune them deliberately instead of
+adopting them blind; the pruning is part of adoption, not a betrayal of the method.
+
 ## Core Principles
 
 ### I. Ideas Without Losing Focus
@@ -29,8 +36,9 @@ Process context (a handoff file, e.g. `CONTEXT.md`) MUST be kept current at mile
 chat restarts aligned. When a session grows heavy or direction changes, the agent MUST suggest a handoff
 to a fresh chat.
 *Rationale (measured, 2026-07): warm-cache turns are ~1/10 cost per reread token, but a long chat
-rereads its ENTIRE context every message — the single largest cost we measured (cache reads ≈170×
-live tokens). No reset per feature (resets have a fixed rebuild cost), but near a full window,
+rereads its ENTIRE context every message — the single largest cost we measured (cache reads:
+hundreds of times the live tokens; dated measurements live in the source repo's observatory).
+No reset per feature (resets have a fixed rebuild cost), but near a full window,
 staying costs MORE than a clean handoff — and quality drops. Switch at milestones; resume
 interrupted work through the cache instead of restarting.*
 
@@ -38,7 +46,10 @@ interrupted work through the cache instead of restarting.*
 If a principle no longer helps, or a better one is needed, the agent MUST say so and propose
 amending this constitution; with approval, it edits this file. The method is *expected* to change.
 *Rationale: a passive doc rots; a living method improves. This is the principle Spec Kit's
-constitution lacks.*
+constitution lacks. Honest caveat: self-amendment is this method's core thesis and is still
+**untested on the outcome that matters** (does it help the human more than a static
+constitution?) — tracked openly in the source repo's observatory (STRATEGIES, "still
+without data").*
 
 ### VII. External Red-Team Before Going Public
 Before anything is published outside private channels (PRs, issue comments, READMEs, posts), the
@@ -168,8 +179,9 @@ Upstream a change to the source repo only if you think it helps everyone. The me
 the rationales are documented in the source repo's observatory
 (SideKick `observatory/STRATEGIES.md`, amendment history in `plugins/metodo/CHANGELOG.md`).
 
-**Version**: 1.9.3 | **Ratified**: 2026-06-11 | **Last Amended**: 2026-07-31 (realigned to
-source-repo master v1.9.3, the "operating hypotheses" tone pass: measured claims in the
-rationales now state their N and their limits — external-source hypotheses declared as such.
-Previous: 1.9.1, 2026-07-25 — Principles XII–XVI added, depersonalized from the v1.6–v1.9
-master amendments)
+**Version**: 1.9.4 | **Ratified**: 2026-06-11 | **Last Amended**: 2026-08-01 (adopter pass,
+from an external red-team review: Scope tags — universal vs context-shaped principles;
+honest caveat on Principle VI, self-amendment untested on the outcome that matters; stale
+inline cache ratio replaced with a pointer to the source repo's dated measurements.
+Previous: 1.9.3, 2026-07-31 — the "operating hypotheses" tone pass; 1.9.1, 2026-07-25 —
+Principles XII–XVI added)
