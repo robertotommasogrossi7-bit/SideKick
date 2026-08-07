@@ -4,7 +4,8 @@
 > (token, misurati dove possibile) e **quanto ha ripagato** (benefici osservati, concreti).
 > Stessa onestà di FINDINGS.md: N piccolo = indizi; dove il costo non è misurabile lo diciamo,
 > non ce lo inventiamo. Aggiornato dalla chat-osservatorio al rituale. Ultima revisione:
-> **2026-08-01** (la data in testa si muove nello stesso commit che tocca il corpo).
+> **2026-08-07** (aggiornamento mirato del §2 su richiesta di Roberto, fuori rituale; la
+> data in testa si muove nello stesso commit che tocca il corpo).
 
 ## Strategie MISURATE (costo e beneficio con numeri)
 
@@ -34,9 +35,37 @@
   difetto complementari** — il modello alto vede difetti a livello di batch, l'ombra economica
   scopre gli scivoloni puntuali (3/4 confermati in arbitrato, es. un a-capo di troppo, un
   conteggio righe sbagliato).
+- **Ultimissimo (2026-08-07, audit del motore T-SQL — il test più duro del pattern
+  finora)**: ombra sotto un orchestratore di TIER PIÙ ALTO. Un orchestratore Fable ha
+  ri-verificato di persona un'implementazione interrotta (harness, gate di fabbrica,
+  percorsi dal vivo nel browser — tutti i claim dei commit confermati per esecuzione,
+  0 finding veri suoi, 1 suo falso positivo ritirato) mentre un'**ombra Opus faceva la
+  stessa revisione con mandato ADVERSARIALE** («prova a confutare i commit; l'harness può
+  essere un giudice corrotto») e verità-campione ESTERNA all'artefatto (doc SQL Server,
+  non la spec/harness del progetto). L'ombra: **9 finding, 2 ALTA veri** (il «+» misto
+  che concatenava invece di alzare il 245 di SQL Server — il motore *promuoveva* l'errore
+  esatto che un esercizio insegna; la guardia-subquery che avvolgeva le tabelle derivate
+  in un errore finto che il gate di fabbrica avrebbe congelato come expected), tutti e 9
+  confermati dall'orchestratore con esecuzioni indipendenti prima dei fix, **0 falsi
+  allarmi**, 7 corretti in sessione (harness 50→57/57). I finding più gravi erano buchi
+  del CATALOGO dei casi di test — invisibili a qualunque verifica basata sull'harness,
+  inclusa quella dell'orchestratore. **Il tier non ha spiegato niente** (il modello più
+  forte non ne ha trovato nessuno): hanno pagato il mandato di confutazione, la verità
+  esterna e l'indipendenza dal contesto dell'autore (la regola difettosa del «+» stava
+  nella spec scritta dall'orchestratore stesso). Costo: ~209k token d'ombra. Fonte:
+  `~/.claude/ESPERIMENTI.md` 2026-08-07 e `Studio/sq/test/tsql/ESITI.md` (sezione audit).
 - **Verdetto**: costo minimo, utile in ENTRAMBE le direzioni → il metodo v1.9 lo generalizza
   (ombra = un modello di distanza dalla base; i difetti meccanici vanno ai validatori a
-  script). N=4 esperimenti — continuare.
+  script). **N≥6 episodi** nel log globale, e l'effetto regge ora all'inversione dei ruoli
+  in entrambe le direzioni — inclusa un'ombra allo stesso tier o SOTTO l'orchestratore.
+  Regola candidata per Roberto (via rituale, vedi PLAN): i controlli scrupolosi
+  post-consegna accoppiano la verifica confermativa per esecuzione dell'orchestratore con
+  **≥1 agente adversariale indipendente** (Opus di default), mandato = confutare +
+  processare-il-giudice; ogni finding ri-verificato per esecuzione prima del fix. Caveat
+  onesto: parte di ogni divario è assegnazione di corsie voluta (l'orchestratore dà
+  all'ombra una lente che lui non sta usando), e anche le ombre sbagliano — in un episodio
+  (2026-07-31) l'ombra economica ha *promosso* contenuti difettosi; è l'arbitrato a
+  rendere sicuro il pattern.
 
 ### 3. Cambio chat / cache (economia del contesto)
 - **Costo misurato** (al conteggio del 2026-07-25 — il rapporto vivo sta nella dashboard

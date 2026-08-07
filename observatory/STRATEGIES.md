@@ -4,7 +4,8 @@
 > (tokens, measured where possible) and **how much it has paid off** (benefits observed,
 > concrete). Same honesty as FINDINGS.md: small N = clues; where the cost isn't measurable we
 > say so, we don't make it up. Updated by the observatory chat at the ritual. Last review:
-> **2026-08-01** (the header date moves in the same commit that touches the body).
+> **2026-08-07** (targeted §2 update on Roberto's request, outside the ritual; the header
+> date moves in the same commit that touches the body).
 
 ## MEASURED strategies (cost and benefit with numbers)
 
@@ -33,9 +34,35 @@
   an Opus baseline): 87% agreement, and the disagreements show **complementary defect
   classes** — the high model sees batch-level defects, the cheap shadow catches point-level
   slips (3/4 confirmed at arbitration, e.g. a stray newline, a wrong line count).
+- **Newest (2026-08-07, T-SQL engine audit — the pattern's hardest test so far)**: shadow
+  under a HIGHER-tier orchestrator. A Fable orchestrator re-verified an interrupted
+  implementation directly (harness, factory gates, live browser paths — all commit claims
+  confirmed by execution, 0 real findings of its own, 1 own false positive retracted) while
+  an **Opus shadow ran the same review with an ADVERSARIAL mandate** («try to refute the
+  commits; the test harness may be a corrupt judge») and ground truth EXTERNAL to the
+  artifact (SQL Server docs, not the project's spec/harness). Shadow: **9 findings, 2 real
+  HIGH** (mixed-type `+` concatenating instead of raising SQL Server's 245 — the engine was
+  *promoting* the exact student mistake one exercise teaches; the scalar-subquery guard
+  wrapping derived tables into a fake error the factory gate would have frozen as expected
+  output), all 9 confirmed by the orchestrator with independent executions before fixing,
+  **0 false alarms**, 7 fixed in-session (harness 50→57/57). The gravest findings were holes
+  in the CATALOG of test cases — invisible to any harness-based check, including the
+  orchestrator's. **Tier explained nothing here** (the stronger model found none of them):
+  what paid was the refutation mandate, the external ground truth, and independence from
+  the author's context (the buggy `+` rule sat in the spec the orchestrator itself wrote).
+  Cost: ~209k shadow tokens. Source: `~/.claude/ESPERIMENTI.md` 2026-08-07 and
+  `Studio/sq/test/tsql/ESITI.md` (audit section).
 - **Verdict**: minimum cost, useful in BOTH directions → method v1.9 generalizes it (shadow
   = one model step away from the baseline; mechanical defects go to script validators).
-  N=4 experiments — continue.
+  **N≥6 episodes** in the global log, and the effect now survives role inversion in both
+  directions — including a shadow at or BELOW the orchestrator's tier. Candidate rule for
+  Roberto (via the ritual, see PLAN): scrupulous post-delivery checks pair the
+  orchestrator's confirmatory execution-check with **≥1 independent adversarial agent**
+  (Opus by default), mandate = refute + audit-the-judge; every finding re-verified by
+  execution before fixing. Honest caveat: part of each gap is by-design lane assignment
+  (the orchestrator hands the shadow a lens it isn't using itself), and shadows also err —
+  one episode (2026-07-31) had the cheap shadow *promoting* defective content; the
+  arbitration step is what keeps the pattern safe.
 
 ### 3. Switching chats / cache (context economics)
 - **Measured cost** (at the 2026-07-25 count — the live ratio lives in the generated

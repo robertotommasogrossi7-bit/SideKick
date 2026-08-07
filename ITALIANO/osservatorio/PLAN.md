@@ -73,6 +73,29 @@
         dei PNG del README rimandato al rituale dell'osservatorio (procedura solo locale).
 12. [ ] **MANUALE (Roberto)**: descrizione del repo + topic su GitHub; decidere sulla rinomina
         dello username.
+12-bis. [ ] **Verifica-ombra: consolidare le prove, darle una vera casa VISIVA e (se
+        reggono) promuoverla a regola del metodo** (Roberto, 2026-08-07, subito dopo
+        l'audit del motore T-SQL — «annota queste informazioni, è molto utile»). Il pattern
+        «un'ombra indipendente trova ciò che il verificatore primario manca» ha ora **N≥6
+        episodi** in `~/.claude/ESPERIMENTI.md` (Tabella 1), l'ultimo è il più forte:
+        un'ombra Opus con mandato adversariale ha trovato 2 bug ALTA veri sotto un
+        orchestratore Fable di tier più alto che non ne aveva trovato nessuno (registro §2,
+        aggiornato). Compiti: (a) raccogliere TUTTI gli episodi in un'unica tabella delle
+        prove — direzione (ombra sopra/sotto la base), mandato, classi di difetti
+        trovate/mancate, costo, tasso confermati-vs-falsi all'arbitrato; (b) costruire la
+        **sezione visiva** chiesta da Roberto (dashboard o pagina dedicata del registro:
+        card per episodio, matrice classi-per-tier, costo per finding vero) invece della
+        prosa sepolta nel §2; (c) disegnare il **test controllato** mancante — l'N attuale
+        confonde tre variabili (mandato, indipendenza, assegnazione delle corsie): es.
+        stesso artefatto, stesso mandato adversariale, auto-verifica dell'orchestratore vs
+        agente indipendente; (d) se le prove reggono, portare a Roberto l'emendamento:
+        *controlli scrupolosi post-consegna = verifica confermativa per esecuzione
+        dell'orchestratore + ≥1 agente adversariale indipendente (Opus di default),
+        mandato di confutazione, verità-campione esterna all'artefatto («l'harness può
+        essere un giudice corrotto»), ogni finding ri-verificato per esecuzione prima del
+        fix* — raffinando la regola esistente «2 revisori Opus indipendenti a fine fase
+        grossa» ed estendendola esplicitamente ai DELIVERABLE DI VERIFICA (harness,
+        validatori, gate).
 13. [x] Più avanti, guidato dai dati — **tutti e quattro i trigger verificati sui dati,
         2026-08-01**:
         · **A/B completo-vs-incrementale di progetto-15 → CHIUSO come non misurabile**

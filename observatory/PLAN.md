@@ -1,4 +1,4 @@
-# PLAN — the single ordered backlog (updated 2026-08-01; the header date moves in the same commit that touches the body)
+# PLAN — the single ordered backlog (updated 2026-08-07; the header date moves in the same commit that touches the body)
 
 > Decided with Roberto in the observatory chat. **The backlog below is THE list**: work top
 > to bottom, check off when done. History of completed phases at the bottom.
@@ -66,6 +66,27 @@
         *Create release from tag* → paste the RELEASES.md section. Screenshot renewal for
         the README PNGs deferred to the observatory ritual (local-only procedure).
 12. [ ] **MANUAL (Roberto)**: repo description + topics on GitHub; decide on username rename.
+12-bis. [ ] **Shadow verification: consolidate the evidence, give it a real VISUAL home,
+        and (if it holds) promote it to a method rule** (Roberto, 2026-08-07, right after
+        the T-SQL engine audit — «annota queste informazioni, è molto utile»). The pattern
+        "an independent shadow finds what the primary checker misses" now has **N≥6
+        episodes** in `~/.claude/ESPERIMENTI.md` (Table 1), the newest being the strongest:
+        an Opus shadow with an adversarial mandate found 2 real HIGH bugs under a
+        HIGHER-tier Fable orchestrator that had found none (register §2, updated). Tasks:
+        (a) collect ALL episodes into one evidence table — direction (shadow above/below
+        baseline), mandate, defect classes found/missed, cost, confirmed-vs-false rate at
+        arbitration; (b) build the **visual section** Roberto asked for (dashboard or a
+        dedicated register page: per-episode cards, classes-by-tier matrix, cost-per-real
+        finding) instead of prose buried in §2; (c) design the missing **controlled test**
+        — the current N confounds three variables (mandate, independence, lane assignment):
+        e.g. same artifact, same adversarial mandate, orchestrator-self-check vs
+        independent agent; (d) if the evidence holds, bring Roberto the amendment:
+        *scrupulous post-delivery checks = orchestrator's confirmatory execution-check +
+        ≥1 independent adversarial agent (Opus default), refutation mandate,
+        ground truth external to the artifact («the harness may be a corrupt judge»),
+        every finding re-verified by execution before fixing* — refining the existing
+        "2 independent Opus reviewers at the end of big phases" rule, and extending it
+        explicitly to VERIFICATION deliverables (harnesses, validators, gates).
 13. [x] Later, data-driven — **all four triggers checked against the data, 2026-08-01**:
         · **progetto-15 full-vs-incremental A/B → CLOSED as unmeasurable** (the option the
           backlog itself offered): 5 sessions total, no phase titles ever logged (operations
